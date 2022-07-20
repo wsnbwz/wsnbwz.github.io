@@ -97,7 +97,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Love</strong>
+      <strong>Strive</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.8k 字
+          undefined 字
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          24 分钟
+          NaN 分钟
         
       </span>
     
@@ -284,7 +284,7 @@
 <h3 id="Service："><a href="#Service：" class="headerlink" title="Service："></a><strong>Service：</strong></h3><p>试想一个问题，ReplicaSet定义了pod的数量是2，当一个pod由于某种原因停止了，ReplicaSet会新建一个pod，以确保运行中的pod数量始终是2。但每个pod都有自己的ip，前端请求不知道这个新pod的ip是什么，那前端的请求如何发送到新pod中呢？<br>答案是使用Service<br>k8s的Service定义了一个服务的访问入口地址，前端的应用通过这个入口地址访问其背后的一组由Pod副本组成的集群实例，来自外部的访问请求被负载均衡到后端的各个容器应用上。Service与其后端Pod副本集群之间则是通过Label Selector实现关联。<br>请说人话：前端请求不是直接发送给Pod，而是发送到Service，Service再将请求转发给pod。</p>
 <h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a><strong>总结</strong>：</h3><p>Pod被ReplicaSet管理，ReplicaSet控制pod的数量；ReplicaSet被Deployment管理，Deployment控制pod应用的升级、回滚，当然也能控制pod的数量。Service提供一个统一固定入口，负责将前端请求转发给Pod。</p>
 <h2 id="实践环节"><a href="#实践环节" class="headerlink" title="实践环节"></a><strong>实践环节</strong></h2><h3 id="定于yaml文件"><a href="#定于yaml文件" class="headerlink" title="定于yaml文件"></a>定于yaml文件</h3><p>定义一个myapp.yaml文件</p>
-<pre><code class="hljs">apiVersion: apps/v1
+<pre><code>apiVersion: apps/v1
 # 声明一个Deployment资源对象
 kind: Deployment
 metadata:
