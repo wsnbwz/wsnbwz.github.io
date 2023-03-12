@@ -1,0 +1,627 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>Service学习笔记 | xiaobei</title><meta name="author" content="XiaoBei"><meta name="copyright" content="XiaoBei"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="k8s企业应用之容器化迁移接下来需要学习的小节 k8s目前市场发展现状 k8s CKA认证介绍（新版） 容器交付流程，在k8s部署项目流程 容器化java网站项目  k8s目前市场发展现状随着云原生技术的普及，越来越多的企业使用Kubernetes来管理应用，并且集群规模也呈爆发式增长，企业也亟需应对随集群规模增长而带来的各种挑战。同时，为了更好地提供高可用、弹性伸缩的应用，企业也对容器混合云解决">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Service学习笔记">
+<meta property="og:url" content="http://example.com/2022/07/21/Service%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="xiaobei">
+<meta property="og:description" content="k8s企业应用之容器化迁移接下来需要学习的小节 k8s目前市场发展现状 k8s CKA认证介绍（新版） 容器交付流程，在k8s部署项目流程 容器化java网站项目  k8s目前市场发展现状随着云原生技术的普及，越来越多的企业使用Kubernetes来管理应用，并且集群规模也呈爆发式增长，企业也亟需应对随集群规模增长而带来的各种挑战。同时，为了更好地提供高可用、弹性伸缩的应用，企业也对容器混合云解决">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wallpapershome.com/images/pages/ico_h/23723.jpg">
+<meta property="article:published_time" content="2022-07-20T18:22:55.000Z">
+<meta property="article:modified_time" content="2022-08-02T05:38:14.346Z">
+<meta property="article:author" content="XiaoBei">
+<meta property="article:tag" content="cloud">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wallpapershome.com/images/pages/ico_h/23723.jpg"><link rel="shortcut icon" href="/img/homepage.jpg"><link rel="canonical" href="http://example.com/2022/07/21/Service%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: XiaoBei","link":"链接: ","source":"来源: xiaobei","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Service学习笔记',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-08-02 13:38:14'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/background.css"><link rel="stylesheet" href="/css/test.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/wsnb.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-paper-plane"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.555kan.net"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="xiaobei"><span class="site-name">xiaobei</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-paper-plane"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.555kan.net"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Service学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-07-20T18:22:55.000Z" title="发表于 2022-07-21 02:22:55">2022-07-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-08-02T05:38:14.346Z" title="更新于 2022-08-02 13:38:14">2022-08-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/k8s/">k8s</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">5.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>20分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Service学习笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="k8s企业应用之容器化迁移"><a href="#k8s企业应用之容器化迁移" class="headerlink" title="k8s企业应用之容器化迁移"></a>k8s企业应用之容器化迁移</h1><h3 id="接下来需要学习的小节"><a href="#接下来需要学习的小节" class="headerlink" title="接下来需要学习的小节"></a><strong>接下来需要学习的小节</strong></h3><ol>
+<li>k8s目前市场发展现状</li>
+<li>k8s CKA认证介绍（新版）</li>
+<li>容器交付流程，在k8s部署项目流程</li>
+<li>容器化java网站项目</li>
+</ol>
+<h3 id="k8s目前市场发展现状"><a href="#k8s目前市场发展现状" class="headerlink" title="k8s目前市场发展现状"></a>k8s目前市场发展现状</h3><p>随着云原生技术的普及，越来越多的企业使用Kubernetes来管理应用，并且集群规模也呈爆发式增长，企业也亟需应对随集群规模增长而带来的各种挑战。同时，为了更好地提供高可用、弹性伸缩的应用，企业也对容器混合云解决方案产生了极大的兴趣。</p>
+<p>纵观容器混合云市场，主要的云服务提供商纷纷推出了自家的解决方案，例如华为云的MCP、Google的Anthos、Vmware的 Tanzu、IBM的 Cloud Pak、Red Hat的ACM for K8s等等。可以说，当前容器混合云市场纷繁嘈杂、百家争鸣，尽管各厂商不遗余力地鼓吹自家解决方案，但有个不争的事实是在容器混合云领域暂未出现领军产品。</p>
+<p>混合云市场的乱象源于两点，一是各厂商均嗅到了商机，发现了这一广阔的蓝海市场，急于在这场竞争中抢占先机C位出道；二是开源界暂无统一的事实标准。根据历史规律，后者是解决这一乱象的关键所在，正像Kubernetes终结容器编排领域的纷争一模一样。</p>
+<p>在开源领域，致力于混合云领域的项目数量与广阔的市场相比，显得极不相称。目前只有Rancher的Fleet、SAP公司力推的Gardener、以及Kubernetes社区的Kubefed。Fleet和Gardener要么缺乏创新，要么格局较低，难成大气，最有可能形成标准的便是被寄予厚望的、也是当前Kubernetes社区唯一的官方项目Kubefed。</p>
+<p>关于k8s 的运维方式，dashboard与kubectl cli哪个更好：</p>
+<p>2年前曾经与某做跨境电商的产品经理聊这个问题，我说linux cli是天花板。 而对方用很不屑的语气说你的命令行敲错了怎么办？ 说用web界面才是王道。草……</p>
+<p>昨天，去高新园与一个做游戏的聊天，对方的观点就比较正。 我们一致认为：命令行是运维人员应当追求的，而web界面是给小白鼠用的。</p>
+<p>不同的人观点不一样，只能选择，不能说服别人去认同你的观点，因为知识体系，工作背景不同。</p>
+<p>举2个例子：<br>客机飞行起飞和降落阶段是人工驾驶、在空中是自动驾驶。 当出现极端天气时 一定是人工去接管自动驾驶系统，机长靠方向盘是最靠谱的。</p>
+<p>昨天也提到阿里云提供了k8s 一键部署，用起来也很一般。 这个问题是这样：<br>对于阿里这种公司，是不可能搞不定一个开源组件的。 他们是业务驱动，如果业务需要深度开发则投入大量人力物力去研究，修改版本。 如果业务不需要深度开发，他们也会做把开源产品简单的包装后，就(侧重点在于简化流程，让小白能傻瓜式的使用)直接拿去卖钱的事情。 例如阿里云的redis、mysql、kafka、对象存储等很多组件就是如此，并不比开源产品性能高多少。</p>
+<p>大公司，也有先安排一两个人去做某个事情的做法，而且比较普遍，不是说大公司的产品，就一定应该如何如何。 需要考虑成本、战略等。</p>
+<p>小公司研发实力虽然在整体不如大公司，在灵活性、某个点的深度，是可以超越大公司的。</p>
+<p>大部分k8s的用户（中小公司），是小白用户，对与网络、架构不需要特殊要求，本身的业务量就很小，开源的是足够用的。<br>少部分特殊场景，例如银行、证券、保险、im（微信这样的体量）、AI（gpu人工智能），需要购买专做云服务创业公司的k8s，据我了解，腾讯、阿里等也购买了不少这种小公司的产品。</p>
+<p>再重申一边：大公司不是搞不定，而是时间成本。 能简单的就简单，能从其它公司买的就花钱去买，而不会什么事情都是自己去干，大公司的程序也不是神，代码也得一行一行去看，坑也得一个一个去踩一遍。 大公司不缺钱，缺时间和机会窗口，要快速反应。</p>
+<p>总结：<br>二八原则。<br>80%的k8s用户对于k8s了解很肤浅，阿里云主要吃的是这一块的用户。<br>20%的k8s用户，对性能等有特殊要求，做微服务的创业公司吃的是这一块的用户。</p>
+<h3 id="k8s-CKA认证介绍"><a href="#k8s-CKA认证介绍" class="headerlink" title="k8s CKA认证介绍"></a>k8s CKA认证介绍</h3><p>关于CKA</p>
+<p>CKA全称为（Certificated Kubernetes Administrator）即为官方认证的Kubernetes管理员。管理员认证（CKA）旨在确保认证持有者具备履行Kubernetes管理员职责的技能，知识和能力。</p>
+<p>那么CKA认证有什么用呢？</p>
+<p>提升专业能力：CKA 是 CNCF 致力于发展 Kubernetes 管理员社区，是促进公司和组织广泛使用 Kubernetes 进行落地实践过程中的关键步骤。</p>
+<p>证明你的实力：通过 CKA 认证的管理人员可迅速建立在就业市场上的信誉和价值。</p>
+<p>申请 KCSP 认证：每个公司一旦有 3 名员工通过 CKA，即可申请 KCSP(KCSP 是由 CNCF和 Linux 基金会发起的，旨在针对在 Kubernetes 的企业应用中拥有丰富经验的服务商认证)。</p>
+<p>公司投标优势：如果公司业务是面向企业的容器化项目，参与投标时提供 CKA 资质证书可提升成功率。</p>
+<p>证书长下面这样子，博主是2021-11-08拿到的证书</p>
+<p>报名</p>
+<p>CKA目前已经开通中文报名通道，考试代号为CKA-CN，官方考试费用目前为2498RMB（2021-11-01），可以通过第三方渠道获取优惠码的方式便宜200~300RMB，在付款的时候输入优惠码，付款金额会变成0，亲测有效，中文报名通道（注册后请先实名认证）：<a target="_blank" rel="noopener" href="https://training.linuxfoundation.cn/certificates/1">https://training.linuxfoundation.cn/certificates/1</a></p>
+<p>购买成功后，登录个人中心可以看到相应的考试码，后续预约考试的时候会使用。</p>
+<p>注意事项：</p>
+<p>中文报名通道网站注册后请先实名认证</p>
+<p>考试有效期一年，也就是可以先缴费报名，可以在报名后的一年内的任意一天预约考试，也就是说报名后你有一年的时间来复习，完全不用担心时间不够</p>
+<p>考试的形式是在线考试，考试时间2小时，考试题目17道（都是上机操作题，会给你7~8个K8S集群，然后选择不同集群根据题意进行操作，开卷考试，考试期间可以参考K8S官方文档），满分100分，66分及格。</p>
+<p>有两次考试机会，如果第一次挂了还拥有一次免费的补考机会（前提是第一次预约一定要去，如果第一次没去，那么就没有补考机会）</p>
+<p>考试证件，预约了新版CKA-CN考试有身份证就可以了（方便国内考生），之前还需要护照等有英文名字的证件</p>
+<p>考前复习</p>
+<p>对于一个完全没有接触过K8S的人来说，需要先从容器基础docker开始学习，实践套路一般为通过Vmware安装Linux虚拟机，然后在虚拟机中安装docker和K8S，这部分可以参考我之前的相关文章</p>
+<p>2021-01-05_5分钟在虚拟机中搭建Linux开发环境</p>
+<p>都9102年了，还没听过docker？5分钟带你了解docker的前世今生！</p>
+<p>2021-06-14_K8S原理架构与实战（基础篇）</p>
+<p>注意考试全部是上机操作题，没有理论题，因此复制过程中一定要注意多敲命令，勤加练习，</p>
+<p>复习过程中也可以多参考熟悉K8S官方文档，考试的时候可以参考官方文档，官方文档地址如下</p>
+<p><a target="_blank" rel="noopener" href="https://kubernetes.io/zh/docs/home/">https://kubernetes.io/zh/docs/home/</a></p>
+<p>考试权重占比</p>
+<p>集群架构，安装和配置：25%</p>
+<p>• 管理基于角色的访问控制（RBAC）</p>
+<p>• 使用Kubeadm安装基本集群</p>
+<p>• 管理高可用性的Kubernetes集群</p>
+<p>• 设置基础架构以部署Kubernetes集群</p>
+<p>• 使用Kubeadm在Kubernetes集群上执行版本升级</p>
+<p>• 实施etcd备份和还原</p>
+<p>工作负载和调度：15%</p>
+<p>• 了解部署以及如何执行滚动更新和回滚</p>
+<p>• 使用ConfigMaps和Secrets配置应用程序</p>
+<p>• 了解如何扩展应用程序</p>
+<p>• 了解用于创建健壮的、自修复的应用程序部署的原语</p>
+<p>• 了解资源限制如何影响Pod调度</p>
+<p>• 了解清单管理和通用模板工具</p>
+<p>服务和网络：20%</p>
+<p>• 了解集群节点上的主机网络配置</p>
+<p>• 理解Pods之间的连通性</p>
+<p>• 了解ClusterIP、NodePort、LoadBalancer服务类型和端点</p>
+<p>• 了解如何使用入口控制器和入口资源</p>
+<p>• 了解如何配置和使用CoreDNS</p>
+<p>• 选择适当的容器网络接口插件</p>
+<p>存储：10%</p>
+<p>• 了解存储类、持久卷</p>
+<p>• 了解卷模式、访问模式和卷回收策略</p>
+<p>• 理解持久容量声明原语</p>
+<p>• 了解如何配置具有持久性存储的应用程序</p>
+<p>故障排除：30%</p>
+<p>• 评估集群和节点日志</p>
+<p>• 了解如何监视应用程序</p>
+<p>• 管理容器标准输出和标准错误日志</p>
+<p>• 解决应用程序故障</p>
+<p>• 对群集组件故障进行故障排除</p>
+<p>• 排除网络故障</p>
+<p>考试题</p>
+<p>在线练习</p>
+<p>CKA提供了在线练习，整个环境和真实考试一致，也是提供了多套集群供练习，在线练习有时间限制，可以在考试前一周左右进行冲刺，注意在线练习题比考试题要难，练习题如下所示</p>
+<p>往年真题</p>
+<p>CKA题库较少，根据我的实践，考试题和往年试题基本一致，所以如果需要快速通过考试，只需要狂练真题即可，下图为我收集的往年真题，带有答案解析和相应笔记：</p>
+<p>下载地址</p>
+<p>往年真题和练习题下载地址（收集整理耗费了不少精力，所以付费下载，望理解）：<a target="_blank" rel="noopener" href="https://download.csdn.net/download/xvktdmjg/37979171">https://download.csdn.net/download/xvktdmjg/37979171</a></p>
+<p>提供有偿一对一培训服务，如需了解，咨询QQ：一零七三八五零五二五</p>
+<p>预约</p>
+<p>预约时间要注意在网络情况比较好的情况预约，并且预约时间和取消预约都需要至少提前一天进行。</p>
+<p>第一次考试一定要参加，如果无法参加请提前取消预约，如果预约了第一次没参加，无法进行第二次考试！</p>
+<p>下面为时间预约步骤</p>
+<p>首先要注册Linux基金会网站并登录，地址： <a target="_blank" rel="noopener" href="https://trainingportal.linuxfoundation.org/">https://trainingportal.linuxfoundation.org/</a></p>
+<p>点击右上角Apply Registration Code，输入报名后获得的考试码，然后点击Validate验证，验证通过后点击Redeem</p>
+<p>步骤准备，根据列表完成相应步骤，注意姓名和身份证一致（CKA-CN），姓和名反写，比如 “四 李”；Schedule按钮要等半个小时才能点击</p>
+<p>在等待Schedule的时候可以进行System Requirements检查，注意此处需要安装一个浏览器插件，安装完成后等全部检测项是勾即为通过</p>
+<p>点击Schedule按钮进入如下界面，注意考试项目选择CKA-CN如下图</p>
+<p>点击Next进入时间选择页面，注意这里会选择两次时间，第一次选择你需要预约的时间，然后系统会获取可以考试的时间，然后再在可以考试的时间里面再次选择（整个过程比较慢，需要耐心等待）。</p>
+<p>考试注意事项</p>
+<p>考试采取在线考试的形式，需要打开摄像头与屏幕共享，考试界面如下（如果报名的CKA-CN，则题目是中文），左边部分是题目，右边部分是命令行输入界面，顶部有一排控制选项（和考官实时对话，交卷，暂时离开等）</p>
+<p>考试过程中注意事项如下：</p>
+<p>确保环境安静（封闭环境），周围不能有其他人</p>
+<p>准备好身份证，身份验证时需要</p>
+<p>需要有稳定的网络，考试需要屏幕分享及打开摄像头</p>
+<p>考试过程中需保证保证人在镜头画面中，不能离开镜头</p>
+<p>考试过程中不能喝水吃东西(最佳状态)，如需要离开请申请，注意，离开依然会算考试时间（如非必要，尽量不要离开）</p>
+<p>考试完成后找到Exam Control点击找到相应按钮提交考试即可结束考试，考试结束后24小时之内出考试结果（邮件通知）</p>
+<p>考试技巧</p>
+<p>快捷命令设置</p>
+<p><strong>给kubectl起一个别名，方面在考试的时候快速输入</strong><br>alias k&#x3D;kubectl</p>
+<p><strong>dry-run命令快速输入</strong><br>export do&#x3D;”–dry-run&#x3D;client -o yaml” # like short for dry output. use whatever you like</p>
+<p>做每道题之前一定要记得切换集群，考试页面不能ctrl+c复制，ctrl+v粘贴，ctrl + insert复制，shift+insert粘贴</p>
+<p>每道题编排文件进行相应命名，方面检查时进行区分</p>
+<p>不会做的及时跳过，并且做标记，每道题目下方可以进行标记，左边按钮是此题已完成，右边是此题未完成</p>
+<p>整个考试过程只能打开两个浏览器标签，一个是在线考试标签，另外一个是K8S在线文档标签，不能打开其他标签</p>
+<h2 id="实战篇"><a href="#实战篇" class="headerlink" title="实战篇"></a>实战篇</h2><h3 id="容器交付流程"><a href="#容器交付流程" class="headerlink" title="容器交付流程"></a>容器交付流程</h3><h4 id="1-容器交付流程"><a href="#1-容器交付流程" class="headerlink" title="1.容器交付流程"></a>1.容器交付流程</h4><p><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/462684-20210925171811116-1426560401.png" alt="img"></p>
+<p><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/198738-20200224193947186-325076363.png" alt="img"></p>
+<h4 id="2-容器交付实战"><a href="#2-容器交付实战" class="headerlink" title="2.容器交付实战"></a>2.容器交付实战</h4><p><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/462684-20210925171900111-45876335.png" alt="img"></p>
+<h4 id=""><a href="#" class="headerlink" title=""></a></h4><ul>
+<li>项目代码构成</li>
+<li>依赖的服务</li>
+<li>提供服务的端口</li>
+<li>配置文件</li>
+<li>程序在工作种涉及持久化的文件</li>
+</ul>
+<p>代码项目地址：<a target="_blank" rel="noopener" href="https://gitee.com/qianxunqianyu/tom-java-demo">https://gitee.com/qianxunqianyu/tom-java-demo</a></p>
+<p>1、生成网站打包文件</p>
+<pre><code>yum install java-1.8.0-openjdk maven git -y``git clone https:``//gitee.com/qianxunqianyu/tom-java-demo``mvn clean package -Dmaven.test.skip=``true` `# 代码编译构建``unzip target/*.war -d target/ROOT # 解压构建文件
+</code></pre>
+<p>　</p>
+<p><strong>实战开始</strong></p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20220718180448759.png" alt="image-20220718180448759"></p>
+<h4 id="3-制作镜像"><a href="#3-制作镜像" class="headerlink" title="**3.**制作镜像"></a>**3.**制作镜像</h4><p><strong>部署ava环境，下载jdk</strong></p>
+<pre><code># Centos yum安装java jdk环境包# 搜索包
+yum list  | grep java     
+
+# 安装指定版本包
+yum -y install java-1.8.0-openjdk* maven
+
+# 查看 jdk版本，环境检查
+[root@vm1 ~]# java -version 
+openjdk version &quot;1.8.0_332&quot;
+OpenJDK Runtime Environment (build 1.8.0_332-b09)
+OpenJDK 64-Bit Server VM (build 25.332-b09, mixed mode)
+
+# 检查mvn命令
+[root@vm1 ~]# mvn
+mvn       mvnDebug  mvnyjp    
+[root@vm1 ~]# mvn
+</code></pre>
+<p>2.下载java项目学习-这里用到的是啊良的哈哈哈</p>
+<pre><code>git clone https://github.com/lizhenliang/tomcat-java-demo		# 因为项目在github上面下载可能会比较慢
+[root@vm1 /]# git clone https://github.com/lizhenliang/tomcat-java-demo
+正克隆到 &#39;tomcat-java-demo&#39;...
+remote: Enumerating objects: 549, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 549 (delta 0), reused 2 (delta 0), pack-reused 546
+接收对象中: 100% (549/549), 5.08 MiB | 2.12 MiB/s, done.
+处理 delta 中: 100% (213/213), done.
+[root@vm1 /]# ls | grep tomcat-java-demo
+tomcat-java-demo
+
+# 查看项目文件（这个就是项目源码包） 这个源码包对于java来说是不能直接部署的-必须经过java编译才行，包括其他语言都是
+[root@vm1 d]# ls
+db  Dockerfile  LICENSE  pom.xml  README.md  src
+
+# src 源码文件
+</code></pre>
+<p>3.编译项目，编译完，项目才能部署</p>
+<p>编译</p>
+<pre><code>mvn clean package -Dmaven.test.skip=true    # 在项目的目录下
+</code></pre>
+<pre><code># 初次编译会重网上下载依赖包，服务器是在国外，要是本地下载比较慢的话我们可以添加阿里云的加速
+# 进入阿里云阿里云云效 Maven网站
+https://developer.aliyun.com/mvn/guide
+</code></pre>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20220718191541127.png" alt="image-20220718191541127"></p>
+<p>3.1，进入maven配置文件</p>
+<pre><code>vim /etc/maven/settings.xml   # 配置文件目录
+&lt;mirror&gt;
+  &lt;id&gt;aliyunmaven&lt;/id&gt;
+  &lt;mirrorOf&gt;*&lt;/mirrorOf&gt;
+  &lt;name&gt;阿里云公共仓库&lt;/name&gt;
+  &lt;url&gt;https://maven.aliyun.com/repository/public&lt;/url&gt;
+&lt;/mirror&gt;
+</code></pre>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20220718191944751.png" alt="image-20220718191944751"></p>
+<p>再次编译</p>
+<pre><code>mvn clean package -Dmaven.test.skip=true
+..........  # 省略输出
+[INFO] Total time: 3.270s
+[INFO] Finished at: Mon Jul 18 19:22:56 CST 2022
+[INFO] Final Memory: 25M/239M
+[INFO] ------------------------------------------------------------------------     显示最下面这几行表示编译完成了
+[root@vm1 tomcat-java-demo]# ls     # 这时在查看目录下面会多一个target文件 
+db  Dockerfile  LICENSE  pom.xml  README.md  src  target
+</code></pre>
+<p>target文件目录就有我们打的war包了，</p>
+<ul>
+<li>我们需要把这个包打一个镜像</li>
+<li>把这个镜像推送到镜像仓库中</li>
+<li>使用k8s拉取这个镜像更新项目</li>
+</ul>
+<h5 id="3-1构建镜像"><a href="#3-1构建镜像" class="headerlink" title="3.1构建镜像"></a>3.1构建镜像</h5><p>镜像分类</p>
+<ul>
+<li>基础镜像：操作系统层，例如Centos，ubuntu，alpine</li>
+<li>环境镜像：环境运行层，例如jdk，nginx，python</li>
+<li>项目镜像：应用层， 例如kubernetesui&#x2F;dashboard</li>
+</ul>
+<p>在项目的文件内有一个Dockerfile文本，里面写了如果制作镜像</p>
+<pre><code>root@vm1 tomcat-java-demo]# cat Dockerfile 
+FROM tomcat 
+LABEL maintainer www.ctnrs.com
+ADD target/*.war /usr/local/tomcat/webapps/ROOT.war 
+</code></pre>
+<pre><code>docker build -t java-demo .   # build镜像，如果默认识别Dockerfile文件，如果是别的名字，就需要-f 指定
+docker build -f Dockerfile -t java-demo .  # 这样
+</code></pre>
+<p>过程</p>
+<pre><code>[root@vm1 tomcat-java-demo]# docker build -t java-lsp -f Dockerfile.bak .
+Sending build context to Docker daemon  49.48MB
+Step 1/4 : FROM lizhenliang/tomcat
+ ---&gt; 143035d83fdc
+Step 2/4 : LABEL maintainer www.ctnrs.com
+ ---&gt; Running in b0fe7fd9b4a4
+Removing intermediate container b0fe7fd9b4a4
+ ---&gt; a3b476842d0e
+Step 3/4 : RUN rm -rf /usr/local/tomcat/webapps/*
+ ---&gt; Running in a3923846a5a4
+Removing intermediate container a3923846a5a4
+ ---&gt; 091c7e6e12d4
+Step 4/4 : ADD target/*.war /usr/local/tomcat/webapps/ROOT.war
+ ---&gt; 680e00bf7826
+Successfully built 680e00bf7826
+Successfully tagged java-lsp:latest		# 镜像构建完成			
+
+[root@vm1 tomcat-java-demo]# docker images | grep java		# 查看我们构建的镜像
+java-lsp                                                          latest     680e00bf7826   2 minutes ago    406MB
+</code></pre>
+<p>我们使用docker run运行测试一下</p>
+<pre><code>[root@vm1 tomcat-java-demo]# docker run -d -p 89:8080 --name java.lsp java-lsp		# 暴露89端口，tomcat默认监听8080端口
+402e1f3088f81031393896a641832eab9c220d95f543d11d40add25f558d717a
+
+[root@vm1 tomcat-java-demo]# docker ps | grep java		# 查看docker进程
+402e1f3088f8   java-lsp                                              &quot;catalina.sh run&quot;        3 minutes ago       Up 3 minutes       0.0.0.0:89-&gt;8080/tcp, :::89-&gt;8080/tcp   java.lsp
+</code></pre>
+<p>浏览器访问测试</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20220718201135404.png" alt="image-20220718201135404"></p>
+<h4 id="4-使用控制器部署镜像"><a href="#4-使用控制器部署镜像" class="headerlink" title="4.使用控制器部署镜像"></a>4.使用控制器部署镜像</h4><p><strong>1.使用deployment控制器，写yaml清单</strong></p>
+<p>Deployment</p>
+<p>我们这里使用ingress暴露Pod出去使用域名访问</p>
+<pre><code>[root@vm1 kubernetes]# cat deployment.yaml 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tomcat
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: tomcat
+  template:
+    metadata:
+      labels:
+        app: tomcat
+    spec:
+      containers:
+      - image: lizhenliang/java-demo		# 这个镜像是直接拿那个啊良哥哥的，从他的仓库下载，我们郭构建的那个镜像我们拉取不了本地，我看资料应该是需要放到node节点
+        name: tomcat
+        resources:
+          requests:
+#            cpu: 1
+#            memory: 1Gi
+#          limits:
+#            cpu: 1
+#            memory: 1Gi
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: tomcat
+spec:
+  selector:
+    app: tomcat
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+
+---
+
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: tomcat
+spec:
+  rules:
+  - host: web.wsnbwsnb.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: tomcat
+            port:
+              number: 8080
+
+
+[root@vm1 kubernetes]# kubectl apply -f deployment.yaml                 
+deployment.apps/tomcat configured
+service/tomcat unchanged
+ingress.networking.k8s.io/tomcat created
+
+查看pod状态，Service,ingress
+[root@vm1 kubernetes]#  kubectl get pod,svc,deploy,ingress -o wide
+NAME                          READY   STATUS    RESTARTS   AGE     IP             NODE   NOMINATED NODE   READINESS GATES
+pod/bs                        1/1     Running   1          2d1h    10.244.1.64    vm2    &lt;none&gt;           &lt;none&gt;
+pod/tomcat-69dcc89b88-4vv58   1/1     Running   0          7m37s   10.244.2.107   vm3    &lt;none&gt;           &lt;none&gt;
+pod/tomcat-69dcc89b88-qkw85   1/1     Running   0          7m21s   10.244.1.98    vm2    &lt;none&gt;           &lt;none&gt;
+pod/tomcat-69dcc89b88-sp88m   1/1     Running   0          9m17s   10.244.1.97    vm2    &lt;none&gt;           &lt;none&gt;
+pod/tomcat-69dcc89b88-z7kxv   1/1     Running   0          9m17s   10.244.1.96    vm2    &lt;none&gt;           &lt;none&gt;
+pod/tomcat-69dcc89b88-zndhk   1/1     Running   0          9m17s   10.244.1.95    vm2    &lt;none&gt;           &lt;none&gt;
+pod/web-84b9b46f96-47vj5      1/1     Running   0          23h     10.244.1.89    vm2    &lt;none&gt;           &lt;none&gt;
+pod/web-84b9b46f96-9fw54      1/1     Running   0          23h     10.244.1.90    vm2    &lt;none&gt;           &lt;none&gt;
+pod/web-84b9b46f96-kpdmt      1/1     Running   0          23h     10.244.2.99    vm3    &lt;none&gt;           &lt;none&gt;
+pod/web-84b9b46f96-wrm8b      1/1     Running   0          23h     10.244.2.98    vm3    &lt;none&gt;           &lt;none&gt;
+pod/web-84b9b46f96-x8jnj      1/1     Running   0          23h     10.244.2.97    vm3    &lt;none&gt;           &lt;none&gt;
+
+NAME                 TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE     SELECTOR
+service/kubernetes   ClusterIP   10.96.0.1        &lt;none&gt;        443/TCP    6d22h   &lt;none&gt;
+service/tomcat       ClusterIP   10.100.140.175   &lt;none&gt;        8080/TCP   50m     app=tomcat
+service/web          ClusterIP   10.98.93.11      &lt;none&gt;        8889/TCP   23h     app=nginx
+
+NAME                     READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES                  SELECTOR
+deployment.apps/tomcat   5/5     5            5           50m   tomcat       lizhenliang/java-demo   app=tomcat
+deployment.apps/web      5/5     5            5           23h   nginx        nginx:1.18              app=nginx
+
+NAME                               CLASS    HOSTS              ADDRESS                       PORTS   AGE
+ingress.networking.k8s.io/tomcat   &lt;none&gt;   web.wsnbwsnb.com   192.168.10.20,192.168.10.30   80      50m		# 我们直接访问这个域名
+</code></pre>
+<h5 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h5><p>修改hosts文件，来解析测试</p>
+<p>windows-以为我电脑联网了用浏览器测试有问题所以用cmd测试</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20220718225129338.png" alt="image-20220718225129338"></p>
+<p>node节点测试</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20220718225234108.png" alt="image-20220718225234108"></p>
+<p>如果我们不会去写yaml，我们可以用命令行创建尝试运行临时演示不会部署，同时导出yaml文件</p>
+<pre><code>kubectl create deployment java-demo --image=lizhenliang/java-demo --dry-run=client -o yaml &gt; web.yaml
+[root@vm1 kubernetes]# ls | grep web
+web.yaml
+[root@vm1 kubernetes]# cat web.yaml 	# 这样就生成了一个命令结果上面的一个yaml了
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null		# 把这个时间戳删除
+  labels:
+    app: java-demo
+  name: java-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: java-demo
+  strategy: &#123;&#125;
+  template:
+    metadata:
+      creationTimestamp: null		# 把这个时间戳删除
+      labels:
+        app: java-demo
+    spec:
+      containers:
+      - image: lizhenliang/java-demo
+        name: java-demo
+        resources: &#123;&#125;
+status: &#123;&#125;			# 用的时候把这个删除
+
+# 这样就可以用了
+[root@vm1 kubernetes]# cat web.yaml 	
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: java-demo
+  name: java-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: java-demo
+  strategy: &#123;&#125;
+  template:
+    metadata:
+      labels:
+        app: java-demo
+    spec:
+      containers:
+      - image: lizhenliang/java-demo
+        name: java-demo
+        resources: &#123;&#125;
+</code></pre>
+<p>Service也可以写</p>
+<pre><code>[root@vm1 /]# kubectl expose deployment tomcat --port=80 --target-port=8080 --type=NodePort --dry-run=client -o yaml &gt; Service.yaml
+[root@vm1 /]# cat Service.yaml 
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null	# 删除
+  name: tomcat
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: tomcat
+  type: NodePort
+status:					# 删除
+  loadBalancer: &#123;&#125;		# 删除
+ # 记得把时间戳删除了
+</code></pre>
+<p>查看监听端口</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">XiaoBei</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/07/21/Service%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">http://example.com/2022/07/21/Service%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="null" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">xiaobei</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/cloud/">cloud</a></div><div class="post_share"><div class="social-share" data-image="https://wallpapershome.com/images/pages/ico_h/23723.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/08/01/Pod%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" title="Pod基本概念"><img class="cover" src="https://wallpapershome.com/images/pages/ico_h/4157.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Pod基本概念</div></div></a></div><div class="next-post pull-right"><a href="/2022/07/21/k8s%E4%BC%81%E4%B8%9A%E5%BA%94%E7%94%A8%E4%B8%8E%E5%AE%B9%E5%99%A8%E8%BF%81%E7%A7%BB/" title="k8s企业应用与容器迁移"><img class="cover" src="https://wallpapershome.com/images/pages/pic_h/24181.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">k8s企业应用与容器迁移</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/07/21/k8s%E4%BC%81%E4%B8%9A%E5%BA%94%E7%94%A8%E4%B8%8E%E5%AE%B9%E5%99%A8%E8%BF%81%E7%A7%BB/" title="k8s企业应用与容器迁移"><img class="cover" src="https://wallpapershome.com/images/pages/pic_h/24181.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-21</div><div class="title">k8s企业应用与容器迁移</div></div></a></div><div><a href="/2022/07/20/%E8%B5%84%E6%BA%90%E5%AF%B9%E8%B1%A1%E5%AF%B9%E5%BA%94%E5%85%B3%E7%B3%BB/" title="资源对象对应关系*-*"><img class="cover" src="https://wallpapershome.com/images/pages/ico_h/24319.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-20</div><div class="title">资源对象对应关系*-*</div></div></a></div><div><a href="/2022/07/20/%E4%BA%94%E7%A7%8D%E6%8E%A7%E5%88%B6%E5%99%A8%E8%AF%A6%E8%A7%A3/" title="五种控制器详解"><img class="cover" src="https://wallpapershome.com/images/pages/ico_h/20030.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-20</div><div class="title">五种控制器详解</div></div></a></div><div><a href="/2022/08/01/Pod%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" title="Pod基本概念"><img class="cover" src="https://wallpapershome.com/images/pages/ico_h/4157.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-01</div><div class="title">Pod基本概念</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/wsnb.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">XiaoBei</div><div class="author-info__description">归途也还可爱</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/wsnbwz" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:wsnblove@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#k8s%E4%BC%81%E4%B8%9A%E5%BA%94%E7%94%A8%E4%B9%8B%E5%AE%B9%E5%99%A8%E5%8C%96%E8%BF%81%E7%A7%BB"><span class="toc-text">k8s企业应用之容器化迁移</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E4%B8%8B%E6%9D%A5%E9%9C%80%E8%A6%81%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%B0%8F%E8%8A%82"><span class="toc-text">接下来需要学习的小节</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#k8s%E7%9B%AE%E5%89%8D%E5%B8%82%E5%9C%BA%E5%8F%91%E5%B1%95%E7%8E%B0%E7%8A%B6"><span class="toc-text">k8s目前市场发展现状</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#k8s-CKA%E8%AE%A4%E8%AF%81%E4%BB%8B%E7%BB%8D"><span class="toc-text">k8s CKA认证介绍</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E6%88%98%E7%AF%87"><span class="toc-text">实战篇</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E4%BA%A4%E4%BB%98%E6%B5%81%E7%A8%8B"><span class="toc-text">容器交付流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%AE%B9%E5%99%A8%E4%BA%A4%E4%BB%98%E6%B5%81%E7%A8%8B"><span class="toc-text">1.容器交付流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%AE%B9%E5%99%A8%E4%BA%A4%E4%BB%98%E5%AE%9E%E6%88%98"><span class="toc-text">2.容器交付实战</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text"></span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%88%B6%E4%BD%9C%E9%95%9C%E5%83%8F"><span class="toc-text">**3.**制作镜像</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1%E6%9E%84%E5%BB%BA%E9%95%9C%E5%83%8F"><span class="toc-text">3.1构建镜像</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E4%BD%BF%E7%94%A8%E6%8E%A7%E5%88%B6%E5%99%A8%E9%83%A8%E7%BD%B2%E9%95%9C%E5%83%8F"><span class="toc-text">4.使用控制器部署镜像</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-text">测试</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/03/10/Docker%E7%BD%91%E7%BB%9C/" title="Docker网络"><img src="https://wallpapershome.com/images/pages/ico_h/24483.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Docker网络"/></a><div class="content"><a class="title" href="/2023/03/10/Docker%E7%BD%91%E7%BB%9C/" title="Docker网络">Docker网络</a><time datetime="2023-03-10T13:15:04.000Z" title="发表于 2023-03-10 21:15:04">2023-03-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/10/Docker%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/" title="Docker基础搭建"><img src="https://wallpapershome.com/images/pages/ico_h/23723.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Docker基础搭建"/></a><div class="content"><a class="title" href="/2023/03/10/Docker%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/" title="Docker基础搭建">Docker基础搭建</a><time datetime="2023-03-10T08:00:34.000Z" title="发表于 2023-03-10 16:00:34">2023-03-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/02/%E7%AE%80%E5%8D%95%E6%90%AD%E5%BB%BAhttp%E6%9C%8D%E5%8A%A1/" title="简单搭建http服务"><img src="https://wallpapershome.com/images/pages/ico_h/24491.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="简单搭建http服务"/></a><div class="content"><a class="title" href="/2022/08/02/%E7%AE%80%E5%8D%95%E6%90%AD%E5%BB%BAhttp%E6%9C%8D%E5%8A%A1/" title="简单搭建http服务">简单搭建http服务</a><time datetime="2022-08-02T06:07:47.000Z" title="发表于 2022-08-02 14:07:47">2022-08-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/02/DHCP%E5%85%AB%E7%A7%8D%E6%8A%A5%E6%96%87%E8%AF%A6%E8%A7%A3/" title="DHCP八种报文详解"><img src="https://wallpapershome.com/images/pages/ico_h/24048.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="DHCP八种报文详解"/></a><div class="content"><a class="title" href="/2022/08/02/DHCP%E5%85%AB%E7%A7%8D%E6%8A%A5%E6%96%87%E8%AF%A6%E8%A7%A3/" title="DHCP八种报文详解">DHCP八种报文详解</a><time datetime="2022-08-02T06:00:35.000Z" title="发表于 2022-08-02 14:00:35">2022-08-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/02/NAT-NAPT%E4%BB%A5%E5%8F%8AeasyIP%E7%9A%84%E5%8C%BA%E5%88%AB/" title="NAT,NAPT以及easyIP的区别"><img src="https://wallpapershome.com/images/pages/ico_h/24489.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="NAT,NAPT以及easyIP的区别"/></a><div class="content"><a class="title" href="/2022/08/02/NAT-NAPT%E4%BB%A5%E5%8F%8AeasyIP%E7%9A%84%E5%8C%BA%E5%88%AB/" title="NAT,NAPT以及easyIP的区别">NAT,NAPT以及easyIP的区别</a><time datetime="2022-08-02T05:55:50.000Z" title="发表于 2022-08-02 13:55:50">2022-08-02</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By XiaoBei</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="true" data-text="富强,民主,文明,和谐,平等,公正,法治,爱国,敬业,诚信,友善" data-fontsize="15px" data-random="true" async="async"></script><div class="fb-customerchat" id="fb-customer-chat" attribution="biz_inbox"></div><script>document.getElementById('fb-root') ? '' : document.body.insertAdjacentHTML('afterend', '<div id="fb-root"></div>')
+
+window.fbAsyncInit = function() {
+  FB.init({
+    xfbml: true,
+    version: 'v15.0'
+  });
+};
+
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/zh_CN/sdk/xfbml.customerchat.js';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+if (false) {
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      FB.CustomerChat.show();
+    });
+  }
+  chatBtnFn()
+} else {
+  if (false) {
+    function chatBtnHide () {
+      FB.CustomerChat.hide()
+    }
+    function chatBtnShow () {
+      FB.CustomerChat.show(false)
+    }
+  }
+}</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></body></html>

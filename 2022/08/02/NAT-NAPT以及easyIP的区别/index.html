@@ -1,0 +1,216 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>NAT,NAPT以及easyIP的区别 | xiaobei</title><meta name="author" content="XiaoBei"><meta name="copyright" content="XiaoBei"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="NAT、NAPT以及easy IP的区别1、NAT:网络地址转换(NAT,Network Address Translation)属接入广域网(WAN)技术，是一种将私有（保留）地址转化为合法IP地址的转换技术，它被广泛应用于各种类型Internet接入方式和各种类型的网络中。原因很简单，NAT不仅完美地解决了lP地址不足的问题，而且还能够有效地避免来自网络外部的攻击，隐藏并保护网络内部的计算机。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NAT,NAPT以及easyIP的区别">
+<meta property="og:url" content="http://example.com/2022/08/02/NAT-NAPT%E4%BB%A5%E5%8F%8AeasyIP%E7%9A%84%E5%8C%BA%E5%88%AB/index.html">
+<meta property="og:site_name" content="xiaobei">
+<meta property="og:description" content="NAT、NAPT以及easy IP的区别1、NAT:网络地址转换(NAT,Network Address Translation)属接入广域网(WAN)技术，是一种将私有（保留）地址转化为合法IP地址的转换技术，它被广泛应用于各种类型Internet接入方式和各种类型的网络中。原因很简单，NAT不仅完美地解决了lP地址不足的问题，而且还能够有效地避免来自网络外部的攻击，隐藏并保护网络内部的计算机。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wallpapershome.com/images/pages/ico_h/24489.jpg">
+<meta property="article:published_time" content="2022-08-02T05:55:50.000Z">
+<meta property="article:modified_time" content="2023-03-10T14:35:58.323Z">
+<meta property="article:author" content="XiaoBei">
+<meta property="article:tag" content="代理-VPN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wallpapershome.com/images/pages/ico_h/24489.jpg"><link rel="shortcut icon" href="/img/homepage.jpg"><link rel="canonical" href="http://example.com/2022/08/02/NAT-NAPT%E4%BB%A5%E5%8F%8AeasyIP%E7%9A%84%E5%8C%BA%E5%88%AB/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: XiaoBei","link":"链接: ","source":"来源: xiaobei","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'NAT,NAPT以及easyIP的区别',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-03-10 22:35:58'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/background.css"><link rel="stylesheet" href="/css/test.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/wsnb.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-paper-plane"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.555kan.net"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="xiaobei"><span class="site-name">xiaobei</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-paper-plane"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.555kan.net"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">NAT,NAPT以及easyIP的区别</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-08-02T05:55:50.000Z" title="发表于 2022-08-02 13:55:50">2022-08-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-10T14:35:58.323Z" title="更新于 2023-03-10 22:35:58">2023-03-10</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/NetWork/">NetWork</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="NAT,NAPT以及easyIP的区别"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="NAT、NAPT以及easy-IP的区别"><a href="#NAT、NAPT以及easy-IP的区别" class="headerlink" title="NAT、NAPT以及easy IP的区别"></a>NAT、NAPT以及easy IP的区别</h1><h2 id="1、NAT"><a href="#1、NAT" class="headerlink" title="1、NAT:"></a>1、NAT:</h2><p>网络地址转换(NAT,Network Address Translation)属接入广域网(WAN)技术，是一种将私有（保留）地址转化为合法IP地址的转换技术，它被广泛应用于各种类型Internet接入方式和各种类型的网络中。原因很简单，NAT不仅完美地解决了lP地址不足的问题，而且还能够有效地避免来自网络外部的攻击，隐藏并保护网络内部的计算机。</p>
+<p>  NAT（Network Address Translation，网络地址转换）是将IP 数据包头中的IP 地址转换为另一个IP 地址的过程。在实际应用中，NAT 主要用于实现私有网络访问公共网络的功能。这种通过使用少量的公有IP 地址代表较多的私有IP 地址的方式，将有助于减缓可用IP 地址空间的枯竭。</p>
+<p>  NAT的基本工作原理是，当私有网主机和公共网主机通信的IP包经过NAT网关时，将IP包中的源IP或目的IP在私有IP和NAT的公共IP之间进行转换。NAT网关有2个网络端口，其中公共网络端口的IP地址是统一分配的公共IP，为202.204.65.2；私有网络端口的IP地址是保留地址，为192.168.1.1。私有网中的主机 192.168.1.2向公共网中的主机166.111.80.200发送了1个IP包（Des&#x3D;166.111.80.200,Src&#x3D;192.168.1.2）。当IP包经过NAT网关时，NAT会将IP包的源IP转换为NAT的公共 IP并转发到公共网，此时IP包（Des&#x3D;166.111.80.200，Src&#x3D;202.204.65.2）中已经不含任何私有网IP的信息。由于IP 包的源IP已经被转换成NAT的公共IP，响应的IP包（Des&#x3D;202.204.65.2,Src&#x3D;166.111.80.200）将被发送到NAT。 这时，NAT会将IP包的目的IP转换成私有网中主机的IP，然后将IP包（Des&#x3D;192.168.1.2，Src&#x3D;166.111.80.200）转 发到私有网。对于通信双方而言，这种地址的转换过程是完全透明的。</p>
+<h2 id="2、NAPT"><a href="#2、NAPT" class="headerlink" title="2、NAPT:"></a>2、NAPT:</h2><p>由于NAT实现是私有IP和NAT的公共IP之间的转换，那么，私有网中同时与公共网进行通信的主机数量就受到NAT的公共IP地址数量的限制。为了克服 这种限制，NAT被进一步扩展到在进行IP地址转换的同时进行Port的转换，这就是网络地址端口转换NAPT（Network Address Port Translation）技术。</p>
+<p>  NAPT与NAT的区别在于，NAPT不仅转换IP包中的IP地址，还对IP包中TCP和UDP的Port进行转换。这使得多台私有网主机利用1个NAT公共IP就可以同时和公共网进行通信。（NAPT多了对TCP和UDP的端口号的转换）</p>
+<p>私有网主机192.168.1.2要访问公共网中的 Http服务器166.111.80.200。首先，要建立TCP连接，假设分配的TCP Port是1010，发送了1个IP包（Des&#x3D;166.111.80.200:80,Src&#x3D;192.168.1.2:1010）,当IP包经过NAT 网关时，NAT会将IP包的源IP转换为NAT的公共IP，同时将源Port转换为NAT动态分配的1个Port。然后，转发到公共网，此时IP包 （Des&#x3D;166.111.80.200：80，Src&#x3D;202.204.65.2:2010）已经不含任何私有网IP和Port的信息。由于IP包的源 IP和Port已经被转换成NAT的公共IP和Port，响应的IP包 （Des&#x3D;202.204.65.2:,Src&#x3D;2010166.111.80.200:80）将被发送到NAT。这时NAT会将IP包的目的IP转换成 私有网主机的IP，同时将目的Port转换为私有网主机的Port，然后将IP包 （Des&#x3D;192.168.1.2:1010，Src&#x3D;166.111.80.200:80）转发到私网。对于通信双方而言，这种IP地址和Port的转 换是完全透明的。</p>
+<h2 id="3、easy-IP"><a href="#3、easy-IP" class="headerlink" title="3、easy IP:"></a>3、easy IP:</h2><p>Easy IP 方式的实现原理与上节介绍的地址池NAPT 转换原理类似，可以算是NAPT的一种特例，不同的是Easy IP 方式可以实现自动根据路由器上WAN 接口的公网IP 地址实现与私网IP 地址之间的映射（无需创建公网地址池）。</p>
+<p>Easy IP 主要应用于将路由器WAN 接口IP 地址作为要被映射的公网IP 地址的情形，特别适合小型局域网接入Internet 的情况。这里的小型局域网主要指中小型网吧、小型办公室等环境，一般具有以下特点：内部主机较少、出接口通过拨号方式获得临时（或固定）公网IP 地址以供内部主机访问Internet。图6-3 所示为Easy IP 方式的实现原理，具体过程如下。</p>
+<p><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/image-20220802135829322.png" alt="image-20220802135829322"></p>
+<p>① 假设私网中的Host A 主机要访问公网的Server，首先要向Router 发送一个请求报文（即Outbound 方向），此时报文中的源地址是10.1.1.100，端口号1540。</p>
+<p>② Router 在收到请求报文后自动利用公网侧WAN 接口临时或者固定的“公网IP地址:端口号”（162.10.2.8:5480），建立与内网侧报文“源IP 地址:源端口号”间的Easy IP转换表项（也包括正、反两个方向），并依据正向Easy IP 表项的查找结果将报文转换后向公网侧发送。此时，转换后的报文源地址和源端口号由原来的（10.1.1.100:1540）转换成了（162.10.2.8:5480）。</p>
+<p>③ Server 在收到请求报文后需要向Router 发送响应报文（即Inbound 方向），此时只须将收到的请求报文中的源IP 地址、源端口号和目的IP 地址、目的端口号对调即可，即此时的响应报文中的目的IP 地址、目的端口号为162.10.2.8:5480。</p>
+<p>④ Router 在收到公网侧Server 的回应报文后，根据其“目的IP 地址:目的端口号”查找反向Easy IP 表项，并依据查找结果将报文转换后向内网侧发送。即转换后的报文中的目的IP 地址为10.1.1.100，目的端口号为1540，与Host A 发送请求报文中的源IP地址和源端口完全一样。</p>
+<p>如果私网中的Host B 也要访问公网，则它所利用的公网IP 地址与Host A 一样，都是路由器WAN 口的公网IP 地址，但转换时所用的端口号一定要与Host A 转换时所用的端口不一样。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">XiaoBei</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/08/02/NAT-NAPT%E4%BB%A5%E5%8F%8AeasyIP%E7%9A%84%E5%8C%BA%E5%88%AB/">http://example.com/2022/08/02/NAT-NAPT%E4%BB%A5%E5%8F%8AeasyIP%E7%9A%84%E5%8C%BA%E5%88%AB/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="null" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">xiaobei</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E4%BB%A3%E7%90%86-VPN/">代理-VPN</a></div><div class="post_share"><div class="social-share" data-image="https://wallpapershome.com/images/pages/ico_h/24489.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/08/02/DHCP%E5%85%AB%E7%A7%8D%E6%8A%A5%E6%96%87%E8%AF%A6%E8%A7%A3/" title="DHCP八种报文详解"><img class="cover" src="https://wallpapershome.com/images/pages/ico_h/24048.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">DHCP八种报文详解</div></div></a></div><div class="next-post pull-right"><a href="/2022/08/02/squid%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="squid代理服务器"><img class="cover" src="https://wallpapershome.com/images/pages/ico_h/24485.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">squid代理服务器</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/wsnb.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">XiaoBei</div><div class="author-info__description">归途也还可爱</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/wsnbwz" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:wsnblove@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#NAT%E3%80%81NAPT%E4%BB%A5%E5%8F%8Aeasy-IP%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">NAT、NAPT以及easy IP的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81NAT"><span class="toc-text">1、NAT:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81NAPT"><span class="toc-text">2、NAPT:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81easy-IP"><span class="toc-text">3、easy IP:</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/03/10/Docker%E7%BD%91%E7%BB%9C/" title="Docker网络"><img src="https://wallpapershome.com/images/pages/ico_h/24483.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Docker网络"/></a><div class="content"><a class="title" href="/2023/03/10/Docker%E7%BD%91%E7%BB%9C/" title="Docker网络">Docker网络</a><time datetime="2023-03-10T13:15:04.000Z" title="发表于 2023-03-10 21:15:04">2023-03-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/10/Docker%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/" title="Docker基础搭建"><img src="https://wallpapershome.com/images/pages/ico_h/23723.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Docker基础搭建"/></a><div class="content"><a class="title" href="/2023/03/10/Docker%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/" title="Docker基础搭建">Docker基础搭建</a><time datetime="2023-03-10T08:00:34.000Z" title="发表于 2023-03-10 16:00:34">2023-03-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/02/%E7%AE%80%E5%8D%95%E6%90%AD%E5%BB%BAhttp%E6%9C%8D%E5%8A%A1/" title="简单搭建http服务"><img src="https://wallpapershome.com/images/pages/ico_h/24491.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="简单搭建http服务"/></a><div class="content"><a class="title" href="/2022/08/02/%E7%AE%80%E5%8D%95%E6%90%AD%E5%BB%BAhttp%E6%9C%8D%E5%8A%A1/" title="简单搭建http服务">简单搭建http服务</a><time datetime="2022-08-02T06:07:47.000Z" title="发表于 2022-08-02 14:07:47">2022-08-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/02/DHCP%E5%85%AB%E7%A7%8D%E6%8A%A5%E6%96%87%E8%AF%A6%E8%A7%A3/" title="DHCP八种报文详解"><img src="https://wallpapershome.com/images/pages/ico_h/24048.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="DHCP八种报文详解"/></a><div class="content"><a class="title" href="/2022/08/02/DHCP%E5%85%AB%E7%A7%8D%E6%8A%A5%E6%96%87%E8%AF%A6%E8%A7%A3/" title="DHCP八种报文详解">DHCP八种报文详解</a><time datetime="2022-08-02T06:00:35.000Z" title="发表于 2022-08-02 14:00:35">2022-08-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/02/NAT-NAPT%E4%BB%A5%E5%8F%8AeasyIP%E7%9A%84%E5%8C%BA%E5%88%AB/" title="NAT,NAPT以及easyIP的区别"><img src="https://wallpapershome.com/images/pages/ico_h/24489.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="NAT,NAPT以及easyIP的区别"/></a><div class="content"><a class="title" href="/2022/08/02/NAT-NAPT%E4%BB%A5%E5%8F%8AeasyIP%E7%9A%84%E5%8C%BA%E5%88%AB/" title="NAT,NAPT以及easyIP的区别">NAT,NAPT以及easyIP的区别</a><time datetime="2022-08-02T05:55:50.000Z" title="发表于 2022-08-02 13:55:50">2022-08-02</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By XiaoBei</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="true" data-text="富强,民主,文明,和谐,平等,公正,法治,爱国,敬业,诚信,友善" data-fontsize="15px" data-random="true" async="async"></script><div class="fb-customerchat" id="fb-customer-chat" attribution="biz_inbox"></div><script>document.getElementById('fb-root') ? '' : document.body.insertAdjacentHTML('afterend', '<div id="fb-root"></div>')
+
+window.fbAsyncInit = function() {
+  FB.init({
+    xfbml: true,
+    version: 'v15.0'
+  });
+};
+
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/zh_CN/sdk/xfbml.customerchat.js';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+if (false) {
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      FB.CustomerChat.show();
+    });
+  }
+  chatBtnFn()
+} else {
+  if (false) {
+    function chatBtnHide () {
+      FB.CustomerChat.hide()
+    }
+    function chatBtnShow () {
+      FB.CustomerChat.show(false)
+    }
+  }
+}</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></body></html>

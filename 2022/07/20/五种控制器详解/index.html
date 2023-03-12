@@ -1,0 +1,1020 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>五种控制器详解 | xiaobei</title><meta name="author" content="XiaoBei"><meta name="copyright" content="XiaoBei"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="五种控制器详解Kubernetes（k8s）Deployment、StatefulSet、DaemonSet、Job、CronJob五种控制器详解 文章目录一、Deployment控制器概述二、Deployment工作原理1）滚动升级2）版本回滚三、Deployment的资源清单文件详解四、Deployment实战1）示例12）扩缩容3）镜像更新4）版本回退五、Deployment金丝雀发布（灰度">
+<meta property="og:type" content="article">
+<meta property="og:title" content="五种控制器详解">
+<meta property="og:url" content="http://example.com/2022/07/20/%E4%BA%94%E7%A7%8D%E6%8E%A7%E5%88%B6%E5%99%A8%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="xiaobei">
+<meta property="og:description" content="五种控制器详解Kubernetes（k8s）Deployment、StatefulSet、DaemonSet、Job、CronJob五种控制器详解 文章目录一、Deployment控制器概述二、Deployment工作原理1）滚动升级2）版本回滚三、Deployment的资源清单文件详解四、Deployment实战1）示例12）扩缩容3）镜像更新4）版本回退五、Deployment金丝雀发布（灰度">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wallpapershome.com/images/pages/ico_h/20030.jpg">
+<meta property="article:published_time" content="2022-07-20T15:51:27.000Z">
+<meta property="article:modified_time" content="2022-07-21T15:40:53.519Z">
+<meta property="article:author" content="XiaoBei">
+<meta property="article:tag" content="cloud">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wallpapershome.com/images/pages/ico_h/20030.jpg"><link rel="shortcut icon" href="/img/homepage.jpg"><link rel="canonical" href="http://example.com/2022/07/20/%E4%BA%94%E7%A7%8D%E6%8E%A7%E5%88%B6%E5%99%A8%E8%AF%A6%E8%A7%A3/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: XiaoBei","link":"链接: ","source":"来源: xiaobei","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '五种控制器详解',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-07-21 23:40:53'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/background.css"><link rel="stylesheet" href="/css/test.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/wsnb.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-paper-plane"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.555kan.net"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="xiaobei"><span class="site-name">xiaobei</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-paper-plane"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.555kan.net"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">五种控制器详解</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-07-20T15:51:27.000Z" title="发表于 2022-07-20 23:51:27">2022-07-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-07-21T15:40:53.519Z" title="更新于 2022-07-21 23:40:53">2022-07-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/k8s/">k8s</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">7.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>29分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="五种控制器详解"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="五种控制器详解"><a href="#五种控制器详解" class="headerlink" title="五种控制器详解"></a>五种控制器详解</h1><p><strong>Kubernetes（k8s）Deployment、StatefulSet、DaemonSet、Job、CronJob五种控制器详解</strong></p>
+<p><strong>文章目录</strong><br>一、Deployment控制器概述<br>二、Deployment工作原理<br>1）滚动升级<br>2）版本回滚<br>三、Deployment的资源清单文件详解<br>四、Deployment实战<br>1）示例1<br>2）扩缩容<br>3）镜像更新<br>4）版本回退<br>五、Deployment金丝雀发布（灰度发布）<br>六、有状态、无状态服务区别<br>1）无状态：<br>2）有状态<br>七、PV、PVC、NFS、SC<br>1）PV概述<br>2）PVC概述<br>3）通过NFS实现持久化存储<br>4）基于NFS存储创建PV<br>5）基于NFS-PV创建PVC<br>6）SC（StorageClass：存储类）<br>7）基于动态sc（StorageClass：存储类）创建一个pv<br>八、StatefulSet控制器<br>1）简介<br>2）常规service和无头服务区别<br>3）特点<br>4）组成部分<br>九、DaemonSet控制器<br>十、Job控制器<br>十一、CronJob 控制器<br>十二、总结<br>1）ReplicationController（RC）主要功能<br>2）ReplicaSet主要功能（RS）<br>3）deployment的主要功能<br>4）Sate fulSet控制器<br>5）DaemonSet控制器<br>6）Job&amp;CronJob</p>
+<h3 id="一-、Deployment控制器概述"><a href="#一-、Deployment控制器概述" class="headerlink" title="一)、Deployment控制器概述"></a>一)、Deployment控制器概述</h3><ul>
+<li>一般情况下，我们并不直接创建 Pod，而是通过 Deployment 来创建 Pod，由 Deployment 来负责创建、更新、维护其所管理的所有 Pods。</li>
+</ul>
+<p>ReplicationSet（RS）和ReplicationController（RC）区别</p>
+<ul>
+<li><p>这里就需要说一下ReplicationSet（RS）和ReplicationController（RC），RS是在RC基础上发展来的，在新版的Kubernetes中，已经将RC替换为RS 了，它们两者没有本质的区别，都是用于Pod副本数量的维护与更新的，使得副本数量始终维持在用户定义范围内，即如果存在容器异常退出，此时会自动创建新的Pod进行替代；而且异常多出来的容器也会自动回收。</p>
+</li>
+<li><p>总结不同点在于：RS在RC的基础上支持集合化的selector</p>
+</li>
+<li><p>一般情况下RS也是可以单独使用的，但是一般推荐和Deployment一起使用，这样会使得的Deployment提供的一些回滚更新操作同样用于RS上，因为<strong>RS不支持回滚更新操作，Deployment支持</strong>；</p>
+</li>
+</ul>
+<h3 id="二-、Deployment工作原理"><a href="#二-、Deployment工作原理" class="headerlink" title="二)、Deployment工作原理"></a>二)、Deployment工作原理</h3><p>先看一下Deployment、RS、Pod它们三者之间的关系：</p>
+<p><img src="https://img-blog.csdnimg.cn/956f98633a9044bbb95c6fab15ee34af.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5a-S5rGf5a2k5b2xMDA3,size_16,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>RS负责控制副本数量，由Deployment来创建具体的Pod。</p>
+<p>Deployment控制器支持两种更新策略：滚动更新（rolling update）和重新创建（recreate），默认为滚动更新。</p>
+<h4 id="1）滚动升级"><a href="#1）滚动升级" class="headerlink" title="1）滚动升级"></a>1）滚动升级</h4><p>滚动升级是默认的更新策略，它在删除一部分旧版本Pod资源的同时，补充创建一部分新版本的Pod对象进行应用升级，其优势是升级期间，容器中应用提供的服务不会中断，但要求应用程序能够应对新旧版本同时工作的情形，例如新旧版本兼容同一个数据库方案等。不过，更新操作期间，不同客户端得到的响应内容可能会来自不同版本的应用。</p>
+<p>Deployment控制器的滚动更新操作并非在同一个ReplicaSet控制器对象下删除并创建Pod资源，而是将它们分置于两个不同的控制器之下：旧控制器的Pod对象数量不断减少的同时，新控制器的Pod对象数量不断增加，直到旧控制器不再拥有Pod对象，而新控制器的副本数量变得完全符合期望值为止，如图所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/ebbee4d0609c4e2490eeff19722f31ed.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5a-S5rGf5a2k5b2xMDA3,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>滚动更新时，应用升级期间还要确保可用的Pod对象数量不低于某阈值以确保可以持续处理客户端的服务请求，变动的方式和Pod对象的数量范围将通过spec.strategy.rollingUpdate.maxSurge和spec.strategy.rollingUpdate.maxUnavailable两个属性协同进行定义，它们的功用如图所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/87f8d64c397a4f57988d904fc2670da4.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5a-S5rGf5a2k5b2xMDA3,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<ul>
+<li>maxSurge：指定升级期间存在的总Pod对象数量最多可超出期望值的个数，其值可以是0或正整数，也可以是一个期望值的百分比；例如，如果期望值为3，当前的属性值为1，则表示Pod对象的总数不能超过4个。</li>
+<li>maxUnavailable：升级期间正常可用的Pod副本数（包括新旧版本）最多不能低于期望数值的个数，其值可以是0或正整数，也可以是一个期望值的百分比；默认值为1，该值意味着如果期望值是3，则升级期间至少要有两个Pod对象处于正常提供服务的状态。</li>
+<li>maxSurge和maxUnavailable属性的值不可同时为0，否则Pod对象的副本数量在符合用户期望的数量后无法做出合理变动以进行滚动更新操作。</li>
+</ul>
+<ol>
+<li><pre><code>-  maxUnavailable：和期望ready的副本数比，不可用副本数最大比例（或最大值），***\*这个值越小，越能保证服务稳定，更新越平滑；\****
+-  maxSurge：和期望ready的副本数比，超过期望副本数最大比例（或最大值），***\*这个值调的越大，副本更新速度越快。\****
+</code></pre>
+<p>1.蓝绿发布：两套环境交替升级，旧版本保留一定时间便于回滚。</p>
+<p>2.灰度发布：根据比例将老版本升级，例如80%用户访问是老版本，20%用户访问是新版本。</p>
+<p>3.滚动发布：按批次停止老版本实例，启动新版本实例。</p>
+</li>
+</ol>
+<h4 id="2）版本回滚"><a href="#2）版本回滚" class="headerlink" title="2）版本回滚"></a>2）版本回滚</h4><p>Deployment控制器也支持用户保留其滚动更新历史中的旧ReplicaSet对象版本,这赋予了控制器进行应用回滚的能力：用户可按需回滚到指定的历史版本。控制器可保存的历史版本数量由“spec.revisionHistoryLimit”属性进行定义。当然，也只有保存于revision历史中的ReplicaSet版本可用于回滚，因此，用户要习惯性地在更新操作时指定保留旧版本。</p>
+<p><img src="https://img-blog.csdnimg.cn/719d6c89978b476089e08d0cd1a7778d.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5a-S5rGf5a2k5b2xMDA3,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h3 id="三-、Deployment的资源清单文件详解"><a href="#三-、Deployment的资源清单文件详解" class="headerlink" title="三)、Deployment的资源清单文件详解"></a>三)、Deployment的资源清单文件详解</h3><pre><code class="yaml">apiVersion: apps/v1     # 版本号
+kind: Deployment        # 类型
+metadata:               # 元数据
+  name:                 # rs名称
+  namespace:            # 所属命名空间
+  labels:               # 标签
+    controller: deploy
+spec:                   # 详情描述
+  replicas:             # 副本数量
+  revisionHistoryLimit: # 保留历史版本，默认是10
+  paused:               # 暂停部署，默认是false
+  progressDeadlineSeconds:      # 部署超时时间(s)，默认是600
+  strategy:             # 策略
+    type: RollingUpdates        # 滚动更新策略
+    rollingUpdate:      # 滚动更新
+      maxSurge:         # 最大额外可以存在的副本数，可以为百分比，也可以为整数
+      maxUnavaliable:   # 最大不可用状态的pod的最大值，可以为百分比，也可以为整数
+  selector:             # 选择器，通过它指定该控制器管理哪些pod
+    matchLabels:        # Labels匹配规则
+       app: nginx-pod
+    matchExpressions:   # Expression匹配规则
+      - &#123;key: app, operator: In, values: [nginx-pod]&#125;
+  template:             # 模板，当副本数量不足时，会根据下面的模板创建pod副本
+    metadata:
+        labels:
+          app: nginx-pod
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.17.1
+        ports:
+        - containerPort: 80
+</code></pre>
+<h3 id="四、Deployment实战"><a href="#四、Deployment实战" class="headerlink" title="四、Deployment实战"></a>四、Deployment实战</h3><h4 id="1）示例1"><a href="#1）示例1" class="headerlink" title="1）示例1"></a>1）示例1</h4><p>创建pc-deployment.yaml，内容如下：</p>
+<pre><code class="yaml">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pc-deployment
+  namespace: dev
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+     app: nginx-pod
+  template:
+    metadata:
+      labels:
+        app: nginx-pod
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.17.1
+</code></pre>
+<p>执行以下命令</p>
+<pre><code class="bash">$ kubectl create namespace dev
+$ kubectl create -f pc-deployment.yaml
+$ kubectl get deploy -n dev -o wide
+</code></pre>
+<p>查看deployment控制的rs和pod，发现rs是在deployment之后加了一段字符串，而pod是在rs之后加了一段字符串。</p>
+<p><img src="https://img-blog.csdnimg.cn/f6609e6b7a2246d695a74144cf06ea48.png" alt="在这里插入图片描述"></p>
+<h4 id="2）扩缩容"><a href="#2）扩缩容" class="headerlink" title="2）扩缩容"></a>2）扩缩容</h4><p>方式一：命令行</p>
+<p>格式</p>
+<pre><code class="bash">kubectl scale deploy deploy名称 --replicas=pod数量 -n 命名空间
+</code></pre>
+<p>过命令行变更pod数量为5个</p>
+<pre><code class="bash">$ kubectl scale deploy pc-deployment --replicas=5 -n dev
+$ kubectl get pod -n dev
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/b1b839e963224f8ea7c6cc36566c3b94.png" alt="在这里插入图片描述"></p>
+<p>方式二：编辑deploy文件</p>
+<p>格式</p>
+<pre><code class="bash">kubectl edit deploy deploy名字 -n 命名空间
+</code></pre>
+<p>通过编辑deploy文件编辑pod数量为3个</p>
+<pre><code class="bash">$ kubectl edit deploy pc-deployment -n dev
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/aa454c2205894a94a94f2ff97fa07d82.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5a-S5rGf5a2k5b2xMDA3,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<pre><code>$ kubectl get pod -n dev
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/b933ac07537b444b93bc565c13e3c33e.png" alt="在这里插入图片描述"></p>
+<h4 id="3）镜像更新"><a href="#3）镜像更新" class="headerlink" title="3）镜像更新"></a>3）镜像更新</h4><p>deployment支持两种镜像更新策略：重建更新和滚动更新（默认），可以通过strategy选项进行配置</p>
+<pre><code class="yaml">strategy：指定新的pod替换旧的pod的策略，支持两个属性：
+  type：指定策略类型，支持两种策略
+    Recreate：在创建出新的pod之前会先杀掉所有已存在的pod
+    RollingUpdate：滚动更新，就是杀死一部分，就启动一部分，在更新过程中，存在两个版本pod
+  rollingUpdate：当type为RollingUpdate时生效，用于为RollingUpdate设置参数，支持两个属性
+    maxUnavailable：用来指定在升级过程中不可用pod的最大数量，默认为25%
+    maxSurge：用来指定在升级过程中可以超过期望的pod的最大数量，默认为25%
+</code></pre>
+<p>1、重建更新</p>
+<p>编辑pc-deployment.yaml，在spec节点下添加更新策略</p>
+<pre><code class="yaml">spec:
+  strategy:  #策略
+    type: Recreate  #重建更新策略
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/5941ab45c28f4aa5a7f83f1b76ef7ea2.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5a-S5rGf5a2k5b2xMDA3,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<pre><code class="bash">$ kubectl apply -f pc-deployment.yaml 
+$ kubectl get pod -n dev
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/29ce0a0cd9e84a1bb7938693f9e64d1c.png" alt="在这里插入图片描述"></p>
+<p>创建deploy进行验证</p>
+<pre><code class="bash">#首先记录原本的pod名
+$ kubectl get pod -n dev
+#更改pod镜像
+$ kubectl set image deploy pc-deployment nginx=nginx:1.17.2 -n dev
+#再次查看镜像
+$ kubectl get pod -n dev
+</code></pre>
+<p>发现pod镜像已经改变了</p>
+<p><img src="https://img-blog.csdnimg.cn/fb4d38594be84f1ebcb6c8de5006d93a.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5a-S5rGf5a2k5b2xMDA3,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>2、滚动更新<br>编辑pc-deployment.yaml，在spec节点下添加滚动更新策略（也可以把strategy去掉，因为默认滚动更新策略）</p>
+<pre><code class="yaml">strategy:
+  type: RollingUpdate #滚动更新策略
+  rollingUpdate:
+    maxUnavailable: 25%
+    maxSurge: 25%
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/e0ffd85c0fc54c57b59910d8d6d795bd.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5a-S5rGf5a2k5b2xMDA3,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>执行</p>
+<pre><code class="bash">$ kubectl apply -f pc-deployment.yaml 
+</code></pre>
+<p>创建deploy进行验证</p>
+<pre><code class="bash">#记录以前的pod
+$ kubectl get pod -n dev
+#更新镜像
+$ kubectl set image deploy pc-deployment nginx=nginx:1.17.3 -n dev
+#查看pod状态
+$ kubectl get pod -n dev
+$ kubectl get pod -n dev
+</code></pre>
+<p>发现pod是旧的一遍停止新的一边创建，最后全变成了新的<br>滚动更新的过程</p>
+<p>3、镜像更新中rs的变化</p>
+<pre><code class="bash">#重建deployment
+$ kubectl delete -f pc-deployment.yaml 
+#添加record参数，表明创建时记录
+$ kubectl create -f pc-deployment.yaml --record
+$ kubectl get deploy,rs,pod -n dev
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/edea98baa36a460d85aa38bcf741a0b3.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5a-S5rGf5a2k5b2xMDA3,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>发现pod是旧的一遍停止新的一边创建，最后全变成了新的<br>滚动更新的过程</p>
+<p><img src="https://img-blog.csdnimg.cn/02fa31f987f34fc68614edeefe664616.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5a-S5rGf5a2k5b2xMDA3,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><strong>3、镜像更新中rs的变化</strong></p>
+<pre><code class="bash">#重建deployment
+$ kubectl delete -f pc-deployment.yaml 
+#添加record参数，表明创建时记录
+$ kubectl create -f pc-deployment.yaml --record
+$ kubectl get deploy,rs,pod -n dev
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/08add79d638e4eb89cfc5f6649d37376.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5a-S5rGf5a2k5b2xMDA3,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>打开两个窗口，用于监听rs和pod<br>在2窗口中监听rs，3窗口中监听pod</p>
+<pre><code class="bash">#在2窗口中输入
+$ kubectl get rs -n dev -w
+#在3窗口中输入
+OBOBOB$ kubectl get pod -n dev -w
+#在1窗口中改变pod镜像
+OBOBOB$ kubectl set image deploy pc-deployment nginx=nginx:1.17.2 -n dev
+</code></pre>
+<p>OBOBOB<br>OBOBOB查看3窗口中pod的变化，发现序号5开头的pod在逐渐暂停，序号7开头的pod在逐渐创建<br>OBOBOB<br><img src="https://img-blog.csdnimg.cn/2165ecaf02fc42d0816bf49427304ff1.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5a-S5rGf5a2k5b2xMDA3,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>OBOBOB查看2窗口中rs的变化，可以看见序号5开头的rs的pod数在减少，序号7开头的rs的pod数在增加</p>
+<p><img src="https://img-blog.csdnimg.cn/8c4c0a9f20844e0b81f32e6981800c96.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5a-S5rGf5a2k5b2xMDA3,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>在1窗口中查看最终rs变化，发现原来的rs依旧存在，只是pod数量变为了0，而后又新产生了一个rs，pod数量为3，其实这就是deployment能够进行版本回退的奥妙所在，后面会详细解释</p>
+<p><img src="https://img-blog.csdnimg.cn/71cede9408ad4c9abc2e410de61faa33.png" alt="在这里插入图片描述"></p>
+<h4 id="4）版本回退"><a href="#4）版本回退" class="headerlink" title="4）版本回退"></a>4）版本回退</h4><p>1、简介</p>
+<p>deployment支持版本升级过程中的暂停，继续功能以及版本回退等诸多功能，下面具体来看<br>kubectl rollout：版本升级相关功能，支持下面的选项：</p>
+<ul>
+<li><p>status：显示当前升级状态</p>
+</li>
+<li><p>history：显示升级历史记录</p>
+</li>
+<li><p>pause：暂停版本升级过程<br>OBOBOB- resume：继续已经暂停的版本升级过程</p>
+</li>
+<li><p>restart：重启版本升级过程<br>OBOBOB- undo：回滚到上一级版本（可以使用–to-revision回滚到指定版本）<br>OBOBOBOBOBOB</p>
+</li>
+</ul>
+<p>#查看升级状态</p>
+<p>OBOBOB&#96;&#96;&#96;bash<br>$ kubectl rollout status deploy pc-deployment -n dev</p>
+<pre><code>
+#查看升级历史（注意：如果只显示版本号说明一开始使用yaml创建文件的时候没有加上–record命令）
+
+```bash
+$ kubectl rollout history deploy pc-deployment -n dev
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/4b710b0ecc7e4ba7ac0a8e68f94bb84c.png" alt="在这里插入图片描述"></p>
+<p>2、版本回滚实验</p>
+<p>#这里使用–to-revision&#x3D;1回滚到1版本，如果省略这个选项，则会回退到上个版本</p>
+<pre><code class="bash">$ kubectl rollout undo deploy pc-deployment --to-revision=1 -n dev
+</code></pre>
+<p>#查看是否回滚成功，发现5序号开头的rs被启动了</p>
+<pre><code class="bash">$ kubectl get rs -n dev
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/2630941c37ba4951b1c1e73c2e94ff30.png" alt="在这里插入图片描述"></p>
+<p>可以看到版本7开头的已经回滚到5开头的版本了，这也就是rs依旧存在的原因。</p>
+<h3 id="五、Deployment金丝雀发布（灰度发布）"><a href="#五、Deployment金丝雀发布（灰度发布）" class="headerlink" title="五、Deployment金丝雀发布（灰度发布）"></a>五、Deployment金丝雀发布（灰度发布）</h3><p>deployment支持更新过程中的控制，如”暂停（pause）”或”继续（resume）”更新操作。</p>
+<p>比如有一批新的pod资源创建完成后立即暂停更新过程，此时，仅存在一部分新版本的应用，主体部分还是旧的版本。然后，再筛选一小部分的用户请求路由到新的pod应用，继续观察能否稳定地按期望的方式运行。确定没问题之后再继续完成余下的pod资源滚动更新，否则立即回滚更新操作。这就是所谓的金丝雀发布，其实也叫做灰度发布。</p>
+<p>#更新deployment版本，并配置暂停deployment</p>
+<pre><code class="bash">$ kubectl set image deploy pc-deployment nginx=nginx:1.17.2 -n dev &amp;&amp; kubectl rollout pause deploy pc-deployment -n dev
+</code></pre>
+<p>#查看rs，发现老版本rs没有减少，新版本rs增加一个</p>
+<pre><code class="bash">$ kubectl get rs -n dev
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/a18ccd72fea64a4ca84f223c01b02706.png" alt="在这里插入图片描述"></p>
+<p>#查看更新过程</p>
+<pre><code class="bash">$ kubectl rollout status deploy pc-deployment -n dev
+$ kubectl get rs -n dev
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/f59f5a14634f42cc817a224c01614b8d.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5a-S5rGf5a2k5b2xMDA3,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>发现老版本均停止，新版本已经创建好</p>
+<h3 id="六、有状态、无状态服务区别"><a href="#六、有状态、无状态服务区别" class="headerlink" title="六、有状态、无状态服务区别"></a>六、有状态、无状态服务区别</h3><h4 id="1）无状态："><a href="#1）无状态：" class="headerlink" title="1）无状态："></a>1）无状态：</h4><ul>
+<li>上面所说的deployment 认为所有的pod都是一样的</li>
+<li>不用考虑顺序的要求</li>
+<li>不用考虑在哪个node节点上运行</li>
+<li>可以随意扩容和缩容</li>
+</ul>
+<h4 id="2）有状态"><a href="#2）有状态" class="headerlink" title="2）有状态"></a>2）有状态</h4><ul>
+<li>实例之间有差别，每个实例都有自己的独特性，元数据不同，例如etcd，zookeeper</li>
+<li>实例之间不对等的关系，以及依靠外部存储的应用</li>
+</ul>
+<h3 id="七、PV、PVC、NFS、SC"><a href="#七、PV、PVC、NFS、SC" class="headerlink" title="七、PV、PVC、NFS、SC"></a>七、PV、PVC、NFS、SC</h3><h4 id="1）PV概述"><a href="#1）PV概述" class="headerlink" title="1）PV概述"></a>1）PV概述</h4><ul>
+<li><p>PersistentVolume (PV：持久化存储卷)是集群中由管理员提供或使用存储类动态提供的一块存储。它是集群中的资源，就像节点是集群资源一样。</p>
+</li>
+<li><p>PV是与Volumes类似的卷插件，但其生命周期与使用PV的任何单个Pod无关。由此API对象捕获存储的实现细节，不管是NFS、iSCSI还是特定于云提供商的存储系统。</p>
+</li>
+</ul>
+<h4 id="2）PVC概述"><a href="#2）PVC概述" class="headerlink" title="2）PVC概述"></a>2）PVC概述</h4><p>PersistentVolumeClaim（PVC：持久化存储卷声明），PVC 是用户存储的一种声明，PVC 和 Pod 比较类似，Pod 消耗的是节点，PVC 消耗的是 PV 资源，Pod 可以请求 CPU 和内存，而 PVC 可以请求特定的存储空间和访问模式。对于真正使用存储的用户不需要关心底层的存储实现细节，只需要直接使用 PVC 即可。</p>
+<h4 id="3）通过NFS实现持久化存储"><a href="#3）通过NFS实现持久化存储" class="headerlink" title="3）通过NFS实现持久化存储"></a>3）通过NFS实现持久化存储</h4><p>NFS工作原理</p>
+<ul>
+<li><p>首先服务器端启动RPC服务，并开启111端口</p>
+</li>
+<li><p>服务器端启动NFS服务，并向RPC注册端口信息</p>
+</li>
+<li><p>客户端启动RPC（rpcbind服务），向服务端的RPC(rpcbind)服务请求服务端的NFS端口</p>
+</li>
+<li><p>服务端的RPC(rpcbind)服务反馈NFS端口信息给客户端。</p>
+</li>
+<li><p>客户端通过获取的NFS端口来建立和服务端的NFS连接并进行数据的传输。</p>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/68c339a8b3e645f48de381c1faa4e422.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5a-S5rGf5a2k5b2xMDA3,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>安装NFS</p>
+<p>1、所有节点安装nfs</p>
+<pre><code class="bash">$ yum -y install  nfs-utils rpcbind
+</code></pre>
+<p>2、在master节点创建共享目录并授权</p>
+<pre><code class="bash">$ mkdir /opt/nfsdata
+# 授权共享目录
+$ chmod 666 /opt/nfsdata
+</code></pre>
+<p>3、编辑exports文件</p>
+<pre><code class="bash">$ cat /etc/exports
+/opt/nfsdata *(rw,no_root_squash,no_all_squash,sync)
+</code></pre>
+<p>4、配置生效</p>
+<pre><code class="bash">$ exportfs -r
+</code></pre>
+<p>exportfs命令</p>
+<blockquote>
+<p>常用选项<br>-a 全部挂载或者全部卸载<br>-r 重新挂载<br>-u 卸载某一个目录<br>-v 显示共享目录 以下操作在服务端上</p>
+</blockquote>
+<p>5、启动rpc和nfs（客户端只需要启动rpc服务）（注意顺序）</p>
+<pre><code class="bash">$ systemctl start rpcbind
+$ systemctl start nfs-server
+$ systemctl enable rpcbind
+$ systemctl enable nfs-server
+</code></pre>
+<p>6、查看</p>
+<pre><code class="bash">$ showmount -e
+$ showmount -e 192.168.0.113
+</code></pre>
+<ul>
+<li>-e 显示NFS服务器的共享列表</li>
+<li>-a 显示本机挂载的文件资源的情况NFS资源的情况</li>
+<li>-v 显示版本号</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/e2b8df67a1604b569669cd7402229515.png" alt="在这里插入图片描述"></p>
+<p>7、客户端</p>
+<pre><code class="bash"># 启动rpc服务
+$ systemctl start rpcbind
+$ systemctl enable rpcbind
+
+# 创建挂载目录
+$ mkdir /mnt/nfsdata
+
+# 挂载
+$ echo &quot;192.168.0.113:/opt/nfsdata /mnt/nfsdata     nfs    defaults  0 1&quot;&gt;&gt; /etc/fstab
+$ mount -a
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/ab4b067ace56401fa448a282f3b85aeb.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5a-S5rGf5a2k5b2xMDA3,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>8、测试</p>
+<pre><code class="bash"># 客户端执行
+$ touch /mnt/nfsdata/test&#123;1..5&#125;
+$ ll /mnt/nfsdata/
+# 服务端执行
+$ ll /opt/nfsdata/
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/06f26efc16b54a65aa5942649cc7a741.png" alt="在这里插入图片描述"></p>
+<h4 id="4）基于NFS存储创建PV"><a href="#4）基于NFS存储创建PV" class="headerlink" title="4）基于NFS存储创建PV"></a>4）基于NFS存储创建PV</h4><p>查看nfs版本号</p>
+<pre><code class="bash"># nfs服务端，只能看到大版本
+$ nfsstat -s
+# nfs客户端看
+$ nfsstat -m
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/ba8d1ff77a2d43c7bf2123b86729743a.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5a-S5rGf5a2k5b2xMDA3,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<pre><code class="yaml"># pv-nfs.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: bxy-pv
+  labels:
+    name: bxy-pv-labels
+spec:
+  capacity:
+    storage: 6Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: bxy-storageclass
+  mountOptions:
+    - hard
+    - nfsvers=4.2
+  nfs:
+    path: /opt/nfsdata
+    server: 192.168.0.113
+</code></pre>
+<p><strong>spec.storageClassName 字段对应 StorageClass 配置中的 metedata.name 字段</strong></p>
+<ul>
+<li>capacity: #容量</li>
+<li>volumeMode: 存储卷模式(默认值为filesystem,除了支持文件系统外（file system）也支持块设备（raw block devices）)</li>
+<li>accessModes: 访问模式</li>
+<li>ReadWriteMany :（RWO&#x2F;该volume只能被单个节点以读写的方式映射）,ReadOnlyMany (ROX&#x2F;该volume可以被多个节点以只读方式映射), ReadWriteMany (RWX&#x2F;该volume可以被多个节点以读写的方式映射)</li>
+<li>persistentVolumeReclaimPolicy: 回收策略 ，Retain（保留）、 Recycle（回收）或者Delete（删除）</li>
+<li>storageClassName: 存储类(通过设置storageClassName字段进行设置。如果设置了存储类，则此PV只能被绑定到也指定了此存储类的PVC)</li>
+<li>mountOptions: 挂接选项</li>
+<li>path: 我的本地挂载路径为</li>
+<li>server: NFS 文件系统所在服务器的真实 IP</li>
+</ul>
+<p>执行</p>
+<pre><code class="bash">$ kubectl apply -f pv-nfs.yaml
+$ kubectl get pv
+$ kubectl describe pv bxy-pv
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/3e1e656cd1d94a108c832699b2c78744.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5a-S5rGf5a2k5b2xMDA3,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>注意创建完 PV 后，会看到 Status 类型为 Available ，这是因为 PV 还没有和 PVC 绑定，当绑定成功后会自动改成 Bound。</p>
+<h4 id="5）基于NFS-PV创建PVC"><a href="#5）基于NFS-PV创建PVC" class="headerlink" title="5）基于NFS-PV创建PVC"></a>5）基于NFS-PV创建PVC</h4><pre><code># nfs-pv-pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: bxy-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: bxy-storageclass
+  selector:
+    matchLabels:
+      name: bxy-pv-labels
+</code></pre>
+<ul>
+<li><p>【注意】storage: 5Gi：我写的是 5G ，但实际绑定成功后会自动改变为 PV 中设置的容量大小 6G。</p>
+</li>
+<li><p>pvc 通过 matchLabels和pv中的label匹配，来关联要使用的存储空间。表明此PVC希望使用Label：name: “bxy-pv-labels”的PV。</p>
+</li>
+</ul>
+<p>执行</p>
+<pre><code class="bash">$ kubectl apply -f nfs-pv-pvc.yaml
+$ kubectl get pvc
+# 再查看pv状态
+$ kubectl get pv
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/31a4471f776349498158a8ea9b776cec.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5a-S5rGf5a2k5b2xMDA3,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h4 id="6）SC（StorageClass：存储类）"><a href="#6）SC（StorageClass：存储类）" class="headerlink" title="6）SC（StorageClass：存储类）"></a>6）SC（StorageClass：存储类）</h4><p>SC是StorageClass的缩写，表示存储类；这种资源主要用来对pv资源的自动供给提供接口；所谓自动供给是指用户无需手动创建pv，而是在创建pvc时对应pv会由persistentVolume-controller自动创建并完成pv和pvc的绑定；使用sc资源的前提是对应后端存储必须支持restfull类型接口的管理接口，并且pvc必须指定对应存储类名称来引用SC；简单讲SC资源就是用来为后端存储提供自动创建pv并关联对应pvc的接口；如下图：<br><img src="https://img-blog.csdnimg.cn/1e28a2d1bbac4eea94e0b1d498165921.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5a-S5rGf5a2k5b2xMDA3,size_19,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>【提示】使用sc动态创建pv，对应pvc必须也是属于对应的sc；上图主要描述了用户在创建pvc时，引用对应的sc以后，对应sc会调用底层存储系统的管理接口，创建对应的pv并关联至对应pvc。</p>
+<p>创建sc资源</p>
+<pre><code class="yaml">apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: slow
+provisioner: kubernetes.io/glusterfs
+parameters:
+  resturl: &quot;http://127.0.0.1:8081&quot;
+  clusterid: &quot;630372ccdc720a92c681fb928f27b53f&quot;
+  restauthenabled: &quot;true&quot;
+  restuser: &quot;admin&quot;
+  secretNamespace: &quot;default&quot;
+  secretName: &quot;heketi-secret&quot;
+  gidMin: &quot;40000&quot;
+  gidMax: &quot;50000&quot;
+  volumetype: &quot;replicate:3&quot;
+</code></pre>
+<p>【提示】在创建pvc时用storageClassName字段来指定对应的SC名称即可。上述是官方文档中的一个示例，在创建sc资源时，对应群组是storage.k8s.io&#x2F;v1，类型为StorageClass；provisioner字段用于描述对应供给接口名称；parameters用来定义向对应存储管理接口要传递的参数。</p>
+<h4 id="7）基于动态sc（StorageClass：存储类）"><a href="#7）基于动态sc（StorageClass：存储类）" class="headerlink" title="7）基于动态sc（StorageClass：存储类）"></a>7）基于动态sc（StorageClass：存储类）</h4><p>创建一个pv</p>
+<p>第一步：创建statefueset的命名空间</p>
+<pre><code>$ cat &lt;&lt; EOF &gt; nginx-ns.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: nginx-ss
+EOF
+$ kubectl apply -f nginx-ns.yaml
+</code></pre>
+<p><strong>第二步：创建ServiceAccount，为nfs-client-provisioner授权</strong><br>如果集群启用了RBAC，则必须执行如下命令授权provisioner。(k8s1.6+默认开启)</p>
+<pre><code class="YAML">$ cat &lt;&lt; EOF &gt; nfs-rbac.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: nfs-client-provisioner
+  # replace with namespace where provisioner is deployed
+  namespace: nginx-ss        #根据实际环境设定namespace,下面类同
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: nfs-client-provisioner-runner
+  namespace: nginx-ss
+rules:
+  - apiGroups: [&quot;&quot;]
+    resources: [&quot;persistentvolumes&quot;]
+    verbs: [&quot;get&quot;, &quot;list&quot;, &quot;watch&quot;, &quot;create&quot;, &quot;delete&quot;]
+  - apiGroups: [&quot;&quot;]
+    resources: [&quot;persistentvolumeclaims&quot;]
+    verbs: [&quot;get&quot;, &quot;list&quot;, &quot;watch&quot;, &quot;update&quot;]
+  - apiGroups: [&quot;storage.k8s.io&quot;]
+    resources: [&quot;storageclasses&quot;]
+    verbs: [&quot;get&quot;, &quot;list&quot;, &quot;watch&quot;]
+  - apiGroups: [&quot;&quot;]
+    resources: [&quot;events&quot;]
+    verbs: [&quot;create&quot;, &quot;update&quot;, &quot;patch&quot;]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: run-nfs-client-provisioner
+subjects:
+  - kind: ServiceAccount
+    name: nfs-client-provisioner
+    namespace: nginx-ss
+    # replace with namespace where provisioner is deployed
+roleRef:
+  kind: ClusterRole
+  name: nfs-client-provisioner-runner
+  apiGroup: rbac.authorization.k8s.io
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: leader-locking-nfs-client-provisioner
+  namespace: nginx-ss
+    # replace with namespace where provisioner is deployed
+rules:
+  - apiGroups: [&quot;&quot;]
+    resources: [&quot;endpoints&quot;]
+    verbs: [&quot;get&quot;, &quot;list&quot;, &quot;watch&quot;, &quot;create&quot;, &quot;update&quot;, &quot;patch&quot;]
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: leader-locking-nfs-client-provisioner
+  namespace: nginx-ss
+subjects:
+  - kind: ServiceAccount
+    name: nfs-client-provisioner
+    # replace with namespace where provisioner is deployed
+    namespace: nginx-ss
+roleRef:
+  kind: Role
+  name: leader-locking-nfs-client-provisioner
+  apiGroup: rbac.authorization.k8s.io
+EOF
+</code></pre>
+<p><strong>第三步：创建nfs的nfs-client-provisioner</strong></p>
+<p>nfs-client-provisioner 是k8s简易的NFS外部提供者(provisioner)，本身不提供NFS，做为NFS的客户端为StorageClass提供存储。</p>
+<pre><code class="YAML">$ cat &lt;&lt; EOF &gt; nfs-deployment-provisioner.yaml
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: nfs-client-provisioner
+  namespace: nginx-ss
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: nfs-client-provisioner
+  template:
+    metadata:
+      labels:
+        app: nfs-client-provisioner
+    spec:
+      serviceAccountName: nfs-client-provisioner
+      containers:
+        - name: nfs-client-provisioner
+          image: quay.io/external_storage/nfs-client-provisioner:latest
+          volumeMounts:
+            - name: nfs-client-root
+              mountPath: /persistentvolumes #容器内挂载点
+          env:
+            - name: PROVISIONER_NAME
+              value: fuseim.pri/ifs
+            - name: NFS_SERVER
+              value: 192.168.0.113
+            - name: NFS_PATH
+              value: /opt/nfsdata
+      volumes:
+        - name: nfs-client-root #宿主机挂载点
+          nfs:
+            server: 192.168.0.113
+            path: /opt/nfsdata
+EOF
+$ kubectl apply -f nfs-deployment-provisioner.yaml
+$ kubectl get deploy -n nginx-ss
+</code></pre>
+<p><strong>第四步：基于sc创建动态存储</strong></p>
+<pre><code class="YAML">cat &lt;&lt; EOF &gt; nginx-sc.yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: nginx-nfs-storage
+  namespace: nginx-ss
+provisioner: fuseim.pri/ifs  # or choose another name, must match deployment&#39;s env PROVISIONER_NAME&#39;
+reclaimPolicy: Retain        #回收策略：Retain（保留）、 Recycle（回收）或者Delete（删除）
+volumeBindingMode: Immediate    #volumeBindingMode存储卷绑定策略
+allowVolumeExpansion: true    #pvc是否允许扩容
+EOF
+</code></pre>
+<p>volumeBindingMode存储卷绑定策略</p>
+<ul>
+<li><p>Immediate：创建 PVC 后立即创建后端存储卷，并且立即绑定新创建的 PV 和 PVC。</p>
+</li>
+<li><p>WaitForFirstConsumer：当 PVC 被 Pod 使用时，才触发 PV 和后端存储的创建，同时实现 PVC&#x2F;PV 的绑定，启用该配置后，Storage Class 中的 Zone 和 Region 将不再生效，而是使用 Pod 调度所在节点的 zone 和 region 创建文件系统，保证文件系统能被 Pod 挂载。）</p>
+</li>
+</ul>
+<p>StorageClass的定义包含四个部分：</p>
+<ul>
+<li>provisioner：该字段指定使用存储卷类型，不同的存储卷提供者类型这里要修改成对应的值。【注意】provisioner必须和上面得Deployment的YAML文件中PROVISIONER_NAME的值保持一致。</li>
+<li>parameters：指定 provisioner 的选项，比如 glusterfs 支持 resturl、restuser 等参数。</li>
+<li>mountOptions：指定挂载选项，当 PV 不支持指定的选项时会直接失败。比如 NFS 支持 hard 和 nfsvers&#x3D;4.2 等选项。</li>
+<li>reclaimPolicy：指定回收策略，同 PV 的回收策略。Retain（保留）、 Recycle（回收）或者Delete（删除）</li>
+</ul>
+<pre><code class="BASH">$ kubectl apply -f nginx-sc.yaml
+$ kubectl get sc -n nginx-ss
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/047ab4ba7e374b0195c3763562034cc8.png" alt="在这里插入图片描述"></p>
+<h3 id="八-、StatefulSet控制器"><a href="#八-、StatefulSet控制器" class="headerlink" title="八)、StatefulSet控制器"></a>八)、StatefulSet控制器</h3><h4 id="1）简介"><a href="#1）简介" class="headerlink" title="1）简介"></a><strong>1）简介</strong></h4><ul>
+<li><p>StatefulSet是用来管理有状态应用的工作负载API对象，实例之间有不对等关系，以及实例对外部数据有依赖关系的应用，称为”有状态应用“。</p>
+</li>
+<li><p>StatefulSet本质上是Deployment的一种变体，在v1.9版本中已成为GA版本，它为了解决有状态服务的问题，它所管理的Pod拥有固定的Pod名称，启停顺序，在StatefulSet中，Pod名字称为网络标识(hostname)，还必须要用到共享存储。</p>
+</li>
+<li><p>在Deployment中，与之对应的服务是service，而在StatefulSet中与之对应的headless service，headless service，即无头服务，与service的区别就是它没有Cluster IP，解析它的名称时将返回该Headless Service对应的全部Pod的Endpoint列表。</p>
+</li>
+</ul>
+<p>除此之外，StatefulSet在Headless Service的基础上又为StatefulSet控制的每个Pod副本创建了一个DNS域名，这个域名的格式为：</p>
+<pre><code>$(podname).(headless server name)
+FQDN：$(podname).(headless server name).namespace.svc.cluster.local
+</code></pre>
+<h4 id="2）常规service和无头服务区别"><a href="#2）常规service和无头服务区别" class="headerlink" title="2）常规service和无头服务区别"></a>2）常规service和无头服务区别</h4><ul>
+<li>service：一组Pod访问策略，提供cluster-IP群集之间通讯，还提供负载均衡和服务发现。</li>
+<li>Headless service 无头服务，不需要cluster-IP，直接绑定具体的Pod的IP。</li>
+</ul>
+<h4 id="3）特点"><a href="#3）特点" class="headerlink" title="3）特点"></a>3）特点</h4><ul>
+<li>Pod一致性：包含次序（启动、停止次序）、网络一致性。此一致性与Pod相关，与被调度到哪个node节点无关；</li>
+<li>稳定的次序：对于N个副本的StatefulSet，每个Pod都在[0，N)的范围内分配一个数字序号，且是唯一的；</li>
+<li>稳定的网络：Pod的hostname模式为( statefulset 名 称 ) − (statefulset名称)-(statefulset名称)−(序号)；</li>
+<li>稳定的存储：通过VolumeClaimTemplate为每个Pod创建一个PV。删除、减少副本，不会删除相关的卷。</li>
+</ul>
+<h4 id="4）组成部分"><a href="#4）组成部分" class="headerlink" title="4）组成部分"></a>4）组成部分</h4><ul>
+<li>Headless Service：用来定义Pod网络标识( DNS domain)；</li>
+<li>volumeClaimTemplates ：存储卷申请模板，创建PVC，指定pvc名称大小，将自动创建pvc，且pvc必须由存储类供应；</li>
+</ul>
+<p><strong>上面【1-4】都得执行，这里是第五步。</strong><br>此处是基于SC，上面已经创建过了SC，这里就直接创建StatefulSet了</p>
+<pre><code class="yaml">cat &lt;&lt; EOF &gt; nginx-ss.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: web
+  namespace: nginx-ss
+spec:
+  selector:
+    matchLabels:
+      app: nginx #必须匹配 .spec.template.metadata.labels
+  serviceName: &quot;nginx&quot;  #声明它属于哪个Headless Service.
+  replicas: 3 #副本数
+  template:
+    metadata:
+      labels:
+        app: nginx # 必须配置 .spec.selector.matchLabels
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: nginx
+        image: nginx:1.17.1
+        ports:
+        - containerPort: 80
+          name: web
+        volumeMounts:
+        - name: nginx-pvc
+          mountPath: /usr/share/nginx/html
+
+  volumeClaimTemplates:   #可看作pvc的模板
+  - metadata:
+      name: nginx-pvc
+    spec:
+      accessModes: [ &quot;ReadWriteOnce&quot; ]
+      storageClassName: &quot;nginx-nfs-storage&quot;  #存储类名，就是上面nginx-sc.yaml metadata.name
+      resources:
+        requests:
+          storage: 1Gi
+EOF
+</code></pre>
+<p>这里的storageClassName必须与上面SC里面的metadata.name一样。<br>执行命令</p>
+<pre><code class="bash">$ kubectl apply -f nginx-ss.yaml
+$ kubectl get pods -n nginx-ss
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/aaac0aaf854d46659e499a6e887f7f17.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5a-S5rGf5a2k5b2xMDA3,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>上述例子中：</p>
+<ul>
+<li>名为 nginx 的 Headless Service 用来控制网络域名。</li>
+<li>名为 web 的 StatefulSet 有一个 Spec，它表明将在独立的 3 个 Pod 副本中启动 nginx 容器。</li>
+<li>volumeClaimTemplates 将通过 PersistentVolumes 驱动提供的 PersistentVolumes 来提供稳定的存储。</li>
+</ul>
+<p>【问题】Kubernetes v1.20 (opens new window)开始，默认删除了 metadata.selfLink 字段，然而，部分应用仍然依赖于这个字段，例如上面的nfs-deployment-provisioner.yaml。其实上面创建pod是没成功的。报错如下：<br><img src="https://img-blog.csdnimg.cn/606e7793c2a64babb386bb77dc3ee55a.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5a-S5rGf5a2k5b2xMDA3,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>【解决】<br>通过配置 apiserver 启动参数中的 –feature-gates 中的 RemoveSelfLink&#x3D;false，可以重新启用 metadata.selfLink 字段。</p>
+<p>修改 &#x2F;etc&#x2F;kubernetes&#x2F;manifests&#x2F;kube-apiserver.yaml 文件，并在其启动参数中增加一行 – –feature-gates&#x3D;RemoveSelfLink&#x3D;false，如下第 43行所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/704fc256714246469fa6432f59d434ae.png" alt="在这里插入图片描述"></p>
+<p>重新加载配置，如果一次未加载成功，多执行几次。</p>
+<pre><code class="bash">$ kubectl apply -f /etc/kubernetes/manifests/kube-apiserver.yaml
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/1493b70a3e054e31acf4c04906a2deaf.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5a-S5rGf5a2k5b2xMDA3,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>加载完配置后，我们再看pod创建情况。</p>
+<pre><code class="bash">$ kubectl get pvc -n nginx-ss
+$ kubectl get pods -n nginx-ss
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/4823c1402fb0438bbd279ac492bf23de.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5a-S5rGf5a2k5b2xMDA3,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>最后命令总结：</p>
+<pre><code class="bash"># 清除，只需要删除命名空间就行
+$ kubectl delete -f nginx-ns.yaml
+# 重新执行
+$ kubectl apply -f nginx-ns.yaml
+$ kubectl apply -f nfs-rbac.yaml
+$ kubectl apply -f nfs-deployment-provisioner.yaml
+$ kubectl apply -f nginx-sc.yaml
+$ kubectl apply -f nginx-ss.yaml
+# 检测
+$ kubectl get pvc -n nginx-ss
+$ kubectl get pods -n nginx-ss
+</code></pre>
+<h3 id="九-、DaemonSet控制器"><a href="#九-、DaemonSet控制器" class="headerlink" title="九)、DaemonSet控制器"></a>九)、DaemonSet控制器</h3><blockquote>
+<p>DaemonSet 确保全部（或者一些）Node 上<strong>运行一个 Pod 的副本</strong>，通常用于实现系统级后台任务。比如ELK服务</p>
+</blockquote>
+<p>创建DaemonSet</p>
+<blockquote>
+<p>DaemonSet的描述文件和Deployment非常相似，只需要修改Kind，并去掉副本数量的配置即可。</p>
+</blockquote>
+<pre><code class="yaml">cat &lt;&lt; EOF &gt; nginx-daemonset.yaml 
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nginx-daemonset
+  labels:
+    app: nginx
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.13.12
+        ports:
+        - containerPort: 80
+EOF
+</code></pre>
+<pre><code class="bash">$ kubectl apply -f nginx-daemonset.yaml
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/796df00f34a740fc84a7259ae28cb211.png" alt="在这里插入图片描述"></p>
+<p>在每个node节点上都运行了一个pod副本</p>
+<h3 id="十）、Job控制器"><a href="#十）、Job控制器" class="headerlink" title="十）、Job控制器"></a>十）、Job控制器</h3><p>Job控制器用于调配pod对象运行一次性任务，容器中的进程在正常运行结束后不会对其进行重启，而是将pod对象置于completed状态。若容器中的进程因错误而终止，则需要依据配置确定重启与否，未运行完成的pod对象因其所在的节点故障而意外终止后会被重新调度。</p>
+<p>简单示例</p>
+<pre><code class="yaml">cat &lt;&lt; EOF &gt; job-demo.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-demo
+spec:
+  template:
+    metadata:
+      name: job-demo
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: counter
+        image: busybox
+        command:
+        - &quot;bin/sh&quot;
+        - &quot;-c&quot;
+        - &quot;for i in 9 8 7 6 5 4 3 2 1; do echo $i; done&quot;
+EOF
+</code></pre>
+<p>Pod模板中的spec.restartPolicy默认为Always，这对job控制器来说只能设定为Never或OnFailure。</p>
+<pre><code class="bash">$ kubectl apply -f job-test.yaml
+</code></pre>
+<h3 id="十一）、CronJob-控制器"><a href="#十一）、CronJob-控制器" class="headerlink" title="十一）、CronJob 控制器"></a>十一）、CronJob 控制器</h3><ul>
+<li><p>CronJob其实就是在Job的基础上加上了时间调度，我们可以：在给定的时间点运行一个任务，也可以周期性地在给定时间点运行。这个实际上和我们Linux中的crontab就非常类似了。</p>
+</li>
+<li><p>一个CronJob对象其实就对应中crontab文件中的一行，它根据配置的时间格式周期性地运行一个Job，格式和crontab也是一样的。</p>
+</li>
+</ul>
+<p>crontab的格式如下：</p>
+<ul>
+<li>分 时 日 月 星期 要运行的命令 第1列分钟0～59 第2列小时0～23） 第3列日1～31 第4列月1～12 第5列星期0～7（0和7表示星期天） 第6列要运行的命令</li>
+</ul>
+<p>现在，我们用CronJob来管理我们上面的Job任务</p>
+<pre><code class="yaml">cat &lt;&lt; EOF &gt; cronjob-demo.yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cronjob-demo
+spec:
+  schedule: &quot;*/1 * * * *&quot;
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: hello
+            image: busybox
+            args:
+            - &quot;bin/sh&quot;
+            - &quot;-c&quot;
+            - &quot;for i in 9 8 7 6 5 4 3 2 1; do echo $i; done&quot;
+EOF
+</code></pre>
+<p>执行</p>
+<pre><code class="bash">$ kubectl get jobs
+$ kubectl get cronjobs.batch
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/07a838dd44f745e8846987594553858a.png" alt="在这里插入图片描述"></p>
+<h3 id="十二）、总结"><a href="#十二）、总结" class="headerlink" title="十二）、总结"></a>十二）、总结</h3><h4 id="1）ReplicationController（RC）主要功能"><a href="#1）ReplicationController（RC）主要功能" class="headerlink" title="1）ReplicationController（RC）主要功能"></a>1）ReplicationController（RC）主要功能</h4><ul>
+<li>ReplicationController用来确保容器应用的副本数始终保持在用户定义的副本数，即如果有容器异常退出，会自动创建新的Pod来替代；而如果异常多出来的容器也会自动回收。</li>
+</ul>
+<h4 id="2）ReplicaSet主要功能（RS）"><a href="#2）ReplicaSet主要功能（RS）" class="headerlink" title="2）ReplicaSet主要功能（RS）"></a>2）ReplicaSet主要功能（RS）</h4><ul>
+<li><p>在新版本的Kubernetes中建议使用ReplicaSet来取ReplicationController。ReplicaSet跟ReplicationController没有本质的不同，只是名字不一样，并且ReplicaSet支持集合式的selector。</p>
+</li>
+<li><p>虽然ReplicaSet可以独立使用，但一般还是建议使用 Deployment 来自动管理ReplicaSet，这样就无需担心跟其他机制的不兼容问题（比如ReplicaSet不支持rolling-update但Deployment支持）。</p>
+</li>
+</ul>
+<pre><code>用户期望的pod副本数量
+标签选择器，判断哪个pod归自己管理
+当现存的pod数量不足，会根据pod资源模板进行新建
+</code></pre>
+<h4 id="3）deployment的主要功能"><a href="#3）deployment的主要功能" class="headerlink" title="3）deployment的主要功能"></a>3）deployment的主要功能</h4><ol>
+<li>管理无状态应用</li>
+<li>管理Pod和ReplicaSet</li>
+<li>具有上线部署、副本设定、滚动升级、回滚等功能</li>
+<li>提供声明式更新，例如只更新一个新的Image</li>
+<li>应用场景：web服务</li>
+</ol>
+<h4 id="4）SatefulSet控制器"><a href="#4）SatefulSet控制器" class="headerlink" title="4）SatefulSet控制器"></a>4）SatefulSet控制器</h4><ol>
+<li>管理有状态应用</li>
+<li>kind：service</li>
+<li>解决Pod独立生命周期，保持Pod启动顺序和唯一性</li>
+<li>稳定，唯一的网络标识符，持久存储（例如：etcd配置文件，节点地址发生变化，将无法使用）</li>
+<li>有序，优雅的部署和扩展、删除和终止（例如：mysql主从关系，先启动主，再启动从），有序，滚动更新</li>
+<li>应用场景：数据库</li>
+</ol>
+<h4 id="5）DaemonSet控制器"><a href="#5）DaemonSet控制器" class="headerlink" title="5）DaemonSet控制器"></a>5）DaemonSet控制器</h4><ol>
+<li>它用于确保集群中的每一个节点只运行特定的pod副本。</li>
+<li>6）Job&amp;CronJob</li>
+<li>Job只要完成就立即退出，不需要重启或重建。</li>
+<li>CronJob其实就是在Job的基础上加上了时间调度。</li>
+</ol>
+<h4 id="文章作者-寒江孤影007"><a href="#文章作者-寒江孤影007" class="headerlink" title="文章作者: @寒江孤影007"></a>文章作者: @寒江孤影007</h4><h4 id="文章链接-https-blog-csdn-net-qq-35745940-article-details-120339730"><a href="#文章链接-https-blog-csdn-net-qq-35745940-article-details-120339730" class="headerlink" title="文章链接: https://blog.csdn.net/qq_35745940/article/details/120339730"></a>文章链接: <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35745940/article/details/120339730">https://blog.csdn.net/qq_35745940/article/details/120339730</a></h4></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">XiaoBei</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/07/20/%E4%BA%94%E7%A7%8D%E6%8E%A7%E5%88%B6%E5%99%A8%E8%AF%A6%E8%A7%A3/">http://example.com/2022/07/20/%E4%BA%94%E7%A7%8D%E6%8E%A7%E5%88%B6%E5%99%A8%E8%AF%A6%E8%A7%A3/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="null" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">xiaobei</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/cloud/">cloud</a></div><div class="post_share"><div class="social-share" data-image="https://wallpapershome.com/images/pages/ico_h/20030.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/07/21/k8s%E4%BC%81%E4%B8%9A%E5%BA%94%E7%94%A8%E4%B8%8E%E5%AE%B9%E5%99%A8%E8%BF%81%E7%A7%BB/" title="k8s企业应用与容器迁移"><img class="cover" src="https://wallpapershome.com/images/pages/pic_h/24181.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">k8s企业应用与容器迁移</div></div></a></div><div class="next-post pull-right"><a href="/2022/07/20/%E8%B5%84%E6%BA%90%E5%AF%B9%E8%B1%A1%E5%AF%B9%E5%BA%94%E5%85%B3%E7%B3%BB/" title="资源对象对应关系*-*"><img class="cover" src="https://wallpapershome.com/images/pages/ico_h/24319.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">资源对象对应关系*-*</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/07/21/Service%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Service学习笔记"><img class="cover" src="https://wallpapershome.com/images/pages/ico_h/23723.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-21</div><div class="title">Service学习笔记</div></div></a></div><div><a href="/2022/07/21/k8s%E4%BC%81%E4%B8%9A%E5%BA%94%E7%94%A8%E4%B8%8E%E5%AE%B9%E5%99%A8%E8%BF%81%E7%A7%BB/" title="k8s企业应用与容器迁移"><img class="cover" src="https://wallpapershome.com/images/pages/pic_h/24181.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-21</div><div class="title">k8s企业应用与容器迁移</div></div></a></div><div><a href="/2022/07/20/%E8%B5%84%E6%BA%90%E5%AF%B9%E8%B1%A1%E5%AF%B9%E5%BA%94%E5%85%B3%E7%B3%BB/" title="资源对象对应关系*-*"><img class="cover" src="https://wallpapershome.com/images/pages/ico_h/24319.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-20</div><div class="title">资源对象对应关系*-*</div></div></a></div><div><a href="/2022/08/01/Pod%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" title="Pod基本概念"><img class="cover" src="https://wallpapershome.com/images/pages/ico_h/4157.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-01</div><div class="title">Pod基本概念</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/wsnb.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">XiaoBei</div><div class="author-info__description">归途也还可爱</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/wsnbwz" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:wsnblove@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E7%A7%8D%E6%8E%A7%E5%88%B6%E5%99%A8%E8%AF%A6%E8%A7%A3"><span class="toc-text">五种控制器详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80-%E3%80%81Deployment%E6%8E%A7%E5%88%B6%E5%99%A8%E6%A6%82%E8%BF%B0"><span class="toc-text">一)、Deployment控制器概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C-%E3%80%81Deployment%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">二)、Deployment工作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%EF%BC%89%E6%BB%9A%E5%8A%A8%E5%8D%87%E7%BA%A7"><span class="toc-text">1）滚动升级</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%EF%BC%89%E7%89%88%E6%9C%AC%E5%9B%9E%E6%BB%9A"><span class="toc-text">2）版本回滚</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89-%E3%80%81Deployment%E7%9A%84%E8%B5%84%E6%BA%90%E6%B8%85%E5%8D%95%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3"><span class="toc-text">三)、Deployment的资源清单文件详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81Deployment%E5%AE%9E%E6%88%98"><span class="toc-text">四、Deployment实战</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%EF%BC%89%E7%A4%BA%E4%BE%8B1"><span class="toc-text">1）示例1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%EF%BC%89%E6%89%A9%E7%BC%A9%E5%AE%B9"><span class="toc-text">2）扩缩容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%EF%BC%89%E9%95%9C%E5%83%8F%E6%9B%B4%E6%96%B0"><span class="toc-text">3）镜像更新</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%EF%BC%89%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80"><span class="toc-text">4）版本回退</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81Deployment%E9%87%91%E4%B8%9D%E9%9B%80%E5%8F%91%E5%B8%83%EF%BC%88%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83%EF%BC%89"><span class="toc-text">五、Deployment金丝雀发布（灰度发布）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E6%9C%89%E7%8A%B6%E6%80%81%E3%80%81%E6%97%A0%E7%8A%B6%E6%80%81%E6%9C%8D%E5%8A%A1%E5%8C%BA%E5%88%AB"><span class="toc-text">六、有状态、无状态服务区别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%EF%BC%89%E6%97%A0%E7%8A%B6%E6%80%81%EF%BC%9A"><span class="toc-text">1）无状态：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%EF%BC%89%E6%9C%89%E7%8A%B6%E6%80%81"><span class="toc-text">2）有状态</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%83%E3%80%81PV%E3%80%81PVC%E3%80%81NFS%E3%80%81SC"><span class="toc-text">七、PV、PVC、NFS、SC</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%EF%BC%89PV%E6%A6%82%E8%BF%B0"><span class="toc-text">1）PV概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%EF%BC%89PVC%E6%A6%82%E8%BF%B0"><span class="toc-text">2）PVC概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%EF%BC%89%E9%80%9A%E8%BF%87NFS%E5%AE%9E%E7%8E%B0%E6%8C%81%E4%B9%85%E5%8C%96%E5%AD%98%E5%82%A8"><span class="toc-text">3）通过NFS实现持久化存储</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%EF%BC%89%E5%9F%BA%E4%BA%8ENFS%E5%AD%98%E5%82%A8%E5%88%9B%E5%BB%BAPV"><span class="toc-text">4）基于NFS存储创建PV</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%EF%BC%89%E5%9F%BA%E4%BA%8ENFS-PV%E5%88%9B%E5%BB%BAPVC"><span class="toc-text">5）基于NFS-PV创建PVC</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6%EF%BC%89SC%EF%BC%88StorageClass%EF%BC%9A%E5%AD%98%E5%82%A8%E7%B1%BB%EF%BC%89"><span class="toc-text">6）SC（StorageClass：存储类）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7%EF%BC%89%E5%9F%BA%E4%BA%8E%E5%8A%A8%E6%80%81sc%EF%BC%88StorageClass%EF%BC%9A%E5%AD%98%E5%82%A8%E7%B1%BB%EF%BC%89"><span class="toc-text">7）基于动态sc（StorageClass：存储类）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AB-%E3%80%81StatefulSet%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="toc-text">八)、StatefulSet控制器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%EF%BC%89%E7%AE%80%E4%BB%8B"><span class="toc-text">1）简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%EF%BC%89%E5%B8%B8%E8%A7%84service%E5%92%8C%E6%97%A0%E5%A4%B4%E6%9C%8D%E5%8A%A1%E5%8C%BA%E5%88%AB"><span class="toc-text">2）常规service和无头服务区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%EF%BC%89%E7%89%B9%E7%82%B9"><span class="toc-text">3）特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%EF%BC%89%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="toc-text">4）组成部分</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B9%9D-%E3%80%81DaemonSet%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="toc-text">九)、DaemonSet控制器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%81%EF%BC%89%E3%80%81Job%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="toc-text">十）、Job控制器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%81%E4%B8%80%EF%BC%89%E3%80%81CronJob-%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="toc-text">十一）、CronJob 控制器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%81%E4%BA%8C%EF%BC%89%E3%80%81%E6%80%BB%E7%BB%93"><span class="toc-text">十二）、总结</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%EF%BC%89ReplicationController%EF%BC%88RC%EF%BC%89%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD"><span class="toc-text">1）ReplicationController（RC）主要功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%EF%BC%89ReplicaSet%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD%EF%BC%88RS%EF%BC%89"><span class="toc-text">2）ReplicaSet主要功能（RS）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%EF%BC%89deployment%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD"><span class="toc-text">3）deployment的主要功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%EF%BC%89SatefulSet%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="toc-text">4）SatefulSet控制器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%EF%BC%89DaemonSet%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="toc-text">5）DaemonSet控制器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E4%BD%9C%E8%80%85-%E5%AF%92%E6%B1%9F%E5%AD%A4%E5%BD%B1007"><span class="toc-text">文章作者: @寒江孤影007</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E9%93%BE%E6%8E%A5-https-blog-csdn-net-qq-35745940-article-details-120339730"><span class="toc-text">文章链接: https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_35745940&#x2F;article&#x2F;details&#x2F;120339730</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/03/10/Docker%E7%BD%91%E7%BB%9C/" title="Docker网络"><img src="https://wallpapershome.com/images/pages/ico_h/24483.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Docker网络"/></a><div class="content"><a class="title" href="/2023/03/10/Docker%E7%BD%91%E7%BB%9C/" title="Docker网络">Docker网络</a><time datetime="2023-03-10T13:15:04.000Z" title="发表于 2023-03-10 21:15:04">2023-03-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/10/Docker%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/" title="Docker基础搭建"><img src="https://wallpapershome.com/images/pages/ico_h/23723.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Docker基础搭建"/></a><div class="content"><a class="title" href="/2023/03/10/Docker%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/" title="Docker基础搭建">Docker基础搭建</a><time datetime="2023-03-10T08:00:34.000Z" title="发表于 2023-03-10 16:00:34">2023-03-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/02/%E7%AE%80%E5%8D%95%E6%90%AD%E5%BB%BAhttp%E6%9C%8D%E5%8A%A1/" title="简单搭建http服务"><img src="https://wallpapershome.com/images/pages/ico_h/24491.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="简单搭建http服务"/></a><div class="content"><a class="title" href="/2022/08/02/%E7%AE%80%E5%8D%95%E6%90%AD%E5%BB%BAhttp%E6%9C%8D%E5%8A%A1/" title="简单搭建http服务">简单搭建http服务</a><time datetime="2022-08-02T06:07:47.000Z" title="发表于 2022-08-02 14:07:47">2022-08-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/02/DHCP%E5%85%AB%E7%A7%8D%E6%8A%A5%E6%96%87%E8%AF%A6%E8%A7%A3/" title="DHCP八种报文详解"><img src="https://wallpapershome.com/images/pages/ico_h/24048.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="DHCP八种报文详解"/></a><div class="content"><a class="title" href="/2022/08/02/DHCP%E5%85%AB%E7%A7%8D%E6%8A%A5%E6%96%87%E8%AF%A6%E8%A7%A3/" title="DHCP八种报文详解">DHCP八种报文详解</a><time datetime="2022-08-02T06:00:35.000Z" title="发表于 2022-08-02 14:00:35">2022-08-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/02/NAT-NAPT%E4%BB%A5%E5%8F%8AeasyIP%E7%9A%84%E5%8C%BA%E5%88%AB/" title="NAT,NAPT以及easyIP的区别"><img src="https://wallpapershome.com/images/pages/ico_h/24489.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="NAT,NAPT以及easyIP的区别"/></a><div class="content"><a class="title" href="/2022/08/02/NAT-NAPT%E4%BB%A5%E5%8F%8AeasyIP%E7%9A%84%E5%8C%BA%E5%88%AB/" title="NAT,NAPT以及easyIP的区别">NAT,NAPT以及easyIP的区别</a><time datetime="2022-08-02T05:55:50.000Z" title="发表于 2022-08-02 13:55:50">2022-08-02</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By XiaoBei</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="true" data-text="富强,民主,文明,和谐,平等,公正,法治,爱国,敬业,诚信,友善" data-fontsize="15px" data-random="true" async="async"></script><div class="fb-customerchat" id="fb-customer-chat" attribution="biz_inbox"></div><script>document.getElementById('fb-root') ? '' : document.body.insertAdjacentHTML('afterend', '<div id="fb-root"></div>')
+
+window.fbAsyncInit = function() {
+  FB.init({
+    xfbml: true,
+    version: 'v15.0'
+  });
+};
+
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/zh_CN/sdk/xfbml.customerchat.js';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+if (false) {
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      FB.CustomerChat.show();
+    });
+  }
+  chatBtnFn()
+} else {
+  if (false) {
+    function chatBtnHide () {
+      FB.CustomerChat.hide()
+    }
+    function chatBtnShow () {
+      FB.CustomerChat.show(false)
+    }
+  }
+}</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></body></html>
