@@ -77,46 +77,6 @@
       </tags>
   </entry>
   <entry>
-    <title>DHCP八种报文详解</title>
-    <url>/2022/08/02/DHCP%E5%85%AB%E7%A7%8D%E6%8A%A5%E6%96%87%E8%AF%A6%E8%A7%A3/</url>
-    <content><![CDATA[<h1 id="DHCP八种报文详解"><a href="#DHCP八种报文详解" class="headerlink" title="DHCP八种报文详解"></a>DHCP八种报文详解</h1><p><strong>DHCP DISCOVER：</strong></p>
-<p>这是 DHCP 客户端首次登录网络时进行 DHCP 过程的第一个报文，用来寻找 DHCP 服务器。</p>
-<p><strong>DHCP OFFER：</strong></p>
-<p>DHCP服务器用来响应DHCP,DISCOVER报文，此报文携带了各种配置信息。</p>
-<p><strong>DHCP REQUEST：此报文用于以下三种用途</strong></p>
-<p>客户端初始化后，发送广播的 DHCP REQUEST 报文来回应服务器的 DHCP OFFER 报文。</p>
-<p>客户端重启初始化后，发送广播的 DHCP REQUEST 报文来确认先前被分配的 IP 地址等配置信息。</p>
-<p>当客户端已经和某个 IP 地址绑定后，发送 DHCP REQUEST 报文来延长 IP 地址的租期。</p>
-<p><strong>DHCP ACK：</strong></p>
-<p>服务器对客户端的 DHCP REQUEST 报文的确认响应报文，客户端收到此报文</p>
-<p>后，才真正获得了 IP 地址和相关的配置信息。</p>
-<p><strong>DHCP NAK：</strong></p>
-<p>服务器对客户端的 DHCP REQUEST 报文的拒绝响应报文，比如服务器对客户</p>
-<p>端分配的 IP 地址已超过使用租借期限（服务器没有找到相应的租约记录）或者由于某些原</p>
-<p>因无法正常分配 IP 地址，则发送 DHCP NAK 报文作为应答（客户端移到了另一个新的网络）。</p>
-<p>通知 DHCP 客户端无法分配合适 IP 地址。DHCP 客户端需要重新发送</p>
-<p>DHCP DISCOVERY 报文</p>
-<p>来申请新的 IP 地址。</p>
-<p><strong>DHCP DECLINE：</strong></p>
-<p>当客户端发现服务器分配给它的 IP 地址发生冲突时会通过发送此报文</p>
-<p>来通知服务器，并且会重新向服务器申请地址。</p>
-<p><strong>DHCP RELEASE：</strong></p>
-<p>客户端可通过发送此报文主动释放服务器分配给它的 IP 地址，当服务</p>
-<p>器收到此报文后，可将这个 IP 地址分配给其它的客户端。</p>
-<p><strong>DHCP INFORM：</strong></p>
-<p>客户端已经获得了 IP 地址，发送此报文的目的是为了从服务器获得其</p>
-<p>他的一些网络配置信息，比如网关地址、DNS 服务器地址等。</p>
-<p>以上 8 种类型报文的格式相同，只是某些字段的取值不同。DHCP 报文格式基于 BOOTP</p>
-<p>的报文格式</p>
-]]></content>
-      <categories>
-        <category>NetWork</category>
-      </categories>
-      <tags>
-        <tag>DHCP</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Docker基础</title>
     <url>/2023/06/06/Docker%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><h2 id="一、相关知识"><a href="#一、相关知识" class="headerlink" title="一、相关知识"></a>一、相关知识</h2><p>Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中,然后发布到任何流行的Linux或Windows操作系统的机器上,也可以实现虚拟化,容器是完全使用沙箱机制,相互之间不会有任何接口。</p>
@@ -272,6 +232,79 @@
 ]]></content>
       <categories>
         <category>Docker</category>
+      </categories>
+      <tags>
+        <tag>Container</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>DHCP八种报文详解</title>
+    <url>/2022/08/02/DHCP%E5%85%AB%E7%A7%8D%E6%8A%A5%E6%96%87%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[<h1 id="DHCP八种报文详解"><a href="#DHCP八种报文详解" class="headerlink" title="DHCP八种报文详解"></a>DHCP八种报文详解</h1><p><strong>DHCP DISCOVER：</strong></p>
+<p>这是 DHCP 客户端首次登录网络时进行 DHCP 过程的第一个报文，用来寻找 DHCP 服务器。</p>
+<p><strong>DHCP OFFER：</strong></p>
+<p>DHCP服务器用来响应DHCP,DISCOVER报文，此报文携带了各种配置信息。</p>
+<p><strong>DHCP REQUEST：此报文用于以下三种用途</strong></p>
+<p>客户端初始化后，发送广播的 DHCP REQUEST 报文来回应服务器的 DHCP OFFER 报文。</p>
+<p>客户端重启初始化后，发送广播的 DHCP REQUEST 报文来确认先前被分配的 IP 地址等配置信息。</p>
+<p>当客户端已经和某个 IP 地址绑定后，发送 DHCP REQUEST 报文来延长 IP 地址的租期。</p>
+<p><strong>DHCP ACK：</strong></p>
+<p>服务器对客户端的 DHCP REQUEST 报文的确认响应报文，客户端收到此报文</p>
+<p>后，才真正获得了 IP 地址和相关的配置信息。</p>
+<p><strong>DHCP NAK：</strong></p>
+<p>服务器对客户端的 DHCP REQUEST 报文的拒绝响应报文，比如服务器对客户</p>
+<p>端分配的 IP 地址已超过使用租借期限（服务器没有找到相应的租约记录）或者由于某些原</p>
+<p>因无法正常分配 IP 地址，则发送 DHCP NAK 报文作为应答（客户端移到了另一个新的网络）。</p>
+<p>通知 DHCP 客户端无法分配合适 IP 地址。DHCP 客户端需要重新发送</p>
+<p>DHCP DISCOVERY 报文</p>
+<p>来申请新的 IP 地址。</p>
+<p><strong>DHCP DECLINE：</strong></p>
+<p>当客户端发现服务器分配给它的 IP 地址发生冲突时会通过发送此报文</p>
+<p>来通知服务器，并且会重新向服务器申请地址。</p>
+<p><strong>DHCP RELEASE：</strong></p>
+<p>客户端可通过发送此报文主动释放服务器分配给它的 IP 地址，当服务</p>
+<p>器收到此报文后，可将这个 IP 地址分配给其它的客户端。</p>
+<p><strong>DHCP INFORM：</strong></p>
+<p>客户端已经获得了 IP 地址，发送此报文的目的是为了从服务器获得其</p>
+<p>他的一些网络配置信息，比如网关地址、DNS 服务器地址等。</p>
+<p>以上 8 种类型报文的格式相同，只是某些字段的取值不同。DHCP 报文格式基于 BOOTP</p>
+<p>的报文格式</p>
+]]></content>
+      <categories>
+        <category>NetWork</category>
+      </categories>
+      <tags>
+        <tag>DHCP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Docker网络</title>
+    <url>/2023/03/10/Docker%E7%BD%91%E7%BB%9C/</url>
+    <content><![CDATA[<p><strong>Docker网络</strong></p>
+<p>理解Docker0</p>
+<p>清空环境（之前练习的环境）</p>
+<p><strong>测试</strong></p>
+<p><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/image-20220802133031396.png" alt="image-20220802133031396"></p>
+<p>三个网络</p>
+<p>？问题 ， Dokcer是如何处理网络访问的</p>
+<p><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/image-20220802133043045.png" alt="image-20220802133043045"></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@wsnb /]<span class="hljs-comment"># docker run -itd --name centos01 centos </span><br>c6651df2600725171ed8fd55dd8b9fc4de8247b17916ea235989b86054792208<br>[root@wsnb /]<span class="hljs-comment"># docker ps</span><br>CONTAINER ID   IMAGE     COMMAND       CREATED         STATUS         PORTS     NAMES<br>c6651df26007   centos    <span class="hljs-string">&quot;/bin/bash&quot;</span>   3 seconds ago   Up 2 seconds             centos01<br>[root@wsnb /]<span class="hljs-comment">#</span><br></code></pre></td></tr></table></figure>
+
+<p>进入容器查看容器IP地址–发现容器启动的时候回生成一个eth0@if41地址–docker分配的</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@wsnb /]<span class="hljs-comment"># docker exec -it c6651df26007 ip addr</span><br>1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000<br>    <span class="hljs-built_in">link</span>/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00<br>    inet 127.0.0.1/8 scope host lo<br>       valid_lft forever preferred_lft forever<br>40: eth0@if41: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default <br>    <span class="hljs-built_in">link</span>/ether 02:42:ac:11:00:02 brd ff:ff:ff:ff:ff:ff link-netnsid 0<br>    inet 172.17.0.2/16 brd 172.17.255.255 scope global eth0<br>       valid_lft forever preferred_lft forever<br>[root@wsnb /]<span class="hljs-comment"># </span><br></code></pre></td></tr></table></figure>
+
+<p>容器内和容器外可以互通交互，docker容器连通宿主机靠的是docker0网卡</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@wsnb /]<span class="hljs-comment"># docker exec -it c6651df26007 ip addr</span><br>1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000<br>    <span class="hljs-built_in">link</span>/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00<br>    inet 127.0.0.1/8 scope host lo<br>       valid_lft forever preferred_lft forever<br>40: eth0@if41: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default <br>    <span class="hljs-built_in">link</span>/ether 02:42:ac:11:00:02 brd ff:ff:ff:ff:ff:ff link-netnsid 0<br>    inet 172.17.0.2/16 brd 172.17.255.255 scope global eth0<br>       valid_lft forever preferred_lft forever<br>[root@wsnb /]<span class="hljs-comment"># ping 172.17.0.2</span><br>PING 172.17.0.2 (172.17.0.2) 56(84) bytes of data.<br>64 bytes from 172.17.0.2: icmp_seq=1 ttl=64 time=0.047 ms<br>^C<br>--- 172.17.0.2 ping statistics ---<br>1 packets transmitted, 1 received, 0% packet loss, time 0ms<br>rtt min/avg/max/mdev = 0.047/0.047/0.047/0.000 ms<br>[root@wsnb /]<span class="hljs-comment"># </span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>docker</category>
       </categories>
       <tags>
         <tag>Container</tag>
@@ -436,39 +469,6 @@
       </categories>
       <tags>
         <tag>Docker-基础</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Docker网络</title>
-    <url>/2023/03/10/Docker%E7%BD%91%E7%BB%9C/</url>
-    <content><![CDATA[<p><strong>Docker网络</strong></p>
-<p>理解Docker0</p>
-<p>清空环境（之前练习的环境）</p>
-<p><strong>测试</strong></p>
-<p><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/image-20220802133031396.png" alt="image-20220802133031396"></p>
-<p>三个网络</p>
-<p>？问题 ， Dokcer是如何处理网络访问的</p>
-<p><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/image-20220802133043045.png" alt="image-20220802133043045"></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@wsnb /]<span class="hljs-comment"># docker run -itd --name centos01 centos </span><br>c6651df2600725171ed8fd55dd8b9fc4de8247b17916ea235989b86054792208<br>[root@wsnb /]<span class="hljs-comment"># docker ps</span><br>CONTAINER ID   IMAGE     COMMAND       CREATED         STATUS         PORTS     NAMES<br>c6651df26007   centos    <span class="hljs-string">&quot;/bin/bash&quot;</span>   3 seconds ago   Up 2 seconds             centos01<br>[root@wsnb /]<span class="hljs-comment">#</span><br></code></pre></td></tr></table></figure>
-
-<p>进入容器查看容器IP地址–发现容器启动的时候回生成一个eth0@if41地址–docker分配的</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@wsnb /]<span class="hljs-comment"># docker exec -it c6651df26007 ip addr</span><br>1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000<br>    <span class="hljs-built_in">link</span>/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00<br>    inet 127.0.0.1/8 scope host lo<br>       valid_lft forever preferred_lft forever<br>40: eth0@if41: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default <br>    <span class="hljs-built_in">link</span>/ether 02:42:ac:11:00:02 brd ff:ff:ff:ff:ff:ff link-netnsid 0<br>    inet 172.17.0.2/16 brd 172.17.255.255 scope global eth0<br>       valid_lft forever preferred_lft forever<br>[root@wsnb /]<span class="hljs-comment"># </span><br></code></pre></td></tr></table></figure>
-
-<p>容器内和容器外可以互通交互，docker容器连通宿主机靠的是docker0网卡</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@wsnb /]<span class="hljs-comment"># docker exec -it c6651df26007 ip addr</span><br>1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000<br>    <span class="hljs-built_in">link</span>/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00<br>    inet 127.0.0.1/8 scope host lo<br>       valid_lft forever preferred_lft forever<br>40: eth0@if41: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default <br>    <span class="hljs-built_in">link</span>/ether 02:42:ac:11:00:02 brd ff:ff:ff:ff:ff:ff link-netnsid 0<br>    inet 172.17.0.2/16 brd 172.17.255.255 scope global eth0<br>       valid_lft forever preferred_lft forever<br>[root@wsnb /]<span class="hljs-comment"># ping 172.17.0.2</span><br>PING 172.17.0.2 (172.17.0.2) 56(84) bytes of data.<br>64 bytes from 172.17.0.2: icmp_seq=1 ttl=64 time=0.047 ms<br>^C<br>--- 172.17.0.2 ping statistics ---<br>1 packets transmitted, 1 received, 0% packet loss, time 0ms<br>rtt min/avg/max/mdev = 0.047/0.047/0.047/0.000 ms<br>[root@wsnb /]<span class="hljs-comment"># </span><br></code></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-]]></content>
-      <categories>
-        <category>docker</category>
-      </categories>
-      <tags>
-        <tag>Container</tag>
       </tags>
   </entry>
   <entry>
@@ -893,6 +893,25 @@
       </tags>
   </entry>
   <entry>
+    <title>docker图像化界面管理</title>
+    <url>/2022/08/01/docker%E5%9B%BE%E5%83%8F%E5%8C%96%E7%95%8C%E9%9D%A2%E7%AE%A1%E7%90%86/</url>
+    <content><![CDATA[<p><strong>portainer</strong></p>
+<p>docker 图像化界面管理工具！提供一个后台面板供我们操作</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">docker run -d -p 8088:9000 --restart=always -v /var/run/docker.sock:/var/run/docker.sock --privileged=true portainer/portainer<br></code></pre></td></tr></table></figure>
+
+<p>通过8088端口访问<strong>portainer</strong><br><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/image-20220802135155407.png" alt="image-20220802135155407"></p>
+<p>将 Portainer 连接到您要管理的 Docker 环境。我们选择本地的（因为暂时我们用不着远程的）<br><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/image-20220802135227206.png" alt="image-20220802135227206"></p>
+<p>连接进入之后的面板<br><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/image-20220802135308408.png" alt="image-20220802135308408"></p>
+<p>可视化面板一般不会使用，自己测试玩玩就ok</p>
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>Container</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Squid代理服务器-2</title>
     <url>/2023/06/06/Squid%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8-0/</url>
     <content><![CDATA[<h1 id="Squid"><a href="#Squid" class="headerlink" title="Squid"></a>Squid</h1><h2 id="一、相关知识"><a href="#一、相关知识" class="headerlink" title="一、相关知识"></a>一、相关知识</h2><p>Squid cache（简称为Squid）是一个流行的自由软件（GNU通用公共许可证）的代理服务器和Web缓存服务器。Squid有广泛的用途，从作为网页服务器的前置cache服务器缓存相关请求来提高Web服务器的速度，到为一组人共享网络资源而缓存万维网，域名系统和其他网络搜索，到通过过滤流量帮助网络安全，到局域网通过代理上网。Squid主要设计用于在Unix一类系统运行。</p>
@@ -1007,22 +1026,58 @@
       </tags>
   </entry>
   <entry>
-    <title>docker图像化界面管理</title>
-    <url>/2022/08/01/docker%E5%9B%BE%E5%83%8F%E5%8C%96%E7%95%8C%E9%9D%A2%E7%AE%A1%E7%90%86/</url>
-    <content><![CDATA[<p><strong>portainer</strong></p>
-<p>docker 图像化界面管理工具！提供一个后台面板供我们操作</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">docker run -d -p 8088:9000 --restart=always -v /var/run/docker.sock:/var/run/docker.sock --privileged=true portainer/portainer<br></code></pre></td></tr></table></figure>
+    <title>squid代理服务器</title>
+    <url>/2022/08/02/squid%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
+    <content><![CDATA[<p>​ </p>
+<h1 id="squid代理服务器"><a href="#squid代理服务器" class="headerlink" title="squid代理服务器"></a>squid代理服务器</h1><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a><strong>简介</strong></h1><p>Squid是一个高性能的代理缓存服务器，Squid支持FTP、gopher和HTTP协议。当用户指定它为代理服务器，且用户的网络和它可联通时，其会接收用户的请求，连接请求的网站，返回结果给用户并保留一个数据的备份作为缓存。当有其他用户请求同一个的页面时，Squid 把保存的备份传给用户，提高用户的访问体验。并且它可以设置过滤条件,对符合过滤条件的进行限制。</p>
+<p>当用户本身的网络无法正常访问某些网址，而代理服务器的网络可以正常访问某网站的时候，可以使用代理服务器去请求网址，代理服务器再把请求的结果返回给用户。它通常和ss,ssr,openvpn一样，有时会被用来做xx上网。又因为它的缓存的功能，有时也被用来做缓存服务器，提高用户的访问速度。</p>
+<h1 id="一，centos-x2F-redhat搭建代理服务器"><a href="#一，centos-x2F-redhat搭建代理服务器" class="headerlink" title="一，centos&#x2F;redhat搭建代理服务器"></a>一，centos&#x2F;redhat搭建代理服务器</h1><p>Squid是一个高性能的代理缓存服务器,Squid支持FTP、gopher、HTTPS和HTTP协议。 服务器环境：服务器centos7.9、 redhat7.0</p>
+<p>搭建环境：主机A(redhat7.0)不能上网，而同一网关内的主机B(centos7.9)可以上网。在主机B上搭建了squid代理服务器，方便主机A上网。</p>
+<h2 id="1、安装"><a href="#1、安装" class="headerlink" title="1、安装"></a><strong>1、安装</strong></h2><p>1.1安装之前养成好习惯</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">sudo yum update<br></code></pre></td></tr></table></figure>
 
-<p>通过8088端口访问<strong>portainer</strong><br><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/image-20220802135155407.png" alt="image-20220802135155407"></p>
-<p>将 Portainer 连接到您要管理的 Docker 环境。我们选择本地的（因为暂时我们用不着远程的）<br><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/image-20220802135227206.png" alt="image-20220802135227206"></p>
-<p>连接进入之后的面板<br><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/image-20220802135308408.png" alt="image-20220802135308408"></p>
-<p>可视化面板一般不会使用，自己测试玩玩就ok</p>
+<h3 id="1-2-进行安装"><a href="#1-2-进行安装" class="headerlink" title="1.2 进行安装"></a><strong>1.2 进行安装</strong></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">yum install squid -y <br>yum install httpd-tools -y<br></code></pre></td></tr></table></figure>
+
+<h2 id="2、密码文件操作"><a href="#2、密码文件操作" class="headerlink" title="2、密码文件操作"></a><strong>2、密码文件操作</strong></h2><p>2.1 生成密码文件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">mkdir /etc/squid3/<br>usernameNet 是用户名<br>htpasswd -cd /etc/squid3/passwords usernameNet<br>提示输入密码，在这里我设的密码为 123456<br>注意密码不要超过8位<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-2-测试密码文件"><a href="#2-2-测试密码文件" class="headerlink" title="2.2 测试密码文件"></a><strong>2.2 测试密码文件</strong></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">/usr/lib64/squid/basic_ncsa_auth /etc/squid3/passwords<br>输入 用户名 密码<br>usernameNet 123456<br>提示OK说明成功，ERR是有问题，请检查一下之前步骤<br>OK<br>测试完成，crtl + c 打断<br></code></pre></td></tr></table></figure>
+
+<h2 id="3、配置"><a href="#3、配置" class="headerlink" title="3、配置"></a><strong>3、配置</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">vim /etc/squid/squid.conf<br>在最后添加<br>auth_param basic program /usr/lib64/squid/basic_ncsa_auth /etc/squid3/passwords<br>auth_param basic realm proxy<br>acl authenticated proxy_auth REQUIRED<br>http_access allow authenticated<br>这里是端口号，可以按需修改<br>http_port 3128 这样写会同时监听ipv6和ipv4的端口，推荐适应下面的配置方法。<br>http_port 0.0.0.0:3128<br></code></pre></td></tr></table></figure>
+
+<h3 id="配置文件意思"><a href="#配置文件意思" class="headerlink" title="配置文件意思"></a><strong>配置文件意思</strong></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">vim /etc/squid/squid.conf<br><br>#一、网段配置<br>acl localnet src 10.0.0.0/8	# RFC1918 possible internal network<br>acl localnet src 172.16.0.0/12	# RFC1918 possible internal network<br>acl localnet src 192.168.0.0/16	# RFC1918 possible internal network<br>acl localnet src fc00::/7       # RFC 4193 local private network range<br>acl localnet src fe80::/10      # RFC 4291 link-local (directly plugged) machines<br>#填入可使用squid的网段<br>acl local    src 192.168.10.0/24<br>acl local    src 192.168.20.0/24<br>acl local    src 192.168.30.0/24<br><br><br><br>#二、端口配置<br>acl SSL_ports port 443<br>acl Safe_ports port 80		# http<br>acl Safe_ports port 21		# ftp<br>acl Safe_ports port 443		# https<br>acl Safe_ports port 70		# gopher<br>acl Safe_ports port 210		# wais<br>acl Safe_ports port 1025-65535	# unregistered ports<br>acl Safe_ports port 280		# http-mgmt<br>acl Safe_ports port 488		# gss-http<br>acl Safe_ports port 591		# filemaker<br>acl Safe_ports port 777		# multiling http<br><br><br><br>#三、密码策略<br># test mypass 设置squid的密码策略<br>auth_param basic program /usr/lib64/squid/basic_ncsa_auth /etc/squid/passwords  <br>auth_param basic children 15<br>auth_param basic credentialsttl 2 hours<br>auth_param basic casesensitive off         #用户名不区分大小写，可改为ON区分大小写<br>auth_param basic realm proxy<br><br><br><br>#四、acl规则配置。先配置一个变量，在配置该变量的限制<br><br>#&lt;1&gt;编写变量<br>#mp4相关限制的变量<br>#acl MYLAN src 192.168.2.0/24              #源地址网段    <br>#acl MC20 maxconn 20                       #最大并发连接<br>#acl DOMAIN dstdomain .qq.com .msn.com     #目标为.qq.com .msn.com的域名<br>#acl FILE urlpath_regex -i \.mp3$ \.mp4$   #以.mp3 .mp4结尾的URL路径<br>#acl TIME time MTWHF 07:30-17:30           #时间为周一至周五早8:30至晚17:30<br>#acl vip arp 00：7c:23:76:5C:1C	           #设置某个mac地址变量为vip<br><br><br><br>#设置黑名单 填入文件中的网址不可访问，一行一个网址<br>acl CONNECT method CONNECT<br>acl blocked_sites dstdomain &quot;/etc/squid/blocked_sites&quot;<br>acl authenticated proxy_auth REQUIRED<br><br><br>#&lt;2&gt;设置acl访问控制规则.<br>#有先后顺序,第一条规则匹配上就不再继续往下，所以先把拒绝写在前面<br>#mp4相关变量的限制<br>#http_access deny MYLAN FILE         #禁止客户机下载MP3 MP4文件<br>#http_access deny MYLAN DOMAIN       #禁止客户机访问acl列表中的网站<br>#http_access deny MYLAN MC20         #客户机的并发连接超过20时将被阻止<br>#http_access allow MYLAN TIME        #允许客户机在工作时间访问互联网<br><br>http_access deny blocked_sites       #限制变量blocked_sites的访问<br>http_access deny !Safe_ports<br>http_access deny CONNECT !SSL_ports<br>http_access allow authenticated<br>http_access allow localhost manager<br>http_access deny manager<br>http_access allow localnet<br>http_access allow localhost<br>#http_access allow vip                #允许变量vip访问<br>#http_access deny all<br><br><br>http_port 37771                       #配置squid端口号<br>coredump_dir /var/spool/squid<br>refresh_pattern ^ftp:		1440	20%	10080<br>refresh_pattern ^gopher:	1440	0%	1440<br>refresh_pattern -i (/cgi-bin/|\?) 0	0%	0<br>refresh_pattern .		0	20%	4320<br><br><br><br>#五、配置不同模式<br><br>#高密配置，隐藏真实ip变成匿名代理 这是squid3.1<br>via off<br>forwarded_for delete<br>request_header_access X-Forwarded-For deny all  <br>request_header_access From deny all  <br>request_header_access Via deny all <br><br><br>#透明配置（最方便使用，最不安全）<br>#http_port 3128 transparent<br>#cache_mem 99 MB<br>#cache_swap_low 90<br>#cache_swap_high 95<br>#maximum_object_size 4M<br>#minimum_object_size 0 KB<br>#maximum_object_size_in_memory 4096 KB<br>#memory_replacement_policy lru<br>#maximum_object_size 4 MB                    #允许保存到缓存空间的最大对象大小，以KB为单位，超过大小限制的文件将不被缓存，而是直接转发给用户<br>#cache_dir ufs /var/spool/squid 100 16 256 <br>#access_log /var/log/squid/access.log<br><br>#使用透明配置时，下方2个要填入对应位置<br>#acl all src 0.0.0.0/0.0.0.0                 #配置变量。允许所有ip访问， all是一个名字，可以随便起<br>#http_access allow all                       #配置该变量的acl限制。允许上面定义的all这个规则访问<br></code></pre></td></tr></table></figure>
+
+<h2 id="4、启动服务"><a href="#4、启动服务" class="headerlink" title="4、启动服务"></a><strong>4、启动服务</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">开启启动<br>systemctl enable squid.service<br>启动<br>systemctl start squid.service<br>停止<br>systemctl stop squid.service<br>重启<br>systemctl restart squid.service<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="5、squid日志默认位置"><a href="#5、squid日志默认位置" class="headerlink" title="5、squid日志默认位置"></a><strong>5、squid日志默认位置</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">注意事项： 想要查看日志信息的话，必须切换到root用户，sudo用户不可以！<br>squid的日志默认是打开的，位于目录/var/log/squid/<br>[root@bogon ~]# ll /var/log/squid/<br>total 24<br>-rw-r-----. 1 squid squid 10069 Jun  6 17:52 access.log<br>-rw-r-----. 1 squid squid   485 Jun  4 08:12 access.log-20220605.gz<br>-rw-r-----. 1 squid squid   484 Jun  5 03:33 cache.log<br>-rw-r-----. 1 squid squid  1339 Jun  4 08:11 cache.log-20220605.gz注意事项： 想要查看日志信息的话，必须切换到root用户，sudo用户不可以！ squid的日志默认是打开的，位于目录/var/log/squid/ [root@bogon ~]# ll /var/log/squid/ total 24 -rw-r-----. 1 squid squid 10069 Jun  6 17:52 access.log -rw-r-----. 1 squid squid   485 Jun  4 08:12 access.log-20220605.gz -rw-r-----. 1 squid squid   484 Jun  5 03:33 cache.log -rw-r-----. 1 squid squid  1339 Jun  4 08:11 cache.log-20220605.gz<br></code></pre></td></tr></table></figure>
+
+<p>注意：限制可以配置白名单和黑名单</p>
+<h1 id="二、代理服务器设置"><a href="#二、代理服务器设置" class="headerlink" title="二、代理服务器设置"></a><strong>二、代理服务器设置</strong></h1><p>这里是主机A (不能上网的机器) 的设置</p>
+<h3 id="2-1-测试服务器"><a href="#2-1-测试服务器" class="headerlink" title="2.1 测试服务器"></a><strong>2.1 测试服务器</strong></h3><p>可以采用下面的命令测试是否可以链接上代理服务器(squid)</p>
+<p>注意事项：一定要关闭suqid所在服务器的防火墙，和自己的防火墙</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">telnet proxy_server_ip 3128<br></code></pre></td></tr></table></figure>
+
+<p>上面这个命令用来测试的，如果没有的话需要安装：</p>
+<p>这里是安装教程的链接。当然，你也可以先不进行测试。</p>
+<h3 id="2-2-配置主机A-想要上网的机器"><a href="#2-2-配置主机A-想要上网的机器" class="headerlink" title="2.2 配置主机A(想要上网的机器)"></a><strong>2.2 配置主机A(想要上网的机器)</strong></h3><p>新建 &#x2F;etc&#x2F;profile.d&#x2F;proxy.sh , 在里面填入一下内容:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">PROXY_URL=&quot;http://proxy_server_ip:3128/&quot;<br>添加不需要走代理的地址<br>NO_PROXY_ADDR=&quot;127.0.0.1,localhost,.local,.cluster.local,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16&quot;<br>添加的代理<br>export http_proxy=&quot;$PROXY_URL&quot;<br>export https_proxy=&quot;$PROXY_URL&quot;<br>export no_proxy=&quot;$NO_PROXY_ADDR&quot;<br>export HTTP_PROXY=&quot;$PROXY_URL&quot;<br>export HTTPS_PROXY=&quot;$PROXY_URL&quot;<br>export NO_PROXY=&quot;$NO_PROXY_ADDR&quot;<br></code></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<ul>
+<li>将proxy_server_ip, 换成自己的Squid proxy server 的IP地址。</li>
+<li>在NO_PROXY_ADDR，中添加不需要走代理的IP地址，这里配置的是访问本机和子网内的机器不走代理。</li>
+</ul>
+<h3 id="2-3-让代理生效"><a href="#2-3-让代理生效" class="headerlink" title="2.3 让代理生效"></a><strong>2.3 让代理生效</strong></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">source /etc/profile.d/proxy.sh<br></code></pre></td></tr></table></figure>
+
+<p>到这里就配置完成了。</p>
+<h3 id="2-4-测试是否可以上网"><a href="#2-4-测试是否可以上网" class="headerlink" title="2.4 测试是否可以上网"></a><strong>2.4 测试是否可以上网</strong></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">第一种方式<br>curl www.baidu.com<br>第二中方式<br>测试下载文件<br>wget https://mirrors.aliyun.com/ubuntu-releases/22.04/ubuntu-22.04-live-server-amd64.list<br></code></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
-        <category>docker</category>
+        <category>代理服务</category>
       </categories>
       <tags>
-        <tag>Container</tag>
+        <tag>代理</tag>
       </tags>
   </entry>
   <entry>
@@ -1205,6 +1260,116 @@
 ]]></content>
       <categories>
         <category>Web服务</category>
+      </categories>
+      <tags>
+        <tag>Service</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>文件共享服务Samba</title>
+    <url>/2023/06/06/%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1Samba/</url>
+    <content><![CDATA[<h1 id="Samba"><a href="#Samba" class="headerlink" title="Samba"></a>Samba</h1><h2 id="一、相关知识"><a href="#一、相关知识" class="headerlink" title="一、相关知识"></a>一、相关知识</h2><p>Samba是在Linux和UNIX系统上实现SMB协议的一个免费软件，由服务器及客户端程序构成。SMB（Server Messages Block，信息服务块）是一种在局域网上共享文件和打印机的一种通信协议，它为局域网内的不同计算机之间提供文件及打印机等资源的共享服务。SMB协议是客户机&#x2F;服务器型协议，客户机通过该协议可以访问服务器上的共享文件系统、打印机及其他资源。通过设置“NetBIOS over TCP&#x2F;IP”使得Samba不但能与局域网络主机分享资源，还能与全世界的电脑分享资源。</p>
+<h2 id="二、实验目标"><a href="#二、实验目标" class="headerlink" title="二、实验目标"></a>二、实验目标</h2><ul>
+<li>本地用户</li>
+<li>匿名用户</li>
+<li>虚拟用户</li>
+</ul>
+<h2 id="三、实验实施"><a href="#三、实验实施" class="headerlink" title="三、实验实施"></a>三、实验实施</h2><h3 id="1、实验规划"><a href="#1、实验规划" class="headerlink" title="1、实验规划"></a>1、实验规划</h3><table>
+<thead>
+<tr>
+<th>IP地址</th>
+<th>主机名</th>
+<th>操作系统</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>192.168.10.10</td>
+<td>Server</td>
+<td>Centos8</td>
+</tr>
+<tr>
+<td>192.168.10.40</td>
+<td>Client</td>
+<td>Win7</td>
+</tr>
+</tbody></table>
+<h3 id="2、实验步骤"><a href="#2、实验步骤" class="headerlink" title="2、实验步骤"></a>2、实验步骤</h3><h4 id="2-1、安装Samba服务"><a href="#2-1、安装Samba服务" class="headerlink" title="2.1、安装Samba服务"></a>2.1、安装Samba服务</h4><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ~]<span class="hljs-comment">#  yum install -y samba        //安装samba 服务</span><br> <br>yum list samba            //列出软件包的信息<br>yum remove samba          //卸载软件包<br>yum check-update samba    //检查是否有可更新的软件包<br>yum update samba          //更新samba软件包<br></code></pre></td></tr></table></figure>
+
+<h4 id="2-2、启动服务"><a href="#2-2、启动服务" class="headerlink" title="2.2、启动服务"></a>2.2、启动服务</h4><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ~]<span class="hljs-comment"># systemctl enable smb --now</span><br>Created symlink /etc/systemd/system/multi-user.target.wants/smb.service → /usr/lib/systemd/system/smb.service.<br>[root@Server ~]<span class="hljs-comment"># </span><br></code></pre></td></tr></table></figure>
+
+<h4 id="2-3、配置Samba服务本地用户访问"><a href="#2-3、配置Samba服务本地用户访问" class="headerlink" title="2.3、配置Samba服务本地用户访问"></a>2.3、配置Samba服务本地用户访问</h4><h5 id="2-3-1、创建用户-x2F-共享路径"><a href="#2-3-1、创建用户-x2F-共享路径" class="headerlink" title="2.3.1、创建用户&#x2F;共享路径"></a>2.3.1、创建用户&#x2F;共享路径</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ~]<span class="hljs-comment"># useradd test1</span><br>[root@Server ~]<span class="hljs-comment"># useradd test2</span><br>[root@Server ~]<span class="hljs-comment"># echo Qwer123.|passwd --stdin test1</span><br>更改用户 test1 的密码 。<br>passwd：所有的身份验证令牌已经成功更新.<br>[root@Server ~]<span class="hljs-comment"># echo Qwer123.|passwd --stdin test2</span><br>更改用户 test2 的密码 。<br>passwd：所有的身份验证令牌已经成功更新.<br><br><span class="hljs-comment"># 创建samba用户，并给每个用户设置密码，要在系统创建完成后才能创建samba用户</span><br>[root@Server home]<span class="hljs-comment"># smbpasswd -a test1    # 也可以用pdbebit 命令</span><br>New SMB password:<br>Retype new SMB password:<br>Added user test1.<br>[root@Server home]<span class="hljs-comment"># smbpasswd -a test2	 # 也可以用pdbebit 命令</span><br>New SMB password:<br>Retype new SMB password:<br>Added user test2.+<br><br><span class="hljs-comment"># 创建共享目录并设置权限</span><br>[root@Server ~]<span class="hljs-comment"># mkdir /samba/local/</span><br>[root@Server ~]<span class="hljs-comment"># chmod 777 /samba/local/</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="2-3-2、pdbebit-参数说明"><a href="#2-3-2、pdbebit-参数说明" class="headerlink" title="2.3.2、pdbebit 参数说明"></a>2.3.2、pdbebit 参数说明</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">-a, --create                       新建samba用户<br> -r, --modify                       修改samba用户<br> -x, --delete                       删除samba用户<br> -L, --list                         列出全部samba用户，读取passdb.tdb数据库文件<br> -v, --verbose                      显示详细信息<br> -c, --account-control=STRING       账户控制值<br>-w, --smbpasswd-style              以smbpasswd格式输出<br> -u, --user=USER                    使用的用户<br> -N, --account-desc=STRING          设置账户描述<br> -f, --fullname=STRING              设置全名<br> -h, --homedir=STRING               设置家目录<br> -D, --drive=STRING                 设置家设备<br> -S, --script=STRING                设置登陆脚本<br> -p, --profile=STRING               设置配置文件路径<br> -I, --domain=STRING                设置用户域名<br> -U, --user SID=STRING              设置用户SID或RID<br> -M, --machine SID=STRING           设置设备SID或RID<br> -m, --machine                      账户是一个设备账户<br> -b, --backend=STRING               使用不同的passdb作为默认后端<br> -i, --import=STRING                指定后段导入用户账户<br> -e, --<span class="hljs-built_in">export</span>=STRING                导出用户账户到指定后端<br> --policies-reset                   恢复默认策略<br> -P, --account-policy=STRING        帐户策略的值(如最大密码有效期)<br> -C, --value=LONG                   设置账号策略值<br> --force-initialized-passwords      强制初始化passdb后端<br> -z, --bad-password-count-reset     重置错误密码<br> -Z, --logon-hours-reset            重置登陆时间<br> --time-format=STRING               时间参数的格式<br> -t, --password-from-stdin          从标准输入获取密码<br> -K, --kickoff-time=STRING          设置开始时间<br> --set-nt-hash=STRING               从nt-hash设置密码<br> -d, --debuglevel=DEBUGLEVEL        设置debug级别<br> -s, --configfile=CONFIGFILE        使用备用配置文件<br> -l, --log-basename=LOGFILEBASE     设置日志文件的基本名称<br> -V, --version                      输出版本号<br> --option=name=value                从命令行设置smb.conf选项<br> -?, --<span class="hljs-built_in">help</span>                         显示帮助信息<br> --usage                            显示简要的使用信息<br><br></code></pre></td></tr></table></figure>
+
+<h5 id="2-3-3、配置Samba配置文件、-x2F-etc-x2F-samba-x2F-smb-conf"><a href="#2-3-3、配置Samba配置文件、-x2F-etc-x2F-samba-x2F-smb-conf" class="headerlink" title="2.3.3、配置Samba配置文件、&#x2F;etc&#x2F;samba&#x2F;smb.conf"></a>2.3.3、配置Samba配置文件、&#x2F;etc&#x2F;samba&#x2F;smb.conf</h5><p>samba服务的配置文件在<code>/etc/samba/smb.conf</code>，其中里面主要包含三个部分（配置简介、全局变量、共享服务配置），这里对配置文件的内容详细不做解释，只对用到的做解释。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 在最下方插入</span><br>[<span class="hljs-built_in">local</span>]<br>        comment = <span class="hljs-built_in">local</span> user	<span class="hljs-comment"># 注释，说明改共享文件的信息 </span><br>        path = /samba/local   <span class="hljs-comment"># 共享文件路径</span><br>        writable = <span class="hljs-built_in">yes</span>  <span class="hljs-comment"># 允许写入</span><br>        browseable = <span class="hljs-built_in">yes</span> <span class="hljs-comment"># 允许访问</span><br><span class="hljs-comment"># 默认没有限制指定用户访问就是允许所有用户访问</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>检验配置文件是否有参数写错</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server samba]<span class="hljs-comment"># testparm </span><br>Load smb config files from /etc/samba/smb.conf<br>Loaded services file OK.<br>Weak crypto is allowed<br><br>Server role: ROLE_STANDALONE<br><br>Press enter to see a dump of your service definitions<br><br><span class="hljs-comment"># Global parameters</span><br>[global]<br>        map to guest = Bad User<br>        printcap name = cups<br>        security = USER<br>        username map = /etc/samba/smbusers<br>        workgroup = SAMBA<br>        idmap config * : backend = tdb<br>        cups options = raw<br><br><br>[homes]<br>        browseable = No<br>        comment = Home Directories<br>        inherit acls = Yes<br>        <span class="hljs-built_in">read</span> only = No<br>        valid <span class="hljs-built_in">users</span> = %S %D%w%S<br><br><br>[printers]<br>        browseable = No<br>        comment = All Printers<br>        create mask = 0600<br>        path = /var/tmp<br>        printable = Yes<br><br><br>[<span class="hljs-built_in">print</span>$]<br>        comment = Printer Drivers<br>        create mask = 0664<br>        directory mask = 0775<br>        force group = @printadmin<br>        path = /var/lib/samba/drivers<br>        write list = @printadmin root<br><br><br>[<span class="hljs-built_in">local</span>]<br>        comment = <span class="hljs-built_in">local</span> user<br>        path = /samba/local<br>        <span class="hljs-built_in">read</span> only = No<br><br></code></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-3-4、在iptables和selinux中放行smb服务"><a href="#2-3-4、在iptables和selinux中放行smb服务" class="headerlink" title="2.3.4、在iptables和selinux中放行smb服务"></a>2.3.4、在iptables和selinux中放行smb服务</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server samba]<span class="hljs-comment"># setsebool -P samba_export_all_rw=1</span><br>[root@Server samba]<span class="hljs-comment"># setsebool -P samba_export_all_ro=1</span><br>[root@Server samba]<span class="hljs-comment"># getsebool -a | grep samba</span><br>samba_domain_controller --&gt; off<br>samba_enable_home_dirs --&gt; off<br>samba_export_all_ro --&gt; on（如果只读共享的文件只开此项就行）<br>samba_export_all_rw --&gt; on（如果读写，只开此项就行，修改文件时要看文件的<span class="hljs-built_in">chmod</span>属性。）<br>samba_share_nfs --&gt; off<br>use_samba_home_dirs --&gt; off<br>virt_use_samba --&gt; off<br><br><span class="hljs-comment"># 如不想共享文件可运行如下语句</span><br><br>[root@Server samba]<span class="hljs-comment"># setsebool -P samba_export_all_rw=0</span><br>[root@Server samba]<span class="hljs-comment"># setsebool -P samba_export_all_ro=0</span><br></code></pre></td></tr></table></figure>
+
+<p>放行防火墙并重启服务</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 放行防火墙</span><br>[root@Server ~]<span class="hljs-comment"># firewall-cmd --add-service=samba --permanent</span><br>[root@Server ~]<span class="hljs-comment"># firewall-cmd --reload </span><br><span class="hljs-comment"># 重启服务</span><br>[root@Server ~]<span class="hljs-comment"># systemctl restart smb </span><br></code></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-3-5、win7测试"><a href="#2-3-5、win7测试" class="headerlink" title="2.3.5、win7测试"></a>2.3.5、win7测试</h5><p><img src="C:/Users/Administrator/Pictures/md/1.png" alt="image-20221003144746991"></p>
+<p><img src="C:/Users/Administrator/Pictures/md/2.png" alt="image-20221003144937216"></p>
+<p><img src="C:/Users/Administrator/Pictures/md/3.png" alt="image-20221003144650825"></p>
+<p><img src="C:/Users/Administrator/Pictures/md/4.png" alt="image-20221003144704243"></p>
+<h4 id="2-4、配置Samba匿名用户访问"><a href="#2-4、配置Samba匿名用户访问" class="headerlink" title="2.4、配置Samba匿名用户访问"></a>2.4、配置Samba匿名用户访问</h4><h5 id="2-4-1、创建共享目录并设置权限"><a href="#2-4-1、创建共享目录并设置权限" class="headerlink" title="2.4.1、创建共享目录并设置权限"></a>2.4.1、创建共享目录并设置权限</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 创建共享目录并设置权限</span><br>[root@Server ~]<span class="hljs-comment"># mkdir /samba/guest</span><br>[root@Server ~]<span class="hljs-comment"># chmod 777 /samba/guest</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="2-4-2、配置samba配置文件"><a href="#2-4-2、配置samba配置文件" class="headerlink" title="2.4.2、配置samba配置文件"></a>2.4.2、配置samba配置文件</h5><ol>
+<li>在[global]下添加 map to guest &#x3D; Bad User，并写入新的共享服务信息，输入正确的时候颜色提示绿色</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[global]<br>        workgroup = SAMBA<br>        security = user<br>        passdb backend = tdbsam<br>        printing = cups<br>        printcap name = cups<br>        load printers = <span class="hljs-built_in">yes</span><br>        cups options = raw<br>        <span class="hljs-comment"># 添加一下行，意思就是配置了这一串就不用用户名密码也可以访问了</span><br>        map to guest = bad User<br>        <br><span class="hljs-comment"># 配置共享目录-最底部添加</span><br>[guest]<br>        comment = fictitious user	<span class="hljs-comment"># 注释，说明改共享文件的信息</span><br>        path = /samba/guest		<span class="hljs-comment"># 共享目录的路径 绝对路径</span><br>        public = <span class="hljs-built_in">yes</span>		<span class="hljs-comment"># 是否允许匿名访问</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="2-4-3、重启服务"><a href="#2-4-3、重启服务" class="headerlink" title="2.4.3、重启服务"></a>2.4.3、重启服务</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 放行防火墙-之前放行过的话，不需要重复放行</span><br>[root@Server ~]<span class="hljs-comment"># firewall-cmd --add-service=samba --permanent</span><br>[root@Server ~]<span class="hljs-comment"># firewall-cmd --reload </span><br><span class="hljs-comment"># 重启服务</span><br>[root@Server ~]<span class="hljs-comment"># systemctl restart smb </span><br></code></pre></td></tr></table></figure>
+
+<h5 id="2-4-4、测试"><a href="#2-4-4、测试" class="headerlink" title="2.4.4、测试"></a>2.4.4、测试</h5><p><img src="C:/Users/Administrator/Pictures/md/5.png" alt="image-20221003151404871"></p>
+<p><strong>直接就进入这里没有显示登录界面</strong></p>
+<p><img src="C:/Users/Administrator/Pictures/md/6.png" alt="image-20221003151348297"></p>
+<p><img src="C:/Users/Administrator/Pictures/md/7.png" alt="image-20221003151532918"></p>
+<p><strong>我们会发现需要进入local共享文件的话需要登陆</strong></p>
+<p><img src="C:/Users/Administrator/Pictures/md/8.png" alt="image-20221003151636118"></p>
+<p><strong>到此匿名用户完成</strong></p>
+<h4 id="2-5，配置Samba虚拟用户访问"><a href="#2-5，配置Samba虚拟用户访问" class="headerlink" title="2.5，配置Samba虚拟用户访问"></a>2.5，配置Samba虚拟用户访问</h4><h5 id="2-5-1、创建用户映射虚拟用户"><a href="#2-5-1、创建用户映射虚拟用户" class="headerlink" title="2.5.1、创建用户映射虚拟用户"></a>2.5.1、创建用户映射虚拟用户</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server samba]<span class="hljs-comment"># useradd guest</span><br>[root@Server samba]<span class="hljs-comment"># echo Qwer123.|passwd --stdin guest </span><br>更改用户 guest 的密码 。<br>passwd：所有的身份验证令牌已经成功更新。<br>[root@Server samba]<span class="hljs-comment"># pdbedit -a guest		# 这个命令是和上面smbpasswd命令是一样的</span><br>new password:<br>retype new password:<br>Unix username:        guest<br>NT username:          <br>Account Flags:        [U          ]<br>User SID:             S-1-5-21-478335590-3805463860-3550396621-1002<br>Primary Group SID:    S-1-5-21-478335590-3805463860-3550396621-513<br>Full Name:            <br>Home Directory:       \\SERVER\guest<br>HomeDir Drive:        <br>Logon Script:         <br>Profile Path:         \\SERVER\guest\profile<br>Domain:               SERVER<br>Account desc:         <br>Workstations:         <br>Munged dial:          <br>Logon time:           0<br>Logoff time:          三, 06 2月 2036 23:06:39 CST<br>Kickoff time:         三, 06 2月 2036 23:06:39 CST<br>Password last <span class="hljs-built_in">set</span>:    一, 03 10月 2022 23:29:21 CST<br>Password can change:  一, 03 10月 2022 23:29:21 CST<br>Password must change: never<br>Last bad password   : 0<br>Bad password count  : 0<br>Logon hours         : FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF<br>[root@Server samba]<span class="hljs-comment"># </span><br></code></pre></td></tr></table></figure>
+
+<h5 id="2-5-2、编辑smbusers文件添加配置"><a href="#2-5-2、编辑smbusers文件添加配置" class="headerlink" title="2.5.2、编辑smbusers文件添加配置"></a>2.5.2、编辑smbusers文件添加配置</h5><p><strong>映射虚拟用户</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server samba]<span class="hljs-comment"># cat /etc/samba/smbusers </span><br>guest = u01 u02<br></code></pre></td></tr></table></figure>
+
+<h5 id="2-5-3、进入smb-conf配置文件中添加映射文件路径"><a href="#2-5-3、进入smb-conf配置文件中添加映射文件路径" class="headerlink" title="2.5.3、进入smb.conf配置文件中添加映射文件路径"></a>2.5.3、进入smb.conf配置文件中添加映射文件路径</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[global]<br>        workgroup = SAMBA<br>        security = user<br>        passdb backend = tdbsam<br>        printing = cups<br>        printcap name = cups<br>        load printers = <span class="hljs-built_in">yes</span><br>        cups options = raw<br>        map to guest = bad User<br>        <span class="hljs-comment"># 添加虚拟用户映射路径</span><br>        username map = /etc/samba/smbusers<br></code></pre></td></tr></table></figure>
+
+<p><strong>检验配置文件是否有参数写错</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server samba]<span class="hljs-comment"># testparm </span><br>Load smb config files from /etc/samba/smb.conf<br>Loaded services file OK.<br>Weak crypto is allowed<br><br>Server role: ROLE_STANDALONE<br><br>Press enter to see a dump of your service definitions<br><br><span class="hljs-comment"># Global parameters</span><br>[global]<br>        map to guest = Bad User<br>        printcap name = cups<br>        security = USER<br>        username map = /etc/samba/smbusers<br>        workgroup = SAMBA<br>        idmap config * : backend = tdb<br>        cups options = raw<br><br><br>[homes]<br>        browseable = No<br>        comment = Home Directories<br>        inherit acls = Yes<br>        <span class="hljs-built_in">read</span> only = No<br>        valid <span class="hljs-built_in">users</span> = %S %D%w%S<br><br><br>[printers]<br>        browseable = No<br>        comment = All Printers<br>        create mask = 0600<br>        path = /var/tmp<br>        printable = Yes<br><br><br>[<span class="hljs-built_in">print</span>$]<br>        comment = Printer Drivers<br>        create mask = 0664<br>        directory mask = 0775<br>        force group = @printadmin<br>        path = /var/lib/samba/drivers<br>        write list = @printadmin root<br><br><br>[<span class="hljs-built_in">local</span>]<br>        comment = <span class="hljs-built_in">local</span> user<br>        path = /samba/local<br>        <span class="hljs-built_in">read</span> only = No<br><br><br>[guest]<br>        comment = fictitious user<br>        guest ok = Yes<br>        path = /samba/guest<br>        <span class="hljs-built_in">read</span> only = No<br></code></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-5-4、重启服务"><a href="#2-5-4、重启服务" class="headerlink" title="2.5.4、重启服务"></a>2.5.4、重启服务</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server samba]<span class="hljs-comment"># systemctl restart smb</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="2-5-5、测试"><a href="#2-5-5、测试" class="headerlink" title="2.5.5、测试"></a>2.5.5、测试</h5><p>先删除之前的记录缓存</p>
+<p><img src="C:/Users/Administrator/Pictures/md/9.png" alt="image-20221003153816731"></p>
+<p><img src="C:/Users/Administrator/Pictures/md/10.png" alt="image-20221003153844193"></p>
+<p><img src="C:/Users/Administrator/Pictures/md/11.png" alt="image-20221003154046298"></p>
+<p><img src="C:/Users/Administrator/Pictures/md/12.png" alt="image-20221003154201803"></p>
+<p><strong>我们使用虚拟用户访问，其实这个过程就是相当于我们在用guest用户在操作</strong></p>
+<h4 id="2-6、吧我们的共享目录映射本地网络驱动"><a href="#2-6、吧我们的共享目录映射本地网络驱动" class="headerlink" title="2.6、吧我们的共享目录映射本地网络驱动"></a>2.6、吧我们的共享目录映射本地网络驱动</h4><h5 id="2-6-1、打开我的电脑，映射网络驱动"><a href="#2-6-1、打开我的电脑，映射网络驱动" class="headerlink" title="2.6.1、打开我的电脑，映射网络驱动"></a>2.6.1、打开我的电脑，映射网络驱动</h5><p><img src="C:/Users/Administrator/Pictures/md/13.png" alt="image-20221003154802332"></p>
+<p><img src="C:/Users/Administrator/Pictures/md/14.png" alt="image-20221003154834148"></p>
+<p><img src="C:/Users/Administrator/Pictures/md/15.png" alt="image-20221003154854835"></p>
+<h4 id="2-7、配置文件常用权限参数-自行配置修改（还有很多参数自行了解）"><a href="#2-7、配置文件常用权限参数-自行配置修改（还有很多参数自行了解）" class="headerlink" title="2.7、配置文件常用权限参数-自行配置修改（还有很多参数自行了解）"></a>2.7、配置文件常用权限参数-自行配置修改（还有很多参数自行了解）</h4><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[<span class="hljs-built_in">test</span>]                 <span class="hljs-comment">#共享文件名称（也就是客户端访问时可以看到的那个名字）        </span><br>        comment = this is <span class="hljs-built_in">test</span>        <span class="hljs-comment">#共享文件夹的描述</span><br>        path = /home/ceshi             <span class="hljs-comment">#共享文件夹路径</span><br>        public = <span class="hljs-built_in">yes</span>                    <span class="hljs-comment">#是否允许guest账户访问</span><br>        writable =<span class="hljs-built_in">yes</span>                <span class="hljs-comment">#是否有写权限</span><br>        directory mask = 0777        <span class="hljs-comment">#默认创建目录权限</span><br>        create mask = 0777             <span class="hljs-comment">#默认创建文件权限</span><br>        valid <span class="hljs-built_in">users</span> = @<span class="hljs-built_in">test</span>,root  <span class="hljs-comment">#设置允许访问共享目录的用户@后跟组名，不写此行就对所有用户开放</span><br>        write list = @<span class="hljs-built_in">test</span>,root        <span class="hljs-comment">#设置有写权限的用户@后面跟的是组名</span><br>        browseable = <span class="hljs-built_in">yes</span>                 <span class="hljs-comment">#该指定共享目录可浏览</span><br>        available = <span class="hljs-built_in">yes</span>                      <span class="hljs-comment">#该指定共享资源可使用</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="！注意"><a href="#！注意" class="headerlink" title="！注意"></a>！注意</h3><p><strong>如果win测试的时候，没有弹出登录界面或者直接访问之前的共享目录，执行以下操作</strong></p>
+<p><img src="C:/Users/Administrator/Pictures/md/16.png" alt="image-20221003151324340"></p>
+<h3 id="Samba配置文件检验"><a href="#Samba配置文件检验" class="headerlink" title="Samba配置文件检验"></a>Samba配置文件检验</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#正确提示</span><br>[root@Server ~]<span class="hljs-comment">#  testparm</span><br><span class="hljs-comment">#提示 Load smb config files from /etc/samba/smb.conf</span><br><span class="hljs-comment">#提示 Loaded services file OK.</span><br><span class="hljs-comment">#提示 Server role: ROLE_STANDALONE</span><br><br><span class="hljs-comment">#错误提示</span><br>[root@Server ~]<span class="hljs-comment">#  testparm</span><br><span class="hljs-comment">#Load smb config files from /etc/samba/smb.conf</span><br><span class="hljs-comment">#报错内容指引： set_variable_helper(ye): value is not boolean!</span><br><span class="hljs-comment">#Error loading services.</span><br></code></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>文件共享</category>
       </categories>
       <tags>
         <tag>Service</tag>
@@ -1418,165 +1583,58 @@
       </tags>
   </entry>
   <entry>
-    <title>squid代理服务器</title>
-    <url>/2022/08/02/squid%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
-    <content><![CDATA[<p>​ </p>
-<h1 id="squid代理服务器"><a href="#squid代理服务器" class="headerlink" title="squid代理服务器"></a>squid代理服务器</h1><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a><strong>简介</strong></h1><p>Squid是一个高性能的代理缓存服务器，Squid支持FTP、gopher和HTTP协议。当用户指定它为代理服务器，且用户的网络和它可联通时，其会接收用户的请求，连接请求的网站，返回结果给用户并保留一个数据的备份作为缓存。当有其他用户请求同一个的页面时，Squid 把保存的备份传给用户，提高用户的访问体验。并且它可以设置过滤条件,对符合过滤条件的进行限制。</p>
-<p>当用户本身的网络无法正常访问某些网址，而代理服务器的网络可以正常访问某网站的时候，可以使用代理服务器去请求网址，代理服务器再把请求的结果返回给用户。它通常和ss,ssr,openvpn一样，有时会被用来做xx上网。又因为它的缓存的功能，有时也被用来做缓存服务器，提高用户的访问速度。</p>
-<h1 id="一，centos-x2F-redhat搭建代理服务器"><a href="#一，centos-x2F-redhat搭建代理服务器" class="headerlink" title="一，centos&#x2F;redhat搭建代理服务器"></a>一，centos&#x2F;redhat搭建代理服务器</h1><p>Squid是一个高性能的代理缓存服务器,Squid支持FTP、gopher、HTTPS和HTTP协议。 服务器环境：服务器centos7.9、 redhat7.0</p>
-<p>搭建环境：主机A(redhat7.0)不能上网，而同一网关内的主机B(centos7.9)可以上网。在主机B上搭建了squid代理服务器，方便主机A上网。</p>
-<h2 id="1、安装"><a href="#1、安装" class="headerlink" title="1、安装"></a><strong>1、安装</strong></h2><p>1.1安装之前养成好习惯</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">sudo yum update<br></code></pre></td></tr></table></figure>
+    <title>简单搭建http服务</title>
+    <url>/2022/08/02/%E7%AE%80%E5%8D%95%E6%90%AD%E5%BB%BAhttp%E6%9C%8D%E5%8A%A1/</url>
+    <content><![CDATA[<h1 id="简单搭建http服务"><a href="#简单搭建http服务" class="headerlink" title="简单搭建http服务"></a><strong>简单搭建http服务</strong></h1><h2 id="一、安装httpd"><a href="#一、安装httpd" class="headerlink" title="一、安装httpd"></a><strong>一、安装httpd</strong></h2><p>执行命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">yum install httpd<br></code></pre></td></tr></table></figure>
 
-<h3 id="1-2-进行安装"><a href="#1-2-进行安装" class="headerlink" title="1.2 进行安装"></a><strong>1.2 进行安装</strong></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">yum install squid -y <br>yum install httpd-tools -y<br></code></pre></td></tr></table></figure>
+<h2 id="二、配置httpd"><a href="#二、配置httpd" class="headerlink" title="二、配置httpd"></a><strong>二、配置httpd</strong></h2><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">vi /etc/httpd/conf/httpd.conf<br></code></pre></td></tr></table></figure>
 
-<h2 id="2、密码文件操作"><a href="#2、密码文件操作" class="headerlink" title="2、密码文件操作"></a><strong>2、密码文件操作</strong></h2><p>2.1 生成密码文件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">mkdir /etc/squid3/<br>usernameNet 是用户名<br>htpasswd -cd /etc/squid3/passwords usernameNet<br>提示输入密码，在这里我设的密码为 123456<br>注意密码不要超过8位<br></code></pre></td></tr></table></figure>
+<h2 id="三、修改配置文件"><a href="#三、修改配置文件" class="headerlink" title="三、修改配置文件"></a><strong>三、修改配置文件</strong></h2><h3 id="3-1-修改端口号"><a href="#3-1-修改端口号" class="headerlink" title="3.1 修改端口号"></a><strong>3.1 修改端口号</strong></h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># Listen: Allows you to bind Apache to specific IP addresses and/or</span><br><span class="hljs-comment"># ports, instead of the default. See also the &lt;VirtualHost&gt;</span><br><span class="hljs-comment"># directive.</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># Change this to Listen on specific IP addresses as shown below to</span><br><span class="hljs-comment"># prevent Apache from glomming onto all bound IP addresses.</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># Listen 12.34.56.78:80</span><br>Listen 80 <span class="hljs-comment"># http监听端口根据实际情况修改 ---如果开启了sellinux和防火墙,修改了默认端口80，需要放行防火墙端口和selinx放行端口</span><br></code></pre></td></tr></table></figure>
 
-<h3 id="2-2-测试密码文件"><a href="#2-2-测试密码文件" class="headerlink" title="2.2 测试密码文件"></a><strong>2.2 测试密码文件</strong></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">/usr/lib64/squid/basic_ncsa_auth /etc/squid3/passwords<br>输入 用户名 密码<br>usernameNet 123456<br>提示OK说明成功，ERR是有问题，请检查一下之前步骤<br>OK<br>测试完成，crtl + c 打断<br></code></pre></td></tr></table></figure>
+<p><strong>端口放行教程（假如我们自己定义监听端口为8080）</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">防火墙放行<br>[root@localhost /]<span class="hljs-comment"># firewall-cmd  --add-port=8080/tcp --permanent</span><br>success<br>[root@localhost /]<span class="hljs-comment"># firewall-cmd  --reload</span><br>success<br>[root@localhost /]<span class="hljs-comment"># firewall-cmd   --list-all</span><br>public (active)<br>target: default<br>icmp-block-inversion: no<br>interfaces: ens33<br>sources:<br>services: ssh dhcpv6-client<br>ports: 8080/tcp<br>protocols:<br>masquerade: no<br>forward-ports:<br>source-ports:<br>icmp-blocks:<br>rich rules:<br>[root@localhost /]<span class="hljs-comment">#</span><br><br>selinux放行<br>[root@localhost /]<span class="hljs-comment"># semanage port -a -t http_port_t -p tcp 8080</span><br>ValueError: 已定义端口 tcp/8080<br>[root@localhost /]<span class="hljs-comment"># </span><br>[root@localhost /]<span class="hljs-comment"># systemctl restart httpd</span><br>[root@localhost /]<span class="hljs-comment"># </span><br></code></pre></td></tr></table></figure>
 
-<h2 id="3、配置"><a href="#3、配置" class="headerlink" title="3、配置"></a><strong>3、配置</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">vim /etc/squid/squid.conf<br>在最后添加<br>auth_param basic program /usr/lib64/squid/basic_ncsa_auth /etc/squid3/passwords<br>auth_param basic realm proxy<br>acl authenticated proxy_auth REQUIRED<br>http_access allow authenticated<br>这里是端口号，可以按需修改<br>http_port 3128 这样写会同时监听ipv6和ipv4的端口，推荐适应下面的配置方法。<br>http_port 0.0.0.0:3128<br></code></pre></td></tr></table></figure>
+<p>“注意如果你用的是Centos系统的话而且是最小化安装可能会没有semanage命令，需要自己安装，查找这个命令的包yum provides semanage，包安装yum install -y policycoreutils-python”</p>
+<h3 id="3-2-修改目录权限"><a href="#3-2-修改目录权限" class="headerlink" title="3.2 修改目录权限"></a><strong>3.2 修改目录权限</strong></h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#</span><br><span class="hljs-comment"># Deny access to the entirety of your server&#x27;s filesystem. You must</span><br><span class="hljs-comment"># explicitly permit access to web content directories in other</span><br><span class="hljs-comment"># &lt;Directory&gt; blocks below.</span><br><span class="hljs-comment">#</span><br>&lt;Directory /&gt;<br>AllowOverride none<br><span class="hljs-comment"># Require all denied 默认设置，拒绝所有访问请求</span><br>Options All <span class="hljs-comment"># 显示目录结构，以便用户浏览下载</span><br>&lt;/Directory&gt;<br></code></pre></td></tr></table></figure>
 
-<h3 id="配置文件意思"><a href="#配置文件意思" class="headerlink" title="配置文件意思"></a><strong>配置文件意思</strong></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">vim /etc/squid/squid.conf<br><br>#一、网段配置<br>acl localnet src 10.0.0.0/8	# RFC1918 possible internal network<br>acl localnet src 172.16.0.0/12	# RFC1918 possible internal network<br>acl localnet src 192.168.0.0/16	# RFC1918 possible internal network<br>acl localnet src fc00::/7       # RFC 4193 local private network range<br>acl localnet src fe80::/10      # RFC 4291 link-local (directly plugged) machines<br>#填入可使用squid的网段<br>acl local    src 192.168.10.0/24<br>acl local    src 192.168.20.0/24<br>acl local    src 192.168.30.0/24<br><br><br><br>#二、端口配置<br>acl SSL_ports port 443<br>acl Safe_ports port 80		# http<br>acl Safe_ports port 21		# ftp<br>acl Safe_ports port 443		# https<br>acl Safe_ports port 70		# gopher<br>acl Safe_ports port 210		# wais<br>acl Safe_ports port 1025-65535	# unregistered ports<br>acl Safe_ports port 280		# http-mgmt<br>acl Safe_ports port 488		# gss-http<br>acl Safe_ports port 591		# filemaker<br>acl Safe_ports port 777		# multiling http<br><br><br><br>#三、密码策略<br># test mypass 设置squid的密码策略<br>auth_param basic program /usr/lib64/squid/basic_ncsa_auth /etc/squid/passwords  <br>auth_param basic children 15<br>auth_param basic credentialsttl 2 hours<br>auth_param basic casesensitive off         #用户名不区分大小写，可改为ON区分大小写<br>auth_param basic realm proxy<br><br><br><br>#四、acl规则配置。先配置一个变量，在配置该变量的限制<br><br>#&lt;1&gt;编写变量<br>#mp4相关限制的变量<br>#acl MYLAN src 192.168.2.0/24              #源地址网段    <br>#acl MC20 maxconn 20                       #最大并发连接<br>#acl DOMAIN dstdomain .qq.com .msn.com     #目标为.qq.com .msn.com的域名<br>#acl FILE urlpath_regex -i \.mp3$ \.mp4$   #以.mp3 .mp4结尾的URL路径<br>#acl TIME time MTWHF 07:30-17:30           #时间为周一至周五早8:30至晚17:30<br>#acl vip arp 00：7c:23:76:5C:1C	           #设置某个mac地址变量为vip<br><br><br><br>#设置黑名单 填入文件中的网址不可访问，一行一个网址<br>acl CONNECT method CONNECT<br>acl blocked_sites dstdomain &quot;/etc/squid/blocked_sites&quot;<br>acl authenticated proxy_auth REQUIRED<br><br><br>#&lt;2&gt;设置acl访问控制规则.<br>#有先后顺序,第一条规则匹配上就不再继续往下，所以先把拒绝写在前面<br>#mp4相关变量的限制<br>#http_access deny MYLAN FILE         #禁止客户机下载MP3 MP4文件<br>#http_access deny MYLAN DOMAIN       #禁止客户机访问acl列表中的网站<br>#http_access deny MYLAN MC20         #客户机的并发连接超过20时将被阻止<br>#http_access allow MYLAN TIME        #允许客户机在工作时间访问互联网<br><br>http_access deny blocked_sites       #限制变量blocked_sites的访问<br>http_access deny !Safe_ports<br>http_access deny CONNECT !SSL_ports<br>http_access allow authenticated<br>http_access allow localhost manager<br>http_access deny manager<br>http_access allow localnet<br>http_access allow localhost<br>#http_access allow vip                #允许变量vip访问<br>#http_access deny all<br><br><br>http_port 37771                       #配置squid端口号<br>coredump_dir /var/spool/squid<br>refresh_pattern ^ftp:		1440	20%	10080<br>refresh_pattern ^gopher:	1440	0%	1440<br>refresh_pattern -i (/cgi-bin/|\?) 0	0%	0<br>refresh_pattern .		0	20%	4320<br><br><br><br>#五、配置不同模式<br><br>#高密配置，隐藏真实ip变成匿名代理 这是squid3.1<br>via off<br>forwarded_for delete<br>request_header_access X-Forwarded-For deny all  <br>request_header_access From deny all  <br>request_header_access Via deny all <br><br><br>#透明配置（最方便使用，最不安全）<br>#http_port 3128 transparent<br>#cache_mem 99 MB<br>#cache_swap_low 90<br>#cache_swap_high 95<br>#maximum_object_size 4M<br>#minimum_object_size 0 KB<br>#maximum_object_size_in_memory 4096 KB<br>#memory_replacement_policy lru<br>#maximum_object_size 4 MB                    #允许保存到缓存空间的最大对象大小，以KB为单位，超过大小限制的文件将不被缓存，而是直接转发给用户<br>#cache_dir ufs /var/spool/squid 100 16 256 <br>#access_log /var/log/squid/access.log<br><br>#使用透明配置时，下方2个要填入对应位置<br>#acl all src 0.0.0.0/0.0.0.0                 #配置变量。允许所有ip访问， all是一个名字，可以随便起<br>#http_access allow all                       #配置该变量的acl限制。允许上面定义的all这个规则访问<br></code></pre></td></tr></table></figure>
+<h3 id="3-3-修改共享目录–如果修改了默认路径需要修改路径的上下文"><a href="#3-3-修改共享目录–如果修改了默认路径需要修改路径的上下文" class="headerlink" title="3.3 修改共享目录–如果修改了默认路径需要修改路径的上下文"></a><strong>3.3 修改共享目录–如果修改了默认路径需要修改路径的上下文</strong></h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#</span><br><span class="hljs-comment"># DocumentRoot: The directory out of which you will serve your</span><br><span class="hljs-comment"># documents. By default, all requests are taken from this directory, but</span><br><span class="hljs-comment"># symbolic links and aliases may be used to point to other locations.</span><br><span class="hljs-comment">#</span><br>DocumentRoot <span class="hljs-string">&quot;/data/&quot;</span> <span class="hljs-comment"># 根据实际情况修改</span><br> <br><span class="hljs-comment">#</span><br><span class="hljs-comment"># Relax access to content within /var/www.</span><br><span class="hljs-comment">#</span><br>&lt;Directory <span class="hljs-string">&quot;/data&quot;</span>&gt; <span class="hljs-comment"># 根据实际情况修改</span><br>AllowOverride None<br><span class="hljs-comment"># Allow open access:</span><br><span class="hljs-comment"># Require all granted</span><br><span class="hljs-comment"># Allow from all</span><br>&lt;/Directory&gt;<br></code></pre></td></tr></table></figure>
 
-<h2 id="4、启动服务"><a href="#4、启动服务" class="headerlink" title="4、启动服务"></a><strong>4、启动服务</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">开启启动<br>systemctl enable squid.service<br>启动<br>systemctl start squid.service<br>停止<br>systemctl stop squid.service<br>重启<br>systemctl restart squid.service<br><br></code></pre></td></tr></table></figure>
+<p>修改定义网站目录上下文–如果不修改需要关闭selinx不然网站无法访问</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@localhost ~]<span class="hljs-comment"># mkdir /data</span><br>[root@localhost ~]<span class="hljs-comment"># ls -ldZ /data/		#查看默认上下文关系-object_r:default_t</span><br>drwxr-xr-x. root root unconfined_u:object_r:default_t:s0 /data/<br><br>[root@localhost ~]<span class="hljs-comment"># semanage fcontext -a -t httpd_sys_content_t &quot;/data(/.*)?&quot;</span><br>[root@localhost ~]<span class="hljs-comment"># restorecon -R -v /data</span><br>restorecon reset /data context unconfined_u:object_r:default_t:s0-&gt;unconfined_u:object_r:httpd_sys_content_t:s0<br>[root@localhost ~]<span class="hljs-comment"># ls -ldZ /data/		#查看现在上下文关系-httpd_sys_content_t</span><br>drwxr-xr-x. root root unconfined_u:object_r:httpd_sys_content_t:s0 /data/<br>[root@localhost ~]<span class="hljs-comment">#</span><br></code></pre></td></tr></table></figure>
 
-<h2 id="5、squid日志默认位置"><a href="#5、squid日志默认位置" class="headerlink" title="5、squid日志默认位置"></a><strong>5、squid日志默认位置</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">注意事项： 想要查看日志信息的话，必须切换到root用户，sudo用户不可以！<br>squid的日志默认是打开的，位于目录/var/log/squid/<br>[root@bogon ~]# ll /var/log/squid/<br>total 24<br>-rw-r-----. 1 squid squid 10069 Jun  6 17:52 access.log<br>-rw-r-----. 1 squid squid   485 Jun  4 08:12 access.log-20220605.gz<br>-rw-r-----. 1 squid squid   484 Jun  5 03:33 cache.log<br>-rw-r-----. 1 squid squid  1339 Jun  4 08:11 cache.log-20220605.gz注意事项： 想要查看日志信息的话，必须切换到root用户，sudo用户不可以！ squid的日志默认是打开的，位于目录/var/log/squid/ [root@bogon ~]# ll /var/log/squid/ total 24 -rw-r-----. 1 squid squid 10069 Jun  6 17:52 access.log -rw-r-----. 1 squid squid   485 Jun  4 08:12 access.log-20220605.gz -rw-r-----. 1 squid squid   484 Jun  5 03:33 cache.log -rw-r-----. 1 squid squid  1339 Jun  4 08:11 cache.log-20220605.gz<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">记不住命令的可以man帮助查看命令<br>[root@localhost ~]<span class="hljs-comment"># man semanage</span><br>[root@localhost ~]<span class="hljs-comment"># man 8 semanage-fcontext </span><br></code></pre></td></tr></table></figure>
 
-<p>注意：限制可以配置白名单和黑名单</p>
-<h1 id="二、代理服务器设置"><a href="#二、代理服务器设置" class="headerlink" title="二、代理服务器设置"></a><strong>二、代理服务器设置</strong></h1><p>这里是主机A (不能上网的机器) 的设置</p>
-<h3 id="2-1-测试服务器"><a href="#2-1-测试服务器" class="headerlink" title="2.1 测试服务器"></a><strong>2.1 测试服务器</strong></h3><p>可以采用下面的命令测试是否可以链接上代理服务器(squid)</p>
-<p>注意事项：一定要关闭suqid所在服务器的防火墙，和自己的防火墙</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">telnet proxy_server_ip 3128<br></code></pre></td></tr></table></figure>
+<p><strong>可以根据自己需求配置</strong></p>
+<p>http全局配置文件，文件选项参数含义–郭老师上课写的笔记内容</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">配置文件选项<br>ServerRoot                        <span class="hljs-comment"># 服务目录</span><br>Listen 80                         <span class="hljs-comment"># 监听的端口； Listen   IP:PORT # 如果不写IP表示监听本机所有的可用IP地址，如果注明IP则表示监听在指定的IP地址之后。Listen选项可以出现多次，表示监听不同IP以及不同端口。</span><br>ServerAdmin                       <span class="hljs-comment"># 管理员邮箱</span><br>AllowOverride none                <span class="hljs-comment"># AllowOverride定义每个目录下.htaccess文件中的指令类型，通常设置为None，什么都不可以放；ALL所有都可以放</span><br>Require all denied                <span class="hljs-comment"># 全部拒绝访问</span><br>Require all granted               <span class="hljs-comment"># 全部允许访问</span><br>Require  ip   X.X.X.X             <span class="hljs-comment"># 允许指定 IP地址访问</span><br>Require  host    hostname         <span class="hljs-comment"># 允许指定的主机名访问</span><br>DocumentRoot                      <span class="hljs-comment"># 存放网页数据的目录</span><br>Options Indexes FollowSymLinks    <span class="hljs-comment"># Options选项，Indexes 允许目录浏览，当客户端指定要访问的目录，但没有指定要访问的文件，且目录下不存在默认文档时，显示该目录中的文件及子目录列表索引。 FollowSymLinks 允许跟踪符号链接文件所指定的源文件，跟踪符号链接，如果目录下存在软连接，则可以直接访问软连接指向的文件。</span><br>DirectoryIndex                    <span class="hljs-comment"># 默认可识别的网页</span><br>ErrorLog <span class="hljs-string">&quot;;logs/error_log&quot;</span>;       <span class="hljs-comment"># 错误的日志文件</span><br>LogLevel warn                     <span class="hljs-comment"># 日志等级</span><br>ErrorDocument                     <span class="hljs-comment"># 错误重定向</span><br></code></pre></td></tr></table></figure>
 
-<p>上面这个命令用来测试的，如果没有的话需要安装：</p>
-<p>这里是安装教程的链接。当然，你也可以先不进行测试。</p>
-<h3 id="2-2-配置主机A-想要上网的机器"><a href="#2-2-配置主机A-想要上网的机器" class="headerlink" title="2.2 配置主机A(想要上网的机器)"></a><strong>2.2 配置主机A(想要上网的机器)</strong></h3><p>新建 &#x2F;etc&#x2F;profile.d&#x2F;proxy.sh , 在里面填入一下内容:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">PROXY_URL=&quot;http://proxy_server_ip:3128/&quot;<br>添加不需要走代理的地址<br>NO_PROXY_ADDR=&quot;127.0.0.1,localhost,.local,.cluster.local,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16&quot;<br>添加的代理<br>export http_proxy=&quot;$PROXY_URL&quot;<br>export https_proxy=&quot;$PROXY_URL&quot;<br>export no_proxy=&quot;$NO_PROXY_ADDR&quot;<br>export HTTP_PROXY=&quot;$PROXY_URL&quot;<br>export HTTPS_PROXY=&quot;$PROXY_URL&quot;<br>export NO_PROXY=&quot;$NO_PROXY_ADDR&quot;<br></code></pre></td></tr></table></figure>
+<h2 id="四、启动httpd服务"><a href="#四、启动httpd服务" class="headerlink" title="四、启动httpd服务"></a><strong>四、启动httpd服务</strong></h2><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">systemctl start httpd<br></code></pre></td></tr></table></figure>
 
-<p>其中：</p>
-<ul>
-<li>将proxy_server_ip, 换成自己的Squid proxy server 的IP地址。</li>
-<li>在NO_PROXY_ADDR，中添加不需要走代理的IP地址，这里配置的是访问本机和子网内的机器不走代理。</li>
-</ul>
-<h3 id="2-3-让代理生效"><a href="#2-3-让代理生效" class="headerlink" title="2.3 让代理生效"></a><strong>2.3 让代理生效</strong></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">source /etc/profile.d/proxy.sh<br></code></pre></td></tr></table></figure>
+<h2 id="五、其他常用命令"><a href="#五、其他常用命令" class="headerlink" title="五、其他常用命令"></a><strong>五、其他常用命令</strong></h2><p>重启httpd服务</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">systemctl start httpd<br></code></pre></td></tr></table></figure>
 
-<p>到这里就配置完成了。</p>
-<h3 id="2-4-测试是否可以上网"><a href="#2-4-测试是否可以上网" class="headerlink" title="2.4 测试是否可以上网"></a><strong>2.4 测试是否可以上网</strong></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">第一种方式<br>curl www.baidu.com<br>第二中方式<br>测试下载文件<br>wget https://mirrors.aliyun.com/ubuntu-releases/22.04/ubuntu-22.04-live-server-amd64.list<br></code></pre></td></tr></table></figure>
+<h2 id="六、测试"><a href="#六、测试" class="headerlink" title="六、测试"></a><strong>六、测试</strong></h2><p>​    <img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/image-20220802140513620.png" alt="image-20220802140513620"></p>
+<h2 id="七、配置http网站用户访问站点"><a href="#七、配置http网站用户访问站点" class="headerlink" title="七、配置http网站用户访问站点"></a><strong>七、配置http网站用户访问站点</strong></h2><p>我们在touch &#x2F;etc&#x2F;httpd&#x2F;conf.d&#x2F;man.conf重新编写一个配置文件</p>
+<p>用户认证文件选项配置参数解释</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">想要认证需要在httpd.conf中找到想要认证页面的&lt;Directory/&gt;添加认证语句，<br>AuthType Basic         <span class="hljs-comment"># 是设置加密方式，基础</span><br>AuthName <span class="hljs-string">&quot;SOS Dan&quot;</span>     <span class="hljs-comment"># 是设置域名称</span><br>AuthUserFile /var/jff2014/user.pw   <span class="hljs-comment"># 是密码保存路径</span><br>Require user jiaofangfang           <span class="hljs-comment"># 是指明用户名</span><br></code></pre></td></tr></table></figure>
 
+<h3 id="编写配置文件"><a href="#编写配置文件" class="headerlink" title="编写配置文件"></a>编写配置文件</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@localhost data]<span class="hljs-comment"># cat /etc/httpd/conf.d/man.conf </span><br>Listen 8080<br>&lt;VirtualHost *:8080&gt;<br>    DocumentRoot <span class="hljs-string">&quot;/data&quot;</span><br>    Directoryindex index.html<br>        &lt;Directory <span class="hljs-string">&quot;/data&quot;</span>&gt;<br>            AllowOverride None<br>            AuthType Basic<br>            AuthName <span class="hljs-string">&quot;SOS Dan&quot;</span><br>            AuthUserFile /wsnb/jnds/user.pw<br>            Require user jnds<br>        &lt;/Directory&gt;<br>&lt;/VirtualHost&gt;<br>[root@localhost data]<span class="hljs-comment"># </span><br></code></pre></td></tr></table></figure>
+
+<p>创建用户，创建用户密码信息路径，添加http用户和密码</p>
+<p>为了安全我们创建保存用户密码文件的时候，为了安全考虑可以在前面加上“.”一点，吧文件弄成隐藏文件,例如吧下面的user.pw—-&gt;.user</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@localhost data]<span class="hljs-comment"># mkdir /wsnb/jnds/</span><br>[root@localhost data]<span class="hljs-comment"># touch /wsnb/jnds/user.pw</span><br>[root@localhost data]<span class="hljs-comment"># htpasswd -c /wsnb/jnds/user.pw jnds</span><br>New password: <br>Re-<span class="hljs-built_in">type</span> new password: <br>Adding password <span class="hljs-keyword">for</span> user jnds<br>[root@localhost data]<span class="hljs-comment"># </span><br></code></pre></td></tr></table></figure>
+
+<p>重启httpd服务</p>
+<p>如果没有放行selinux和防火墙的自行去放行上面有教程</p>
+<p>还有网页目录的上下文</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@localhost ~]<span class="hljs-comment"># systemctl restart httpd</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a><strong>测试</strong></h2><p><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/image-20220802140636502.png" alt="image-20220802140636502"></p>
+<p><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/image-20220802140641867.png" alt="image-20220802140641867"></p>
 ]]></content>
       <categories>
-        <category>代理服务</category>
-      </categories>
-      <tags>
-        <tag>代理</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>文件共享服务Samba</title>
-    <url>/2023/06/06/%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1Samba/</url>
-    <content><![CDATA[<h1 id="Samba"><a href="#Samba" class="headerlink" title="Samba"></a>Samba</h1><h2 id="一、相关知识"><a href="#一、相关知识" class="headerlink" title="一、相关知识"></a>一、相关知识</h2><p>Samba是在Linux和UNIX系统上实现SMB协议的一个免费软件，由服务器及客户端程序构成。SMB（Server Messages Block，信息服务块）是一种在局域网上共享文件和打印机的一种通信协议，它为局域网内的不同计算机之间提供文件及打印机等资源的共享服务。SMB协议是客户机&#x2F;服务器型协议，客户机通过该协议可以访问服务器上的共享文件系统、打印机及其他资源。通过设置“NetBIOS over TCP&#x2F;IP”使得Samba不但能与局域网络主机分享资源，还能与全世界的电脑分享资源。</p>
-<h2 id="二、实验目标"><a href="#二、实验目标" class="headerlink" title="二、实验目标"></a>二、实验目标</h2><ul>
-<li>本地用户</li>
-<li>匿名用户</li>
-<li>虚拟用户</li>
-</ul>
-<h2 id="三、实验实施"><a href="#三、实验实施" class="headerlink" title="三、实验实施"></a>三、实验实施</h2><h3 id="1、实验规划"><a href="#1、实验规划" class="headerlink" title="1、实验规划"></a>1、实验规划</h3><table>
-<thead>
-<tr>
-<th>IP地址</th>
-<th>主机名</th>
-<th>操作系统</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>192.168.10.10</td>
-<td>Server</td>
-<td>Centos8</td>
-</tr>
-<tr>
-<td>192.168.10.40</td>
-<td>Client</td>
-<td>Win7</td>
-</tr>
-</tbody></table>
-<h3 id="2、实验步骤"><a href="#2、实验步骤" class="headerlink" title="2、实验步骤"></a>2、实验步骤</h3><h4 id="2-1、安装Samba服务"><a href="#2-1、安装Samba服务" class="headerlink" title="2.1、安装Samba服务"></a>2.1、安装Samba服务</h4><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ~]<span class="hljs-comment">#  yum install -y samba        //安装samba 服务</span><br> <br>yum list samba            //列出软件包的信息<br>yum remove samba          //卸载软件包<br>yum check-update samba    //检查是否有可更新的软件包<br>yum update samba          //更新samba软件包<br></code></pre></td></tr></table></figure>
-
-<h4 id="2-2、启动服务"><a href="#2-2、启动服务" class="headerlink" title="2.2、启动服务"></a>2.2、启动服务</h4><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ~]<span class="hljs-comment"># systemctl enable smb --now</span><br>Created symlink /etc/systemd/system/multi-user.target.wants/smb.service → /usr/lib/systemd/system/smb.service.<br>[root@Server ~]<span class="hljs-comment"># </span><br></code></pre></td></tr></table></figure>
-
-<h4 id="2-3、配置Samba服务本地用户访问"><a href="#2-3、配置Samba服务本地用户访问" class="headerlink" title="2.3、配置Samba服务本地用户访问"></a>2.3、配置Samba服务本地用户访问</h4><h5 id="2-3-1、创建用户-x2F-共享路径"><a href="#2-3-1、创建用户-x2F-共享路径" class="headerlink" title="2.3.1、创建用户&#x2F;共享路径"></a>2.3.1、创建用户&#x2F;共享路径</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ~]<span class="hljs-comment"># useradd test1</span><br>[root@Server ~]<span class="hljs-comment"># useradd test2</span><br>[root@Server ~]<span class="hljs-comment"># echo Qwer123.|passwd --stdin test1</span><br>更改用户 test1 的密码 。<br>passwd：所有的身份验证令牌已经成功更新.<br>[root@Server ~]<span class="hljs-comment"># echo Qwer123.|passwd --stdin test2</span><br>更改用户 test2 的密码 。<br>passwd：所有的身份验证令牌已经成功更新.<br><br><span class="hljs-comment"># 创建samba用户，并给每个用户设置密码，要在系统创建完成后才能创建samba用户</span><br>[root@Server home]<span class="hljs-comment"># smbpasswd -a test1    # 也可以用pdbebit 命令</span><br>New SMB password:<br>Retype new SMB password:<br>Added user test1.<br>[root@Server home]<span class="hljs-comment"># smbpasswd -a test2	 # 也可以用pdbebit 命令</span><br>New SMB password:<br>Retype new SMB password:<br>Added user test2.+<br><br><span class="hljs-comment"># 创建共享目录并设置权限</span><br>[root@Server ~]<span class="hljs-comment"># mkdir /samba/local/</span><br>[root@Server ~]<span class="hljs-comment"># chmod 777 /samba/local/</span><br></code></pre></td></tr></table></figure>
-
-<h5 id="2-3-2、pdbebit-参数说明"><a href="#2-3-2、pdbebit-参数说明" class="headerlink" title="2.3.2、pdbebit 参数说明"></a>2.3.2、pdbebit 参数说明</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">-a, --create                       新建samba用户<br> -r, --modify                       修改samba用户<br> -x, --delete                       删除samba用户<br> -L, --list                         列出全部samba用户，读取passdb.tdb数据库文件<br> -v, --verbose                      显示详细信息<br> -c, --account-control=STRING       账户控制值<br>-w, --smbpasswd-style              以smbpasswd格式输出<br> -u, --user=USER                    使用的用户<br> -N, --account-desc=STRING          设置账户描述<br> -f, --fullname=STRING              设置全名<br> -h, --homedir=STRING               设置家目录<br> -D, --drive=STRING                 设置家设备<br> -S, --script=STRING                设置登陆脚本<br> -p, --profile=STRING               设置配置文件路径<br> -I, --domain=STRING                设置用户域名<br> -U, --user SID=STRING              设置用户SID或RID<br> -M, --machine SID=STRING           设置设备SID或RID<br> -m, --machine                      账户是一个设备账户<br> -b, --backend=STRING               使用不同的passdb作为默认后端<br> -i, --import=STRING                指定后段导入用户账户<br> -e, --<span class="hljs-built_in">export</span>=STRING                导出用户账户到指定后端<br> --policies-reset                   恢复默认策略<br> -P, --account-policy=STRING        帐户策略的值(如最大密码有效期)<br> -C, --value=LONG                   设置账号策略值<br> --force-initialized-passwords      强制初始化passdb后端<br> -z, --bad-password-count-reset     重置错误密码<br> -Z, --logon-hours-reset            重置登陆时间<br> --time-format=STRING               时间参数的格式<br> -t, --password-from-stdin          从标准输入获取密码<br> -K, --kickoff-time=STRING          设置开始时间<br> --set-nt-hash=STRING               从nt-hash设置密码<br> -d, --debuglevel=DEBUGLEVEL        设置debug级别<br> -s, --configfile=CONFIGFILE        使用备用配置文件<br> -l, --log-basename=LOGFILEBASE     设置日志文件的基本名称<br> -V, --version                      输出版本号<br> --option=name=value                从命令行设置smb.conf选项<br> -?, --<span class="hljs-built_in">help</span>                         显示帮助信息<br> --usage                            显示简要的使用信息<br><br></code></pre></td></tr></table></figure>
-
-<h5 id="2-3-3、配置Samba配置文件、-x2F-etc-x2F-samba-x2F-smb-conf"><a href="#2-3-3、配置Samba配置文件、-x2F-etc-x2F-samba-x2F-smb-conf" class="headerlink" title="2.3.3、配置Samba配置文件、&#x2F;etc&#x2F;samba&#x2F;smb.conf"></a>2.3.3、配置Samba配置文件、&#x2F;etc&#x2F;samba&#x2F;smb.conf</h5><p>samba服务的配置文件在<code>/etc/samba/smb.conf</code>，其中里面主要包含三个部分（配置简介、全局变量、共享服务配置），这里对配置文件的内容详细不做解释，只对用到的做解释。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 在最下方插入</span><br>[<span class="hljs-built_in">local</span>]<br>        comment = <span class="hljs-built_in">local</span> user	<span class="hljs-comment"># 注释，说明改共享文件的信息 </span><br>        path = /samba/local   <span class="hljs-comment"># 共享文件路径</span><br>        writable = <span class="hljs-built_in">yes</span>  <span class="hljs-comment"># 允许写入</span><br>        browseable = <span class="hljs-built_in">yes</span> <span class="hljs-comment"># 允许访问</span><br><span class="hljs-comment"># 默认没有限制指定用户访问就是允许所有用户访问</span><br></code></pre></td></tr></table></figure>
-
-<p><strong>检验配置文件是否有参数写错</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server samba]<span class="hljs-comment"># testparm </span><br>Load smb config files from /etc/samba/smb.conf<br>Loaded services file OK.<br>Weak crypto is allowed<br><br>Server role: ROLE_STANDALONE<br><br>Press enter to see a dump of your service definitions<br><br><span class="hljs-comment"># Global parameters</span><br>[global]<br>        map to guest = Bad User<br>        printcap name = cups<br>        security = USER<br>        username map = /etc/samba/smbusers<br>        workgroup = SAMBA<br>        idmap config * : backend = tdb<br>        cups options = raw<br><br><br>[homes]<br>        browseable = No<br>        comment = Home Directories<br>        inherit acls = Yes<br>        <span class="hljs-built_in">read</span> only = No<br>        valid <span class="hljs-built_in">users</span> = %S %D%w%S<br><br><br>[printers]<br>        browseable = No<br>        comment = All Printers<br>        create mask = 0600<br>        path = /var/tmp<br>        printable = Yes<br><br><br>[<span class="hljs-built_in">print</span>$]<br>        comment = Printer Drivers<br>        create mask = 0664<br>        directory mask = 0775<br>        force group = @printadmin<br>        path = /var/lib/samba/drivers<br>        write list = @printadmin root<br><br><br>[<span class="hljs-built_in">local</span>]<br>        comment = <span class="hljs-built_in">local</span> user<br>        path = /samba/local<br>        <span class="hljs-built_in">read</span> only = No<br><br></code></pre></td></tr></table></figure>
-
-
-
-<h5 id="2-3-4、在iptables和selinux中放行smb服务"><a href="#2-3-4、在iptables和selinux中放行smb服务" class="headerlink" title="2.3.4、在iptables和selinux中放行smb服务"></a>2.3.4、在iptables和selinux中放行smb服务</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server samba]<span class="hljs-comment"># setsebool -P samba_export_all_rw=1</span><br>[root@Server samba]<span class="hljs-comment"># setsebool -P samba_export_all_ro=1</span><br>[root@Server samba]<span class="hljs-comment"># getsebool -a | grep samba</span><br>samba_domain_controller --&gt; off<br>samba_enable_home_dirs --&gt; off<br>samba_export_all_ro --&gt; on（如果只读共享的文件只开此项就行）<br>samba_export_all_rw --&gt; on（如果读写，只开此项就行，修改文件时要看文件的<span class="hljs-built_in">chmod</span>属性。）<br>samba_share_nfs --&gt; off<br>use_samba_home_dirs --&gt; off<br>virt_use_samba --&gt; off<br><br><span class="hljs-comment"># 如不想共享文件可运行如下语句</span><br><br>[root@Server samba]<span class="hljs-comment"># setsebool -P samba_export_all_rw=0</span><br>[root@Server samba]<span class="hljs-comment"># setsebool -P samba_export_all_ro=0</span><br></code></pre></td></tr></table></figure>
-
-<p>放行防火墙并重启服务</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 放行防火墙</span><br>[root@Server ~]<span class="hljs-comment"># firewall-cmd --add-service=samba --permanent</span><br>[root@Server ~]<span class="hljs-comment"># firewall-cmd --reload </span><br><span class="hljs-comment"># 重启服务</span><br>[root@Server ~]<span class="hljs-comment"># systemctl restart smb </span><br></code></pre></td></tr></table></figure>
-
-
-
-<h5 id="2-3-5、win7测试"><a href="#2-3-5、win7测试" class="headerlink" title="2.3.5、win7测试"></a>2.3.5、win7测试</h5><p><img src="C:/Users/Administrator/Pictures/md/1.png" alt="image-20221003144746991"></p>
-<p><img src="C:/Users/Administrator/Pictures/md/2.png" alt="image-20221003144937216"></p>
-<p><img src="C:/Users/Administrator/Pictures/md/3.png" alt="image-20221003144650825"></p>
-<p><img src="C:/Users/Administrator/Pictures/md/4.png" alt="image-20221003144704243"></p>
-<h4 id="2-4、配置Samba匿名用户访问"><a href="#2-4、配置Samba匿名用户访问" class="headerlink" title="2.4、配置Samba匿名用户访问"></a>2.4、配置Samba匿名用户访问</h4><h5 id="2-4-1、创建共享目录并设置权限"><a href="#2-4-1、创建共享目录并设置权限" class="headerlink" title="2.4.1、创建共享目录并设置权限"></a>2.4.1、创建共享目录并设置权限</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 创建共享目录并设置权限</span><br>[root@Server ~]<span class="hljs-comment"># mkdir /samba/guest</span><br>[root@Server ~]<span class="hljs-comment"># chmod 777 /samba/guest</span><br></code></pre></td></tr></table></figure>
-
-<h5 id="2-4-2、配置samba配置文件"><a href="#2-4-2、配置samba配置文件" class="headerlink" title="2.4.2、配置samba配置文件"></a>2.4.2、配置samba配置文件</h5><ol>
-<li>在[global]下添加 map to guest &#x3D; Bad User，并写入新的共享服务信息，输入正确的时候颜色提示绿色</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[global]<br>        workgroup = SAMBA<br>        security = user<br>        passdb backend = tdbsam<br>        printing = cups<br>        printcap name = cups<br>        load printers = <span class="hljs-built_in">yes</span><br>        cups options = raw<br>        <span class="hljs-comment"># 添加一下行，意思就是配置了这一串就不用用户名密码也可以访问了</span><br>        map to guest = bad User<br>        <br><span class="hljs-comment"># 配置共享目录-最底部添加</span><br>[guest]<br>        comment = fictitious user	<span class="hljs-comment"># 注释，说明改共享文件的信息</span><br>        path = /samba/guest		<span class="hljs-comment"># 共享目录的路径 绝对路径</span><br>        public = <span class="hljs-built_in">yes</span>		<span class="hljs-comment"># 是否允许匿名访问</span><br></code></pre></td></tr></table></figure>
-
-<h5 id="2-4-3、重启服务"><a href="#2-4-3、重启服务" class="headerlink" title="2.4.3、重启服务"></a>2.4.3、重启服务</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 放行防火墙-之前放行过的话，不需要重复放行</span><br>[root@Server ~]<span class="hljs-comment"># firewall-cmd --add-service=samba --permanent</span><br>[root@Server ~]<span class="hljs-comment"># firewall-cmd --reload </span><br><span class="hljs-comment"># 重启服务</span><br>[root@Server ~]<span class="hljs-comment"># systemctl restart smb </span><br></code></pre></td></tr></table></figure>
-
-<h5 id="2-4-4、测试"><a href="#2-4-4、测试" class="headerlink" title="2.4.4、测试"></a>2.4.4、测试</h5><p><img src="C:/Users/Administrator/Pictures/md/5.png" alt="image-20221003151404871"></p>
-<p><strong>直接就进入这里没有显示登录界面</strong></p>
-<p><img src="C:/Users/Administrator/Pictures/md/6.png" alt="image-20221003151348297"></p>
-<p><img src="C:/Users/Administrator/Pictures/md/7.png" alt="image-20221003151532918"></p>
-<p><strong>我们会发现需要进入local共享文件的话需要登陆</strong></p>
-<p><img src="C:/Users/Administrator/Pictures/md/8.png" alt="image-20221003151636118"></p>
-<p><strong>到此匿名用户完成</strong></p>
-<h4 id="2-5，配置Samba虚拟用户访问"><a href="#2-5，配置Samba虚拟用户访问" class="headerlink" title="2.5，配置Samba虚拟用户访问"></a>2.5，配置Samba虚拟用户访问</h4><h5 id="2-5-1、创建用户映射虚拟用户"><a href="#2-5-1、创建用户映射虚拟用户" class="headerlink" title="2.5.1、创建用户映射虚拟用户"></a>2.5.1、创建用户映射虚拟用户</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server samba]<span class="hljs-comment"># useradd guest</span><br>[root@Server samba]<span class="hljs-comment"># echo Qwer123.|passwd --stdin guest </span><br>更改用户 guest 的密码 。<br>passwd：所有的身份验证令牌已经成功更新。<br>[root@Server samba]<span class="hljs-comment"># pdbedit -a guest		# 这个命令是和上面smbpasswd命令是一样的</span><br>new password:<br>retype new password:<br>Unix username:        guest<br>NT username:          <br>Account Flags:        [U          ]<br>User SID:             S-1-5-21-478335590-3805463860-3550396621-1002<br>Primary Group SID:    S-1-5-21-478335590-3805463860-3550396621-513<br>Full Name:            <br>Home Directory:       \\SERVER\guest<br>HomeDir Drive:        <br>Logon Script:         <br>Profile Path:         \\SERVER\guest\profile<br>Domain:               SERVER<br>Account desc:         <br>Workstations:         <br>Munged dial:          <br>Logon time:           0<br>Logoff time:          三, 06 2月 2036 23:06:39 CST<br>Kickoff time:         三, 06 2月 2036 23:06:39 CST<br>Password last <span class="hljs-built_in">set</span>:    一, 03 10月 2022 23:29:21 CST<br>Password can change:  一, 03 10月 2022 23:29:21 CST<br>Password must change: never<br>Last bad password   : 0<br>Bad password count  : 0<br>Logon hours         : FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF<br>[root@Server samba]<span class="hljs-comment"># </span><br></code></pre></td></tr></table></figure>
-
-<h5 id="2-5-2、编辑smbusers文件添加配置"><a href="#2-5-2、编辑smbusers文件添加配置" class="headerlink" title="2.5.2、编辑smbusers文件添加配置"></a>2.5.2、编辑smbusers文件添加配置</h5><p><strong>映射虚拟用户</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server samba]<span class="hljs-comment"># cat /etc/samba/smbusers </span><br>guest = u01 u02<br></code></pre></td></tr></table></figure>
-
-<h5 id="2-5-3、进入smb-conf配置文件中添加映射文件路径"><a href="#2-5-3、进入smb-conf配置文件中添加映射文件路径" class="headerlink" title="2.5.3、进入smb.conf配置文件中添加映射文件路径"></a>2.5.3、进入smb.conf配置文件中添加映射文件路径</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[global]<br>        workgroup = SAMBA<br>        security = user<br>        passdb backend = tdbsam<br>        printing = cups<br>        printcap name = cups<br>        load printers = <span class="hljs-built_in">yes</span><br>        cups options = raw<br>        map to guest = bad User<br>        <span class="hljs-comment"># 添加虚拟用户映射路径</span><br>        username map = /etc/samba/smbusers<br></code></pre></td></tr></table></figure>
-
-<p><strong>检验配置文件是否有参数写错</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server samba]<span class="hljs-comment"># testparm </span><br>Load smb config files from /etc/samba/smb.conf<br>Loaded services file OK.<br>Weak crypto is allowed<br><br>Server role: ROLE_STANDALONE<br><br>Press enter to see a dump of your service definitions<br><br><span class="hljs-comment"># Global parameters</span><br>[global]<br>        map to guest = Bad User<br>        printcap name = cups<br>        security = USER<br>        username map = /etc/samba/smbusers<br>        workgroup = SAMBA<br>        idmap config * : backend = tdb<br>        cups options = raw<br><br><br>[homes]<br>        browseable = No<br>        comment = Home Directories<br>        inherit acls = Yes<br>        <span class="hljs-built_in">read</span> only = No<br>        valid <span class="hljs-built_in">users</span> = %S %D%w%S<br><br><br>[printers]<br>        browseable = No<br>        comment = All Printers<br>        create mask = 0600<br>        path = /var/tmp<br>        printable = Yes<br><br><br>[<span class="hljs-built_in">print</span>$]<br>        comment = Printer Drivers<br>        create mask = 0664<br>        directory mask = 0775<br>        force group = @printadmin<br>        path = /var/lib/samba/drivers<br>        write list = @printadmin root<br><br><br>[<span class="hljs-built_in">local</span>]<br>        comment = <span class="hljs-built_in">local</span> user<br>        path = /samba/local<br>        <span class="hljs-built_in">read</span> only = No<br><br><br>[guest]<br>        comment = fictitious user<br>        guest ok = Yes<br>        path = /samba/guest<br>        <span class="hljs-built_in">read</span> only = No<br></code></pre></td></tr></table></figure>
-
-
-
-<h5 id="2-5-4、重启服务"><a href="#2-5-4、重启服务" class="headerlink" title="2.5.4、重启服务"></a>2.5.4、重启服务</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server samba]<span class="hljs-comment"># systemctl restart smb</span><br></code></pre></td></tr></table></figure>
-
-<h5 id="2-5-5、测试"><a href="#2-5-5、测试" class="headerlink" title="2.5.5、测试"></a>2.5.5、测试</h5><p>先删除之前的记录缓存</p>
-<p><img src="C:/Users/Administrator/Pictures/md/9.png" alt="image-20221003153816731"></p>
-<p><img src="C:/Users/Administrator/Pictures/md/10.png" alt="image-20221003153844193"></p>
-<p><img src="C:/Users/Administrator/Pictures/md/11.png" alt="image-20221003154046298"></p>
-<p><img src="C:/Users/Administrator/Pictures/md/12.png" alt="image-20221003154201803"></p>
-<p><strong>我们使用虚拟用户访问，其实这个过程就是相当于我们在用guest用户在操作</strong></p>
-<h4 id="2-6、吧我们的共享目录映射本地网络驱动"><a href="#2-6、吧我们的共享目录映射本地网络驱动" class="headerlink" title="2.6、吧我们的共享目录映射本地网络驱动"></a>2.6、吧我们的共享目录映射本地网络驱动</h4><h5 id="2-6-1、打开我的电脑，映射网络驱动"><a href="#2-6-1、打开我的电脑，映射网络驱动" class="headerlink" title="2.6.1、打开我的电脑，映射网络驱动"></a>2.6.1、打开我的电脑，映射网络驱动</h5><p><img src="C:/Users/Administrator/Pictures/md/13.png" alt="image-20221003154802332"></p>
-<p><img src="C:/Users/Administrator/Pictures/md/14.png" alt="image-20221003154834148"></p>
-<p><img src="C:/Users/Administrator/Pictures/md/15.png" alt="image-20221003154854835"></p>
-<h4 id="2-7、配置文件常用权限参数-自行配置修改（还有很多参数自行了解）"><a href="#2-7、配置文件常用权限参数-自行配置修改（还有很多参数自行了解）" class="headerlink" title="2.7、配置文件常用权限参数-自行配置修改（还有很多参数自行了解）"></a>2.7、配置文件常用权限参数-自行配置修改（还有很多参数自行了解）</h4><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[<span class="hljs-built_in">test</span>]                 <span class="hljs-comment">#共享文件名称（也就是客户端访问时可以看到的那个名字）        </span><br>        comment = this is <span class="hljs-built_in">test</span>        <span class="hljs-comment">#共享文件夹的描述</span><br>        path = /home/ceshi             <span class="hljs-comment">#共享文件夹路径</span><br>        public = <span class="hljs-built_in">yes</span>                    <span class="hljs-comment">#是否允许guest账户访问</span><br>        writable =<span class="hljs-built_in">yes</span>                <span class="hljs-comment">#是否有写权限</span><br>        directory mask = 0777        <span class="hljs-comment">#默认创建目录权限</span><br>        create mask = 0777             <span class="hljs-comment">#默认创建文件权限</span><br>        valid <span class="hljs-built_in">users</span> = @<span class="hljs-built_in">test</span>,root  <span class="hljs-comment">#设置允许访问共享目录的用户@后跟组名，不写此行就对所有用户开放</span><br>        write list = @<span class="hljs-built_in">test</span>,root        <span class="hljs-comment">#设置有写权限的用户@后面跟的是组名</span><br>        browseable = <span class="hljs-built_in">yes</span>                 <span class="hljs-comment">#该指定共享目录可浏览</span><br>        available = <span class="hljs-built_in">yes</span>                      <span class="hljs-comment">#该指定共享资源可使用</span><br></code></pre></td></tr></table></figure>
-
-
-
-<h3 id="！注意"><a href="#！注意" class="headerlink" title="！注意"></a>！注意</h3><p><strong>如果win测试的时候，没有弹出登录界面或者直接访问之前的共享目录，执行以下操作</strong></p>
-<p><img src="C:/Users/Administrator/Pictures/md/16.png" alt="image-20221003151324340"></p>
-<h3 id="Samba配置文件检验"><a href="#Samba配置文件检验" class="headerlink" title="Samba配置文件检验"></a>Samba配置文件检验</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#正确提示</span><br>[root@Server ~]<span class="hljs-comment">#  testparm</span><br><span class="hljs-comment">#提示 Load smb config files from /etc/samba/smb.conf</span><br><span class="hljs-comment">#提示 Loaded services file OK.</span><br><span class="hljs-comment">#提示 Server role: ROLE_STANDALONE</span><br><br><span class="hljs-comment">#错误提示</span><br>[root@Server ~]<span class="hljs-comment">#  testparm</span><br><span class="hljs-comment">#Load smb config files from /etc/samba/smb.conf</span><br><span class="hljs-comment">#报错内容指引： set_variable_helper(ye): value is not boolean!</span><br><span class="hljs-comment">#Error loading services.</span><br></code></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>文件共享</category>
+        <category>Linux</category>
       </categories>
       <tags>
         <tag>Service</tag>
@@ -2003,64 +2061,6 @@
       </categories>
       <tags>
         <tag>cloud</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>简单搭建http服务</title>
-    <url>/2022/08/02/%E7%AE%80%E5%8D%95%E6%90%AD%E5%BB%BAhttp%E6%9C%8D%E5%8A%A1/</url>
-    <content><![CDATA[<h1 id="简单搭建http服务"><a href="#简单搭建http服务" class="headerlink" title="简单搭建http服务"></a><strong>简单搭建http服务</strong></h1><h2 id="一、安装httpd"><a href="#一、安装httpd" class="headerlink" title="一、安装httpd"></a><strong>一、安装httpd</strong></h2><p>执行命令</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">yum install httpd<br></code></pre></td></tr></table></figure>
-
-<h2 id="二、配置httpd"><a href="#二、配置httpd" class="headerlink" title="二、配置httpd"></a><strong>二、配置httpd</strong></h2><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">vi /etc/httpd/conf/httpd.conf<br></code></pre></td></tr></table></figure>
-
-<h2 id="三、修改配置文件"><a href="#三、修改配置文件" class="headerlink" title="三、修改配置文件"></a><strong>三、修改配置文件</strong></h2><h3 id="3-1-修改端口号"><a href="#3-1-修改端口号" class="headerlink" title="3.1 修改端口号"></a><strong>3.1 修改端口号</strong></h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># Listen: Allows you to bind Apache to specific IP addresses and/or</span><br><span class="hljs-comment"># ports, instead of the default. See also the &lt;VirtualHost&gt;</span><br><span class="hljs-comment"># directive.</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># Change this to Listen on specific IP addresses as shown below to</span><br><span class="hljs-comment"># prevent Apache from glomming onto all bound IP addresses.</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># Listen 12.34.56.78:80</span><br>Listen 80 <span class="hljs-comment"># http监听端口根据实际情况修改 ---如果开启了sellinux和防火墙,修改了默认端口80，需要放行防火墙端口和selinx放行端口</span><br></code></pre></td></tr></table></figure>
-
-<p><strong>端口放行教程（假如我们自己定义监听端口为8080）</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">防火墙放行<br>[root@localhost /]<span class="hljs-comment"># firewall-cmd  --add-port=8080/tcp --permanent</span><br>success<br>[root@localhost /]<span class="hljs-comment"># firewall-cmd  --reload</span><br>success<br>[root@localhost /]<span class="hljs-comment"># firewall-cmd   --list-all</span><br>public (active)<br>target: default<br>icmp-block-inversion: no<br>interfaces: ens33<br>sources:<br>services: ssh dhcpv6-client<br>ports: 8080/tcp<br>protocols:<br>masquerade: no<br>forward-ports:<br>source-ports:<br>icmp-blocks:<br>rich rules:<br>[root@localhost /]<span class="hljs-comment">#</span><br><br>selinux放行<br>[root@localhost /]<span class="hljs-comment"># semanage port -a -t http_port_t -p tcp 8080</span><br>ValueError: 已定义端口 tcp/8080<br>[root@localhost /]<span class="hljs-comment"># </span><br>[root@localhost /]<span class="hljs-comment"># systemctl restart httpd</span><br>[root@localhost /]<span class="hljs-comment"># </span><br></code></pre></td></tr></table></figure>
-
-<p>“注意如果你用的是Centos系统的话而且是最小化安装可能会没有semanage命令，需要自己安装，查找这个命令的包yum provides semanage，包安装yum install -y policycoreutils-python”</p>
-<h3 id="3-2-修改目录权限"><a href="#3-2-修改目录权限" class="headerlink" title="3.2 修改目录权限"></a><strong>3.2 修改目录权限</strong></h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#</span><br><span class="hljs-comment"># Deny access to the entirety of your server&#x27;s filesystem. You must</span><br><span class="hljs-comment"># explicitly permit access to web content directories in other</span><br><span class="hljs-comment"># &lt;Directory&gt; blocks below.</span><br><span class="hljs-comment">#</span><br>&lt;Directory /&gt;<br>AllowOverride none<br><span class="hljs-comment"># Require all denied 默认设置，拒绝所有访问请求</span><br>Options All <span class="hljs-comment"># 显示目录结构，以便用户浏览下载</span><br>&lt;/Directory&gt;<br></code></pre></td></tr></table></figure>
-
-<h3 id="3-3-修改共享目录–如果修改了默认路径需要修改路径的上下文"><a href="#3-3-修改共享目录–如果修改了默认路径需要修改路径的上下文" class="headerlink" title="3.3 修改共享目录–如果修改了默认路径需要修改路径的上下文"></a><strong>3.3 修改共享目录–如果修改了默认路径需要修改路径的上下文</strong></h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#</span><br><span class="hljs-comment"># DocumentRoot: The directory out of which you will serve your</span><br><span class="hljs-comment"># documents. By default, all requests are taken from this directory, but</span><br><span class="hljs-comment"># symbolic links and aliases may be used to point to other locations.</span><br><span class="hljs-comment">#</span><br>DocumentRoot <span class="hljs-string">&quot;/data/&quot;</span> <span class="hljs-comment"># 根据实际情况修改</span><br> <br><span class="hljs-comment">#</span><br><span class="hljs-comment"># Relax access to content within /var/www.</span><br><span class="hljs-comment">#</span><br>&lt;Directory <span class="hljs-string">&quot;/data&quot;</span>&gt; <span class="hljs-comment"># 根据实际情况修改</span><br>AllowOverride None<br><span class="hljs-comment"># Allow open access:</span><br><span class="hljs-comment"># Require all granted</span><br><span class="hljs-comment"># Allow from all</span><br>&lt;/Directory&gt;<br></code></pre></td></tr></table></figure>
-
-<p>修改定义网站目录上下文–如果不修改需要关闭selinx不然网站无法访问</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@localhost ~]<span class="hljs-comment"># mkdir /data</span><br>[root@localhost ~]<span class="hljs-comment"># ls -ldZ /data/		#查看默认上下文关系-object_r:default_t</span><br>drwxr-xr-x. root root unconfined_u:object_r:default_t:s0 /data/<br><br>[root@localhost ~]<span class="hljs-comment"># semanage fcontext -a -t httpd_sys_content_t &quot;/data(/.*)?&quot;</span><br>[root@localhost ~]<span class="hljs-comment"># restorecon -R -v /data</span><br>restorecon reset /data context unconfined_u:object_r:default_t:s0-&gt;unconfined_u:object_r:httpd_sys_content_t:s0<br>[root@localhost ~]<span class="hljs-comment"># ls -ldZ /data/		#查看现在上下文关系-httpd_sys_content_t</span><br>drwxr-xr-x. root root unconfined_u:object_r:httpd_sys_content_t:s0 /data/<br>[root@localhost ~]<span class="hljs-comment">#</span><br></code></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">记不住命令的可以man帮助查看命令<br>[root@localhost ~]<span class="hljs-comment"># man semanage</span><br>[root@localhost ~]<span class="hljs-comment"># man 8 semanage-fcontext </span><br></code></pre></td></tr></table></figure>
-
-<p><strong>可以根据自己需求配置</strong></p>
-<p>http全局配置文件，文件选项参数含义–郭老师上课写的笔记内容</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">配置文件选项<br>ServerRoot                        <span class="hljs-comment"># 服务目录</span><br>Listen 80                         <span class="hljs-comment"># 监听的端口； Listen   IP:PORT # 如果不写IP表示监听本机所有的可用IP地址，如果注明IP则表示监听在指定的IP地址之后。Listen选项可以出现多次，表示监听不同IP以及不同端口。</span><br>ServerAdmin                       <span class="hljs-comment"># 管理员邮箱</span><br>AllowOverride none                <span class="hljs-comment"># AllowOverride定义每个目录下.htaccess文件中的指令类型，通常设置为None，什么都不可以放；ALL所有都可以放</span><br>Require all denied                <span class="hljs-comment"># 全部拒绝访问</span><br>Require all granted               <span class="hljs-comment"># 全部允许访问</span><br>Require  ip   X.X.X.X             <span class="hljs-comment"># 允许指定 IP地址访问</span><br>Require  host    hostname         <span class="hljs-comment"># 允许指定的主机名访问</span><br>DocumentRoot                      <span class="hljs-comment"># 存放网页数据的目录</span><br>Options Indexes FollowSymLinks    <span class="hljs-comment"># Options选项，Indexes 允许目录浏览，当客户端指定要访问的目录，但没有指定要访问的文件，且目录下不存在默认文档时，显示该目录中的文件及子目录列表索引。 FollowSymLinks 允许跟踪符号链接文件所指定的源文件，跟踪符号链接，如果目录下存在软连接，则可以直接访问软连接指向的文件。</span><br>DirectoryIndex                    <span class="hljs-comment"># 默认可识别的网页</span><br>ErrorLog <span class="hljs-string">&quot;;logs/error_log&quot;</span>;       <span class="hljs-comment"># 错误的日志文件</span><br>LogLevel warn                     <span class="hljs-comment"># 日志等级</span><br>ErrorDocument                     <span class="hljs-comment"># 错误重定向</span><br></code></pre></td></tr></table></figure>
-
-<h2 id="四、启动httpd服务"><a href="#四、启动httpd服务" class="headerlink" title="四、启动httpd服务"></a><strong>四、启动httpd服务</strong></h2><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">systemctl start httpd<br></code></pre></td></tr></table></figure>
-
-<h2 id="五、其他常用命令"><a href="#五、其他常用命令" class="headerlink" title="五、其他常用命令"></a><strong>五、其他常用命令</strong></h2><p>重启httpd服务</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">systemctl start httpd<br></code></pre></td></tr></table></figure>
-
-<h2 id="六、测试"><a href="#六、测试" class="headerlink" title="六、测试"></a><strong>六、测试</strong></h2><p>​    <img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/image-20220802140513620.png" alt="image-20220802140513620"></p>
-<h2 id="七、配置http网站用户访问站点"><a href="#七、配置http网站用户访问站点" class="headerlink" title="七、配置http网站用户访问站点"></a><strong>七、配置http网站用户访问站点</strong></h2><p>我们在touch &#x2F;etc&#x2F;httpd&#x2F;conf.d&#x2F;man.conf重新编写一个配置文件</p>
-<p>用户认证文件选项配置参数解释</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">想要认证需要在httpd.conf中找到想要认证页面的&lt;Directory/&gt;添加认证语句，<br>AuthType Basic         <span class="hljs-comment"># 是设置加密方式，基础</span><br>AuthName <span class="hljs-string">&quot;SOS Dan&quot;</span>     <span class="hljs-comment"># 是设置域名称</span><br>AuthUserFile /var/jff2014/user.pw   <span class="hljs-comment"># 是密码保存路径</span><br>Require user jiaofangfang           <span class="hljs-comment"># 是指明用户名</span><br></code></pre></td></tr></table></figure>
-
-<h3 id="编写配置文件"><a href="#编写配置文件" class="headerlink" title="编写配置文件"></a>编写配置文件</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@localhost data]<span class="hljs-comment"># cat /etc/httpd/conf.d/man.conf </span><br>Listen 8080<br>&lt;VirtualHost *:8080&gt;<br>    DocumentRoot <span class="hljs-string">&quot;/data&quot;</span><br>    Directoryindex index.html<br>        &lt;Directory <span class="hljs-string">&quot;/data&quot;</span>&gt;<br>            AllowOverride None<br>            AuthType Basic<br>            AuthName <span class="hljs-string">&quot;SOS Dan&quot;</span><br>            AuthUserFile /wsnb/jnds/user.pw<br>            Require user jnds<br>        &lt;/Directory&gt;<br>&lt;/VirtualHost&gt;<br>[root@localhost data]<span class="hljs-comment"># </span><br></code></pre></td></tr></table></figure>
-
-<p>创建用户，创建用户密码信息路径，添加http用户和密码</p>
-<p>为了安全我们创建保存用户密码文件的时候，为了安全考虑可以在前面加上“.”一点，吧文件弄成隐藏文件,例如吧下面的user.pw—-&gt;.user</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@localhost data]<span class="hljs-comment"># mkdir /wsnb/jnds/</span><br>[root@localhost data]<span class="hljs-comment"># touch /wsnb/jnds/user.pw</span><br>[root@localhost data]<span class="hljs-comment"># htpasswd -c /wsnb/jnds/user.pw jnds</span><br>New password: <br>Re-<span class="hljs-built_in">type</span> new password: <br>Adding password <span class="hljs-keyword">for</span> user jnds<br>[root@localhost data]<span class="hljs-comment"># </span><br></code></pre></td></tr></table></figure>
-
-<p>重启httpd服务</p>
-<p>如果没有放行selinux和防火墙的自行去放行上面有教程</p>
-<p>还有网页目录的上下文</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@localhost ~]<span class="hljs-comment"># systemctl restart httpd</span><br></code></pre></td></tr></table></figure>
-
-<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a><strong>测试</strong></h2><p><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/image-20220802140636502.png" alt="image-20220802140636502"></p>
-<p><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/image-20220802140641867.png" alt="image-20220802140641867"></p>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Service</tag>
       </tags>
   </entry>
   <entry>
