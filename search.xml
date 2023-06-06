@@ -1211,61 +1211,6 @@
       </tags>
   </entry>
   <entry>
-    <title>squid代理服务器</title>
-    <url>/2022/08/02/squid%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
-    <content><![CDATA[<p>​ </p>
-<h1 id="squid代理服务器"><a href="#squid代理服务器" class="headerlink" title="squid代理服务器"></a>squid代理服务器</h1><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a><strong>简介</strong></h1><p>Squid是一个高性能的代理缓存服务器，Squid支持FTP、gopher和HTTP协议。当用户指定它为代理服务器，且用户的网络和它可联通时，其会接收用户的请求，连接请求的网站，返回结果给用户并保留一个数据的备份作为缓存。当有其他用户请求同一个的页面时，Squid 把保存的备份传给用户，提高用户的访问体验。并且它可以设置过滤条件,对符合过滤条件的进行限制。</p>
-<p>当用户本身的网络无法正常访问某些网址，而代理服务器的网络可以正常访问某网站的时候，可以使用代理服务器去请求网址，代理服务器再把请求的结果返回给用户。它通常和ss,ssr,openvpn一样，有时会被用来做xx上网。又因为它的缓存的功能，有时也被用来做缓存服务器，提高用户的访问速度。</p>
-<h1 id="一，centos-x2F-redhat搭建代理服务器"><a href="#一，centos-x2F-redhat搭建代理服务器" class="headerlink" title="一，centos&#x2F;redhat搭建代理服务器"></a>一，centos&#x2F;redhat搭建代理服务器</h1><p>Squid是一个高性能的代理缓存服务器,Squid支持FTP、gopher、HTTPS和HTTP协议。 服务器环境：服务器centos7.9、 redhat7.0</p>
-<p>搭建环境：主机A(redhat7.0)不能上网，而同一网关内的主机B(centos7.9)可以上网。在主机B上搭建了squid代理服务器，方便主机A上网。</p>
-<h2 id="1、安装"><a href="#1、安装" class="headerlink" title="1、安装"></a><strong>1、安装</strong></h2><p>1.1安装之前养成好习惯</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">sudo yum update<br></code></pre></td></tr></table></figure>
-
-<h3 id="1-2-进行安装"><a href="#1-2-进行安装" class="headerlink" title="1.2 进行安装"></a><strong>1.2 进行安装</strong></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">yum install squid -y <br>yum install httpd-tools -y<br></code></pre></td></tr></table></figure>
-
-<h2 id="2、密码文件操作"><a href="#2、密码文件操作" class="headerlink" title="2、密码文件操作"></a><strong>2、密码文件操作</strong></h2><p>2.1 生成密码文件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">mkdir /etc/squid3/<br>usernameNet 是用户名<br>htpasswd -cd /etc/squid3/passwords usernameNet<br>提示输入密码，在这里我设的密码为 123456<br>注意密码不要超过8位<br></code></pre></td></tr></table></figure>
-
-<h3 id="2-2-测试密码文件"><a href="#2-2-测试密码文件" class="headerlink" title="2.2 测试密码文件"></a><strong>2.2 测试密码文件</strong></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">/usr/lib64/squid/basic_ncsa_auth /etc/squid3/passwords<br>输入 用户名 密码<br>usernameNet 123456<br>提示OK说明成功，ERR是有问题，请检查一下之前步骤<br>OK<br>测试完成，crtl + c 打断<br></code></pre></td></tr></table></figure>
-
-<h2 id="3、配置"><a href="#3、配置" class="headerlink" title="3、配置"></a><strong>3、配置</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">vim /etc/squid/squid.conf<br>在最后添加<br>auth_param basic program /usr/lib64/squid/basic_ncsa_auth /etc/squid3/passwords<br>auth_param basic realm proxy<br>acl authenticated proxy_auth REQUIRED<br>http_access allow authenticated<br>这里是端口号，可以按需修改<br>http_port 3128 这样写会同时监听ipv6和ipv4的端口，推荐适应下面的配置方法。<br>http_port 0.0.0.0:3128<br></code></pre></td></tr></table></figure>
-
-<h3 id="配置文件意思"><a href="#配置文件意思" class="headerlink" title="配置文件意思"></a><strong>配置文件意思</strong></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">vim /etc/squid/squid.conf<br><br>#一、网段配置<br>acl localnet src 10.0.0.0/8	# RFC1918 possible internal network<br>acl localnet src 172.16.0.0/12	# RFC1918 possible internal network<br>acl localnet src 192.168.0.0/16	# RFC1918 possible internal network<br>acl localnet src fc00::/7       # RFC 4193 local private network range<br>acl localnet src fe80::/10      # RFC 4291 link-local (directly plugged) machines<br>#填入可使用squid的网段<br>acl local    src 192.168.10.0/24<br>acl local    src 192.168.20.0/24<br>acl local    src 192.168.30.0/24<br><br><br><br>#二、端口配置<br>acl SSL_ports port 443<br>acl Safe_ports port 80		# http<br>acl Safe_ports port 21		# ftp<br>acl Safe_ports port 443		# https<br>acl Safe_ports port 70		# gopher<br>acl Safe_ports port 210		# wais<br>acl Safe_ports port 1025-65535	# unregistered ports<br>acl Safe_ports port 280		# http-mgmt<br>acl Safe_ports port 488		# gss-http<br>acl Safe_ports port 591		# filemaker<br>acl Safe_ports port 777		# multiling http<br><br><br><br>#三、密码策略<br># test mypass 设置squid的密码策略<br>auth_param basic program /usr/lib64/squid/basic_ncsa_auth /etc/squid/passwords  <br>auth_param basic children 15<br>auth_param basic credentialsttl 2 hours<br>auth_param basic casesensitive off         #用户名不区分大小写，可改为ON区分大小写<br>auth_param basic realm proxy<br><br><br><br>#四、acl规则配置。先配置一个变量，在配置该变量的限制<br><br>#&lt;1&gt;编写变量<br>#mp4相关限制的变量<br>#acl MYLAN src 192.168.2.0/24              #源地址网段    <br>#acl MC20 maxconn 20                       #最大并发连接<br>#acl DOMAIN dstdomain .qq.com .msn.com     #目标为.qq.com .msn.com的域名<br>#acl FILE urlpath_regex -i \.mp3$ \.mp4$   #以.mp3 .mp4结尾的URL路径<br>#acl TIME time MTWHF 07:30-17:30           #时间为周一至周五早8:30至晚17:30<br>#acl vip arp 00：7c:23:76:5C:1C	           #设置某个mac地址变量为vip<br><br><br><br>#设置黑名单 填入文件中的网址不可访问，一行一个网址<br>acl CONNECT method CONNECT<br>acl blocked_sites dstdomain &quot;/etc/squid/blocked_sites&quot;<br>acl authenticated proxy_auth REQUIRED<br><br><br>#&lt;2&gt;设置acl访问控制规则.<br>#有先后顺序,第一条规则匹配上就不再继续往下，所以先把拒绝写在前面<br>#mp4相关变量的限制<br>#http_access deny MYLAN FILE         #禁止客户机下载MP3 MP4文件<br>#http_access deny MYLAN DOMAIN       #禁止客户机访问acl列表中的网站<br>#http_access deny MYLAN MC20         #客户机的并发连接超过20时将被阻止<br>#http_access allow MYLAN TIME        #允许客户机在工作时间访问互联网<br><br>http_access deny blocked_sites       #限制变量blocked_sites的访问<br>http_access deny !Safe_ports<br>http_access deny CONNECT !SSL_ports<br>http_access allow authenticated<br>http_access allow localhost manager<br>http_access deny manager<br>http_access allow localnet<br>http_access allow localhost<br>#http_access allow vip                #允许变量vip访问<br>#http_access deny all<br><br><br>http_port 37771                       #配置squid端口号<br>coredump_dir /var/spool/squid<br>refresh_pattern ^ftp:		1440	20%	10080<br>refresh_pattern ^gopher:	1440	0%	1440<br>refresh_pattern -i (/cgi-bin/|\?) 0	0%	0<br>refresh_pattern .		0	20%	4320<br><br><br><br>#五、配置不同模式<br><br>#高密配置，隐藏真实ip变成匿名代理 这是squid3.1<br>via off<br>forwarded_for delete<br>request_header_access X-Forwarded-For deny all  <br>request_header_access From deny all  <br>request_header_access Via deny all <br><br><br>#透明配置（最方便使用，最不安全）<br>#http_port 3128 transparent<br>#cache_mem 99 MB<br>#cache_swap_low 90<br>#cache_swap_high 95<br>#maximum_object_size 4M<br>#minimum_object_size 0 KB<br>#maximum_object_size_in_memory 4096 KB<br>#memory_replacement_policy lru<br>#maximum_object_size 4 MB                    #允许保存到缓存空间的最大对象大小，以KB为单位，超过大小限制的文件将不被缓存，而是直接转发给用户<br>#cache_dir ufs /var/spool/squid 100 16 256 <br>#access_log /var/log/squid/access.log<br><br>#使用透明配置时，下方2个要填入对应位置<br>#acl all src 0.0.0.0/0.0.0.0                 #配置变量。允许所有ip访问， all是一个名字，可以随便起<br>#http_access allow all                       #配置该变量的acl限制。允许上面定义的all这个规则访问<br></code></pre></td></tr></table></figure>
-
-<h2 id="4、启动服务"><a href="#4、启动服务" class="headerlink" title="4、启动服务"></a><strong>4、启动服务</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">开启启动<br>systemctl enable squid.service<br>启动<br>systemctl start squid.service<br>停止<br>systemctl stop squid.service<br>重启<br>systemctl restart squid.service<br><br></code></pre></td></tr></table></figure>
-
-<h2 id="5、squid日志默认位置"><a href="#5、squid日志默认位置" class="headerlink" title="5、squid日志默认位置"></a><strong>5、squid日志默认位置</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">注意事项： 想要查看日志信息的话，必须切换到root用户，sudo用户不可以！<br>squid的日志默认是打开的，位于目录/var/log/squid/<br>[root@bogon ~]# ll /var/log/squid/<br>total 24<br>-rw-r-----. 1 squid squid 10069 Jun  6 17:52 access.log<br>-rw-r-----. 1 squid squid   485 Jun  4 08:12 access.log-20220605.gz<br>-rw-r-----. 1 squid squid   484 Jun  5 03:33 cache.log<br>-rw-r-----. 1 squid squid  1339 Jun  4 08:11 cache.log-20220605.gz注意事项： 想要查看日志信息的话，必须切换到root用户，sudo用户不可以！ squid的日志默认是打开的，位于目录/var/log/squid/ [root@bogon ~]# ll /var/log/squid/ total 24 -rw-r-----. 1 squid squid 10069 Jun  6 17:52 access.log -rw-r-----. 1 squid squid   485 Jun  4 08:12 access.log-20220605.gz -rw-r-----. 1 squid squid   484 Jun  5 03:33 cache.log -rw-r-----. 1 squid squid  1339 Jun  4 08:11 cache.log-20220605.gz<br></code></pre></td></tr></table></figure>
-
-<p>注意：限制可以配置白名单和黑名单</p>
-<h1 id="二、代理服务器设置"><a href="#二、代理服务器设置" class="headerlink" title="二、代理服务器设置"></a><strong>二、代理服务器设置</strong></h1><p>这里是主机A (不能上网的机器) 的设置</p>
-<h3 id="2-1-测试服务器"><a href="#2-1-测试服务器" class="headerlink" title="2.1 测试服务器"></a><strong>2.1 测试服务器</strong></h3><p>可以采用下面的命令测试是否可以链接上代理服务器(squid)</p>
-<p>注意事项：一定要关闭suqid所在服务器的防火墙，和自己的防火墙</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">telnet proxy_server_ip 3128<br></code></pre></td></tr></table></figure>
-
-<p>上面这个命令用来测试的，如果没有的话需要安装：</p>
-<p>这里是安装教程的链接。当然，你也可以先不进行测试。</p>
-<h3 id="2-2-配置主机A-想要上网的机器"><a href="#2-2-配置主机A-想要上网的机器" class="headerlink" title="2.2 配置主机A(想要上网的机器)"></a><strong>2.2 配置主机A(想要上网的机器)</strong></h3><p>新建 &#x2F;etc&#x2F;profile.d&#x2F;proxy.sh , 在里面填入一下内容:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">PROXY_URL=&quot;http://proxy_server_ip:3128/&quot;<br>添加不需要走代理的地址<br>NO_PROXY_ADDR=&quot;127.0.0.1,localhost,.local,.cluster.local,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16&quot;<br>添加的代理<br>export http_proxy=&quot;$PROXY_URL&quot;<br>export https_proxy=&quot;$PROXY_URL&quot;<br>export no_proxy=&quot;$NO_PROXY_ADDR&quot;<br>export HTTP_PROXY=&quot;$PROXY_URL&quot;<br>export HTTPS_PROXY=&quot;$PROXY_URL&quot;<br>export NO_PROXY=&quot;$NO_PROXY_ADDR&quot;<br></code></pre></td></tr></table></figure>
-
-<p>其中：</p>
-<ul>
-<li>将proxy_server_ip, 换成自己的Squid proxy server 的IP地址。</li>
-<li>在NO_PROXY_ADDR，中添加不需要走代理的IP地址，这里配置的是访问本机和子网内的机器不走代理。</li>
-</ul>
-<h3 id="2-3-让代理生效"><a href="#2-3-让代理生效" class="headerlink" title="2.3 让代理生效"></a><strong>2.3 让代理生效</strong></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">source /etc/profile.d/proxy.sh<br></code></pre></td></tr></table></figure>
-
-<p>到这里就配置完成了。</p>
-<h3 id="2-4-测试是否可以上网"><a href="#2-4-测试是否可以上网" class="headerlink" title="2.4 测试是否可以上网"></a><strong>2.4 测试是否可以上网</strong></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">第一种方式<br>curl www.baidu.com<br>第二中方式<br>测试下载文件<br>wget https://mirrors.aliyun.com/ubuntu-releases/22.04/ubuntu-22.04-live-server-amd64.list<br></code></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>代理服务</category>
-      </categories>
-      <tags>
-        <tag>代理</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>k8s企业应用与容器迁移</title>
     <url>/2022/07/21/k8s%E4%BC%81%E4%B8%9A%E5%BA%94%E7%94%A8%E4%B8%8E%E5%AE%B9%E5%99%A8%E8%BF%81%E7%A7%BB/</url>
     <content><![CDATA[<h1 id="k8s企业应用之容器化迁移"><a href="#k8s企业应用之容器化迁移" class="headerlink" title="k8s企业应用之容器化迁移"></a>k8s企业应用之容器化迁移</h1><h3 id="接下来需要学习的小节"><a href="#接下来需要学习的小节" class="headerlink" title="接下来需要学习的小节"></a><strong>接下来需要学习的小节</strong></h3><ol>
@@ -1470,6 +1415,61 @@
       </categories>
       <tags>
         <tag>cloud</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>squid代理服务器</title>
+    <url>/2022/08/02/squid%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
+    <content><![CDATA[<p>​ </p>
+<h1 id="squid代理服务器"><a href="#squid代理服务器" class="headerlink" title="squid代理服务器"></a>squid代理服务器</h1><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a><strong>简介</strong></h1><p>Squid是一个高性能的代理缓存服务器，Squid支持FTP、gopher和HTTP协议。当用户指定它为代理服务器，且用户的网络和它可联通时，其会接收用户的请求，连接请求的网站，返回结果给用户并保留一个数据的备份作为缓存。当有其他用户请求同一个的页面时，Squid 把保存的备份传给用户，提高用户的访问体验。并且它可以设置过滤条件,对符合过滤条件的进行限制。</p>
+<p>当用户本身的网络无法正常访问某些网址，而代理服务器的网络可以正常访问某网站的时候，可以使用代理服务器去请求网址，代理服务器再把请求的结果返回给用户。它通常和ss,ssr,openvpn一样，有时会被用来做xx上网。又因为它的缓存的功能，有时也被用来做缓存服务器，提高用户的访问速度。</p>
+<h1 id="一，centos-x2F-redhat搭建代理服务器"><a href="#一，centos-x2F-redhat搭建代理服务器" class="headerlink" title="一，centos&#x2F;redhat搭建代理服务器"></a>一，centos&#x2F;redhat搭建代理服务器</h1><p>Squid是一个高性能的代理缓存服务器,Squid支持FTP、gopher、HTTPS和HTTP协议。 服务器环境：服务器centos7.9、 redhat7.0</p>
+<p>搭建环境：主机A(redhat7.0)不能上网，而同一网关内的主机B(centos7.9)可以上网。在主机B上搭建了squid代理服务器，方便主机A上网。</p>
+<h2 id="1、安装"><a href="#1、安装" class="headerlink" title="1、安装"></a><strong>1、安装</strong></h2><p>1.1安装之前养成好习惯</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">sudo yum update<br></code></pre></td></tr></table></figure>
+
+<h3 id="1-2-进行安装"><a href="#1-2-进行安装" class="headerlink" title="1.2 进行安装"></a><strong>1.2 进行安装</strong></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">yum install squid -y <br>yum install httpd-tools -y<br></code></pre></td></tr></table></figure>
+
+<h2 id="2、密码文件操作"><a href="#2、密码文件操作" class="headerlink" title="2、密码文件操作"></a><strong>2、密码文件操作</strong></h2><p>2.1 生成密码文件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">mkdir /etc/squid3/<br>usernameNet 是用户名<br>htpasswd -cd /etc/squid3/passwords usernameNet<br>提示输入密码，在这里我设的密码为 123456<br>注意密码不要超过8位<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-2-测试密码文件"><a href="#2-2-测试密码文件" class="headerlink" title="2.2 测试密码文件"></a><strong>2.2 测试密码文件</strong></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">/usr/lib64/squid/basic_ncsa_auth /etc/squid3/passwords<br>输入 用户名 密码<br>usernameNet 123456<br>提示OK说明成功，ERR是有问题，请检查一下之前步骤<br>OK<br>测试完成，crtl + c 打断<br></code></pre></td></tr></table></figure>
+
+<h2 id="3、配置"><a href="#3、配置" class="headerlink" title="3、配置"></a><strong>3、配置</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">vim /etc/squid/squid.conf<br>在最后添加<br>auth_param basic program /usr/lib64/squid/basic_ncsa_auth /etc/squid3/passwords<br>auth_param basic realm proxy<br>acl authenticated proxy_auth REQUIRED<br>http_access allow authenticated<br>这里是端口号，可以按需修改<br>http_port 3128 这样写会同时监听ipv6和ipv4的端口，推荐适应下面的配置方法。<br>http_port 0.0.0.0:3128<br></code></pre></td></tr></table></figure>
+
+<h3 id="配置文件意思"><a href="#配置文件意思" class="headerlink" title="配置文件意思"></a><strong>配置文件意思</strong></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">vim /etc/squid/squid.conf<br><br>#一、网段配置<br>acl localnet src 10.0.0.0/8	# RFC1918 possible internal network<br>acl localnet src 172.16.0.0/12	# RFC1918 possible internal network<br>acl localnet src 192.168.0.0/16	# RFC1918 possible internal network<br>acl localnet src fc00::/7       # RFC 4193 local private network range<br>acl localnet src fe80::/10      # RFC 4291 link-local (directly plugged) machines<br>#填入可使用squid的网段<br>acl local    src 192.168.10.0/24<br>acl local    src 192.168.20.0/24<br>acl local    src 192.168.30.0/24<br><br><br><br>#二、端口配置<br>acl SSL_ports port 443<br>acl Safe_ports port 80		# http<br>acl Safe_ports port 21		# ftp<br>acl Safe_ports port 443		# https<br>acl Safe_ports port 70		# gopher<br>acl Safe_ports port 210		# wais<br>acl Safe_ports port 1025-65535	# unregistered ports<br>acl Safe_ports port 280		# http-mgmt<br>acl Safe_ports port 488		# gss-http<br>acl Safe_ports port 591		# filemaker<br>acl Safe_ports port 777		# multiling http<br><br><br><br>#三、密码策略<br># test mypass 设置squid的密码策略<br>auth_param basic program /usr/lib64/squid/basic_ncsa_auth /etc/squid/passwords  <br>auth_param basic children 15<br>auth_param basic credentialsttl 2 hours<br>auth_param basic casesensitive off         #用户名不区分大小写，可改为ON区分大小写<br>auth_param basic realm proxy<br><br><br><br>#四、acl规则配置。先配置一个变量，在配置该变量的限制<br><br>#&lt;1&gt;编写变量<br>#mp4相关限制的变量<br>#acl MYLAN src 192.168.2.0/24              #源地址网段    <br>#acl MC20 maxconn 20                       #最大并发连接<br>#acl DOMAIN dstdomain .qq.com .msn.com     #目标为.qq.com .msn.com的域名<br>#acl FILE urlpath_regex -i \.mp3$ \.mp4$   #以.mp3 .mp4结尾的URL路径<br>#acl TIME time MTWHF 07:30-17:30           #时间为周一至周五早8:30至晚17:30<br>#acl vip arp 00：7c:23:76:5C:1C	           #设置某个mac地址变量为vip<br><br><br><br>#设置黑名单 填入文件中的网址不可访问，一行一个网址<br>acl CONNECT method CONNECT<br>acl blocked_sites dstdomain &quot;/etc/squid/blocked_sites&quot;<br>acl authenticated proxy_auth REQUIRED<br><br><br>#&lt;2&gt;设置acl访问控制规则.<br>#有先后顺序,第一条规则匹配上就不再继续往下，所以先把拒绝写在前面<br>#mp4相关变量的限制<br>#http_access deny MYLAN FILE         #禁止客户机下载MP3 MP4文件<br>#http_access deny MYLAN DOMAIN       #禁止客户机访问acl列表中的网站<br>#http_access deny MYLAN MC20         #客户机的并发连接超过20时将被阻止<br>#http_access allow MYLAN TIME        #允许客户机在工作时间访问互联网<br><br>http_access deny blocked_sites       #限制变量blocked_sites的访问<br>http_access deny !Safe_ports<br>http_access deny CONNECT !SSL_ports<br>http_access allow authenticated<br>http_access allow localhost manager<br>http_access deny manager<br>http_access allow localnet<br>http_access allow localhost<br>#http_access allow vip                #允许变量vip访问<br>#http_access deny all<br><br><br>http_port 37771                       #配置squid端口号<br>coredump_dir /var/spool/squid<br>refresh_pattern ^ftp:		1440	20%	10080<br>refresh_pattern ^gopher:	1440	0%	1440<br>refresh_pattern -i (/cgi-bin/|\?) 0	0%	0<br>refresh_pattern .		0	20%	4320<br><br><br><br>#五、配置不同模式<br><br>#高密配置，隐藏真实ip变成匿名代理 这是squid3.1<br>via off<br>forwarded_for delete<br>request_header_access X-Forwarded-For deny all  <br>request_header_access From deny all  <br>request_header_access Via deny all <br><br><br>#透明配置（最方便使用，最不安全）<br>#http_port 3128 transparent<br>#cache_mem 99 MB<br>#cache_swap_low 90<br>#cache_swap_high 95<br>#maximum_object_size 4M<br>#minimum_object_size 0 KB<br>#maximum_object_size_in_memory 4096 KB<br>#memory_replacement_policy lru<br>#maximum_object_size 4 MB                    #允许保存到缓存空间的最大对象大小，以KB为单位，超过大小限制的文件将不被缓存，而是直接转发给用户<br>#cache_dir ufs /var/spool/squid 100 16 256 <br>#access_log /var/log/squid/access.log<br><br>#使用透明配置时，下方2个要填入对应位置<br>#acl all src 0.0.0.0/0.0.0.0                 #配置变量。允许所有ip访问， all是一个名字，可以随便起<br>#http_access allow all                       #配置该变量的acl限制。允许上面定义的all这个规则访问<br></code></pre></td></tr></table></figure>
+
+<h2 id="4、启动服务"><a href="#4、启动服务" class="headerlink" title="4、启动服务"></a><strong>4、启动服务</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">开启启动<br>systemctl enable squid.service<br>启动<br>systemctl start squid.service<br>停止<br>systemctl stop squid.service<br>重启<br>systemctl restart squid.service<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="5、squid日志默认位置"><a href="#5、squid日志默认位置" class="headerlink" title="5、squid日志默认位置"></a><strong>5、squid日志默认位置</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">注意事项： 想要查看日志信息的话，必须切换到root用户，sudo用户不可以！<br>squid的日志默认是打开的，位于目录/var/log/squid/<br>[root@bogon ~]# ll /var/log/squid/<br>total 24<br>-rw-r-----. 1 squid squid 10069 Jun  6 17:52 access.log<br>-rw-r-----. 1 squid squid   485 Jun  4 08:12 access.log-20220605.gz<br>-rw-r-----. 1 squid squid   484 Jun  5 03:33 cache.log<br>-rw-r-----. 1 squid squid  1339 Jun  4 08:11 cache.log-20220605.gz注意事项： 想要查看日志信息的话，必须切换到root用户，sudo用户不可以！ squid的日志默认是打开的，位于目录/var/log/squid/ [root@bogon ~]# ll /var/log/squid/ total 24 -rw-r-----. 1 squid squid 10069 Jun  6 17:52 access.log -rw-r-----. 1 squid squid   485 Jun  4 08:12 access.log-20220605.gz -rw-r-----. 1 squid squid   484 Jun  5 03:33 cache.log -rw-r-----. 1 squid squid  1339 Jun  4 08:11 cache.log-20220605.gz<br></code></pre></td></tr></table></figure>
+
+<p>注意：限制可以配置白名单和黑名单</p>
+<h1 id="二、代理服务器设置"><a href="#二、代理服务器设置" class="headerlink" title="二、代理服务器设置"></a><strong>二、代理服务器设置</strong></h1><p>这里是主机A (不能上网的机器) 的设置</p>
+<h3 id="2-1-测试服务器"><a href="#2-1-测试服务器" class="headerlink" title="2.1 测试服务器"></a><strong>2.1 测试服务器</strong></h3><p>可以采用下面的命令测试是否可以链接上代理服务器(squid)</p>
+<p>注意事项：一定要关闭suqid所在服务器的防火墙，和自己的防火墙</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">telnet proxy_server_ip 3128<br></code></pre></td></tr></table></figure>
+
+<p>上面这个命令用来测试的，如果没有的话需要安装：</p>
+<p>这里是安装教程的链接。当然，你也可以先不进行测试。</p>
+<h3 id="2-2-配置主机A-想要上网的机器"><a href="#2-2-配置主机A-想要上网的机器" class="headerlink" title="2.2 配置主机A(想要上网的机器)"></a><strong>2.2 配置主机A(想要上网的机器)</strong></h3><p>新建 &#x2F;etc&#x2F;profile.d&#x2F;proxy.sh , 在里面填入一下内容:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">PROXY_URL=&quot;http://proxy_server_ip:3128/&quot;<br>添加不需要走代理的地址<br>NO_PROXY_ADDR=&quot;127.0.0.1,localhost,.local,.cluster.local,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16&quot;<br>添加的代理<br>export http_proxy=&quot;$PROXY_URL&quot;<br>export https_proxy=&quot;$PROXY_URL&quot;<br>export no_proxy=&quot;$NO_PROXY_ADDR&quot;<br>export HTTP_PROXY=&quot;$PROXY_URL&quot;<br>export HTTPS_PROXY=&quot;$PROXY_URL&quot;<br>export NO_PROXY=&quot;$NO_PROXY_ADDR&quot;<br></code></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<ul>
+<li>将proxy_server_ip, 换成自己的Squid proxy server 的IP地址。</li>
+<li>在NO_PROXY_ADDR，中添加不需要走代理的IP地址，这里配置的是访问本机和子网内的机器不走代理。</li>
+</ul>
+<h3 id="2-3-让代理生效"><a href="#2-3-让代理生效" class="headerlink" title="2.3 让代理生效"></a><strong>2.3 让代理生效</strong></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">source /etc/profile.d/proxy.sh<br></code></pre></td></tr></table></figure>
+
+<p>到这里就配置完成了。</p>
+<h3 id="2-4-测试是否可以上网"><a href="#2-4-测试是否可以上网" class="headerlink" title="2.4 测试是否可以上网"></a><strong>2.4 测试是否可以上网</strong></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">第一种方式<br>curl www.baidu.com<br>第二中方式<br>测试下载文件<br>wget https://mirrors.aliyun.com/ubuntu-releases/22.04/ubuntu-22.04-live-server-amd64.list<br></code></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>代理服务</category>
+      </categories>
+      <tags>
+        <tag>代理</tag>
       </tags>
   </entry>
   <entry>
