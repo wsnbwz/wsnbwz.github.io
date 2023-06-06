@@ -1,0 +1,376 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>httpd基础 | xiaobei</title><meta name="author" content="XiaoBei"><meta name="copyright" content="XiaoBei"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="httpd一、相关知识httpd是Apache超文本传输协议（HTTP）服务器的主程序。被设计为一个独立运行的后台进程，它会建立一个处理请求的子进程或线程的池。apache服务是用来提供网页服务的，比如说，我们浏览一个网站实际上就是连接这个网站的服务器，当我们浏览百度新闻的时候其实就是在连接百度的一台服务器（计算机），在这台上服务器上部署了一些列服务，浏览网页的过程就是在这个服务器上下载文件的过程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="httpd基础">
+<meta property="og:url" content="http://example.com/2023/06/06/httpd%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="xiaobei">
+<meta property="og:description" content="httpd一、相关知识httpd是Apache超文本传输协议（HTTP）服务器的主程序。被设计为一个独立运行的后台进程，它会建立一个处理请求的子进程或线程的池。apache服务是用来提供网页服务的，比如说，我们浏览一个网站实际上就是连接这个网站的服务器，当我们浏览百度新闻的时候其实就是在连接百度的一台服务器（计算机），在这台上服务器上部署了一些列服务，浏览网页的过程就是在这个服务器上下载文件的过程">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://w.wallhaven.cc/full/rr/wallhaven-rryk81.png">
+<meta property="article:published_time" content="2023-06-06T08:22:55.000Z">
+<meta property="article:modified_time" content="2023-06-06T08:36:25.848Z">
+<meta property="article:author" content="XiaoBei">
+<meta property="article:tag" content="Service">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://w.wallhaven.cc/full/rr/wallhaven-rryk81.png"><link rel="shortcut icon" href="/img/homepage.jpg"><link rel="canonical" href="http://example.com/2023/06/06/httpd%E5%9F%BA%E7%A1%80/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: XiaoBei","link":"链接: ","source":"来源: xiaobei","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'httpd基础',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-06-06 16:36:25'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/background.css"><link rel="stylesheet" href="/css/test.css"><link rel="stylesheet" href="/css/ahzoo.css"><link rel="stylesheet" href="/css/transpancy.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/wsnb.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.linuxcool.com"><i class="fa-fw Linux命令大全"></i><span> 学Linux</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://www.555kan.net"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="xiaobei"><span class="site-name">xiaobei</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.linuxcool.com"><i class="fa-fw Linux命令大全"></i><span> 学Linux</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://www.555kan.net"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">httpd基础</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-06T08:22:55.000Z" title="发表于 2023-06-06 16:22:55">2023-06-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-06T08:36:25.848Z" title="更新于 2023-06-06 16:36:25">2023-06-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Web%E6%9C%8D%E5%8A%A1/">Web服务</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">5.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>23分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="httpd基础"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="httpd"><a href="#httpd" class="headerlink" title="httpd"></a>httpd</h1><h2 id="一、相关知识"><a href="#一、相关知识" class="headerlink" title="一、相关知识"></a>一、相关知识</h2><p>httpd是Apache超文本传输协议（HTTP）服务器的主程序。被设计为一个独立运行的后台进程，它会建立一个处理请求的子进程或线程的池。<br>apache服务是用来提供网页服务的，比如说，我们浏览一个网站实际上就是连接这个网站的服务器，当我们浏览百度新闻的时候其实就是在连接百度的一台服务器（计算机），在这台上服务器上部署了一些列服务，浏览网页的过程就是在这个服务器上下载文件的过程。</p>
+<p>接下来的实验我们用的是apache服务来实验的</p>
+<p>Apache源于NCSAhttpd服务器，经过多次修改，成为世界上最流行的Web服务器软件之一。Apache取自“a patchy server”的读音，意思是充满补丁的服务器，因为它是自由软件，所以不断有人来为它开发新的功能、新的特性、修改原来的缺陷。Apache的特点是简单、速度快、性能稳定，并可做代理服务器来使用。</p>
+<h2 id="二、实验目标"><a href="#二、实验目标" class="headerlink" title="二、实验目标"></a>二、实验目标</h2><p><strong>基于IP地址</strong></p>
+<p><strong>基于端口</strong></p>
+<p><strong>基于域名</strong></p>
+<p><strong>基于用户认证</strong></p>
+<p><strong>基于个人主页</strong></p>
+<p><strong>基于https</strong></p>
+<h2 id="三、实验实施"><a href="#三、实验实施" class="headerlink" title="三、实验实施"></a>三、实验实施</h2><h3 id="1、实验规划"><a href="#1、实验规划" class="headerlink" title="1、实验规划"></a>1、实验规划</h3><table>
+<thead>
+<tr>
+<th>IP地址</th>
+<th>主机名</th>
+<th>操作系统</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>192.168.10.10</td>
+<td>Server</td>
+<td>Centos8</td>
+</tr>
+<tr>
+<td>192.168.10.20</td>
+<td>Client</td>
+<td>Centos8</td>
+</tr>
+<tr>
+<td>192.168.10.40</td>
+<td>Client</td>
+<td>Windows10</td>
+</tr>
+</tbody></table>
+<h3 id="2、实验步骤"><a href="#2、实验步骤" class="headerlink" title="2、实验步骤"></a>2、实验步骤</h3><h4 id="2-1、安装Apache服务"><a href="#2-1、安装Apache服务" class="headerlink" title="2.1、安装Apache服务"></a>2.1、安装Apache服务</h4><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server /]<span class="hljs-comment"># yum -y install httpd </span><br></code></pre></td></tr></table></figure>
+
+<p><strong>配置文件选项参数详解</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">配置文件选项<br>DocumentRoot                      <span class="hljs-comment">#网页存在的路径</span><br>ServerRoot                        <span class="hljs-comment"># 服务目录</span><br>Listen 80                         <span class="hljs-comment"># 监听的端口； Listen   IP:PORT # 如果不写IP表示监听本机所有的可用IP地址，如果注明IP则表示监听在指定的IP地址之后。Listen选项可以出现多次，表示监听不同IP以及不同端口。</span><br>ServerAdmin                       <span class="hljs-comment"># 管理员邮箱</span><br>AllowOverride none                <span class="hljs-comment"># AllowOverride定义每个目录下.htaccess文件中的指令类型，通常设置为None，什么都不可以放；ALL所有都可以放</span><br>Require all denied                <span class="hljs-comment"># 全部拒绝访问</span><br>Require all granted               <span class="hljs-comment"># 全部允许访问</span><br>Require  ip   X.X.X.X             <span class="hljs-comment"># 允许指定 IP地址访问</span><br>Require  host    hostname         <span class="hljs-comment"># 允许指定的主机名访问</span><br>DocumentRoot                      <span class="hljs-comment"># 存放网页数据的目录</span><br>Options Indexes FollowSymLinks    <span class="hljs-comment"># Options选项，Indexes 允许目录浏览，当客户端指定要访问的目录，但没有指定要访问的文件，且目录下不存在默认文档时，显示该目录中的文件及子目录列表索引。 FollowSymLinks 允许跟踪符号链接文件所指定的源文件，跟踪符号链接，如果目录下存在软连接，则可以直接访问软连接指向的文件。</span><br>DirectoryIndex                    <span class="hljs-comment"># 默认可识别的网页</span><br>ErrorLog <span class="hljs-string">&quot;;logs/error_log&quot;</span>;       <span class="hljs-comment"># 错误的日志文件</span><br>LogLevel warn                     <span class="hljs-comment"># 日志等级</span><br>ErrorDocument                     <span class="hljs-comment"># 错误重定向</span><br>/etc/httpd/conf.d				<span class="hljs-comment"># 目录下，创建一个以.conf结尾的文件。httpd配置文件，服务器优先识别此目录下的配置</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>注！</strong></p>
+<p>1、httpd默认网页文件目录在 “&#x2F;var&#x2F;www&#x2F;html” 下，如要跟换默认网页目录，需给我们指定的路径<strong>修改路径的上下文</strong>为<httpd_sys_content_t></p>
+<p>修改定义网站目录上下文–如果不修改需要关闭selinx不然网站无法访问，根据实际情况修改、</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ~]<span class="hljs-comment"># semanage fcontext -a -t httpd_sys_content_t &quot;/路径(/.*)?&quot;</span><br>[root@Server ~]<span class="hljs-comment"># restorecon -R -v /路径</span><br></code></pre></td></tr></table></figure>
+
+<p>记不住命令的可以man帮助查看命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ~]<span class="hljs-comment"># man semanage </span><br>[root@Server ~]<span class="hljs-comment"># man 8 semanage-fcontext </span><br></code></pre></td></tr></table></figure>
+
+<p>2、如果不关闭Selinux需要更改默认80端口使用的话，Selinux需要允许</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">semanage port -a -t http_port_t -p tcp 端口<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-2、基于IP地址"><a href="#2-2、基于IP地址" class="headerlink" title="2.2、基于IP地址"></a>2.2、基于IP地址</h4><p><strong>实验目的：客户端使用web服务器IP地址访问web服务器的网页</strong></p>
+<h5 id="2-2-1、配置httpd配置文件"><a href="#2-2-1、配置httpd配置文件" class="headerlink" title="2.2.1、配置httpd配置文件"></a>2.2.1、配置httpd配置文件</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ~]<span class="hljs-comment"># cat /etc/httpd/conf.d/user.conf </span><br>Listen 80<br>&lt;VirtualHost *:80&gt;<br>Documentroot /var/www/html<br>Directoryindex index.html<br>&lt;Directory <span class="hljs-string">&quot;/var/www/html&quot;</span>&gt;<br>    AllowOverride None<br>    Options None<br>    Require all granted<br>&lt;/Directory&gt;<br>&lt;/VirtualHost&gt;<br><span class="hljs-comment"># 参数上面有解释</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="2-2-2、编写网页内容"><a href="#2-2-2、编写网页内容" class="headerlink" title="2.2.2、编写网页内容"></a>2.2.2、编写网页内容</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ~]<span class="hljs-comment"># echo &quot;基于 IP地址 测试 &quot; &gt;&gt; /var/www/html/index.html</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="2-2-3、重启服务、放行防火墙"><a href="#2-2-3、重启服务、放行防火墙" class="headerlink" title="2.2.3、重启服务、放行防火墙"></a>2.2.3、重启服务、放行防火墙</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ~]<span class="hljs-comment"># systemctl restart httpd</span><br>[root@Server ~]<span class="hljs-comment"># systemctl enable httpd </span><br>[root@Server ~]<span class="hljs-comment"># firewall-cmd --add-port=80/tcp --permanent </span><br>success<br>[root@Server ~]<span class="hljs-comment"># firewall-cmd --reload </span><br>success<br></code></pre></td></tr></table></figure>
+
+<h5 id="2-2-4、测试"><a href="#2-2-4、测试" class="headerlink" title="2.2.4、测试"></a>2.2.4、测试</h5><p><strong>windows10测试</strong></p>
+<p><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/202210051828727.png" alt="image-20221005182853658"></p>
+<h4 id="2-3、基于端口"><a href="#2-3、基于端口" class="headerlink" title="2.3、基于端口"></a>2.3、基于端口</h4><p><strong>实验目的：客户端使用web服务器IP地址+端口可以访问到web服务器不同的网页内容</strong></p>
+<h5 id="2-3-1、配置httpd配置文件"><a href="#2-3-1、配置httpd配置文件" class="headerlink" title="2.3.1、配置httpd配置文件"></a>2.3.1、配置httpd配置文件</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs BASH">[root@Server ~]<span class="hljs-comment"># vim /etc/httpd/conf.d/user.conf </span><br>Listen 80				<span class="hljs-comment"># 这个是上面基于IP的</span><br>&lt;VirtualHost *:80&gt;<br>Documentroot /var/www/html<br>Directoryindex index.html<br>&lt;Directory <span class="hljs-string">&quot;/var/www/html&quot;</span>&gt;<br>    AllowOverride None<br>    Options None<br>    Require all granted<br>&lt;/Directory&gt;<br>&lt;/VirtualHost&gt;<br><br>Listen 8888<br>&lt;VirtualHost *:8888&gt;<br>Documentroot /test/httpd/8888/<br>Directoryindex index.html<br>&lt;Directory <span class="hljs-string">&quot;/test/httpd/8888/&quot;</span>&gt;<br>    AllowOverride None<br>    Options None<br>    Require all granted<br>&lt;/Directory&gt;<br>&lt;/VirtualHost&gt;<br><br>Listen 8080<br>&lt;VirtualHost *:80&gt;<br>Documentroot /test/httpd/8080/<br>Directoryindex index.html<br>&lt;Directory <span class="hljs-string">&quot;/test/httpd/8080/&quot;</span>&gt;<br>    AllowOverride None<br>    Options None<br>    Require all granted<br>&lt;/Directory&gt;<br>&lt;/VirtualHost&gt;<br></code></pre></td></tr></table></figure>
+
+<h5 id="2-3-2、创建网页目录、更改网页目录上下文、Selinux允许端口"><a href="#2-3-2、创建网页目录、更改网页目录上下文、Selinux允许端口" class="headerlink" title="2.3.2、创建网页目录、更改网页目录上下文、Selinux允许端口"></a>2.3.2、创建网页目录、更改网页目录上下文、Selinux允许端口</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ~]<span class="hljs-comment"># mkdir -p /test/httpd/8888</span><br>[root@Server ~]<span class="hljs-comment"># mkdir -p /test/httpd/8080</span><br>[root@Server ~]<span class="hljs-comment"># semanage fcontext -a -t httpd_sys_content_t &quot;/test/httpd(/.*)?&quot;</span><br>[root@Server ~]<span class="hljs-comment"># restorecon -R -v /test/httpd/</span><br>Relabeled /test/httpd from unconfined_u:object_r:default_t:s0 to unconfined_u:object_r:httpd_sys_content_t:s0<br>Relabeled /test/httpd/8888 from unconfined_u:object_r:default_t:s0 to unconfined_u:object_r:httpd_sys_content_t:s0<br>Relabeled /test/httpd/8080 from unconfined_u:object_r:default_t:s0 to unconfined_u:object_r:httpd_sys_content_t:s0<br>[root@Server ~]<span class="hljs-comment"># ll -ldZ /test/httpd/*			# 上下文修改完成</span><br>drwxr-xr-x. 2 root root unconfined_u:object_r:httpd_sys_content_t:s0 6 10月  6 02:43 /test/httpd/8080<br>drwxr-xr-x. 2 root root unconfined_u:object_r:httpd_sys_content_t:s0 6 10月  6 02:42 /test/httpd/8888<br>[root@Server ~]<span class="hljs-comment"># semanage port -a -t http_port_t -p tcp 8888</span><br>[root@Server ~]<span class="hljs-comment"># semanage port -a -t http_port_t -p tcp 8080</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="2-3-3、写入网页内容"><a href="#2-3-3、写入网页内容" class="headerlink" title="2.3.3、写入网页内容"></a>2.3.3、写入网页内容</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ~]<span class="hljs-comment"># echo &quot;基于端口测试 port&quot;8888&quot;&quot; &gt;&gt; /test/httpd/8888/index.html</span><br>[root@Server ~]<span class="hljs-comment"># echo &quot;基于端口测试 port&quot;8080&quot;&quot; &gt;&gt; /test/httpd/8080/index.html    </span><br>[root@Server ~]<span class="hljs-comment"># cat /test/httpd/8888/index.html </span><br>基于端口测试 port8888<br>[root@Server ~]<span class="hljs-comment"># cat /test/httpd/8080/index.html </span><br>基于端口测试 port8080<br></code></pre></td></tr></table></figure>
+
+<h5 id="2-3-4、重启服务、放行防火墙"><a href="#2-3-4、重启服务、放行防火墙" class="headerlink" title="2.3.4、重启服务、放行防火墙"></a>2.3.4、重启服务、放行防火墙</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ~]<span class="hljs-comment"># firewall-cmd --add-port=8080/tcp --permanent</span><br>success<br>[root@Server ~]<span class="hljs-comment"># firewall-cmd --add-port=8888/tcp --permanent </span><br>success<br>[root@Server ~]<span class="hljs-comment"># firewall-cmd --reload </span><br>success<br>[root@Server ~]<span class="hljs-comment"># systemctl restart httpd </span><br></code></pre></td></tr></table></figure>
+
+<h5 id="2-3-5、测试"><a href="#2-3-5、测试" class="headerlink" title="2.3.5、测试"></a>2.3.5、测试</h5><p><strong>windows10测试</strong></p>
+<p><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/202210051859392.png" alt="image-20221005185946355"></p>
+<h4 id="2-4、基于域名"><a href="#2-4、基于域名" class="headerlink" title="2.4、基于域名"></a>2.4、基于域名</h4><p><strong>实验目的：客户端使用域名可以访问到web服务器网页</strong></p>
+<p><strong>注：</strong>因为我们没有搭建DNS服务器，所以我修改hosts文件来实现域名访问。</p>
+<p>“<em>hosts文件是Linux系统中一个负责IP地址与域名快速解析的文件</em>,以ASCII格式保存在“&#x2F;etc”目录下,文件名为“hosts”。 hosts文件包含了IP地址和主机名之间的映射,还包括主机名的别名。在没有域名服务器的情况下,系统上的所有网络程序都通过查询该文件来解析对应于某个主机名的IP地址,否则就需要使用DNS服务程序来解决。通常可以将常用的域名和IP地址映射加入到hosts文件中,实现快速方便的访问。</p>
+<h5 id="2-4-1、修改hosts文件，配置域名解析"><a href="#2-4-1、修改hosts文件，配置域名解析" class="headerlink" title="2.4.1、修改hosts文件，配置域名解析"></a>2.4.1、修改hosts文件，配置域名解析</h5><p>我们这里使用，<a target="_blank" rel="noopener" href="http://www.ncvt.com,这个域名/">www.ncvt.com，这个域名</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ~]<span class="hljs-comment"># cat /etc/hosts </span><br>127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4<br>::1         localhost localhost.localdomain localhost6 localhost6.localdomain6<br>192.168.10.10   www.ncvt.com<br></code></pre></td></tr></table></figure>
+
+<h5 id="2-4-2、配置httpd配置文件"><a href="#2-4-2、配置httpd配置文件" class="headerlink" title="2.4.2、配置httpd配置文件"></a>2.4.2、配置httpd配置文件</h5><p>我们在conf.d目录下从新写一个，配置文件。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server conf.d]<span class="hljs-comment"># cat yming.conf		# 我们需要吧之前写的基于IP访问的那个配置注释掉，不然会占用80端口报错</span><br>Listen 80<br>&lt;VirtualHost *:80&gt;<br>ServerName www.ncvt.com		<span class="hljs-comment"># 指定服务器域名</span><br>Documentroot /var/www/html<br>Directoryindex index.html<br>&lt;Directory <span class="hljs-string">&quot;/var/www/html&quot;</span>&gt;<br>    AllowOverride None<br>    Options None<br>    Require all granted<br>&lt;/Directory&gt;<br>&lt;/VirtualHost&gt;<br></code></pre></td></tr></table></figure>
+
+<p>修改index.html文件内容</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server conf.d]<span class="hljs-comment"># echo &quot;基于域名 测试&quot; &gt; /var/www/html/index.html </span><br></code></pre></td></tr></table></figure>
+
+<h5 id="2-4-3、重启服务"><a href="#2-4-3、重启服务" class="headerlink" title="2.4.3、重启服务"></a>2.4.3、重启服务</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server conf.d]<span class="hljs-comment"># systemctl restart httpd</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="2-4-3、测试"><a href="#2-4-3、测试" class="headerlink" title="2.4.3、测试"></a>2.4.3、测试</h5><p>Windws10测试因为我们没有配置DNS所以在windows我们也需要修改win的hosts文件。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">C:\Windows\System32\drivers\etc\hosts<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/202210061443028.png" alt="image-20221006144304933"></p>
+<p><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/202210061447457.png" alt="image-20221006144732425"></p>
+<h4 id="2-5、基于用户认证"><a href="#2-5、基于用户认证" class="headerlink" title="2.5、基于用户认证"></a>2.5、基于用户认证</h4><p>​	当我们在网站的某些特定目录放置了比较私密的信息，而又只想提供给我们信任的指定用户访问，这时就需要使用httpd的基于用户访问控制，其能帮你实现只有通过认证的用户才能被允许访问特定的资源，从而大大提高了网站的安全性。  </p>
+<h5 id="2-5-1、httpd基于用户的访问控制简介"><a href="#2-5-1、httpd基于用户的访问控制简介" class="headerlink" title="2.5.1、httpd基于用户的访问控制简介"></a>2.5.1、httpd基于用户的访问控制简介</h5><blockquote>
+<p>  基于用户的访问控制包含认证和授权两个过程：<br>    认证（Authentication）是指识别用户身份的过程<br>    授权（Authorization）是允许特定用户访问特定区域信息的过程。</p>
+<p>  Apache的认证包含基本认证（Basic）和摘要认证（Digest）两种方式<br>    基本认证是Apache的基本功能，采用base64 加密 明文发送<br>    摘要认证需要在编译httpd的过程中预先配置“–enable-auth-digest”，部分浏览器不支持</p>
+<p>  当用户访问基于用户认证网页时会经历一下两个阶段：<br>   质询：<br>    WWW-Authenticate: 服务器用401状态拒绝客户端请求，说明需要用户提供用户名和密码；弹出对话框；<br>   认证：<br>     Authorization：客户端用户填入账号密码后再次发请求至服务器；认证通过，则请求授权；</p>
+</blockquote>
+<h5 id="2-5-2、基于basic认证的配置"><a href="#2-5-2、基于basic认证的配置" class="headerlink" title="2.5.2、基于basic认证的配置"></a>2.5.2、基于basic认证的配置</h5><p>1、创建网页目录</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ~]<span class="hljs-comment"># mkdir /test/httpd/user</span><br>[root@Server ~]<span class="hljs-comment"># echo &quot;基于用户认证测试&quot; &gt; /test/httpd/user/index.html</span><br></code></pre></td></tr></table></figure>
+
+<p> 2、创建虚拟用户</p>
+<p>​     2.1、创建虚拟用户及文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">创建虚拟账户需要用到htpasswd命令，具体参数如下：<br>      htpasswd命令用于维护用户认证文件<br>             htpasswd [ -c ] [ -m ] [ -D ] passwdfile username<br>                          -c: 添加第一用户时创建此文件；<br>                          -m: 以md5格式加密用户密码存放；<br>                          -s: 以sha格式加密用户密码存放；<br>                          -D：删除指定用户<br>                          <br>[root@Server ~]<span class="hljs-comment"># mkdir /test/httpd/password		# 创建存储虚拟用户密码的目录</span><br>[root@Server ~]<span class="hljs-comment"># htpasswd -m -c /test/httpd/password/.htpasswd user1		# 第一次需要用-c 创建文件《.htpasswd》、后面是指定虚拟用户</span><br>New password: <br>Re-<span class="hljs-built_in">type</span> new password: <br>Adding password <span class="hljs-keyword">for</span> user user1<br>[root@Server ~]<span class="hljs-comment"># htpasswd -m /test/httpd/password/.htpasswd user2    		# 创建第二个虚拟用户</span><br>New password: <br>Re-<span class="hljs-built_in">type</span> new password: <br>Adding password <span class="hljs-keyword">for</span> user user2<br></code></pre></td></tr></table></figure>
+
+<h5 id="2-5-3、-修改-x2F-etc-x2F-httpd-x2F-conf-d-x2F-user2-conf配置文件"><a href="#2-5-3、-修改-x2F-etc-x2F-httpd-x2F-conf-d-x2F-user2-conf配置文件" class="headerlink" title="2.5.3、 修改&#x2F;etc&#x2F;httpd&#x2F;conf.d&#x2F;user2.conf配置文件"></a>2.5.3、 修改&#x2F;etc&#x2F;httpd&#x2F;conf.d&#x2F;user2.conf配置文件</h5><p>我们这里用到域名+8282端口访问基于用户认证的网页</p>
+<p>参数解释：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">想要认证需要在httpd.conf中找到想要认证页面的&lt;Directory/&gt;添加认证语句，<br>AuthType Basic         <span class="hljs-comment"># 是设置加密方式，基于basic认证</span><br>AuthName <span class="hljs-string">&quot;SOS Dan&quot;</span>     <span class="hljs-comment"># 登录提示的欢迎信息</span><br>AuthUserFile /var/jff2014/user.pw   <span class="hljs-comment"># 是密码保存路径</span><br>Require user username          	    <span class="hljs-comment"># 是指明用户名、指定.htpasswd 文件中的特定用户登录</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server conf.d]<span class="hljs-comment"># cat user2.conf </span><br>Listen 8282<br>&lt;VirtualHost *:8282&gt;<br>Servername www.ncvt.com<br>Documentroot /test/httpd/user<br>Directoryindex index.html<br>&lt;Directory <span class="hljs-string">&quot;/test/httpd/user&quot;</span>&gt;<br>    AllowOverride None<br>    Options None<br>    AuthType Basic<br>    Authname <span class="hljs-string">&quot;请输入用户名及密码登录&quot;</span><br>    AuthUserFile /test/httpd/password/.htpasswd<br>    Require user user1 user2<br>&lt;/Directory&gt;<br>&lt;/VirtualHost&gt;<br></code></pre></td></tr></table></figure>
+
+<h5 id="2-5-4、配置selinux、防火墙"><a href="#2-5-4、配置selinux、防火墙" class="headerlink" title="2.5.4、配置selinux、防火墙"></a>2.5.4、配置selinux、防火墙</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server conf.d]<span class="hljs-comment"># semanage port -a -t http_port_t -p tcp 8282                 </span><br>[root@Server conf.d]<span class="hljs-comment"># firewall-cmd --add-port=8282/tcp --permanent </span><br>success<br>[root@Server conf.d]<span class="hljs-comment"># firewall-cmd --reload </span><br>succes<br></code></pre></td></tr></table></figure>
+
+<h5 id="2-5-5、重启服务器"><a href="#2-5-5、重启服务器" class="headerlink" title="2.5.5、重启服务器"></a>2.5.5、重启服务器</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server conf.d]<span class="hljs-comment"># systemctl enable httpd --now</span><br>[root@Server conf.d]<span class="hljs-comment"># systemctl restart httpd</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="2-5-6、测试"><a href="#2-5-6、测试" class="headerlink" title="2.5.6、测试"></a>2.5.6、测试</h5><p>windows测试，之前上面我们已经吧hosts文件些好了域名解析，接下来我们直接测试</p>
+<p><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/202210061522625.png" alt="image-20221006152252578"></p>
+<p><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/202210061546231.png" alt="image-20221006154600188"></p>
+<p><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/202210061544888.png" alt="image-20221006154402841"></p>
+<p><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/202210061546231.png"></p>
+<h4 id="2-6、基于个人主页"><a href="#2-6、基于个人主页" class="headerlink" title="2.6、基于个人主页"></a>2.6、基于个人主页</h4><p>案例描述：在IP地址为192.168.10.10的Apache服务器中，为系统用户lm设置个人主页。该用户的家目录为&#x2F;home&#x2F;lm，个人主页所在目录为html。案例分析:为了实现用户定制的个人主页空间，需要用到两个容器和。容器实现了系统用户个人主页的目录。容器则用来设置个人主页目录的访问控制权限。解决步骤：</p>
+<h5 id="2-6-1、创建用户wsnb"><a href="#2-6-1、创建用户wsnb" class="headerlink" title="2.6.1、创建用户wsnb"></a>2.6.1、创建用户wsnb</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ~]<span class="hljs-comment"># useradd wsnb</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="2-6-2、修改配置文件"><a href="#2-6-2、修改配置文件" class="headerlink" title="2.6.2、修改配置文件"></a>2.6.2、修改配置文件</h5><p>个人主页配置文件&#x2F;etc&#x2F;httpd&#x2F;conf.d&#x2F;userdir.conf </p>
+<blockquote>
+<p>#UserDir disabled 表示开启用户主页功能<br>UserDir public_html 定义用户主页目录</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ~]<span class="hljs-comment"># cat /etc/httpd/conf.d/userdir.conf</span><br>&lt;IfModule mod_userdir.c&gt;<br>    <span class="hljs-comment">#</span><br>    <span class="hljs-comment"># UserDir is disabled by default since it can confirm the presence</span><br>    <span class="hljs-comment"># of a username on the system (depending on home directory</span><br>    <span class="hljs-comment"># permissions).</span><br>    <span class="hljs-comment">#</span><br>    <span class="hljs-comment">#UserDir disabled			# 注释掉关闭个人主页，注释了就表示开启用户主页功能</span><br><br>    <span class="hljs-comment">#</span><br>    <span class="hljs-comment"># To enable requests to /~user/ to serve the user&#x27;s public_html</span><br>    <span class="hljs-comment"># directory, remove the &quot;UserDir disabled&quot; line above, and uncomment</span><br>    <span class="hljs-comment"># the following line instead:</span><br>    <span class="hljs-comment"># </span><br>    UserDir public_html			<span class="hljs-comment"># 定义用户主页目录</span><br>&lt;/IfModule&gt;<br></code></pre></td></tr></table></figure>
+
+<h5 id="2-6-3、进入-x2F-home-x2F-wsnb下创建public-html目录里面编写一个已-html结尾的文件"><a href="#2-6-3、进入-x2F-home-x2F-wsnb下创建public-html目录里面编写一个已-html结尾的文件" class="headerlink" title="2.6.3、进入&#x2F;home&#x2F;wsnb下创建public_html目录里面编写一个已.html结尾的文件"></a>2.6.3、进入&#x2F;home&#x2F;wsnb下创建public_html目录里面编写一个已.html结尾的文件</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server wsnb]<span class="hljs-comment"># pwd</span><br>/home/wsnb<br>[root@Server wsnb]<span class="hljs-comment"># mkdir public_html</span><br>[root@Server wsnb]<span class="hljs-comment"># cd public_html/</span><br>[root@Server public_html]<span class="hljs-comment"># touch index.html</span><br>[root@Server public_html]<span class="hljs-comment"># ls</span><br>index.html<br>[root@Server home]<span class="hljs-comment"># echo &quot;基于用户主页测试&quot;  &gt; /home/wsnb/public_html/index.html </span><br></code></pre></td></tr></table></figure>
+
+<h5 id="2-6-4、允许Selinux、修改文件权限"><a href="#2-6-4、允许Selinux、修改文件权限" class="headerlink" title="2.6.4、允许Selinux、修改文件权限"></a>2.6.4、允许Selinux、修改文件权限</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 修改其所属组和所属用户为wsnb默认是root</span><br>[root@Server wsnb]<span class="hljs-comment"># chown -R  wsnb:wsnb public_html</span><br>[root@Server wsnb]<span class="hljs-comment"># ll</span><br>总用量 0<br>drwxr-xr-x. 2 wsnb wsnb 24 10月  8 01:33 public_html<br>[root@Server wsnb]<span class="hljs-comment"># cd public_html/</span><br>[root@Server public_html]<span class="hljs-comment"># ll</span><br>总用量 4<br>-rw-r--r--. 1 wsnb wsnb 25 10月  8 01:38 index.html<br><br><span class="hljs-comment"># 给目录文件755权限</span><br>[root@Server home]<span class="hljs-comment"># chmod 755 -R wsnb/</span><br>[root@Server home]<span class="hljs-comment"># ll -d wsnb</span><br>总用量 0<br>drwxr-xr-x. 5 wsnb  wsnb  129 10月  8 01:33 wsnb<br>[root@Server home]<span class="hljs-comment"># cd wsnb/</span><br>[root@Server wsnb]<span class="hljs-comment"># ll</span><br>总用量 0<br>drwxr-xr-x. 2 wsnb wsnb 24 10月  8 01:33 public_html<br>[root@Server wsnb]<span class="hljs-comment"># cd public_html/</span><br>[root@Server public_html]<span class="hljs-comment"># ll</span><br>总用量 4<br>-rwxr-xr-x. 1 wsnb wsnb 25 10月  8 01:38 index.html<br><br><span class="hljs-comment"># 打开selinux个人主页功能 setsebool -P httpd_enable_homedirs=on </span><br>[root@Server home]<span class="hljs-comment"># setsebool -P httpd_enable_homedirs=on </span><br><br></code></pre></td></tr></table></figure>
+
+<h5 id="2-6-5、重启服务"><a href="#2-6-5、重启服务" class="headerlink" title="2.6.5、重启服务"></a>2.6.5、重启服务</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server home]<span class="hljs-comment"># systemctl restart httpd</span><br></code></pre></td></tr></table></figure>
+
+<p>2.6.6、测试</p>
+<p><strong>windows测试</strong></p>
+<p><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/202210071754246.png" alt="image-20221007175419149"></p>
+<p>基于个人主页完成</p>
+<h4 id="2-7、基于https"><a href="#2-7、基于https" class="headerlink" title="2.7、基于https"></a>2.7、基于https</h4><h5 id="2-7-1、https简介"><a href="#2-7-1、https简介" class="headerlink" title="2.7.1、https简介"></a>2.7.1、https简介</h5><p>HTTPS其实是有两部分组成：HTTP + SSL&#x2F;TLS，也就是在HTTP上又加了一层处理加密信息的模块。服务端和客户端的信息传输都会通过TLS进行加密，所以传输的数据都是加密后的数据</p>
+<h6 id="2-7-1-1、https协议原理"><a href="#2-7-1-1、https协议原理" class="headerlink" title="2.7.1.1、https协议原理"></a>2.7.1.1、https协议原理</h6><p>首先，客户端与服务器建立连接，各自生成私钥和公钥，是不同的。服务器返给客户端一个公钥，然后客户端拿着这个公钥把要搜索的东西加密，称之为密文，并连并自己的公钥一起返回给服务器，服务器拿着自己的私钥解密密文，然后把响应到的数据用客户端的公钥加密，返回给客户端，客户端拿着自己的私钥解密密文，把数据呈现出来</p>
+<h5 id="2-7-2、安装OpenSSL"><a href="#2-7-2、安装OpenSSL" class="headerlink" title="2.7.2、安装OpenSSL"></a>2.7.2、安装OpenSSL</h5><p>​	我们将使用自签名证书。我们CentOS已经安装了Apache Web服务器。我们需要使用OpenSSL生成自签名证书。如果尚未安装OpenSSL它，可以使用yum来安装。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ~]<span class="hljs-comment"># yum -y install openssl mod_ssl</span><br></code></pre></td></tr></table></figure>
+
+<p>安装完毕后，会自动生成 &#x2F;etc&#x2F;httpd&#x2F;conf.d&#x2F;ssl.conf 文件，后面配置会用到！</p>
+<h5 id="2-7-3、生成自签名证书"><a href="#2-7-3、生成自签名证书" class="headerlink" title="2.7.3、生成自签名证书"></a>2.7.3、生成自签名证书</h5><p>我们创建一个存放证书的目录</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server /]<span class="hljs-comment"># mkdir -p /http/ssl</span><br>[root@Server /]<span class="hljs-comment"># cd /http/ssl/</span><br>[root@Server ssl]<span class="hljs-comment"># </span><br></code></pre></td></tr></table></figure>
+
+<p>下面的命令可以被用来产生一个自签名的证书。</p>
+<p>首先，生成2048位的加密私钥</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ssl]<span class="hljs-comment"># openssl genrsa -out server.key 2048</span><br>Generating RSA private key, 2048 bit long modulus (2 primes)<br>..........+++++<br>......................................................................................................+++++<br>e is 65537 (0x010001)<br>[root@Server ssl]<span class="hljs-comment"># ll</span><br>总用量 4<br>-rw-------. 1 root root 1675 10月  8 07:28 server.key<br></code></pre></td></tr></table></figure>
+
+<p>然后，生成证书签名请求（CSR），这里需要填写许多信息，如国家，省市，公司等</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ssl]<span class="hljs-comment"># openssl req -new -key server.key -out server.csr</span><br>You are about to be asked to enter information that will be incorporated<br>into your certificate request.<br>What you are about to enter is what is called a Distinguished Name or a DN.<br>There are quite a few fields but you can leave some blank<br>For some fields there will be a default value,<br>If you enter <span class="hljs-string">&#x27;.&#x27;</span>, the field will be left blank.<br>-----<br>Country Name (2 letter code) [XX]:CN							<span class="hljs-comment"># 国家代号，中国输入CN</span><br>State or Province Name (full name) []:GX						<span class="hljs-comment"># 省的全名，拼音</span><br>Locality Name (eg, city) [Default City]:NanNing					<span class="hljs-comment"># 市的全名，拼音</span><br>Organization Name (eg, company) [Default Company Ltd]:Rgzn		 <span class="hljs-comment"># 公司英文名</span><br>Organizational Unit Name (eg, section) []:						<span class="hljs-comment"># 组织单位</span><br>Common Name (eg, your name or your server<span class="hljs-string">&#x27;s hostname) []:ncvt.com # 主机名</span><br><span class="hljs-string">Email Address []:				# 邮箱地址</span><br><span class="hljs-string">Please enter the following &#x27;</span>extra<span class="hljs-string">&#x27; attributes</span><br><span class="hljs-string">to be sent with your certificate request</span><br><span class="hljs-string">A challenge password []:</span><br><span class="hljs-string">An optional company name []:</span><br><span class="hljs-string">[root@Server ssl]# </span><br><span class="hljs-string">[root@Server ssl]# ll</span><br><span class="hljs-string">总用量 8</span><br><span class="hljs-string">-rw-r--r--. 1 root root  968 10月  8 07:30 server.csr</span><br><span class="hljs-string">-rw-------. 1 root root 1675 10月  8 07:28 server.key</span><br></code></pre></td></tr></table></figure>
+
+<p>最后，生成类型为X509的自签名证书。有效期设置3650天，即有效期为10年</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ssl]<span class="hljs-comment"># openssl x509 -req -days 3650 -in server.csr -signkey server.key -out server.crt</span><br>Signature ok<br>subject=C = CN, ST = GX, L = NanNing, O = Rgzn, CN = ncvt.com<br>Getting Private key<br></code></pre></td></tr></table></figure>
+
+<p><strong>查看</strong></p>
+<p>查看自签名证书简要内容和查看证书的有效期</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ssl]<span class="hljs-comment"># openssl x509 -in server.crt -noout -issuer</span><br>issuer=C = CN, ST = GX, L = NanNing, O = Rgzn, CN = ncvt.com<br>[root@Server ssl]<span class="hljs-comment"># openssl x509 -in server.crt -noout -text  </span><br>Certificate:<br>    Data:<br>        Version: 1 (0x0)<br>        Serial Number:<br>            17:6d:b6:f1:5d:fe:08:d7:40:ac:03:fd:94:46:c1:79:fd:81:e7:97<br>        Signature Algorithm: sha256WithRSAEncryption<br>        Issuer: C = CN, ST = GX, L = NanNing, O = Rgzn, CN = ncvt.com<br>        Validity<br>            Not Before: Oct  7 23:34:40 2022 GMT<br>            Not After : Oct  4 23:34:40 2032 GMT<br>        Subject: C = CN, ST = GX, L = NanNing, O = Rgzn, CN = ncvt.com<br>        Subject Public Key Info:<br>            Public Key Algorithm: rsaEncryption<br>                RSA Public-Key: (2048 bit)<br>                Modulus:<br>                    00:e3:46:18:65:31:52:e1:56:ae:b9:40:b9:1a:81:<br>                    1d:db:9a:ad:17:2c:c3:d6:96:e2:51:9b:57:12:8d:<br>                    48:a6:ad:46:53:4a:4a:8c:77:43:bc:66:53:3c:57:<br>                    c9:0b:57:19:f1:2f:25:59:<span class="hljs-built_in">fc</span>:d6:b2:37:28:81:11:<br>                    0d:9d:34:01:9f:b3:8c:89:51:54:95:cc:b7:bc:46:<br>                    5f:26:ec:8c:e2:ef:<span class="hljs-built_in">fc</span>:a5:09:f1:73:d2:a0:46:f0:<br>                    93:99:1c:e9:77:27:c8:68:5d:72:8b:70:ad:e6:50:<br>                    a0:3b:8c:a9:02:31:cb:13:27:93:23:23:fb:b7:e4:<br>                    9a:7b:20:1d:13:a5:a9:b4:cb:1b:61:8b:4b:8a:79:<br>                    1c:ae:2b:08:d9:45:5f:aa:a8:6f:78:9f:47:8b:a1:<br>                    12:2c:18:0b:2a:c3:d1:12:c6:77:35:47:d6:9b:63:<br>                    93:35:4a:b2:cb:b5:e5:b5:41:8b:db:1b:a1:f3:d9:<br>                    17:dc:6a:5d:d0:db:62:03:e1:c2:ce:a5:0d:41:a9:<br>                    b1:82:88:89:e4:29:7d:6b:e3:06:f2:3a:3a:52:48:<br>                    20:bf:ce:bb:cf:7a:04:90:29:7e:9d:71:f8:bb:08:<br>                    dc:7d:c0:e6:bc:9b:79:28:48:3b:d7:b1:6a:ae:44:<br>                    5b:93:71:f2:50:cc:4e:e0:68:9f:5f:3b:cb:74:4d:<br>                    26:89<br>                Exponent: 65537 (0x10001)<br>    Signature Algorithm: sha256WithRSAEncryption<br>         <span class="hljs-built_in">df</span>:5a:18:cb:6b:27:0e:67:0c:17:c9:ac:3e:3f:9d:be:ac:d0:<br>         19:a3:09:70:8f:c0:b2:96:66:0e:3c:5d:6d:75:8c:ed:8b:5f:<br>         ef:0b:09:<span class="hljs-built_in">dd</span>:5a:59:71:24:61:c9:f1:3f:22:8c:82:f1:<span class="hljs-built_in">cd</span>:5d:<br>         7a:0b:76:c7:98:63:68:ea:36:43:77:b5:ec:da:f8:9d:1d:b8:<br>         ce:3a:1a:05:79:c6:50:08:65:25:90:3c:b1:a3:d9:ce:4e:c4:<br>         c0:8a:29:74:b0:43:ed:e0:1c:5f:bc:e1:eb:e0:31:01:6c:3a:<br>         a3:de:2e:19:3b:91:aa:ad:fa:fd:48:96:19:35:a7:10:62:cc:<br>         <span class="hljs-built_in">dd</span>:4d:09:c2:24:02:50:4b:1b:<span class="hljs-built_in">fc</span>:95:6b:c1:95:a7:93:5e:ee:<br>         74:d7:1a:10:ff:54:4c:9c:71:d9:db:30:f1:10:1d:c0:98:8c:<br>         f7:ff:86:ac:9c:b0:36:ea:f7:30:e8:94:cf:68:71:d3:8e:ce:<br>         ce:a2:ca:b8:6c:7a:a8:0c:21:bf:55:db:48:52:41:54:8c:ef:<br>         ed:82:8b:73:f7:91:f6:f3:d7:ae:89:99:1c:1b:1c:02:97:9c:<br>         ec:f9:a5:9a:4d:f5:a8:6f:9c:ed:ac:7d:65:16:37:c5:ed:33:<br>         e3:de:80:ec:46:79:<span class="hljs-built_in">df</span>:2b:0e:60:cf:cf:d6:ec:ae:94:6b:b1:<br>         6b:90:86:4e<br>[root@Server ssl]<span class="hljs-comment"># </span><br></code></pre></td></tr></table></figure>
+
+<p>创建证书后，将文件复制到对应的目录。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ssl]<span class="hljs-comment"># ll</span><br>总用量 12<br>-rw-r--r--. 1 root root 1147 10月  8 07:34 server.crt<br>-rw-r--r--. 1 root root  968 10月  8 07:30 server.csr<br>-rw-------. 1 root root 1675 10月  8 07:28 server.key<br>[root@Server ssl]<span class="hljs-comment"># cp server.crt /etc/pki/tls/certs/</span><br>[root@Server ssl]<span class="hljs-comment"># cp server.csr /etc/pki/tls/private/</span><br>[root@Server ssl]<span class="hljs-comment"># cp server.key /etc/pki/tls/private/</span><br>[root@Server ssl]<span class="hljs-comment"># ll /etc/pki/tls/certs/</span><br>总用量 4<br>lrwxrwxrwx. 1 root root   49 5月  11 2019 ca-bundle.crt -&gt; /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem<br>lrwxrwxrwx. 1 root root   55 5月  11 2019 ca-bundle.trust.crt -&gt; /etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt<br>-rw-r--r--. 1 root root 1147 10月  8 07:37 server.crt<br>[root@Server ssl]<span class="hljs-comment"># ll /etc/pki/tls/private</span><br>总用量 8<br>-rw-r--r--. 1 root root  968 10月  8 07:37 server.csr<br>-rw-------. 1 root root 1675 10月  8 07:37 server.key<br>[root@Server ssl]<span class="hljs-comment"># </span><br></code></pre></td></tr></table></figure>
+
+<h5 id="2-7-4、配置Apache-Web服务器"><a href="#2-7-4、配置Apache-Web服务器" class="headerlink" title="2.7.4、配置Apache Web服务器"></a>2.7.4、配置Apache Web服务器</h5><p>首先，修改下面的配置文件、&#x2F;etc&#x2F;httpd&#x2F;conf.d&#x2F;ssl.conf。</p>
+<p>仅需配置 SSLCertificateFile 和 SSLCertificateKeyFile证书部分</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ssl]<span class="hljs-comment"># cat /etc/httpd/conf.d/ssl.conf</span><br>SSLCertificateFile /etc/pki/tls/certs/server.crt<br>SSLCertificateKeyFile /etc/pki/tls/private/server.key<br></code></pre></td></tr></table></figure>
+
+<h5 id="2-7-5、重启服务、放行防火墙、selinux"><a href="#2-7-5、重启服务、放行防火墙、selinux" class="headerlink" title="2.7.5、重启服务、放行防火墙、selinux"></a>2.7.5、重启服务、放行防火墙、selinux</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 允许443端口</span><br>[root@Server ssl]<span class="hljs-comment"># firewall-cmd --add-port=443/tcp --permanent </span><br>success<br>[root@Server ssl]<span class="hljs-comment"># firewall-cmd --reload </span><br>success<br><span class="hljs-comment"># Selinux允许443端口--默认是允许的</span><br>[root@Server ssl]<span class="hljs-comment"># semanage port -a -t http_port_t -p tcp 443</span><br><br><span class="hljs-comment"># 重启</span><br>[root@Server ssl]<span class="hljs-comment"># systemctl restart httpd</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="2-7-6、测试"><a href="#2-7-6、测试" class="headerlink" title="2.7.6、测试"></a>2.7.6、测试</h5><p>windows10测试</p>
+<p><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/202210072349931.png" alt="image-20221007234945884"></p>
+<p><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/202210072345794.png" alt="image-20221007234549753"></p>
+<p><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/202210072349158.png" alt="image-20221007234959122"></p>
+<p><strong>因为是自签名证书显示不安全很正常</strong></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">XiaoBei</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2023/06/06/httpd%E5%9F%BA%E7%A1%80/">http://example.com/2023/06/06/httpd%E5%9F%BA%E7%A1%80/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="null" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">xiaobei</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Service/">Service</a></div><div class="post_share"><div class="social-share" data-image="https://w.wallhaven.cc/full/rr/wallhaven-rryk81.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/06/06/%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1Samba/" title="文件共享服务Samba"><img class="cover" src="https://th.wallhaven.cc/small/l3/l3xk6q.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">文件共享服务Samba</div></div></a></div><div class="next-post pull-right"><a href="/2023/06/06/Docker%E5%9F%BA%E7%A1%80/" title="Docker基础"><img class="cover" src="https://w.wallhaven.cc/full/we/wallhaven-wel6or.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Docker基础</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/06/06/Chrony%E6%97%B6%E9%97%B4%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="Chrony时间服务器"><img class="cover" src="https://th.wallhaven.cc/small/9m/9mjoy1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-06</div><div class="title">Chrony时间服务器</div></div></a></div><div><a href="/2023/06/06/Squid%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8-0/" title="Squid代理服务器-2"><img class="cover" src="https://w.wallhaven.cc/full/7p/wallhaven-7pw269.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-06</div><div class="title">Squid代理服务器-2</div></div></a></div><div><a href="/2023/06/06/%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1Samba/" title="文件共享服务Samba"><img class="cover" src="https://th.wallhaven.cc/small/l3/l3xk6q.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-06</div><div class="title">文件共享服务Samba</div></div></a></div><div><a href="/2022/08/02/%E7%AE%80%E5%8D%95%E6%90%AD%E5%BB%BAhttp%E6%9C%8D%E5%8A%A1/" title="简单搭建http服务"><img class="cover" src="https://w.wallhaven.cc/full/jx/wallhaven-jxky9p.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-02</div><div class="title">简单搭建http服务</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/wsnb.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">XiaoBei</div><div class="author-info__description">归途也还可爱</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/wsnbwz" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:wsnblove@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#httpd"><span class="toc-text">httpd</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86"><span class="toc-text">一、相关知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%9E%E9%AA%8C%E7%9B%AE%E6%A0%87"><span class="toc-text">二、实验目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%AE%9E%E9%AA%8C%E5%AE%9E%E6%96%BD"><span class="toc-text">三、实验实施</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E5%AE%9E%E9%AA%8C%E8%A7%84%E5%88%92"><span class="toc-text">1、实验规划</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E5%AE%9E%E9%AA%8C%E6%AD%A5%E9%AA%A4"><span class="toc-text">2、实验步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1%E3%80%81%E5%AE%89%E8%A3%85Apache%E6%9C%8D%E5%8A%A1"><span class="toc-text">2.1、安装Apache服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2%E3%80%81%E5%9F%BA%E4%BA%8EIP%E5%9C%B0%E5%9D%80"><span class="toc-text">2.2、基于IP地址</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-1%E3%80%81%E9%85%8D%E7%BD%AEhttpd%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">2.2.1、配置httpd配置文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-2%E3%80%81%E7%BC%96%E5%86%99%E7%BD%91%E9%A1%B5%E5%86%85%E5%AE%B9"><span class="toc-text">2.2.2、编写网页内容</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-3%E3%80%81%E9%87%8D%E5%90%AF%E6%9C%8D%E5%8A%A1%E3%80%81%E6%94%BE%E8%A1%8C%E9%98%B2%E7%81%AB%E5%A2%99"><span class="toc-text">2.2.3、重启服务、放行防火墙</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-4%E3%80%81%E6%B5%8B%E8%AF%95"><span class="toc-text">2.2.4、测试</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3%E3%80%81%E5%9F%BA%E4%BA%8E%E7%AB%AF%E5%8F%A3"><span class="toc-text">2.3、基于端口</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-1%E3%80%81%E9%85%8D%E7%BD%AEhttpd%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">2.3.1、配置httpd配置文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-2%E3%80%81%E5%88%9B%E5%BB%BA%E7%BD%91%E9%A1%B5%E7%9B%AE%E5%BD%95%E3%80%81%E6%9B%B4%E6%94%B9%E7%BD%91%E9%A1%B5%E7%9B%AE%E5%BD%95%E4%B8%8A%E4%B8%8B%E6%96%87%E3%80%81Selinux%E5%85%81%E8%AE%B8%E7%AB%AF%E5%8F%A3"><span class="toc-text">2.3.2、创建网页目录、更改网页目录上下文、Selinux允许端口</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-3%E3%80%81%E5%86%99%E5%85%A5%E7%BD%91%E9%A1%B5%E5%86%85%E5%AE%B9"><span class="toc-text">2.3.3、写入网页内容</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-4%E3%80%81%E9%87%8D%E5%90%AF%E6%9C%8D%E5%8A%A1%E3%80%81%E6%94%BE%E8%A1%8C%E9%98%B2%E7%81%AB%E5%A2%99"><span class="toc-text">2.3.4、重启服务、放行防火墙</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-5%E3%80%81%E6%B5%8B%E8%AF%95"><span class="toc-text">2.3.5、测试</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4%E3%80%81%E5%9F%BA%E4%BA%8E%E5%9F%9F%E5%90%8D"><span class="toc-text">2.4、基于域名</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-4-1%E3%80%81%E4%BF%AE%E6%94%B9hosts%E6%96%87%E4%BB%B6%EF%BC%8C%E9%85%8D%E7%BD%AE%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90"><span class="toc-text">2.4.1、修改hosts文件，配置域名解析</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-4-2%E3%80%81%E9%85%8D%E7%BD%AEhttpd%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">2.4.2、配置httpd配置文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-4-3%E3%80%81%E9%87%8D%E5%90%AF%E6%9C%8D%E5%8A%A1"><span class="toc-text">2.4.3、重启服务</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-4-3%E3%80%81%E6%B5%8B%E8%AF%95"><span class="toc-text">2.4.3、测试</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-5%E3%80%81%E5%9F%BA%E4%BA%8E%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81"><span class="toc-text">2.5、基于用户认证</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-5-1%E3%80%81httpd%E5%9F%BA%E4%BA%8E%E7%94%A8%E6%88%B7%E7%9A%84%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E7%AE%80%E4%BB%8B"><span class="toc-text">2.5.1、httpd基于用户的访问控制简介</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-5-2%E3%80%81%E5%9F%BA%E4%BA%8Ebasic%E8%AE%A4%E8%AF%81%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-text">2.5.2、基于basic认证的配置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-5-3%E3%80%81-%E4%BF%AE%E6%94%B9-x2F-etc-x2F-httpd-x2F-conf-d-x2F-user2-conf%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">2.5.3、 修改&#x2F;etc&#x2F;httpd&#x2F;conf.d&#x2F;user2.conf配置文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-5-4%E3%80%81%E9%85%8D%E7%BD%AEselinux%E3%80%81%E9%98%B2%E7%81%AB%E5%A2%99"><span class="toc-text">2.5.4、配置selinux、防火墙</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-5-5%E3%80%81%E9%87%8D%E5%90%AF%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-text">2.5.5、重启服务器</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-5-6%E3%80%81%E6%B5%8B%E8%AF%95"><span class="toc-text">2.5.6、测试</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-6%E3%80%81%E5%9F%BA%E4%BA%8E%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5"><span class="toc-text">2.6、基于个人主页</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-6-1%E3%80%81%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7wsnb"><span class="toc-text">2.6.1、创建用户wsnb</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-6-2%E3%80%81%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">2.6.2、修改配置文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-6-3%E3%80%81%E8%BF%9B%E5%85%A5-x2F-home-x2F-wsnb%E4%B8%8B%E5%88%9B%E5%BB%BApublic-html%E7%9B%AE%E5%BD%95%E9%87%8C%E9%9D%A2%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AA%E5%B7%B2-html%E7%BB%93%E5%B0%BE%E7%9A%84%E6%96%87%E4%BB%B6"><span class="toc-text">2.6.3、进入&#x2F;home&#x2F;wsnb下创建public_html目录里面编写一个已.html结尾的文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-6-4%E3%80%81%E5%85%81%E8%AE%B8Selinux%E3%80%81%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90"><span class="toc-text">2.6.4、允许Selinux、修改文件权限</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-6-5%E3%80%81%E9%87%8D%E5%90%AF%E6%9C%8D%E5%8A%A1"><span class="toc-text">2.6.5、重启服务</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-7%E3%80%81%E5%9F%BA%E4%BA%8Ehttps"><span class="toc-text">2.7、基于https</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-7-1%E3%80%81https%E7%AE%80%E4%BB%8B"><span class="toc-text">2.7.1、https简介</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#2-7-1-1%E3%80%81https%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86"><span class="toc-text">2.7.1.1、https协议原理</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-7-2%E3%80%81%E5%AE%89%E8%A3%85OpenSSL"><span class="toc-text">2.7.2、安装OpenSSL</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-7-3%E3%80%81%E7%94%9F%E6%88%90%E8%87%AA%E7%AD%BE%E5%90%8D%E8%AF%81%E4%B9%A6"><span class="toc-text">2.7.3、生成自签名证书</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-7-4%E3%80%81%E9%85%8D%E7%BD%AEApache-Web%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-text">2.7.4、配置Apache Web服务器</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-7-5%E3%80%81%E9%87%8D%E5%90%AF%E6%9C%8D%E5%8A%A1%E3%80%81%E6%94%BE%E8%A1%8C%E9%98%B2%E7%81%AB%E5%A2%99%E3%80%81selinux"><span class="toc-text">2.7.5、重启服务、放行防火墙、selinux</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-7-6%E3%80%81%E6%B5%8B%E8%AF%95"><span class="toc-text">2.7.6、测试</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/06/06/Squid%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8-0/" title="Squid代理服务器-2"><img src="https://w.wallhaven.cc/full/7p/wallhaven-7pw269.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Squid代理服务器-2"/></a><div class="content"><a class="title" href="/2023/06/06/Squid%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8-0/" title="Squid代理服务器-2">Squid代理服务器-2</a><time datetime="2023-06-06T08:23:50.000Z" title="发表于 2023-06-06 16:23:50">2023-06-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/06/%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1Samba/" title="文件共享服务Samba"><img src="https://th.wallhaven.cc/small/l3/l3xk6q.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="文件共享服务Samba"/></a><div class="content"><a class="title" href="/2023/06/06/%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1Samba/" title="文件共享服务Samba">文件共享服务Samba</a><time datetime="2023-06-06T08:23:26.000Z" title="发表于 2023-06-06 16:23:26">2023-06-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/06/httpd%E5%9F%BA%E7%A1%80/" title="httpd基础"><img src="https://w.wallhaven.cc/full/rr/wallhaven-rryk81.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="httpd基础"/></a><div class="content"><a class="title" href="/2023/06/06/httpd%E5%9F%BA%E7%A1%80/" title="httpd基础">httpd基础</a><time datetime="2023-06-06T08:22:55.000Z" title="发表于 2023-06-06 16:22:55">2023-06-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/06/Docker%E5%9F%BA%E7%A1%80/" title="Docker基础"><img src="https://w.wallhaven.cc/full/we/wallhaven-wel6or.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Docker基础"/></a><div class="content"><a class="title" href="/2023/06/06/Docker%E5%9F%BA%E7%A1%80/" title="Docker基础">Docker基础</a><time datetime="2023-06-06T08:22:42.000Z" title="发表于 2023-06-06 16:22:42">2023-06-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/06/Chrony%E6%97%B6%E9%97%B4%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="Chrony时间服务器"><img src="https://th.wallhaven.cc/small/9m/9mjoy1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Chrony时间服务器"/></a><div class="content"><a class="title" href="/2023/06/06/Chrony%E6%97%B6%E9%97%B4%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="Chrony时间服务器">Chrony时间服务器</a><time datetime="2023-06-06T08:22:13.000Z" title="发表于 2023-06-06 16:22:13">2023-06-06</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By XiaoBei</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><div class="fb-customerchat" id="fb-customer-chat" attribution="biz_inbox"></div><script>document.getElementById('fb-root') ? '' : document.body.insertAdjacentHTML('afterend', '<div id="fb-root"></div>')
+
+window.fbAsyncInit = function() {
+  FB.init({
+    xfbml: true,
+    version: 'v15.0'
+  });
+};
+
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/zh_CN/sdk/xfbml.customerchat.js';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+if (false) {
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      FB.CustomerChat.show();
+    });
+  }
+  chatBtnFn()
+} else {
+  if (false) {
+    function chatBtnHide () {
+      FB.CustomerChat.hide()
+    }
+    function chatBtnShow () {
+      FB.CustomerChat.show(false)
+    }
+  }
+}</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></body></html>

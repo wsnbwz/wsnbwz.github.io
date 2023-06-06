@@ -5,19 +5,19 @@
 <meta property="og:site_name" content="xiaobei">
 <meta property="og:description" content="Docker一、相关知识Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中,然后发布到任何流行的Linux或Windows操作系统的机器上,也可以实现虚拟化,容器是完全使用沙箱机制,相互之间不会有任何接口。  环境管理复杂 - 从各种OS到各种中间件到各种app, 一款产品能够成功作为开发者需要关心的东西太多，且难于管理，这个问题几乎在所有现代IT相关">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://w.wallhaven.cc/full/qz/wallhaven-qzgzwl.jpg">
+<meta property="og:image" content="https://w.wallhaven.cc/full/l8/wallhaven-l8kwpr.jpg">
 <meta property="article:published_time" content="2023-03-10T08:00:34.000Z">
 <meta property="article:modified_time" content="2023-03-10T14:44:44.745Z">
 <meta property="article:author" content="XiaoBei">
 <meta property="article:tag" content="Docker-基础">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://w.wallhaven.cc/full/qz/wallhaven-qzgzwl.jpg"><link rel="shortcut icon" href="/img/homepage.jpg"><link rel="canonical" href="http://example.com/2023/03/10/Docker%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+<meta name="twitter:image" content="https://w.wallhaven.cc/full/l8/wallhaven-l8kwpr.jpg"><link rel="shortcut icon" href="/img/homepage.jpg"><link rel="canonical" href="http://example.com/2023/03/10/Docker%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
   root: '/',
   algolia: undefined,
   localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
   translate: undefined,
   noticeOutdate: undefined,
-  highlight: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -161,7 +161,7 @@
       }
     }
     detectApple()
-    })(window)</script><link rel="stylesheet" href="/css/background.css"><link rel="stylesheet" href="/css/test.css"><link rel="stylesheet" href="/css/ahzoo.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/wsnb.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.linuxcool.com"><i class="fa-fw Linux命令大全"></i><span> 学Linux</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://www.555kan.net"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="xiaobei"><span class="site-name">xiaobei</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.linuxcool.com"><i class="fa-fw Linux命令大全"></i><span> 学Linux</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://www.555kan.net"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Docker基础搭建</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-10T08:00:34.000Z" title="发表于 2023-03-10 16:00:34">2023-03-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-10T14:44:44.745Z" title="更新于 2023-03-10 22:44:44">2023-03-10</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/docker/">docker</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>20分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Docker基础搭建"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><h2 id="一、相关知识"><a href="#一、相关知识" class="headerlink" title="一、相关知识"></a>一、相关知识</h2><p>Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中,然后发布到任何流行的Linux或Windows操作系统的机器上,也可以实现虚拟化,容器是完全使用沙箱机制,相互之间不会有任何接口。</p>
+    })(window)</script><link rel="stylesheet" href="/css/background.css"><link rel="stylesheet" href="/css/test.css"><link rel="stylesheet" href="/css/ahzoo.css"><link rel="stylesheet" href="/css/transpancy.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/wsnb.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.linuxcool.com"><i class="fa-fw Linux命令大全"></i><span> 学Linux</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://www.555kan.net"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="xiaobei"><span class="site-name">xiaobei</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.linuxcool.com"><i class="fa-fw Linux命令大全"></i><span> 学Linux</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://www.555kan.net"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Docker基础搭建</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-10T08:00:34.000Z" title="发表于 2023-03-10 16:00:34">2023-03-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-10T14:44:44.745Z" title="更新于 2023-03-10 22:44:44">2023-03-10</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/docker/">docker</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>19分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Docker基础搭建"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><h2 id="一、相关知识"><a href="#一、相关知识" class="headerlink" title="一、相关知识"></a>一、相关知识</h2><p>Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中,然后发布到任何流行的Linux或Windows操作系统的机器上,也可以实现虚拟化,容器是完全使用沙箱机制,相互之间不会有任何接口。</p>
 <ul>
 <li>环境管理复杂 - 从各种OS到各种中间件到各种app, 一款产品能够成功作为开发者需要关心的东西太多，且难于管理，这个问题几乎在所有现代IT相关行业都需要面对。</li>
 <li>云计算时代的到来 - AWS的成功, 引导开发者将应用转移到 cloud 上, 解决了硬件管理的问题，然而中间件相关的问题依然存在 (所以openstack HEAT和 AWS cloudformation 都着力解决这个问题)。开发者思路变化提供了可能性。</li>
@@ -185,19 +185,10 @@
 <td>Centos8</td>
 </tr>
 </tbody></table>
-<h3 id="2、实施步骤"><a href="#2、实施步骤" class="headerlink" title="2、实施步骤"></a>2、实施步骤</h3><h4 id="2-1、配置基本环境"><a href="#2-1、配置基本环境" class="headerlink" title="2.1、配置基本环境"></a>2.1、配置基本环境</h4><pre><code class="bash">#关闭防火墙
-[root@Server ~]# systemctl disable firewalld
-[root@Server ~]# systemctl stop firewalld
+<h3 id="2、实施步骤"><a href="#2、实施步骤" class="headerlink" title="2、实施步骤"></a>2、实施步骤</h3><h4 id="2-1、配置基本环境"><a href="#2-1、配置基本环境" class="headerlink" title="2.1、配置基本环境"></a>2.1、配置基本环境</h4><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#关闭防火墙</span><br>[root@Server ~]<span class="hljs-comment"># systemctl disable firewalld</span><br>[root@Server ~]<span class="hljs-comment"># systemctl stop firewalld</span><br><br><span class="hljs-comment">#关闭selinux</span><br>[root@Server ~]<span class="hljs-comment"># sed -i &quot;s/SELINUX=permissive/SELINUX=disabled/g&quot; /etc/selinux/config </span><br><br><span class="hljs-comment"># 开启路由转发</span><br>[root@Server ~]<span class="hljs-comment"># echo 1 &gt; /proc/sys/net/ipv4/ip_forward</span><br><span class="hljs-comment"># 添加要访问internet的IP范围.</span><br>[root@Server ~]<span class="hljs-comment">#  iptables -t nat -A POSTROUTING -s 172.17.0.0/16 -j MASQUERADE</span><br>[root@Server ~]<span class="hljs-comment">#  service docker restart</span><br></code></pre></td></tr></table></figure>
 
-#关闭selinux
-[root@Server ~]# sed -i &quot;s/SELINUX=permissive/SELINUX=disabled/g&quot; /etc/selinux/config 
 
-# 开启路由转发
-[root@Server ~]# echo 1 &gt; /proc/sys/net/ipv4/ip_forward
-# 添加要访问internet的IP范围.
-[root@Server ~]#  iptables -t nat -A POSTROUTING -s 172.17.0.0/16 -j MASQUERADE
-[root@Server ~]#  service docker restart
-</code></pre>
+
 <h4 id="2-2、安装Docker"><a href="#2-2、安装Docker" class="headerlink" title="2.2、安装Docker"></a>2.2、安装Docker</h4><p>第一步配置Docker的网络源，网址：</p>
 <p><a target="_blank" rel="noopener" href="https://developer.aliyun.com/mirror/?spm=a2c6h.13651102.0.0.16bc1b11XuGchI&serviceType=mirror&tag=%E5%AE%B9%E5%99%A8">https://developer.aliyun.com/mirror/?spm=a2c6h.13651102.0.0.16bc1b11XuGchI&serviceType=mirror&tag=%E5%AE%B9%E5%99%A8</a></p>
 <p><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/202209282330945.jpg" alt="img"> </p>
@@ -205,300 +196,77 @@
 <p>按照以上步骤</p>
 <ul>
 <li><p>Step 1: 安装必要的一些系统工具</p>
-<pre><code class="bash">[root@Server /]# sudo yum install -y yum-utils device-mapper-persistent-data lvm2
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server /]<span class="hljs-comment"># sudo yum install -y yum-utils device-mapper-persistent-data lvm2</span><br></code></pre></td></tr></table></figure>
 </li>
 <li><p>Step 2: 添加软件源信息</p>
-<pre><code class="bash">[root@Server /]# curl https://download.docker.com/linux/centos/docker-ce.repo -o /etc/yum.repos.d/docker-ce.repo
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server /]<span class="hljs-comment"># curl https://download.docker.com/linux/centos/docker-ce.repo -o /etc/yum.repos.d/docker-ce.repo</span><br></code></pre></td></tr></table></figure>
 </li>
 <li><p>Step 3：安装依赖（<strong>这是相比centos7的关键步骤</strong>）</p>
-<pre><code class="bash">[root@Server /]# yum install https://download.docker.com/linux/fedora/30/x86_64/stable/Packages/containerd.io-1.2.6-3.3.fc30.x86_64.rpm
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server /]<span class="hljs-comment"># yum install https://download.docker.com/linux/fedora/30/x86_64/stable/Packages/containerd.io-1.2.6-3.3.fc30.x86_64.rpm</span><br></code></pre></td></tr></table></figure>
 </li>
 <li><p>Step 4: 更新并安装Docker-CE</p>
-<pre><code class="bash">[root@Server /]# sudo yum makecache fast
-
-# 不指定版本安装默认安装最新版
-[root@Server /]# sudo yum -y install docker-ce-20.10.9-3.el8
-
-# 查看可安装的历史版本
-[root@Server /]# yum list docker-ce --showduplicates | sort -r
-docker-ce.x86_64                3:20.10.9-3.el8                 docker-ce-stable
-docker-ce.x86_64                3:20.10.8-3.el8                 docker-ce-stable
-docker-ce.x86_64                3:20.10.7-3.el8                 docker-ce-stable
-docker-ce.x86_64                3:20.10.6-3.el8                 docker-ce-stable
-docker-ce.x86_64                3:20.10.5-3.el8                 docker-ce-stable
-docker-ce.x86_64                3:20.10.4-3.el8                 docker-ce-stable
-docker-ce.x86_64                3:20.10.3-3.el8                 docker-ce-stable
-docker-ce.x86_64                3:20.10.2-3.el8                 docker-ce-stable
-docker-ce.x86_64                3:20.10.18-3.el8                docker-ce-stable
-docker-ce.x86_64                3:20.10.17-3.el8                docker-ce-stable
-docker-ce.x86_64                3:20.10.16-3.el8                docker-ce-stable
-docker-ce.x86_64                3:20.10.15-3.el8                docker-ce-stable
-docker-ce.x86_64                3:20.10.14-3.el8                docker-ce-stable
-docker-ce.x86_64                3:20.10.1-3.el8                 docker-ce-stable
-docker-ce.x86_64                3:20.10.13-3.el8                docker-ce-stable
-docker-ce.x86_64                3:20.10.12-3.el8                docker-ce-stable
-docker-ce.x86_64                3:20.10.11-3.el8                docker-ce-stable
-docker-ce.x86_64                3:20.10.10-3.el8                docker-ce-stable
-docker-ce.x86_64                3:20.10.0-3.el8                 docker-ce-stable
-docker-ce.x86_64                3:19.03.15-3.el8                docker-ce-stable
-docker-ce.x86_64                3:19.03.14-3.el8                docker-ce-stable
-docker-ce.x86_64                3:19.03.13-3.el8                docker-ce-stable
-可安装的软件包
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server /]<span class="hljs-comment"># sudo yum makecache fast</span><br><br><span class="hljs-comment"># 不指定版本安装默认安装最新版</span><br>[root@Server /]<span class="hljs-comment"># sudo yum -y install docker-ce-20.10.9-3.el8</span><br><br><span class="hljs-comment"># 查看可安装的历史版本</span><br>[root@Server /]<span class="hljs-comment"># yum list docker-ce --showduplicates | sort -r</span><br>docker-ce.x86_64                3:20.10.9-3.el8                 docker-ce-stable<br>docker-ce.x86_64                3:20.10.8-3.el8                 docker-ce-stable<br>docker-ce.x86_64                3:20.10.7-3.el8                 docker-ce-stable<br>docker-ce.x86_64                3:20.10.6-3.el8                 docker-ce-stable<br>docker-ce.x86_64                3:20.10.5-3.el8                 docker-ce-stable<br>docker-ce.x86_64                3:20.10.4-3.el8                 docker-ce-stable<br>docker-ce.x86_64                3:20.10.3-3.el8                 docker-ce-stable<br>docker-ce.x86_64                3:20.10.2-3.el8                 docker-ce-stable<br>docker-ce.x86_64                3:20.10.18-3.el8                docker-ce-stable<br>docker-ce.x86_64                3:20.10.17-3.el8                docker-ce-stable<br>docker-ce.x86_64                3:20.10.16-3.el8                docker-ce-stable<br>docker-ce.x86_64                3:20.10.15-3.el8                docker-ce-stable<br>docker-ce.x86_64                3:20.10.14-3.el8                docker-ce-stable<br>docker-ce.x86_64                3:20.10.1-3.el8                 docker-ce-stable<br>docker-ce.x86_64                3:20.10.13-3.el8                docker-ce-stable<br>docker-ce.x86_64                3:20.10.12-3.el8                docker-ce-stable<br>docker-ce.x86_64                3:20.10.11-3.el8                docker-ce-stable<br>docker-ce.x86_64                3:20.10.10-3.el8                docker-ce-stable<br>docker-ce.x86_64                3:20.10.0-3.el8                 docker-ce-stable<br>docker-ce.x86_64                3:19.03.15-3.el8                docker-ce-stable<br>docker-ce.x86_64                3:19.03.14-3.el8                docker-ce-stable<br>docker-ce.x86_64                3:19.03.13-3.el8                docker-ce-stable<br>可安装的软件包<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>Step 5: 自启动Docker服务</p>
-<pre><code class="bash">[root@Server /]# systemctl enable docker --now      
-Created symlink /etc/systemd/system/multi-user.target.wants/docker.service → /usr/lib/systemd/system/docker.service.
-
-启动docker
-systemctl start docker
-
-关闭docker
-systemctl stop docker
-
-重启docker
-systemctl restart docker
-
-docker设置随服务启动而自启动
-systemctl enable docker
-</code></pre>
-</li>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server /]<span class="hljs-comment"># systemctl enable docker --now      </span><br>Created symlink /etc/systemd/system/multi-user.target.wants/docker.service → /usr/lib/systemd/system/docker.service.<br><br>启动docker<br>systemctl start docker<br><br>关闭docker<br>systemctl stop docker<br><br>重启docker<br>systemctl restart docker<br><br>docker设置随服务启动而自启动<br>systemctl <span class="hljs-built_in">enable</span> docker<br></code></pre></td></tr></table></figure></li>
 </ul>
-<h4 id="2-3-查看docker版本"><a href="#2-3-查看docker版本" class="headerlink" title="2.3 查看docker版本"></a>2.3 查看docker版本</h4><pre><code class="bash">[root@Server /]# docker version
-Client: Docker Engine - Community
- Version:           20.10.18
- API version:       1.41
- Go version:        go1.18.6
- Git commit:        b40c2f6
- Built:             Thu Sep  8 23:11:56 2022
- OS/Arch:           linux/amd64
- Context:           default
- Experimental:      true
+<h4 id="2-3-查看docker版本"><a href="#2-3-查看docker版本" class="headerlink" title="2.3 查看docker版本"></a>2.3 查看docker版本</h4><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server /]<span class="hljs-comment"># docker version</span><br>Client: Docker Engine - Community<br> Version:           20.10.18<br> API version:       1.41<br> Go version:        go1.18.6<br> Git commit:        b40c2f6<br> Built:             Thu Sep  8 23:11:56 2022<br> OS/Arch:           linux/amd64<br> Context:           default<br> Experimental:      <span class="hljs-literal">true</span><br><br>Server: Docker Engine - Community<br> Engine:<br>  Version:          20.10.9<br>  API version:      1.41 (minimum version 1.12)<br>  Go version:       go1.16.8<br>  Git commit:       79ea9d3<br>  Built:            Mon Oct  4 16:06:48 2021<br>  OS/Arch:          linux/amd64<br>  Experimental:     <span class="hljs-literal">false</span><br> containerd:<br>  Version:          1.6.8<br>  GitCommit:        9cd3357b7fd7218e4aec3eae239db1f68a5a6ec6<br> runc:<br>  Version:          1.1.4<br>  GitCommit:        v1.1.4-0-g5fd4c4d<br> docker-init:<br>  Version:          0.19.0<br>  GitCommit:        de40ad0<br></code></pre></td></tr></table></figure>
 
-Server: Docker Engine - Community
- Engine:
-  Version:          20.10.9
-  API version:      1.41 (minimum version 1.12)
-  Go version:       go1.16.8
-  Git commit:       79ea9d3
-  Built:            Mon Oct  4 16:06:48 2021
-  OS/Arch:          linux/amd64
-  Experimental:     false
- containerd:
-  Version:          1.6.8
-  GitCommit:        9cd3357b7fd7218e4aec3eae239db1f68a5a6ec6
- runc:
-  Version:          1.1.4
-  GitCommit:        v1.1.4-0-g5fd4c4d
- docker-init:
-  Version:          0.19.0
-  GitCommit:        de40ad0
-</code></pre>
 <h4 id="2-4、添加docker加速器"><a href="#2-4、添加docker加速器" class="headerlink" title="2.4、添加docker加速器"></a>2.4、添加docker加速器</h4><p>默认docker拉取的镜像在国外，拉取镜像的时候速度很慢，所以我们添加阿里云提供的镜像加速器</p>
 <p>加速器网址：<a target="_blank" rel="noopener" href="https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors">https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors</a></p>
 <p><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/%E9%98%BF%E9%87%8C%E4%BA%91.png" alt="image-20220928195926904"></p>
-<pre><code class="bash">[root@Server /]# sudo tee /etc/docker/daemon.json &lt;&lt;-&#39;EOF&#39;
-&#123;
-  &quot;registry-mirrors&quot;: [&quot;https://ukhwyb9e.mirror.aliyuncs.com&quot;]
-&#125;
-EOF
-[root@Server /]# sudo systemctl daemon-reload
-[root@Server /]# sudo systemctl restart docker
-</code></pre>
-<p>查看是否添加成功加速器</p>
-<pre><code class="bash">[root@Server /]# docker info
-Client:
- Context:    default
- Debug Mode: false
- Plugins:
-  app: Docker App (Docker Inc., v0.9.1-beta3)
-  buildx: Docker Buildx (Docker Inc., v0.9.1-docker)
-  scan: Docker Scan (Docker Inc., v0.17.0)
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server /]<span class="hljs-comment"># sudo tee /etc/docker/daemon.json &lt;&lt;-&#x27;EOF&#x27;</span><br>&#123;<br>  <span class="hljs-string">&quot;registry-mirrors&quot;</span>: [<span class="hljs-string">&quot;https://ukhwyb9e.mirror.aliyuncs.com&quot;</span>]<br>&#125;<br>EOF<br>[root@Server /]<span class="hljs-comment"># sudo systemctl daemon-reload</span><br>[root@Server /]<span class="hljs-comment"># sudo systemctl restart docker</span><br></code></pre></td></tr></table></figure>
 
-Server:
- Containers: 0
-  Running: 0
-  Paused: 0
-  Stopped: 0
- Images: 0
- Server Version: 20.10.9
- Storage Driver: overlay2
-  Backing Filesystem: xfs
-  Supports d_type: true
-  Native Overlay Diff: true
-  userxattr: false
- Logging Driver: json-file
- Cgroup Driver: cgroupfs
- Cgroup Version: 1
- Plugins:
-  Volume: local
-  Network: bridge host ipvlan macvlan null overlay
-  Log: awslogs fluentd gcplogs gelf journald json-file local logentries splunk syslog
- Swarm: inactive
- Runtimes: runc io.containerd.runc.v2 io.containerd.runtime.v1.linux
- Default Runtime: runc
- Init Binary: docker-init
- containerd version: 9cd3357b7fd7218e4aec3eae239db1f68a5a6ec6
- runc version: v1.1.4-0-g5fd4c4d
- init version: de40ad0
- Security Options:
-  seccomp
-   Profile: default
- Kernel Version: 4.18.0-147.el8.x86_64
- Operating System: CentOS Linux 8 (Core)
- OSType: linux
- Architecture: x86_64
- CPUs: 2
- Total Memory: 3.669GiB
- Name: Server
- ID: U6KW:E3NO:O73Z:6J4W:4TCK:WXRS:SILI:CAAK:Y7RY:X7LD:4IDW:QPN4
- Docker Root Dir: /var/lib/docker
- Debug Mode: false
- Registry: https://index.docker.io/v1/
- Labels:
- Experimental: false
- Insecure Registries:
-  127.0.0.0/8
- Registry Mirrors:
-  https://ukhwyb9e.mirror.aliyuncs.com/      # 查看这里已经添加上了加速器
- Live Restore Enabled: false
-</code></pre>
+<p>查看是否添加成功加速器</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server /]<span class="hljs-comment"># docker info</span><br>Client:<br> Context:    default<br> Debug Mode: <span class="hljs-literal">false</span><br> Plugins:<br>  app: Docker App (Docker Inc., v0.9.1-beta3)<br>  buildx: Docker Buildx (Docker Inc., v0.9.1-docker)<br>  scan: Docker Scan (Docker Inc., v0.17.0)<br><br>Server:<br> Containers: 0<br>  Running: 0<br>  Paused: 0<br>  Stopped: 0<br> Images: 0<br> Server Version: 20.10.9<br> Storage Driver: overlay2<br>  Backing Filesystem: xfs<br>  Supports d_type: <span class="hljs-literal">true</span><br>  Native Overlay Diff: <span class="hljs-literal">true</span><br>  userxattr: <span class="hljs-literal">false</span><br> Logging Driver: json-file<br> Cgroup Driver: cgroupfs<br> Cgroup Version: 1<br> Plugins:<br>  Volume: <span class="hljs-built_in">local</span><br>  Network: bridge host ipvlan macvlan null overlay<br>  Log: awslogs fluentd gcplogs gelf journald json-file <span class="hljs-built_in">local</span> logentries splunk syslog<br> Swarm: inactive<br> Runtimes: runc io.containerd.runc.v2 io.containerd.runtime.v1.linux<br> Default Runtime: runc<br> Init Binary: docker-init<br> containerd version: 9cd3357b7fd7218e4aec3eae239db1f68a5a6ec6<br> runc version: v1.1.4-0-g5fd4c4d<br> init version: de40ad0<br> Security Options:<br>  seccomp<br>   Profile: default<br> Kernel Version: 4.18.0-147.el8.x86_64<br> Operating System: CentOS Linux 8 (Core)<br> OSType: linux<br> Architecture: x86_64<br> CPUs: 2<br> Total Memory: 3.669GiB<br> Name: Server<br> ID: U6KW:E3NO:O73Z:6J4W:4TCK:WXRS:SILI:CAAK:Y7RY:X7LD:4IDW:QPN4<br> Docker Root Dir: /var/lib/docker<br> Debug Mode: <span class="hljs-literal">false</span><br> Registry: https://index.docker.io/v1/<br> Labels:<br> Experimental: <span class="hljs-literal">false</span><br> Insecure Registries:<br>  127.0.0.0/8<br> Registry Mirrors:<br>  https://ukhwyb9e.mirror.aliyuncs.com/      <span class="hljs-comment"># 查看这里已经添加上了加速器</span><br> Live Restore Enabled: <span class="hljs-literal">false</span><br></code></pre></td></tr></table></figure>
+
 <h3 id="3、常用命令"><a href="#3、常用命令" class="headerlink" title="3、常用命令"></a>3、常用命令</h3><ul>
 <li>Docker容器的一些命令按功能分类大致如下</li>
 </ul>
-<pre><code class="bash">Docker环境信息   info、version
-镜像仓库命令      login、logout、pull、push、search
-镜像管理          build、images、import、load、rmi、save、tag、commit
-容器生命周期管理  create、exec、kill、pause、restart、rm、run、start、stop、unpause
-容器运维操作      attach、export、inspect、port、ps、rename、stats、top、wait、cp、diff、update
-容器资源管理      volume、network
-系统信息日志      events、history、logs
-1.events打印容器的实时系统事件
-2.history 打印出指定镜像的历史版本信息
-3.logs打印容器中进程的运行日志
-</code></pre>
-<pre><code class="bash">docker --help       #查看docker命令
-docker info         #docker 详细信息，镜像和容器
-docker version      #查看docker版本
-帮助文档地址：https://docs.docker.com/reference/
-</code></pre>
-<h4 id="3-1-镜像命令"><a href="#3-1-镜像命令" class="headerlink" title="3.1 镜像命令"></a>3.1 镜像命令</h4><h5 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h5><pre><code class="bash"># 拉取镜像命令 docker pull &lt;镜像名称&gt;:&lt;版本&gt;
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">Docker环境信息   info、version<br>镜像仓库命令      login、<span class="hljs-built_in">logout</span>、pull、push、search<br>镜像管理          build、images、import、load、rmi、save、tag、commit<br>容器生命周期管理  create、<span class="hljs-built_in">exec</span>、<span class="hljs-built_in">kill</span>、pause、restart、<span class="hljs-built_in">rm</span>、run、start、stop、unpause<br>容器运维操作      attach、<span class="hljs-built_in">export</span>、inspect、port、ps、rename、stats、top、<span class="hljs-built_in">wait</span>、<span class="hljs-built_in">cp</span>、diff、update<br>容器资源管理      volume、network<br>系统信息日志      events、<span class="hljs-built_in">history</span>、logs<br>1.events打印容器的实时系统事件<br>2.<span class="hljs-built_in">history</span> 打印出指定镜像的历史版本信息<br>3.logs打印容器中进程的运行日志<br></code></pre></td></tr></table></figure>
 
-[root@Server /]# docker pull centos:7
-7: Pulling from library/centos
-2d473b07cdd5: Pull complete 
-Digest: sha256:9d4bcbbb213dfd745b58be38b13b996ebb5ac315fe75711bd618426a630e0987
-Status: Downloaded newer image for centos:7
-docker.io/library/centos:7
-</code></pre>
-<h5 id="列出本地镜像"><a href="#列出本地镜像" class="headerlink" title="列出本地镜像"></a>列出本地镜像</h5><pre><code class="bash">docker images # 查看docker镜像；
-# 具体列解释含义：
-REPOSITORY  #镜像仓库源                
-TAG         #镜像的标签                 
-IMAGE ID    #镜像id            
-CREATED     #创建时间             
-SIZE        #大小
-</code></pre>
-<pre><code class="bash">[root@Server /]# docker images
-REPOSITORY   TAG       IMAGE ID       CREATED         SIZE
-centos       7         eeb6ee3f44bd   12 months ago   204MB
-</code></pre>
-<h5 id="查找镜像"><a href="#查找镜像" class="headerlink" title="查找镜像"></a>查找镜像</h5><pre><code class="bash">docker search tomcat    # 从Docker Hub上查找tomcat镜像
-STARS：                 # 关注度
-docker search --filter=stars=300 tomcat     #从Docker Hub上查找关注度大于300的tomcat镜像
-</code></pre>
-<h4 id="3-2-运行-x2F-删除-容器"><a href="#3-2-运行-x2F-删除-容器" class="headerlink" title="3.2 运行&#x2F;删除..容器"></a>3.2 运行&#x2F;删除..容器</h4><pre><code class="bash">[root@Server ~]# docker run -itd  --name centos7 -p 8888:23 -v /docker:/opt centos:7
-3d4b6674e54b993827be4563361183dfbf2fccebea6130395bfc785f3f0c5ca5
-[root@Server ~]# docker ps
-CONTAINER ID   IMAGE      COMMAND       CREATED         STATUS        PORTS                                   NAMES
-3d4b6674e54b   centos:7   &quot;/bin/bash&quot;   3 seconds ago   Up 1 second   0.0.0.0:8888-&gt;23/tcp, :::8888-&gt;23/tcp   centos7
-</code></pre>
-<pre><code class="bash">语法：docker run -it 镜像:版本号 bash环境  
-参数解释：    
--i： 表示以“交互模式”运行容器
--t： 表示容器启动后会进入其命令行。加入这两个参数后，容器创建就能登录进去。即 分配一个伪终端。
---name： 为创建的容器命名
--v： 表示目录映射关系(前者是宿主机目录，后者是映射到宿主机上的目录，即 宿主机目录:容器中目录)，可以使 用多个-v 做多个目录或文件映射。注意:最好做目录映射，在宿主机上做修改，然后 共享到容器上。
--d： 在run后面加上-d参数,则会创建一个守护式容器在后台运行(这样创建容器后不 会自动登录容器，如果只加-i -t 两个参数，创建后就会自动进去容器)。
--p： 表示端口映射，前者是宿主机端口，后者是容器内的映射端口。可以使用多个-p 做多个端口映射
--e： 为容器设置环境变量
---network=host： 表示将主机的网络环境映射到容器中，容器的网络与主机相同
-</code></pre>
-<h5 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a>删除容器</h5><pre><code class="bash">语法：docker rm 容器ID  
-# 正常删除  docker rm 容器ID  
-# 强制删除  docker rm -f 容器ID
-# 批量删除  docker rm -f $(docker ps -a)
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">docker --<span class="hljs-built_in">help</span>       <span class="hljs-comment">#查看docker命令</span><br>docker info         <span class="hljs-comment">#docker 详细信息，镜像和容器</span><br>docker version      <span class="hljs-comment">#查看docker版本</span><br>帮助文档地址：https://docs.docker.com/reference/<br></code></pre></td></tr></table></figure>
+
+<h4 id="3-1-镜像命令"><a href="#3-1-镜像命令" class="headerlink" title="3.1 镜像命令"></a>3.1 镜像命令</h4><h5 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 拉取镜像命令 docker pull &lt;镜像名称&gt;:&lt;版本&gt;</span><br><br>[root@Server /]<span class="hljs-comment"># docker pull centos:7</span><br>7: Pulling from library/centos<br>2d473b07cdd5: Pull complete <br>Digest: sha256:9d4bcbbb213dfd745b58be38b13b996ebb5ac315fe75711bd618426a630e0987<br>Status: Downloaded newer image <span class="hljs-keyword">for</span> centos:7<br>docker.io/library/centos:7<br></code></pre></td></tr></table></figure>
+
+
+
+<h5 id="列出本地镜像"><a href="#列出本地镜像" class="headerlink" title="列出本地镜像"></a>列出本地镜像</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">docker images <span class="hljs-comment"># 查看docker镜像；</span><br><span class="hljs-comment"># 具体列解释含义：</span><br>REPOSITORY  <span class="hljs-comment">#镜像仓库源                </span><br>TAG         <span class="hljs-comment">#镜像的标签                 </span><br>IMAGE ID    <span class="hljs-comment">#镜像id            </span><br>CREATED     <span class="hljs-comment">#创建时间             </span><br>SIZE        <span class="hljs-comment">#大小</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server /]<span class="hljs-comment"># docker images</span><br>REPOSITORY   TAG       IMAGE ID       CREATED         SIZE<br>centos       7         eeb6ee3f44bd   12 months ago   204MB<br></code></pre></td></tr></table></figure>
+
+
+
+<h5 id="查找镜像"><a href="#查找镜像" class="headerlink" title="查找镜像"></a>查找镜像</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">docker search tomcat    <span class="hljs-comment"># 从Docker Hub上查找tomcat镜像</span><br>STARS：                 <span class="hljs-comment"># 关注度</span><br>docker search --filter=stars=300 tomcat     <span class="hljs-comment">#从Docker Hub上查找关注度大于300的tomcat镜像</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="3-2-运行-x2F-删除-容器"><a href="#3-2-运行-x2F-删除-容器" class="headerlink" title="3.2 运行&#x2F;删除..容器"></a>3.2 运行&#x2F;删除..容器</h4><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ~]<span class="hljs-comment"># docker run -itd  --name centos7 -p 8888:23 -v /docker:/opt centos:7</span><br>3d4b6674e54b993827be4563361183dfbf2fccebea6130395bfc785f3f0c5ca5<br>[root@Server ~]<span class="hljs-comment"># docker ps</span><br>CONTAINER ID   IMAGE      COMMAND       CREATED         STATUS        PORTS                                   NAMES<br>3d4b6674e54b   centos:7   <span class="hljs-string">&quot;/bin/bash&quot;</span>   3 seconds ago   Up 1 second   0.0.0.0:8888-&gt;23/tcp, :::8888-&gt;23/tcp   centos7<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">语法：docker run -it 镜像:版本号 bash环境  <br>参数解释：    <br>-i： 表示以“交互模式”运行容器<br>-t： 表示容器启动后会进入其命令行。加入这两个参数后，容器创建就能登录进去。即 分配一个伪终端。<br>--name： 为创建的容器命名<br>-v： 表示目录映射关系(前者是宿主机目录，后者是映射到宿主机上的目录，即 宿主机目录:容器中目录)，可以使 用多个-v 做多个目录或文件映射。注意:最好做目录映射，在宿主机上做修改，然后 共享到容器上。<br>-d： 在run后面加上-d参数,则会创建一个守护式容器在后台运行(这样创建容器后不 会自动登录容器，如果只加-i -t 两个参数，创建后就会自动进去容器)。<br>-p： 表示端口映射，前者是宿主机端口，后者是容器内的映射端口。可以使用多个-p 做多个端口映射<br>-e： 为容器设置环境变量<br>--network=host： 表示将主机的网络环境映射到容器中，容器的网络与主机相同<br></code></pre></td></tr></table></figure>
+
+<h5 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a>删除容器</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">语法：docker <span class="hljs-built_in">rm</span> 容器ID  <br><span class="hljs-comment"># 正常删除  docker rm 容器ID  </span><br><span class="hljs-comment"># 强制删除  docker rm -f 容器ID</span><br><span class="hljs-comment"># 批量删除  docker rm -f $(docker ps -a)</span><br></code></pre></td></tr></table></figure>
+
 <h3 id="4、搭建Repository本地仓库"><a href="#4、搭建Repository本地仓库" class="headerlink" title="4、搭建Repository本地仓库"></a>4、搭建Repository本地仓库</h3><p>​		镜像构建完成后，可以很容易的在当前宿主机上运行，但是，如果需要在其它服务器上使用这个镜像，我们就需要一个集中的存储、分发镜像的服务，Docker Registry 就是这样的服务。一个 Docker Registry 中可以包含多个仓库（Repository）；每个仓库可以包含多个标签（Tag）；每个标签对应一个镜像。</p>
 <p><strong>搭建私有仓库</strong></p>
 <p>创建仓库流程</p>
-<h4 id="4-1、根据registry镜像创建容器"><a href="#4-1、根据registry镜像创建容器" class="headerlink" title="4.1、根据registry镜像创建容器"></a>4.1、根据registry镜像创建容器</h4><h5 id="下载registry镜像"><a href="#下载registry镜像" class="headerlink" title="下载registry镜像"></a>下载registry镜像</h5><pre><code class="bash">[root@Server ~]# docker pull registry
-Using default tag: latest
-latest: Pulling from library/registry
-79e9f2f55bf5: Pull complete 
-0d96da54f60b: Pull complete 
-5b27040df4a2: Pull complete 
-e2ead8259a04: Pull complete 
-3790aef225b9: Pull complete 
-Digest: sha256:169211e20e2f2d5d115674681eb79d21a217b296b43374b8e39f97fcf866b375
-Status: Downloaded newer image for registry:latest
-docker.io/library/registry:latest
-</code></pre>
-<h5 id="启动仓库容器"><a href="#启动仓库容器" class="headerlink" title="启动仓库容器"></a>启动仓库容器</h5><pre><code class="bash">docker run -d -p 5000:5000 --restart=always --name registry registry 
---restart 标志会检查容器的退出代码，并据此来决定是否要重启容器，默认是不会重启。 
---restart的参数 always：无论容器的退出代码是什么，Docker都会自动重启该容器。
-</code></pre>
-<pre><code class="bash">[root@Server ~]# docker run -d -p 5000:5000 --restart=always --name registry registry 
-24846a8f867e6683c1d1895dd8d802ea629e8e882ca2bf28e7c9eb8f6e75acaf
-[root@Server ~]# docker ps
-CONTAINER ID   IMAGE      COMMAND                  CREATED          STATUS          PORTS                                       NAMES
-24846a8f867e   registry   &quot;/entrypoint.sh /etc…&quot;   2 seconds ago    Up 2 seconds    0.0.0.0:5000-&gt;5000/tcp, :::5000-&gt;5000/tcp   registry
-</code></pre>
-<h5 id="检查容器效果"><a href="#检查容器效果" class="headerlink" title="检查容器效果"></a>检查容器效果</h5><pre><code>[root@Server ~]# curl 127.0.0.1:5000/v2/_catalog  # 回显，可以看出我们搭建成功
-&#123;&quot;repositories&quot;:[]&#125;
-</code></pre>
+<h4 id="4-1、根据registry镜像创建容器"><a href="#4-1、根据registry镜像创建容器" class="headerlink" title="4.1、根据registry镜像创建容器"></a>4.1、根据registry镜像创建容器</h4><h5 id="下载registry镜像"><a href="#下载registry镜像" class="headerlink" title="下载registry镜像"></a>下载registry镜像</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ~]<span class="hljs-comment"># docker pull registry</span><br>Using default tag: latest<br>latest: Pulling from library/registry<br>79e9f2f55bf5: Pull complete <br>0d96da54f60b: Pull complete <br>5b27040df4a2: Pull complete <br>e2ead8259a04: Pull complete <br>3790aef225b9: Pull complete <br>Digest: sha256:169211e20e2f2d5d115674681eb79d21a217b296b43374b8e39f97fcf866b375<br>Status: Downloaded newer image <span class="hljs-keyword">for</span> registry:latest<br>docker.io/library/registry:latest<br></code></pre></td></tr></table></figure>
+
+<h5 id="启动仓库容器"><a href="#启动仓库容器" class="headerlink" title="启动仓库容器"></a>启动仓库容器</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">docker run -d -p 5000:5000 --restart=always --name registry registry <br>--restart 标志会检查容器的退出代码，并据此来决定是否要重启容器，默认是不会重启。 <br>--restart的参数 always：无论容器的退出代码是什么，Docker都会自动重启该容器。<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ~]<span class="hljs-comment"># docker run -d -p 5000:5000 --restart=always --name registry registry </span><br>24846a8f867e6683c1d1895dd8d802ea629e8e882ca2bf28e7c9eb8f6e75acaf<br>[root@Server ~]<span class="hljs-comment"># docker ps</span><br>CONTAINER ID   IMAGE      COMMAND                  CREATED          STATUS          PORTS                                       NAMES<br>24846a8f867e   registry   <span class="hljs-string">&quot;/entrypoint.sh /etc…&quot;</span>   2 seconds ago    Up 2 seconds    0.0.0.0:5000-&gt;5000/tcp, :::5000-&gt;5000/tcp   registry<br></code></pre></td></tr></table></figure>
+
+<h5 id="检查容器效果"><a href="#检查容器效果" class="headerlink" title="检查容器效果"></a>检查容器效果</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">[root@Server ~]# curl 127.0.0.1:5000/v2/_catalog  # 回显，可以看出我们搭建成功<br>&#123;&quot;repositories&quot;:[]&#125;<br></code></pre></td></tr></table></figure>
+
 <h5 id="配置仓库权限"><a href="#配置仓库权限" class="headerlink" title="配置仓库权限"></a>配置仓库权限</h5><p>你如果把192.168.10.10:5000这样的内网地址作为私有仓库地址，这时你会发现无法成功推送镜像。</p>
 <p>这是因为 Docker 默认不允许非HTTPS方式推送镜像。我们可以通过 Docker 的配置选项来取消这个限制</p>
 <p>在&#x2F;etc&#x2F;docker&#x2F;daemon.json中写入如下内容（如果文件不存在请新建该文件）</p>
-<pre><code class="bash">[root@Server ~]# cat /etc/docker/daemon.json 
-&#123;
-  &quot;registry-mirrors&quot;: [
-          &quot;https://ibotsnhh.mirror.aliyuncs.com&quot;
-  ],
-  &quot;insecure-registries&quot;: [
-          &quot;192.168.10.10:5000&quot;
-  ]
-&#125;
-[root@Server ~]# systemctl  daemon-reload 
-[root@Server ~]# systemctl  restart docker
-</code></pre>
-<h4 id="4-2、提交镜像至私有仓库"><a href="#4-2、提交镜像至私有仓库" class="headerlink" title="4.2、提交镜像至私有仓库"></a>4.2、提交镜像至私有仓库</h4><h5 id="标记镜像语法为："><a href="#标记镜像语法为：" class="headerlink" title="标记镜像语法为："></a>标记镜像语法为：</h5><pre><code class="bash">[root@Server ~]# docker images
-REPOSITORY   TAG       IMAGE ID       CREATED         SIZE
-registry     latest    b8604a3fe854   10 months ago   26.2MB
-centos       7         eeb6ee3f44bd   12 months ago   204MB
-[root@Server ~]# docker tag registry:latest 192.168.10.10:5000/registry:v1
-[root@Server ~]# docker images
-REPOSITORY                    TAG       IMAGE ID       CREATED         SIZE
-192.168.10.10:5000/registry   v1        b8604a3fe854   10 months ago   26.2MB
-registry                      latest    b8604a3fe854   10 months ago   26.2MB
-centos                        7         eeb6ee3f44bd   12 months ago   204MB
-</code></pre>
-<h5 id="上传镜像至仓库"><a href="#上传镜像至仓库" class="headerlink" title="上传镜像至仓库"></a>上传镜像至仓库</h5><pre><code class="bash">[root@Server ~]# docker push 192.168.10.10:5000/registry:v1
-The push refers to repository [192.168.10.10:5000/registry]
-aeccf26589a7: Pushed 
-f640be0d5aad: Pushed 
-aa4330046b37: Pushed 
-ad10b481abe7: Pushed 
-69715584ec78: Pushed 
-v1: digest: sha256:36cb5b157911061fb610d8884dc09e0b0300a767a350563cbfd88b4b85324ce4 size: 1363
-[root@Server ~]# 
-</code></pre>
-<pre><code class="bash">[root@Server ~]# curl 127.0.0.1:5000/v2/_catalog
-&#123;&quot;repositories&quot;:[&quot;registry&quot;]&#125;
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ~]<span class="hljs-comment"># cat /etc/docker/daemon.json </span><br>&#123;<br>  <span class="hljs-string">&quot;registry-mirrors&quot;</span>: [<br>          <span class="hljs-string">&quot;https://ibotsnhh.mirror.aliyuncs.com&quot;</span><br>  ],<br>  <span class="hljs-string">&quot;insecure-registries&quot;</span>: [<br>          <span class="hljs-string">&quot;192.168.10.10:5000&quot;</span><br>  ]<br>&#125;<br>[root@Server ~]<span class="hljs-comment"># systemctl  daemon-reload </span><br>[root@Server ~]<span class="hljs-comment"># systemctl  restart docker</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="4-2、提交镜像至私有仓库"><a href="#4-2、提交镜像至私有仓库" class="headerlink" title="4.2、提交镜像至私有仓库"></a>4.2、提交镜像至私有仓库</h4><h5 id="标记镜像语法为："><a href="#标记镜像语法为：" class="headerlink" title="标记镜像语法为："></a>标记镜像语法为：</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ~]<span class="hljs-comment"># docker images</span><br>REPOSITORY   TAG       IMAGE ID       CREATED         SIZE<br>registry     latest    b8604a3fe854   10 months ago   26.2MB<br>centos       7         eeb6ee3f44bd   12 months ago   204MB<br>[root@Server ~]<span class="hljs-comment"># docker tag registry:latest 192.168.10.10:5000/registry:v1</span><br>[root@Server ~]<span class="hljs-comment"># docker images</span><br>REPOSITORY                    TAG       IMAGE ID       CREATED         SIZE<br>192.168.10.10:5000/registry   v1        b8604a3fe854   10 months ago   26.2MB<br>registry                      latest    b8604a3fe854   10 months ago   26.2MB<br>centos                        7         eeb6ee3f44bd   12 months ago   204MB<br></code></pre></td></tr></table></figure>
+
+<h5 id="上传镜像至仓库"><a href="#上传镜像至仓库" class="headerlink" title="上传镜像至仓库"></a>上传镜像至仓库</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ~]<span class="hljs-comment"># docker push 192.168.10.10:5000/registry:v1</span><br>The push refers to repository [192.168.10.10:5000/registry]<br>aeccf26589a7: Pushed <br>f640be0d5aad: Pushed <br>aa4330046b37: Pushed <br>ad10b481abe7: Pushed <br>69715584ec78: Pushed <br>v1: digest: sha256:36cb5b157911061fb610d8884dc09e0b0300a767a350563cbfd88b4b85324ce4 size: 1363<br>[root@Server ~]<span class="hljs-comment"># </span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ~]<span class="hljs-comment"># curl 127.0.0.1:5000/v2/_catalog</span><br>&#123;<span class="hljs-string">&quot;repositories&quot;</span>:[<span class="hljs-string">&quot;registry&quot;</span>]&#125;<br></code></pre></td></tr></table></figure>
+
 <p><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/202209291551495.png" alt="image-20220929155137457"></p>
 <h3 id="5、Dockerfile制作镜像"><a href="#5、Dockerfile制作镜像" class="headerlink" title="5、Dockerfile制作镜像"></a>5、Dockerfile制作镜像</h3><p><strong>DockerFile介绍</strong></p>
 <p>DockerFile就是用来构建镜像的！命令脚本！先体验一下！</p>
@@ -528,158 +296,22 @@ v1: digest: sha256:36cb5b157911061fb610d8884dc09e0b0300a767a350563cbfd88b4b85324
 <p>现在知道这些指令后，我们自己练习自己写一个镜像！</p>
 </li>
 </ul>
-<pre><code class="bash">FROM          # 基础镜像，一切从这里构建
-MAINTAINER    # 镜像是谁写的，名字 + 邮箱
-RUN           # Docker镜像构建的时候需要运行的命令
-ADD           # 步骤：tomcat镜像，这个tomcat压缩包！添加内容
-WORKDIR       # 指定镜像的工作目录
-VOLUME        # 挂载卷的目录位置
-EXPOSE        # 指定暴露端口配置（和我们运行容器用的&quot;-p&quot;是一个道理）
-CMD           # 指定这个容器启动的时候要运行的命令，只要最后一个会生效，可被代替
-ENTRYPOINT    # 指定这个容器启动的时候要运行的命令，可以追加命令
-ONBUILD       # 当构一个被继承 DockerFile 这个时候就会运行 ONBUILD 的指令，触发指令
-COPY          # 类似ADD，将我们文件拷贝到镜像中,简写（CP）
-ENV           # 构建的时候设置环境变量
-</code></pre>
-<h5 id="创建一个自己的镜像"><a href="#创建一个自己的镜像" class="headerlink" title="创建一个自己的镜像"></a>创建一个自己的镜像</h5><pre><code class="bash">[root@Server dockerfile]# cp /etc/yum.repos.d/CentOS-Base.repo . # 吧yum文件拷贝到当前目录
-[root@Server dockerfile]# ls
-CentOS-Base.repo  Dockerfile
-# 编写dockerFile
-[root@Server dockerfile]# cat Dockerfile 
-FROM centos:8
-MAINTAINER wsnb
-RUN rm -rf /etc/yum.repos.d/*
-COPY centos1.repo  /etc/yum.repos.d/
-RUN ls /etc/yum.repos.d/
-EXPOSE 80
-EXPOSE 23
-RUN yum -y install vim
-CMD echo &quot;-----end----&quot;
-CMD /bin/bash
-</code></pre>
-<h5 id="构建镜像"><a href="#构建镜像" class="headerlink" title="构建镜像"></a>构建镜像</h5><pre><code class="bash">[root@Server dockerfile]# docker build -f Dockerfile .
-Sending build context to Docker daemon  7.168kB
-Step 1/10 : FROM centos:8
- ---&gt; 5d0da3dc9764
-Step 2/10 : MAINTAINER wsnb
- ---&gt; Using cache
- ---&gt; ed9d500cdb37
-Step 3/10 : RUN rm -rf /etc/yum.repos.d/*
- ---&gt; Using cache
- ---&gt; 079f615ff017
-Step 4/10 : COPY centos1.repo  /etc/yum.repos.d/
- ---&gt; fa0f3dc832aa
-Step 5/10 : RUN ls /etc/yum.repos.d/
- ---&gt; Running in f18d2ba20735
-centos1.repo
-Removing intermediate container f18d2ba20735
- ---&gt; 25f4da680fe3
-Step 6/10 : EXPOSE 80
- ---&gt; Running in 997af4746276
-Removing intermediate container 997af4746276
- ---&gt; 929d0301e5aa
-Step 7/10 : EXPOSE 23
- ---&gt; Running in 583c5a4706c3
-Removing intermediate container 583c5a4706c3
- ---&gt; 9eada5309326
-Step 8/10 : RUN yum -y install vim
- ---&gt; Running in 545279c89e93
-CentOS-8.5.2111 - Base - mirrors.aliyun.com     2.1 MB/s | 4.6 MB     00:02    
-CentOS-8.5.2111 - Extras - mirrors.aliyun.com    38 kB/s |  10 kB     00:00    
-CentOS-8.5.2111 - AppStream - mirrors.aliyun.co 1.7 MB/s | 8.4 MB     00:04    
-Dependencies resolved.
-================================================================================
- Package             Arch        Version                   Repository      Size
-================================================================================
-Installing:
- vim-enhanced        x86_64      2:8.0.1763-16.el8         AppStream      1.4 M
-Installing dependencies:
- gpm-libs            x86_64      1.20.7-17.el8             AppStream       39 k
- vim-common          x86_64      2:8.0.1763-16.el8         AppStream      6.3 M
- vim-filesystem      noarch      2:8.0.1763-16.el8         AppStream       49 k
- which               x86_64      2.21-16.el8               base            49 k
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">FROM          <span class="hljs-comment"># 基础镜像，一切从这里构建</span><br>MAINTAINER    <span class="hljs-comment"># 镜像是谁写的，名字 + 邮箱</span><br>RUN           <span class="hljs-comment"># Docker镜像构建的时候需要运行的命令</span><br>ADD           <span class="hljs-comment"># 步骤：tomcat镜像，这个tomcat压缩包！添加内容</span><br>WORKDIR       <span class="hljs-comment"># 指定镜像的工作目录</span><br>VOLUME        <span class="hljs-comment"># 挂载卷的目录位置</span><br>EXPOSE        <span class="hljs-comment"># 指定暴露端口配置（和我们运行容器用的&quot;-p&quot;是一个道理）</span><br>CMD           <span class="hljs-comment"># 指定这个容器启动的时候要运行的命令，只要最后一个会生效，可被代替</span><br>ENTRYPOINT    <span class="hljs-comment"># 指定这个容器启动的时候要运行的命令，可以追加命令</span><br>ONBUILD       <span class="hljs-comment"># 当构一个被继承 DockerFile 这个时候就会运行 ONBUILD 的指令，触发指令</span><br>COPY          <span class="hljs-comment"># 类似ADD，将我们文件拷贝到镜像中,简写（CP）</span><br>ENV           <span class="hljs-comment"># 构建的时候设置环境变量</span><br></code></pre></td></tr></table></figure>
 
-Transaction Summary
-================================================================================
-Install  5 Packages
+<h5 id="创建一个自己的镜像"><a href="#创建一个自己的镜像" class="headerlink" title="创建一个自己的镜像"></a>创建一个自己的镜像</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server dockerfile]<span class="hljs-comment"># cp /etc/yum.repos.d/CentOS-Base.repo . # 吧yum文件拷贝到当前目录</span><br>[root@Server dockerfile]<span class="hljs-comment"># ls</span><br>CentOS-Base.repo  Dockerfile<br><span class="hljs-comment"># 编写dockerFile</span><br>[root@Server dockerfile]<span class="hljs-comment"># cat Dockerfile </span><br>FROM centos:8<br>MAINTAINER wsnb<br>RUN <span class="hljs-built_in">rm</span> -rf /etc/yum.repos.d/*<br>COPY centos1.repo  /etc/yum.repos.d/<br>RUN <span class="hljs-built_in">ls</span> /etc/yum.repos.d/<br>EXPOSE 80<br>EXPOSE 23<br>RUN yum -y install vim<br>CMD <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;-----end----&quot;</span><br>CMD /bin/bash<br></code></pre></td></tr></table></figure>
 
-Total download size: 7.8 M
-Installed size: 30 M
-Downloading Packages:
-(1/5): gpm-libs-1.20.7-17.el8.x86_64.rpm        392 kB/s |  39 kB     00:00    
-(2/5): which-2.21-16.el8.x86_64.rpm             171 kB/s |  49 kB     00:00    
-(3/5): vim-filesystem-8.0.1763-16.el8.noarch.rp 529 kB/s |  49 kB     00:00    
-(4/5): vim-enhanced-8.0.1763-16.el8.x86_64.rpm  819 kB/s | 1.4 MB     00:01    
-(5/5): vim-common-8.0.1763-16.el8.x86_64.rpm    1.8 MB/s | 6.3 MB     00:03    
---------------------------------------------------------------------------------
-Total                                           2.2 MB/s | 7.8 MB     00:03     
-Running transaction check
-Transaction check succeeded.
-Running transaction test
-Transaction test succeeded.
-Running transaction
-  Preparing        :                                                        1/1 
-  Installing       : vim-filesystem-2:8.0.1763-16.el8.noarch                1/5 
-  Installing       : vim-common-2:8.0.1763-16.el8.x86_64                    2/5 
-  Installing       : gpm-libs-1.20.7-17.el8.x86_64                          3/5 
-  Running scriptlet: gpm-libs-1.20.7-17.el8.x86_64                          3/5 
-  Installing       : which-2.21-16.el8.x86_64                               4/5 
-  Installing       : vim-enhanced-2:8.0.1763-16.el8.x86_64                  5/5 
-  Running scriptlet: vim-enhanced-2:8.0.1763-16.el8.x86_64                  5/5 
-  Running scriptlet: vim-common-2:8.0.1763-16.el8.x86_64                    5/5 
-  Verifying        : which-2.21-16.el8.x86_64                               1/5 
-  Verifying        : gpm-libs-1.20.7-17.el8.x86_64                          2/5 
-  Verifying        : vim-common-2:8.0.1763-16.el8.x86_64                    3/5 
-  Verifying        : vim-enhanced-2:8.0.1763-16.el8.x86_64                  4/5 
-  Verifying        : vim-filesystem-2:8.0.1763-16.el8.noarch                5/5 
+<h5 id="构建镜像"><a href="#构建镜像" class="headerlink" title="构建镜像"></a>构建镜像</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server dockerfile]<span class="hljs-comment"># docker build -f Dockerfile .</span><br>Sending build context to Docker daemon  7.168kB<br>Step 1/10 : FROM centos:8<br> ---&gt; 5d0da3dc9764<br>Step 2/10 : MAINTAINER wsnb<br> ---&gt; Using cache<br> ---&gt; ed9d500cdb37<br>Step 3/10 : RUN <span class="hljs-built_in">rm</span> -rf /etc/yum.repos.d/*<br> ---&gt; Using cache<br> ---&gt; 079f615ff017<br>Step 4/10 : COPY centos1.repo  /etc/yum.repos.d/<br> ---&gt; fa0f3dc832aa<br>Step 5/10 : RUN <span class="hljs-built_in">ls</span> /etc/yum.repos.d/<br> ---&gt; Running <span class="hljs-keyword">in</span> f18d2ba20735<br>centos1.repo<br>Removing intermediate container f18d2ba20735<br> ---&gt; 25f4da680fe3<br>Step 6/10 : EXPOSE 80<br> ---&gt; Running <span class="hljs-keyword">in</span> 997af4746276<br>Removing intermediate container 997af4746276<br> ---&gt; 929d0301e5aa<br>Step 7/10 : EXPOSE 23<br> ---&gt; Running <span class="hljs-keyword">in</span> 583c5a4706c3<br>Removing intermediate container 583c5a4706c3<br> ---&gt; 9eada5309326<br>Step 8/10 : RUN yum -y install vim<br> ---&gt; Running <span class="hljs-keyword">in</span> 545279c89e93<br>CentOS-8.5.2111 - Base - mirrors.aliyun.com     2.1 MB/s | 4.6 MB     00:02    <br>CentOS-8.5.2111 - Extras - mirrors.aliyun.com    38 kB/s |  10 kB     00:00    <br>CentOS-8.5.2111 - AppStream - mirrors.aliyun.co 1.7 MB/s | 8.4 MB     00:04    <br>Dependencies resolved.<br>================================================================================<br> Package             Arch        Version                   Repository      Size<br>================================================================================<br>Installing:<br> vim-enhanced        x86_64      2:8.0.1763-16.el8         AppStream      1.4 M<br>Installing dependencies:<br> gpm-libs            x86_64      1.20.7-17.el8             AppStream       39 k<br> vim-common          x86_64      2:8.0.1763-16.el8         AppStream      6.3 M<br> vim-filesystem      noarch      2:8.0.1763-16.el8         AppStream       49 k<br> <span class="hljs-built_in">which</span>               x86_64      2.21-16.el8               base            49 k<br><br>Transaction Summary<br>================================================================================<br>Install  5 Packages<br><br>Total download size: 7.8 M<br>Installed size: 30 M<br>Downloading Packages:<br>(1/5): gpm-libs-1.20.7-17.el8.x86_64.rpm        392 kB/s |  39 kB     00:00    <br>(2/5): which-2.21-16.el8.x86_64.rpm             171 kB/s |  49 kB     00:00    <br>(3/5): vim-filesystem-8.0.1763-16.el8.noarch.rp 529 kB/s |  49 kB     00:00    <br>(4/5): vim-enhanced-8.0.1763-16.el8.x86_64.rpm  819 kB/s | 1.4 MB     00:01    <br>(5/5): vim-common-8.0.1763-16.el8.x86_64.rpm    1.8 MB/s | 6.3 MB     00:03    <br>--------------------------------------------------------------------------------<br>Total                                           2.2 MB/s | 7.8 MB     00:03     <br>Running transaction check<br>Transaction check succeeded.<br>Running transaction <span class="hljs-built_in">test</span><br>Transaction <span class="hljs-built_in">test</span> succeeded.<br>Running transaction<br>  Preparing        :                                                        1/1 <br>  Installing       : vim-filesystem-2:8.0.1763-16.el8.noarch                1/5 <br>  Installing       : vim-common-2:8.0.1763-16.el8.x86_64                    2/5 <br>  Installing       : gpm-libs-1.20.7-17.el8.x86_64                          3/5 <br>  Running scriptlet: gpm-libs-1.20.7-17.el8.x86_64                          3/5 <br>  Installing       : which-2.21-16.el8.x86_64                               4/5 <br>  Installing       : vim-enhanced-2:8.0.1763-16.el8.x86_64                  5/5 <br>  Running scriptlet: vim-enhanced-2:8.0.1763-16.el8.x86_64                  5/5 <br>  Running scriptlet: vim-common-2:8.0.1763-16.el8.x86_64                    5/5 <br>  Verifying        : which-2.21-16.el8.x86_64                               1/5 <br>  Verifying        : gpm-libs-1.20.7-17.el8.x86_64                          2/5 <br>  Verifying        : vim-common-2:8.0.1763-16.el8.x86_64                    3/5 <br>  Verifying        : vim-enhanced-2:8.0.1763-16.el8.x86_64                  4/5 <br>  Verifying        : vim-filesystem-2:8.0.1763-16.el8.noarch                5/5 <br><br>Installed:<br>  gpm-libs-1.20.7-17.el8.x86_64         vim-common-2:8.0.1763-16.el8.x86_64    <br>  vim-enhanced-2:8.0.1763-16.el8.x86_64 vim-filesystem-2:8.0.1763-16.el8.noarch<br>  which-2.21-16.el8.x86_64             <br><br>Complete!<br>Removing intermediate container 545279c89e93<br> ---&gt; e5c8ca311626<br>Step 9/10 : CMD <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;-----end----&quot;</span><br> ---&gt; Running <span class="hljs-keyword">in</span> 91baa8452cd7<br>Removing intermediate container 91baa8452cd7<br> ---&gt; d2b0074329d9<br>Step 10/10 : CMD /bin/bash<br> ---&gt; Running <span class="hljs-keyword">in</span> ceabd3e1268a<br>Removing intermediate container ceabd3e1268a<br> ---&gt; 0c30ff39bef8<br>Successfully built 0c30ff39bef8<br></code></pre></td></tr></table></figure>
 
-Installed:
-  gpm-libs-1.20.7-17.el8.x86_64         vim-common-2:8.0.1763-16.el8.x86_64    
-  vim-enhanced-2:8.0.1763-16.el8.x86_64 vim-filesystem-2:8.0.1763-16.el8.noarch
-  which-2.21-16.el8.x86_64             
+<h5 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server dockerfile]<span class="hljs-comment"># docker run -itd --name wsnb1 0c30ff39bef8 </span><br>ccaa11ce6d86cdcaa1238453f6aa52b020781604f8120a2dd8b65cfe5f3db9d4<br>[root@Server dockerfile]<span class="hljs-comment"># docker ps</span><br>CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS          PORTS            NAMES<br>ccaa11ce6d86   0c30ff39bef8   <span class="hljs-string">&quot;/bin/sh -c /bin/bash&quot;</span>   2 seconds ago    Up 2 seconds    23/tcp, 80/tcp   wsnb1<br>51fde0d4f283   centos:8       <span class="hljs-string">&quot;/bin/bash&quot;</span>              11 minutes ago   Up 11 minutes                    centos8<br></code></pre></td></tr></table></figure>
 
-Complete!
-Removing intermediate container 545279c89e93
- ---&gt; e5c8ca311626
-Step 9/10 : CMD echo &quot;-----end----&quot;
- ---&gt; Running in 91baa8452cd7
-Removing intermediate container 91baa8452cd7
- ---&gt; d2b0074329d9
-Step 10/10 : CMD /bin/bash
- ---&gt; Running in ceabd3e1268a
-Removing intermediate container ceabd3e1268a
- ---&gt; 0c30ff39bef8
-Successfully built 0c30ff39bef8
-</code></pre>
-<h5 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h5><pre><code class="bash">[root@Server dockerfile]# docker run -itd --name wsnb1 0c30ff39bef8 
-ccaa11ce6d86cdcaa1238453f6aa52b020781604f8120a2dd8b65cfe5f3db9d4
-[root@Server dockerfile]# docker ps
-CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS          PORTS            NAMES
-ccaa11ce6d86   0c30ff39bef8   &quot;/bin/sh -c /bin/bash&quot;   2 seconds ago    Up 2 seconds    23/tcp, 80/tcp   wsnb1
-51fde0d4f283   centos:8       &quot;/bin/bash&quot;              11 minutes ago   Up 11 minutes                    centos8
-</code></pre>
-<h5 id="标记镜像"><a href="#标记镜像" class="headerlink" title="标记镜像"></a>标记镜像</h5><pre><code class="bash">[root@Server dockerfile]# docker tag  0c30ff39bef8  192.168.10.10:5000/wsnb:v1    
-[root@Server dockerfile]# docker images
-REPOSITORY                    TAG       IMAGE ID       CREATED         SIZE
-192.168.10.10:5000/wsnb       v1        0c30ff39bef8   6 minutes ago   298MB    # 这个
-192.168.10.10:5000/registry   v1        b8604a3fe854   10 months ago   26.2MB
-registry                      latest    b8604a3fe854   10 months ago   26.2MB
-centos                        7         eeb6ee3f44bd   12 months ago   204MB
-centos                        8         5d0da3dc9764   12 months ago   231MB
-</code></pre>
-<h5 id="上传本地仓库"><a href="#上传本地仓库" class="headerlink" title="上传本地仓库"></a>上传本地仓库</h5><pre><code class="bash">[root@Server dockerfile]# docker push 192.168.10.10:5000/wsnb:v1
-The push refers to repository [192.168.10.10:5000/wsnb]
-ac5a788b3b8b: Pushed 
-06ce684cb1c7: Pushed 
-df1b7ae76752: Pushed 
-74ddd0ec08fa: Pushed 
-v1: digest: sha256:93e9be3e76a1bbc246fea55535dca553b1a5d8f22ae82dc6bd507e05b33fcd4e size: 1155
-</code></pre>
-<h5 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h5><pre><code>[root@Server dockerfile]# curl 192.168.10.10:5000/v2/_catalog       
-&#123;&quot;repositories&quot;:[&quot;registry&quot;,&quot;wsnb&quot;]&#125;
-</code></pre>
+<h5 id="标记镜像"><a href="#标记镜像" class="headerlink" title="标记镜像"></a>标记镜像</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server dockerfile]<span class="hljs-comment"># docker tag  0c30ff39bef8  192.168.10.10:5000/wsnb:v1    </span><br>[root@Server dockerfile]<span class="hljs-comment"># docker images</span><br>REPOSITORY                    TAG       IMAGE ID       CREATED         SIZE<br>192.168.10.10:5000/wsnb       v1        0c30ff39bef8   6 minutes ago   298MB    <span class="hljs-comment"># 这个</span><br>192.168.10.10:5000/registry   v1        b8604a3fe854   10 months ago   26.2MB<br>registry                      latest    b8604a3fe854   10 months ago   26.2MB<br>centos                        7         eeb6ee3f44bd   12 months ago   204MB<br>centos                        8         5d0da3dc9764   12 months ago   231MB<br></code></pre></td></tr></table></figure>
+
+<h5 id="上传本地仓库"><a href="#上传本地仓库" class="headerlink" title="上传本地仓库"></a>上传本地仓库</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server dockerfile]<span class="hljs-comment"># docker push 192.168.10.10:5000/wsnb:v1</span><br>The push refers to repository [192.168.10.10:5000/wsnb]<br>ac5a788b3b8b: Pushed <br>06ce684cb1c7: Pushed <br>df1b7ae76752: Pushed <br>74ddd0ec08fa: Pushed <br>v1: digest: sha256:93e9be3e76a1bbc246fea55535dca553b1a5d8f22ae82dc6bd507e05b33fcd4e size: 1155<br></code></pre></td></tr></table></figure>
+
+<h5 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">[root@Server dockerfile]# curl 192.168.10.10:5000/v2/_catalog       <br>&#123;&quot;repositories&quot;:[&quot;registry&quot;,&quot;wsnb&quot;]&#125;<br></code></pre></td></tr></table></figure>
+
 <p><img src="https://cloud-1311712548.cos.ap-guangzhou.myqcloud.com/img/202209292117255.png" alt="image-20220929211739200"></p>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">XiaoBei</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2023/03/10/Docker%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/">http://example.com/2023/03/10/Docker%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="null" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">xiaobei</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Docker-%E5%9F%BA%E7%A1%80/">Docker-基础</a></div><div class="post_share"><div class="social-share" data-image="https://w.wallhaven.cc/full/qz/wallhaven-qzgzwl.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/03/10/Docker%E7%BD%91%E7%BB%9C/" title="Docker网络"><img class="cover" src="https://w.wallhaven.cc/full/we/wallhaven-wel6or.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Docker网络</div></div></a></div><div class="next-post pull-right"><a href="/2022/08/02/%E7%AE%80%E5%8D%95%E6%90%AD%E5%BB%BAhttp%E6%9C%8D%E5%8A%A1/" title="简单搭建http服务"><img class="cover" src="https://th.wallhaven.cc/small/y8/y8622k.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">简单搭建http服务</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/wsnb.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">XiaoBei</div><div class="author-info__description">归途也还可爱</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/wsnbwz" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:wsnblove@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Docker"><span class="toc-text">Docker</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86"><span class="toc-text">一、相关知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%9E%E9%AA%8C%E7%9B%AE%E6%A0%87"><span class="toc-text">二、实验目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%9E%E9%AA%8C%E5%AE%9E%E6%96%BD"><span class="toc-text">二、实验实施</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E5%AE%9E%E9%AA%8C%E8%A7%84%E5%88%92"><span class="toc-text">1、实验规划</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E5%AE%9E%E6%96%BD%E6%AD%A5%E9%AA%A4"><span class="toc-text">2、实施步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1%E3%80%81%E9%85%8D%E7%BD%AE%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83"><span class="toc-text">2.1、配置基本环境</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2%E3%80%81%E5%AE%89%E8%A3%85Docker"><span class="toc-text">2.2、安装Docker</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-%E6%9F%A5%E7%9C%8Bdocker%E7%89%88%E6%9C%AC"><span class="toc-text">2.3 查看docker版本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4%E3%80%81%E6%B7%BB%E5%8A%A0docker%E5%8A%A0%E9%80%9F%E5%99%A8"><span class="toc-text">2.4、添加docker加速器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">3、常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-%E9%95%9C%E5%83%8F%E5%91%BD%E4%BB%A4"><span class="toc-text">3.1 镜像命令</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F"><span class="toc-text">拉取镜像</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%97%E5%87%BA%E6%9C%AC%E5%9C%B0%E9%95%9C%E5%83%8F"><span class="toc-text">列出本地镜像</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E9%95%9C%E5%83%8F"><span class="toc-text">查找镜像</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-%E8%BF%90%E8%A1%8C-x2F-%E5%88%A0%E9%99%A4-%E5%AE%B9%E5%99%A8"><span class="toc-text">3.2 运行&#x2F;删除..容器</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E5%AE%B9%E5%99%A8"><span class="toc-text">删除容器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E6%90%AD%E5%BB%BARepository%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93"><span class="toc-text">4、搭建Repository本地仓库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1%E3%80%81%E6%A0%B9%E6%8D%AEregistry%E9%95%9C%E5%83%8F%E5%88%9B%E5%BB%BA%E5%AE%B9%E5%99%A8"><span class="toc-text">4.1、根据registry镜像创建容器</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDregistry%E9%95%9C%E5%83%8F"><span class="toc-text">下载registry镜像</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E4%BB%93%E5%BA%93%E5%AE%B9%E5%99%A8"><span class="toc-text">启动仓库容器</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E5%AE%B9%E5%99%A8%E6%95%88%E6%9E%9C"><span class="toc-text">检查容器效果</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E4%BB%93%E5%BA%93%E6%9D%83%E9%99%90"><span class="toc-text">配置仓库权限</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2%E3%80%81%E6%8F%90%E4%BA%A4%E9%95%9C%E5%83%8F%E8%87%B3%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93"><span class="toc-text">4.2、提交镜像至私有仓库</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A0%87%E8%AE%B0%E9%95%9C%E5%83%8F%E8%AF%AD%E6%B3%95%E4%B8%BA%EF%BC%9A"><span class="toc-text">标记镜像语法为：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%8A%E4%BC%A0%E9%95%9C%E5%83%8F%E8%87%B3%E4%BB%93%E5%BA%93"><span class="toc-text">上传镜像至仓库</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5%E3%80%81Dockerfile%E5%88%B6%E4%BD%9C%E9%95%9C%E5%83%8F"><span class="toc-text">5、Dockerfile制作镜像</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1DockerFile%E6%9E%84%E5%BB%BA%E8%BF%87%E7%A8%8B"><span class="toc-text">5.1DockerFile构建过程</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%EF%BC%9A"><span class="toc-text">基础知识：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E7%9A%84%E9%95%9C%E5%83%8F"><span class="toc-text">创建一个自己的镜像</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E9%95%9C%E5%83%8F"><span class="toc-text">构建镜像</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E5%AE%B9%E5%99%A8"><span class="toc-text">启动容器</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A0%87%E8%AE%B0%E9%95%9C%E5%83%8F"><span class="toc-text">标记镜像</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%8A%E4%BC%A0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93"><span class="toc-text">上传本地仓库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81"><span class="toc-text">验证</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/03/10/Docker%E7%BD%91%E7%BB%9C/" title="Docker网络"><img src="https://w.wallhaven.cc/full/we/wallhaven-wel6or.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Docker网络"/></a><div class="content"><a class="title" href="/2023/03/10/Docker%E7%BD%91%E7%BB%9C/" title="Docker网络">Docker网络</a><time datetime="2023-03-10T13:15:04.000Z" title="发表于 2023-03-10 21:15:04">2023-03-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/10/Docker%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/" title="Docker基础搭建"><img src="https://w.wallhaven.cc/full/qz/wallhaven-qzgzwl.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Docker基础搭建"/></a><div class="content"><a class="title" href="/2023/03/10/Docker%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/" title="Docker基础搭建">Docker基础搭建</a><time datetime="2023-03-10T08:00:34.000Z" title="发表于 2023-03-10 16:00:34">2023-03-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/02/%E7%AE%80%E5%8D%95%E6%90%AD%E5%BB%BAhttp%E6%9C%8D%E5%8A%A1/" title="简单搭建http服务"><img src="https://th.wallhaven.cc/small/y8/y8622k.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="简单搭建http服务"/></a><div class="content"><a class="title" href="/2022/08/02/%E7%AE%80%E5%8D%95%E6%90%AD%E5%BB%BAhttp%E6%9C%8D%E5%8A%A1/" title="简单搭建http服务">简单搭建http服务</a><time datetime="2022-08-02T06:07:47.000Z" title="发表于 2022-08-02 14:07:47">2022-08-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/02/DHCP%E5%85%AB%E7%A7%8D%E6%8A%A5%E6%96%87%E8%AF%A6%E8%A7%A3/" title="DHCP八种报文详解"><img src="https://th.wallhaven.cc/small/zy/zyxvqy.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="DHCP八种报文详解"/></a><div class="content"><a class="title" href="/2022/08/02/DHCP%E5%85%AB%E7%A7%8D%E6%8A%A5%E6%96%87%E8%AF%A6%E8%A7%A3/" title="DHCP八种报文详解">DHCP八种报文详解</a><time datetime="2022-08-02T06:00:35.000Z" title="发表于 2022-08-02 14:00:35">2022-08-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/02/NAT-NAPT%E4%BB%A5%E5%8F%8AeasyIP%E7%9A%84%E5%8C%BA%E5%88%AB/" title="NAT,NAPT以及easyIP的区别"><img src="https://w.wallhaven.cc/full/7p/wallhaven-7pw269.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="NAT,NAPT以及easyIP的区别"/></a><div class="content"><a class="title" href="/2022/08/02/NAT-NAPT%E4%BB%A5%E5%8F%8AeasyIP%E7%9A%84%E5%8C%BA%E5%88%AB/" title="NAT,NAPT以及easyIP的区别">NAT,NAPT以及easyIP的区别</a><time datetime="2022-08-02T05:55:50.000Z" title="发表于 2022-08-02 13:55:50">2022-08-02</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By XiaoBei</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">XiaoBei</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2023/03/10/Docker%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/">http://example.com/2023/03/10/Docker%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="null" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">xiaobei</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Docker-%E5%9F%BA%E7%A1%80/">Docker-基础</a></div><div class="post_share"><div class="social-share" data-image="https://w.wallhaven.cc/full/l8/wallhaven-l8kwpr.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/03/10/Docker%E7%BD%91%E7%BB%9C/" title="Docker网络"><img class="cover" src="https://w.wallhaven.cc/full/7p/wallhaven-7pw269.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Docker网络</div></div></a></div><div class="next-post pull-right"><a href="/2022/08/02/%E7%AE%80%E5%8D%95%E6%90%AD%E5%BB%BAhttp%E6%9C%8D%E5%8A%A1/" title="简单搭建http服务"><img class="cover" src="https://w.wallhaven.cc/full/jx/wallhaven-jxky9p.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">简单搭建http服务</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/wsnb.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">XiaoBei</div><div class="author-info__description">归途也还可爱</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/wsnbwz" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:wsnblove@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Docker"><span class="toc-text">Docker</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86"><span class="toc-text">一、相关知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%9E%E9%AA%8C%E7%9B%AE%E6%A0%87"><span class="toc-text">二、实验目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%9E%E9%AA%8C%E5%AE%9E%E6%96%BD"><span class="toc-text">二、实验实施</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E5%AE%9E%E9%AA%8C%E8%A7%84%E5%88%92"><span class="toc-text">1、实验规划</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E5%AE%9E%E6%96%BD%E6%AD%A5%E9%AA%A4"><span class="toc-text">2、实施步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1%E3%80%81%E9%85%8D%E7%BD%AE%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83"><span class="toc-text">2.1、配置基本环境</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2%E3%80%81%E5%AE%89%E8%A3%85Docker"><span class="toc-text">2.2、安装Docker</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-%E6%9F%A5%E7%9C%8Bdocker%E7%89%88%E6%9C%AC"><span class="toc-text">2.3 查看docker版本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4%E3%80%81%E6%B7%BB%E5%8A%A0docker%E5%8A%A0%E9%80%9F%E5%99%A8"><span class="toc-text">2.4、添加docker加速器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">3、常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-%E9%95%9C%E5%83%8F%E5%91%BD%E4%BB%A4"><span class="toc-text">3.1 镜像命令</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F"><span class="toc-text">拉取镜像</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%97%E5%87%BA%E6%9C%AC%E5%9C%B0%E9%95%9C%E5%83%8F"><span class="toc-text">列出本地镜像</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E9%95%9C%E5%83%8F"><span class="toc-text">查找镜像</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-%E8%BF%90%E8%A1%8C-x2F-%E5%88%A0%E9%99%A4-%E5%AE%B9%E5%99%A8"><span class="toc-text">3.2 运行&#x2F;删除..容器</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E5%AE%B9%E5%99%A8"><span class="toc-text">删除容器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E6%90%AD%E5%BB%BARepository%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93"><span class="toc-text">4、搭建Repository本地仓库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1%E3%80%81%E6%A0%B9%E6%8D%AEregistry%E9%95%9C%E5%83%8F%E5%88%9B%E5%BB%BA%E5%AE%B9%E5%99%A8"><span class="toc-text">4.1、根据registry镜像创建容器</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDregistry%E9%95%9C%E5%83%8F"><span class="toc-text">下载registry镜像</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E4%BB%93%E5%BA%93%E5%AE%B9%E5%99%A8"><span class="toc-text">启动仓库容器</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E5%AE%B9%E5%99%A8%E6%95%88%E6%9E%9C"><span class="toc-text">检查容器效果</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E4%BB%93%E5%BA%93%E6%9D%83%E9%99%90"><span class="toc-text">配置仓库权限</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2%E3%80%81%E6%8F%90%E4%BA%A4%E9%95%9C%E5%83%8F%E8%87%B3%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93"><span class="toc-text">4.2、提交镜像至私有仓库</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A0%87%E8%AE%B0%E9%95%9C%E5%83%8F%E8%AF%AD%E6%B3%95%E4%B8%BA%EF%BC%9A"><span class="toc-text">标记镜像语法为：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%8A%E4%BC%A0%E9%95%9C%E5%83%8F%E8%87%B3%E4%BB%93%E5%BA%93"><span class="toc-text">上传镜像至仓库</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5%E3%80%81Dockerfile%E5%88%B6%E4%BD%9C%E9%95%9C%E5%83%8F"><span class="toc-text">5、Dockerfile制作镜像</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1DockerFile%E6%9E%84%E5%BB%BA%E8%BF%87%E7%A8%8B"><span class="toc-text">5.1DockerFile构建过程</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%EF%BC%9A"><span class="toc-text">基础知识：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E7%9A%84%E9%95%9C%E5%83%8F"><span class="toc-text">创建一个自己的镜像</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E9%95%9C%E5%83%8F"><span class="toc-text">构建镜像</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E5%AE%B9%E5%99%A8"><span class="toc-text">启动容器</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A0%87%E8%AE%B0%E9%95%9C%E5%83%8F"><span class="toc-text">标记镜像</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%8A%E4%BC%A0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93"><span class="toc-text">上传本地仓库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81"><span class="toc-text">验证</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/06/06/Squid%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8-0/" title="Squid代理服务器-2"><img src="https://w.wallhaven.cc/full/7p/wallhaven-7pw269.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Squid代理服务器-2"/></a><div class="content"><a class="title" href="/2023/06/06/Squid%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8-0/" title="Squid代理服务器-2">Squid代理服务器-2</a><time datetime="2023-06-06T08:23:50.000Z" title="发表于 2023-06-06 16:23:50">2023-06-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/06/%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1Samba/" title="文件共享服务Samba"><img src="https://th.wallhaven.cc/small/l3/l3xk6q.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="文件共享服务Samba"/></a><div class="content"><a class="title" href="/2023/06/06/%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1Samba/" title="文件共享服务Samba">文件共享服务Samba</a><time datetime="2023-06-06T08:23:26.000Z" title="发表于 2023-06-06 16:23:26">2023-06-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/06/httpd%E5%9F%BA%E7%A1%80/" title="httpd基础"><img src="https://w.wallhaven.cc/full/rr/wallhaven-rryk81.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="httpd基础"/></a><div class="content"><a class="title" href="/2023/06/06/httpd%E5%9F%BA%E7%A1%80/" title="httpd基础">httpd基础</a><time datetime="2023-06-06T08:22:55.000Z" title="发表于 2023-06-06 16:22:55">2023-06-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/06/Docker%E5%9F%BA%E7%A1%80/" title="Docker基础"><img src="https://w.wallhaven.cc/full/we/wallhaven-wel6or.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Docker基础"/></a><div class="content"><a class="title" href="/2023/06/06/Docker%E5%9F%BA%E7%A1%80/" title="Docker基础">Docker基础</a><time datetime="2023-06-06T08:22:42.000Z" title="发表于 2023-06-06 16:22:42">2023-06-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/06/Chrony%E6%97%B6%E9%97%B4%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="Chrony时间服务器"><img src="https://th.wallhaven.cc/small/9m/9mjoy1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Chrony时间服务器"/></a><div class="content"><a class="title" href="/2023/06/06/Chrony%E6%97%B6%E9%97%B4%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="Chrony时间服务器">Chrony时间服务器</a><time datetime="2023-06-06T08:22:13.000Z" title="发表于 2023-06-06 16:22:13">2023-06-06</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By XiaoBei</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
 POWERMODE.shake = true;
 POWERMODE.mobile = true;
 document.body.addEventListener('input', POWERMODE);

@@ -1,0 +1,301 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>文件共享服务Samba | xiaobei</title><meta name="author" content="XiaoBei"><meta name="copyright" content="XiaoBei"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Samba一、相关知识Samba是在Linux和UNIX系统上实现SMB协议的一个免费软件，由服务器及客户端程序构成。SMB（Server Messages Block，信息服务块）是一种在局域网上共享文件和打印机的一种通信协议，它为局域网内的不同计算机之间提供文件及打印机等资源的共享服务。SMB协议是客户机&#x2F;服务器型协议，客户机通过该协议可以访问服务器上的共享文件系统、打印机及其他资源">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文件共享服务Samba">
+<meta property="og:url" content="http://example.com/2023/06/06/%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1Samba/index.html">
+<meta property="og:site_name" content="xiaobei">
+<meta property="og:description" content="Samba一、相关知识Samba是在Linux和UNIX系统上实现SMB协议的一个免费软件，由服务器及客户端程序构成。SMB（Server Messages Block，信息服务块）是一种在局域网上共享文件和打印机的一种通信协议，它为局域网内的不同计算机之间提供文件及打印机等资源的共享服务。SMB协议是客户机&#x2F;服务器型协议，客户机通过该协议可以访问服务器上的共享文件系统、打印机及其他资源">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://th.wallhaven.cc/small/l3/l3xk6q.jpg">
+<meta property="article:published_time" content="2023-06-06T08:23:26.000Z">
+<meta property="article:modified_time" content="2023-06-06T08:37:28.045Z">
+<meta property="article:author" content="XiaoBei">
+<meta property="article:tag" content="Service">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://th.wallhaven.cc/small/l3/l3xk6q.jpg"><link rel="shortcut icon" href="/img/homepage.jpg"><link rel="canonical" href="http://example.com/2023/06/06/%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1Samba/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: XiaoBei","link":"链接: ","source":"来源: xiaobei","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '文件共享服务Samba',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-06-06 16:37:28'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/background.css"><link rel="stylesheet" href="/css/test.css"><link rel="stylesheet" href="/css/ahzoo.css"><link rel="stylesheet" href="/css/transpancy.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/wsnb.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.linuxcool.com"><i class="fa-fw Linux命令大全"></i><span> 学Linux</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://www.555kan.net"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="xiaobei"><span class="site-name">xiaobei</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.linuxcool.com"><i class="fa-fw Linux命令大全"></i><span> 学Linux</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://www.555kan.net"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">文件共享服务Samba</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-06T08:23:26.000Z" title="发表于 2023-06-06 16:23:26">2023-06-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-06T08:37:28.045Z" title="更新于 2023-06-06 16:37:28">2023-06-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB/">文件共享</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="文件共享服务Samba"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="Samba"><a href="#Samba" class="headerlink" title="Samba"></a>Samba</h1><h2 id="一、相关知识"><a href="#一、相关知识" class="headerlink" title="一、相关知识"></a>一、相关知识</h2><p>Samba是在Linux和UNIX系统上实现SMB协议的一个免费软件，由服务器及客户端程序构成。SMB（Server Messages Block，信息服务块）是一种在局域网上共享文件和打印机的一种通信协议，它为局域网内的不同计算机之间提供文件及打印机等资源的共享服务。SMB协议是客户机&#x2F;服务器型协议，客户机通过该协议可以访问服务器上的共享文件系统、打印机及其他资源。通过设置“NetBIOS over TCP&#x2F;IP”使得Samba不但能与局域网络主机分享资源，还能与全世界的电脑分享资源。</p>
+<h2 id="二、实验目标"><a href="#二、实验目标" class="headerlink" title="二、实验目标"></a>二、实验目标</h2><ul>
+<li>本地用户</li>
+<li>匿名用户</li>
+<li>虚拟用户</li>
+</ul>
+<h2 id="三、实验实施"><a href="#三、实验实施" class="headerlink" title="三、实验实施"></a>三、实验实施</h2><h3 id="1、实验规划"><a href="#1、实验规划" class="headerlink" title="1、实验规划"></a>1、实验规划</h3><table>
+<thead>
+<tr>
+<th>IP地址</th>
+<th>主机名</th>
+<th>操作系统</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>192.168.10.10</td>
+<td>Server</td>
+<td>Centos8</td>
+</tr>
+<tr>
+<td>192.168.10.40</td>
+<td>Client</td>
+<td>Win7</td>
+</tr>
+</tbody></table>
+<h3 id="2、实验步骤"><a href="#2、实验步骤" class="headerlink" title="2、实验步骤"></a>2、实验步骤</h3><h4 id="2-1、安装Samba服务"><a href="#2-1、安装Samba服务" class="headerlink" title="2.1、安装Samba服务"></a>2.1、安装Samba服务</h4><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ~]<span class="hljs-comment">#  yum install -y samba        //安装samba 服务</span><br> <br>yum list samba            //列出软件包的信息<br>yum remove samba          //卸载软件包<br>yum check-update samba    //检查是否有可更新的软件包<br>yum update samba          //更新samba软件包<br></code></pre></td></tr></table></figure>
+
+<h4 id="2-2、启动服务"><a href="#2-2、启动服务" class="headerlink" title="2.2、启动服务"></a>2.2、启动服务</h4><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ~]<span class="hljs-comment"># systemctl enable smb --now</span><br>Created symlink /etc/systemd/system/multi-user.target.wants/smb.service → /usr/lib/systemd/system/smb.service.<br>[root@Server ~]<span class="hljs-comment"># </span><br></code></pre></td></tr></table></figure>
+
+<h4 id="2-3、配置Samba服务本地用户访问"><a href="#2-3、配置Samba服务本地用户访问" class="headerlink" title="2.3、配置Samba服务本地用户访问"></a>2.3、配置Samba服务本地用户访问</h4><h5 id="2-3-1、创建用户-x2F-共享路径"><a href="#2-3-1、创建用户-x2F-共享路径" class="headerlink" title="2.3.1、创建用户&#x2F;共享路径"></a>2.3.1、创建用户&#x2F;共享路径</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server ~]<span class="hljs-comment"># useradd test1</span><br>[root@Server ~]<span class="hljs-comment"># useradd test2</span><br>[root@Server ~]<span class="hljs-comment"># echo Qwer123.|passwd --stdin test1</span><br>更改用户 test1 的密码 。<br>passwd：所有的身份验证令牌已经成功更新.<br>[root@Server ~]<span class="hljs-comment"># echo Qwer123.|passwd --stdin test2</span><br>更改用户 test2 的密码 。<br>passwd：所有的身份验证令牌已经成功更新.<br><br><span class="hljs-comment"># 创建samba用户，并给每个用户设置密码，要在系统创建完成后才能创建samba用户</span><br>[root@Server home]<span class="hljs-comment"># smbpasswd -a test1    # 也可以用pdbebit 命令</span><br>New SMB password:<br>Retype new SMB password:<br>Added user test1.<br>[root@Server home]<span class="hljs-comment"># smbpasswd -a test2	 # 也可以用pdbebit 命令</span><br>New SMB password:<br>Retype new SMB password:<br>Added user test2.+<br><br><span class="hljs-comment"># 创建共享目录并设置权限</span><br>[root@Server ~]<span class="hljs-comment"># mkdir /samba/local/</span><br>[root@Server ~]<span class="hljs-comment"># chmod 777 /samba/local/</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="2-3-2、pdbebit-参数说明"><a href="#2-3-2、pdbebit-参数说明" class="headerlink" title="2.3.2、pdbebit 参数说明"></a>2.3.2、pdbebit 参数说明</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">-a, --create                       新建samba用户<br> -r, --modify                       修改samba用户<br> -x, --delete                       删除samba用户<br> -L, --list                         列出全部samba用户，读取passdb.tdb数据库文件<br> -v, --verbose                      显示详细信息<br> -c, --account-control=STRING       账户控制值<br>-w, --smbpasswd-style              以smbpasswd格式输出<br> -u, --user=USER                    使用的用户<br> -N, --account-desc=STRING          设置账户描述<br> -f, --fullname=STRING              设置全名<br> -h, --homedir=STRING               设置家目录<br> -D, --drive=STRING                 设置家设备<br> -S, --script=STRING                设置登陆脚本<br> -p, --profile=STRING               设置配置文件路径<br> -I, --domain=STRING                设置用户域名<br> -U, --user SID=STRING              设置用户SID或RID<br> -M, --machine SID=STRING           设置设备SID或RID<br> -m, --machine                      账户是一个设备账户<br> -b, --backend=STRING               使用不同的passdb作为默认后端<br> -i, --import=STRING                指定后段导入用户账户<br> -e, --<span class="hljs-built_in">export</span>=STRING                导出用户账户到指定后端<br> --policies-reset                   恢复默认策略<br> -P, --account-policy=STRING        帐户策略的值(如最大密码有效期)<br> -C, --value=LONG                   设置账号策略值<br> --force-initialized-passwords      强制初始化passdb后端<br> -z, --bad-password-count-reset     重置错误密码<br> -Z, --logon-hours-reset            重置登陆时间<br> --time-format=STRING               时间参数的格式<br> -t, --password-from-stdin          从标准输入获取密码<br> -K, --kickoff-time=STRING          设置开始时间<br> --set-nt-hash=STRING               从nt-hash设置密码<br> -d, --debuglevel=DEBUGLEVEL        设置debug级别<br> -s, --configfile=CONFIGFILE        使用备用配置文件<br> -l, --log-basename=LOGFILEBASE     设置日志文件的基本名称<br> -V, --version                      输出版本号<br> --option=name=value                从命令行设置smb.conf选项<br> -?, --<span class="hljs-built_in">help</span>                         显示帮助信息<br> --usage                            显示简要的使用信息<br><br></code></pre></td></tr></table></figure>
+
+<h5 id="2-3-3、配置Samba配置文件、-x2F-etc-x2F-samba-x2F-smb-conf"><a href="#2-3-3、配置Samba配置文件、-x2F-etc-x2F-samba-x2F-smb-conf" class="headerlink" title="2.3.3、配置Samba配置文件、&#x2F;etc&#x2F;samba&#x2F;smb.conf"></a>2.3.3、配置Samba配置文件、&#x2F;etc&#x2F;samba&#x2F;smb.conf</h5><p>samba服务的配置文件在<code>/etc/samba/smb.conf</code>，其中里面主要包含三个部分（配置简介、全局变量、共享服务配置），这里对配置文件的内容详细不做解释，只对用到的做解释。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 在最下方插入</span><br>[<span class="hljs-built_in">local</span>]<br>        comment = <span class="hljs-built_in">local</span> user	<span class="hljs-comment"># 注释，说明改共享文件的信息 </span><br>        path = /samba/local   <span class="hljs-comment"># 共享文件路径</span><br>        writable = <span class="hljs-built_in">yes</span>  <span class="hljs-comment"># 允许写入</span><br>        browseable = <span class="hljs-built_in">yes</span> <span class="hljs-comment"># 允许访问</span><br><span class="hljs-comment"># 默认没有限制指定用户访问就是允许所有用户访问</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>检验配置文件是否有参数写错</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server samba]<span class="hljs-comment"># testparm </span><br>Load smb config files from /etc/samba/smb.conf<br>Loaded services file OK.<br>Weak crypto is allowed<br><br>Server role: ROLE_STANDALONE<br><br>Press enter to see a dump of your service definitions<br><br><span class="hljs-comment"># Global parameters</span><br>[global]<br>        map to guest = Bad User<br>        printcap name = cups<br>        security = USER<br>        username map = /etc/samba/smbusers<br>        workgroup = SAMBA<br>        idmap config * : backend = tdb<br>        cups options = raw<br><br><br>[homes]<br>        browseable = No<br>        comment = Home Directories<br>        inherit acls = Yes<br>        <span class="hljs-built_in">read</span> only = No<br>        valid <span class="hljs-built_in">users</span> = %S %D%w%S<br><br><br>[printers]<br>        browseable = No<br>        comment = All Printers<br>        create mask = 0600<br>        path = /var/tmp<br>        printable = Yes<br><br><br>[<span class="hljs-built_in">print</span>$]<br>        comment = Printer Drivers<br>        create mask = 0664<br>        directory mask = 0775<br>        force group = @printadmin<br>        path = /var/lib/samba/drivers<br>        write list = @printadmin root<br><br><br>[<span class="hljs-built_in">local</span>]<br>        comment = <span class="hljs-built_in">local</span> user<br>        path = /samba/local<br>        <span class="hljs-built_in">read</span> only = No<br><br></code></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-3-4、在iptables和selinux中放行smb服务"><a href="#2-3-4、在iptables和selinux中放行smb服务" class="headerlink" title="2.3.4、在iptables和selinux中放行smb服务"></a>2.3.4、在iptables和selinux中放行smb服务</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server samba]<span class="hljs-comment"># setsebool -P samba_export_all_rw=1</span><br>[root@Server samba]<span class="hljs-comment"># setsebool -P samba_export_all_ro=1</span><br>[root@Server samba]<span class="hljs-comment"># getsebool -a | grep samba</span><br>samba_domain_controller --&gt; off<br>samba_enable_home_dirs --&gt; off<br>samba_export_all_ro --&gt; on（如果只读共享的文件只开此项就行）<br>samba_export_all_rw --&gt; on（如果读写，只开此项就行，修改文件时要看文件的<span class="hljs-built_in">chmod</span>属性。）<br>samba_share_nfs --&gt; off<br>use_samba_home_dirs --&gt; off<br>virt_use_samba --&gt; off<br><br><span class="hljs-comment"># 如不想共享文件可运行如下语句</span><br><br>[root@Server samba]<span class="hljs-comment"># setsebool -P samba_export_all_rw=0</span><br>[root@Server samba]<span class="hljs-comment"># setsebool -P samba_export_all_ro=0</span><br></code></pre></td></tr></table></figure>
+
+<p>放行防火墙并重启服务</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 放行防火墙</span><br>[root@Server ~]<span class="hljs-comment"># firewall-cmd --add-service=samba --permanent</span><br>[root@Server ~]<span class="hljs-comment"># firewall-cmd --reload </span><br><span class="hljs-comment"># 重启服务</span><br>[root@Server ~]<span class="hljs-comment"># systemctl restart smb </span><br></code></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-3-5、win7测试"><a href="#2-3-5、win7测试" class="headerlink" title="2.3.5、win7测试"></a>2.3.5、win7测试</h5><p><img src="C:/Users/Administrator/Pictures/md/1.png" alt="image-20221003144746991"></p>
+<p><img src="C:/Users/Administrator/Pictures/md/2.png" alt="image-20221003144937216"></p>
+<p><img src="C:/Users/Administrator/Pictures/md/3.png" alt="image-20221003144650825"></p>
+<p><img src="C:/Users/Administrator/Pictures/md/4.png" alt="image-20221003144704243"></p>
+<h4 id="2-4、配置Samba匿名用户访问"><a href="#2-4、配置Samba匿名用户访问" class="headerlink" title="2.4、配置Samba匿名用户访问"></a>2.4、配置Samba匿名用户访问</h4><h5 id="2-4-1、创建共享目录并设置权限"><a href="#2-4-1、创建共享目录并设置权限" class="headerlink" title="2.4.1、创建共享目录并设置权限"></a>2.4.1、创建共享目录并设置权限</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 创建共享目录并设置权限</span><br>[root@Server ~]<span class="hljs-comment"># mkdir /samba/guest</span><br>[root@Server ~]<span class="hljs-comment"># chmod 777 /samba/guest</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="2-4-2、配置samba配置文件"><a href="#2-4-2、配置samba配置文件" class="headerlink" title="2.4.2、配置samba配置文件"></a>2.4.2、配置samba配置文件</h5><ol>
+<li>在[global]下添加 map to guest &#x3D; Bad User，并写入新的共享服务信息，输入正确的时候颜色提示绿色</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[global]<br>        workgroup = SAMBA<br>        security = user<br>        passdb backend = tdbsam<br>        printing = cups<br>        printcap name = cups<br>        load printers = <span class="hljs-built_in">yes</span><br>        cups options = raw<br>        <span class="hljs-comment"># 添加一下行，意思就是配置了这一串就不用用户名密码也可以访问了</span><br>        map to guest = bad User<br>        <br><span class="hljs-comment"># 配置共享目录-最底部添加</span><br>[guest]<br>        comment = fictitious user	<span class="hljs-comment"># 注释，说明改共享文件的信息</span><br>        path = /samba/guest		<span class="hljs-comment"># 共享目录的路径 绝对路径</span><br>        public = <span class="hljs-built_in">yes</span>		<span class="hljs-comment"># 是否允许匿名访问</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="2-4-3、重启服务"><a href="#2-4-3、重启服务" class="headerlink" title="2.4.3、重启服务"></a>2.4.3、重启服务</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 放行防火墙-之前放行过的话，不需要重复放行</span><br>[root@Server ~]<span class="hljs-comment"># firewall-cmd --add-service=samba --permanent</span><br>[root@Server ~]<span class="hljs-comment"># firewall-cmd --reload </span><br><span class="hljs-comment"># 重启服务</span><br>[root@Server ~]<span class="hljs-comment"># systemctl restart smb </span><br></code></pre></td></tr></table></figure>
+
+<h5 id="2-4-4、测试"><a href="#2-4-4、测试" class="headerlink" title="2.4.4、测试"></a>2.4.4、测试</h5><p><img src="C:/Users/Administrator/Pictures/md/5.png" alt="image-20221003151404871"></p>
+<p><strong>直接就进入这里没有显示登录界面</strong></p>
+<p><img src="C:/Users/Administrator/Pictures/md/6.png" alt="image-20221003151348297"></p>
+<p><img src="C:/Users/Administrator/Pictures/md/7.png" alt="image-20221003151532918"></p>
+<p><strong>我们会发现需要进入local共享文件的话需要登陆</strong></p>
+<p><img src="C:/Users/Administrator/Pictures/md/8.png" alt="image-20221003151636118"></p>
+<p><strong>到此匿名用户完成</strong></p>
+<h4 id="2-5，配置Samba虚拟用户访问"><a href="#2-5，配置Samba虚拟用户访问" class="headerlink" title="2.5，配置Samba虚拟用户访问"></a>2.5，配置Samba虚拟用户访问</h4><h5 id="2-5-1、创建用户映射虚拟用户"><a href="#2-5-1、创建用户映射虚拟用户" class="headerlink" title="2.5.1、创建用户映射虚拟用户"></a>2.5.1、创建用户映射虚拟用户</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server samba]<span class="hljs-comment"># useradd guest</span><br>[root@Server samba]<span class="hljs-comment"># echo Qwer123.|passwd --stdin guest </span><br>更改用户 guest 的密码 。<br>passwd：所有的身份验证令牌已经成功更新。<br>[root@Server samba]<span class="hljs-comment"># pdbedit -a guest		# 这个命令是和上面smbpasswd命令是一样的</span><br>new password:<br>retype new password:<br>Unix username:        guest<br>NT username:          <br>Account Flags:        [U          ]<br>User SID:             S-1-5-21-478335590-3805463860-3550396621-1002<br>Primary Group SID:    S-1-5-21-478335590-3805463860-3550396621-513<br>Full Name:            <br>Home Directory:       \\SERVER\guest<br>HomeDir Drive:        <br>Logon Script:         <br>Profile Path:         \\SERVER\guest\profile<br>Domain:               SERVER<br>Account desc:         <br>Workstations:         <br>Munged dial:          <br>Logon time:           0<br>Logoff time:          三, 06 2月 2036 23:06:39 CST<br>Kickoff time:         三, 06 2月 2036 23:06:39 CST<br>Password last <span class="hljs-built_in">set</span>:    一, 03 10月 2022 23:29:21 CST<br>Password can change:  一, 03 10月 2022 23:29:21 CST<br>Password must change: never<br>Last bad password   : 0<br>Bad password count  : 0<br>Logon hours         : FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF<br>[root@Server samba]<span class="hljs-comment"># </span><br></code></pre></td></tr></table></figure>
+
+<h5 id="2-5-2、编辑smbusers文件添加配置"><a href="#2-5-2、编辑smbusers文件添加配置" class="headerlink" title="2.5.2、编辑smbusers文件添加配置"></a>2.5.2、编辑smbusers文件添加配置</h5><p><strong>映射虚拟用户</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server samba]<span class="hljs-comment"># cat /etc/samba/smbusers </span><br>guest = u01 u02<br></code></pre></td></tr></table></figure>
+
+<h5 id="2-5-3、进入smb-conf配置文件中添加映射文件路径"><a href="#2-5-3、进入smb-conf配置文件中添加映射文件路径" class="headerlink" title="2.5.3、进入smb.conf配置文件中添加映射文件路径"></a>2.5.3、进入smb.conf配置文件中添加映射文件路径</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[global]<br>        workgroup = SAMBA<br>        security = user<br>        passdb backend = tdbsam<br>        printing = cups<br>        printcap name = cups<br>        load printers = <span class="hljs-built_in">yes</span><br>        cups options = raw<br>        map to guest = bad User<br>        <span class="hljs-comment"># 添加虚拟用户映射路径</span><br>        username map = /etc/samba/smbusers<br></code></pre></td></tr></table></figure>
+
+<p><strong>检验配置文件是否有参数写错</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server samba]<span class="hljs-comment"># testparm </span><br>Load smb config files from /etc/samba/smb.conf<br>Loaded services file OK.<br>Weak crypto is allowed<br><br>Server role: ROLE_STANDALONE<br><br>Press enter to see a dump of your service definitions<br><br><span class="hljs-comment"># Global parameters</span><br>[global]<br>        map to guest = Bad User<br>        printcap name = cups<br>        security = USER<br>        username map = /etc/samba/smbusers<br>        workgroup = SAMBA<br>        idmap config * : backend = tdb<br>        cups options = raw<br><br><br>[homes]<br>        browseable = No<br>        comment = Home Directories<br>        inherit acls = Yes<br>        <span class="hljs-built_in">read</span> only = No<br>        valid <span class="hljs-built_in">users</span> = %S %D%w%S<br><br><br>[printers]<br>        browseable = No<br>        comment = All Printers<br>        create mask = 0600<br>        path = /var/tmp<br>        printable = Yes<br><br><br>[<span class="hljs-built_in">print</span>$]<br>        comment = Printer Drivers<br>        create mask = 0664<br>        directory mask = 0775<br>        force group = @printadmin<br>        path = /var/lib/samba/drivers<br>        write list = @printadmin root<br><br><br>[<span class="hljs-built_in">local</span>]<br>        comment = <span class="hljs-built_in">local</span> user<br>        path = /samba/local<br>        <span class="hljs-built_in">read</span> only = No<br><br><br>[guest]<br>        comment = fictitious user<br>        guest ok = Yes<br>        path = /samba/guest<br>        <span class="hljs-built_in">read</span> only = No<br></code></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-5-4、重启服务"><a href="#2-5-4、重启服务" class="headerlink" title="2.5.4、重启服务"></a>2.5.4、重启服务</h5><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[root@Server samba]<span class="hljs-comment"># systemctl restart smb</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="2-5-5、测试"><a href="#2-5-5、测试" class="headerlink" title="2.5.5、测试"></a>2.5.5、测试</h5><p>先删除之前的记录缓存</p>
+<p><img src="C:/Users/Administrator/Pictures/md/9.png" alt="image-20221003153816731"></p>
+<p><img src="C:/Users/Administrator/Pictures/md/10.png" alt="image-20221003153844193"></p>
+<p><img src="C:/Users/Administrator/Pictures/md/11.png" alt="image-20221003154046298"></p>
+<p><img src="C:/Users/Administrator/Pictures/md/12.png" alt="image-20221003154201803"></p>
+<p><strong>我们使用虚拟用户访问，其实这个过程就是相当于我们在用guest用户在操作</strong></p>
+<h4 id="2-6、吧我们的共享目录映射本地网络驱动"><a href="#2-6、吧我们的共享目录映射本地网络驱动" class="headerlink" title="2.6、吧我们的共享目录映射本地网络驱动"></a>2.6、吧我们的共享目录映射本地网络驱动</h4><h5 id="2-6-1、打开我的电脑，映射网络驱动"><a href="#2-6-1、打开我的电脑，映射网络驱动" class="headerlink" title="2.6.1、打开我的电脑，映射网络驱动"></a>2.6.1、打开我的电脑，映射网络驱动</h5><p><img src="C:/Users/Administrator/Pictures/md/13.png" alt="image-20221003154802332"></p>
+<p><img src="C:/Users/Administrator/Pictures/md/14.png" alt="image-20221003154834148"></p>
+<p><img src="C:/Users/Administrator/Pictures/md/15.png" alt="image-20221003154854835"></p>
+<h4 id="2-7、配置文件常用权限参数-自行配置修改（还有很多参数自行了解）"><a href="#2-7、配置文件常用权限参数-自行配置修改（还有很多参数自行了解）" class="headerlink" title="2.7、配置文件常用权限参数-自行配置修改（还有很多参数自行了解）"></a>2.7、配置文件常用权限参数-自行配置修改（还有很多参数自行了解）</h4><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">[<span class="hljs-built_in">test</span>]                 <span class="hljs-comment">#共享文件名称（也就是客户端访问时可以看到的那个名字）        </span><br>        comment = this is <span class="hljs-built_in">test</span>        <span class="hljs-comment">#共享文件夹的描述</span><br>        path = /home/ceshi             <span class="hljs-comment">#共享文件夹路径</span><br>        public = <span class="hljs-built_in">yes</span>                    <span class="hljs-comment">#是否允许guest账户访问</span><br>        writable =<span class="hljs-built_in">yes</span>                <span class="hljs-comment">#是否有写权限</span><br>        directory mask = 0777        <span class="hljs-comment">#默认创建目录权限</span><br>        create mask = 0777             <span class="hljs-comment">#默认创建文件权限</span><br>        valid <span class="hljs-built_in">users</span> = @<span class="hljs-built_in">test</span>,root  <span class="hljs-comment">#设置允许访问共享目录的用户@后跟组名，不写此行就对所有用户开放</span><br>        write list = @<span class="hljs-built_in">test</span>,root        <span class="hljs-comment">#设置有写权限的用户@后面跟的是组名</span><br>        browseable = <span class="hljs-built_in">yes</span>                 <span class="hljs-comment">#该指定共享目录可浏览</span><br>        available = <span class="hljs-built_in">yes</span>                      <span class="hljs-comment">#该指定共享资源可使用</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="！注意"><a href="#！注意" class="headerlink" title="！注意"></a>！注意</h3><p><strong>如果win测试的时候，没有弹出登录界面或者直接访问之前的共享目录，执行以下操作</strong></p>
+<p><img src="C:/Users/Administrator/Pictures/md/16.png" alt="image-20221003151324340"></p>
+<h3 id="Samba配置文件检验"><a href="#Samba配置文件检验" class="headerlink" title="Samba配置文件检验"></a>Samba配置文件检验</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#正确提示</span><br>[root@Server ~]<span class="hljs-comment">#  testparm</span><br><span class="hljs-comment">#提示 Load smb config files from /etc/samba/smb.conf</span><br><span class="hljs-comment">#提示 Loaded services file OK.</span><br><span class="hljs-comment">#提示 Server role: ROLE_STANDALONE</span><br><br><span class="hljs-comment">#错误提示</span><br>[root@Server ~]<span class="hljs-comment">#  testparm</span><br><span class="hljs-comment">#Load smb config files from /etc/samba/smb.conf</span><br><span class="hljs-comment">#报错内容指引： set_variable_helper(ye): value is not boolean!</span><br><span class="hljs-comment">#Error loading services.</span><br></code></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">XiaoBei</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2023/06/06/%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1Samba/">http://example.com/2023/06/06/%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1Samba/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="null" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">xiaobei</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Service/">Service</a></div><div class="post_share"><div class="social-share" data-image="https://th.wallhaven.cc/small/l3/l3xk6q.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/06/06/Squid%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8-0/" title="Squid代理服务器-2"><img class="cover" src="https://w.wallhaven.cc/full/7p/wallhaven-7pw269.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Squid代理服务器-2</div></div></a></div><div class="next-post pull-right"><a href="/2023/06/06/httpd%E5%9F%BA%E7%A1%80/" title="httpd基础"><img class="cover" src="https://w.wallhaven.cc/full/rr/wallhaven-rryk81.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">httpd基础</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/06/06/Chrony%E6%97%B6%E9%97%B4%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="Chrony时间服务器"><img class="cover" src="https://th.wallhaven.cc/small/9m/9mjoy1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-06</div><div class="title">Chrony时间服务器</div></div></a></div><div><a href="/2023/06/06/Squid%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8-0/" title="Squid代理服务器-2"><img class="cover" src="https://w.wallhaven.cc/full/7p/wallhaven-7pw269.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-06</div><div class="title">Squid代理服务器-2</div></div></a></div><div><a href="/2023/06/06/httpd%E5%9F%BA%E7%A1%80/" title="httpd基础"><img class="cover" src="https://w.wallhaven.cc/full/rr/wallhaven-rryk81.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-06</div><div class="title">httpd基础</div></div></a></div><div><a href="/2022/08/02/%E7%AE%80%E5%8D%95%E6%90%AD%E5%BB%BAhttp%E6%9C%8D%E5%8A%A1/" title="简单搭建http服务"><img class="cover" src="https://w.wallhaven.cc/full/jx/wallhaven-jxky9p.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-02</div><div class="title">简单搭建http服务</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/wsnb.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">XiaoBei</div><div class="author-info__description">归途也还可爱</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/wsnbwz" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:wsnblove@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Samba"><span class="toc-text">Samba</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86"><span class="toc-text">一、相关知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%9E%E9%AA%8C%E7%9B%AE%E6%A0%87"><span class="toc-text">二、实验目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%AE%9E%E9%AA%8C%E5%AE%9E%E6%96%BD"><span class="toc-text">三、实验实施</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E5%AE%9E%E9%AA%8C%E8%A7%84%E5%88%92"><span class="toc-text">1、实验规划</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E5%AE%9E%E9%AA%8C%E6%AD%A5%E9%AA%A4"><span class="toc-text">2、实验步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1%E3%80%81%E5%AE%89%E8%A3%85Samba%E6%9C%8D%E5%8A%A1"><span class="toc-text">2.1、安装Samba服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2%E3%80%81%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1"><span class="toc-text">2.2、启动服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3%E3%80%81%E9%85%8D%E7%BD%AESamba%E6%9C%8D%E5%8A%A1%E6%9C%AC%E5%9C%B0%E7%94%A8%E6%88%B7%E8%AE%BF%E9%97%AE"><span class="toc-text">2.3、配置Samba服务本地用户访问</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-1%E3%80%81%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7-x2F-%E5%85%B1%E4%BA%AB%E8%B7%AF%E5%BE%84"><span class="toc-text">2.3.1、创建用户&#x2F;共享路径</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-2%E3%80%81pdbebit-%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="toc-text">2.3.2、pdbebit 参数说明</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-3%E3%80%81%E9%85%8D%E7%BD%AESamba%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E3%80%81-x2F-etc-x2F-samba-x2F-smb-conf"><span class="toc-text">2.3.3、配置Samba配置文件、&#x2F;etc&#x2F;samba&#x2F;smb.conf</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-4%E3%80%81%E5%9C%A8iptables%E5%92%8Cselinux%E4%B8%AD%E6%94%BE%E8%A1%8Csmb%E6%9C%8D%E5%8A%A1"><span class="toc-text">2.3.4、在iptables和selinux中放行smb服务</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-5%E3%80%81win7%E6%B5%8B%E8%AF%95"><span class="toc-text">2.3.5、win7测试</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4%E3%80%81%E9%85%8D%E7%BD%AESamba%E5%8C%BF%E5%90%8D%E7%94%A8%E6%88%B7%E8%AE%BF%E9%97%AE"><span class="toc-text">2.4、配置Samba匿名用户访问</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-4-1%E3%80%81%E5%88%9B%E5%BB%BA%E5%85%B1%E4%BA%AB%E7%9B%AE%E5%BD%95%E5%B9%B6%E8%AE%BE%E7%BD%AE%E6%9D%83%E9%99%90"><span class="toc-text">2.4.1、创建共享目录并设置权限</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-4-2%E3%80%81%E9%85%8D%E7%BD%AEsamba%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">2.4.2、配置samba配置文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-4-3%E3%80%81%E9%87%8D%E5%90%AF%E6%9C%8D%E5%8A%A1"><span class="toc-text">2.4.3、重启服务</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-4-4%E3%80%81%E6%B5%8B%E8%AF%95"><span class="toc-text">2.4.4、测试</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-5%EF%BC%8C%E9%85%8D%E7%BD%AESamba%E8%99%9A%E6%8B%9F%E7%94%A8%E6%88%B7%E8%AE%BF%E9%97%AE"><span class="toc-text">2.5，配置Samba虚拟用户访问</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-5-1%E3%80%81%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7%E6%98%A0%E5%B0%84%E8%99%9A%E6%8B%9F%E7%94%A8%E6%88%B7"><span class="toc-text">2.5.1、创建用户映射虚拟用户</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-5-2%E3%80%81%E7%BC%96%E8%BE%91smbusers%E6%96%87%E4%BB%B6%E6%B7%BB%E5%8A%A0%E9%85%8D%E7%BD%AE"><span class="toc-text">2.5.2、编辑smbusers文件添加配置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-5-3%E3%80%81%E8%BF%9B%E5%85%A5smb-conf%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84"><span class="toc-text">2.5.3、进入smb.conf配置文件中添加映射文件路径</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-5-4%E3%80%81%E9%87%8D%E5%90%AF%E6%9C%8D%E5%8A%A1"><span class="toc-text">2.5.4、重启服务</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-5-5%E3%80%81%E6%B5%8B%E8%AF%95"><span class="toc-text">2.5.5、测试</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-6%E3%80%81%E5%90%A7%E6%88%91%E4%BB%AC%E7%9A%84%E5%85%B1%E4%BA%AB%E7%9B%AE%E5%BD%95%E6%98%A0%E5%B0%84%E6%9C%AC%E5%9C%B0%E7%BD%91%E7%BB%9C%E9%A9%B1%E5%8A%A8"><span class="toc-text">2.6、吧我们的共享目录映射本地网络驱动</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-6-1%E3%80%81%E6%89%93%E5%BC%80%E6%88%91%E7%9A%84%E7%94%B5%E8%84%91%EF%BC%8C%E6%98%A0%E5%B0%84%E7%BD%91%E7%BB%9C%E9%A9%B1%E5%8A%A8"><span class="toc-text">2.6.1、打开我的电脑，映射网络驱动</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-7%E3%80%81%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%B8%B8%E7%94%A8%E6%9D%83%E9%99%90%E5%8F%82%E6%95%B0-%E8%87%AA%E8%A1%8C%E9%85%8D%E7%BD%AE%E4%BF%AE%E6%94%B9%EF%BC%88%E8%BF%98%E6%9C%89%E5%BE%88%E5%A4%9A%E5%8F%82%E6%95%B0%E8%87%AA%E8%A1%8C%E4%BA%86%E8%A7%A3%EF%BC%89"><span class="toc-text">2.7、配置文件常用权限参数-自行配置修改（还有很多参数自行了解）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%81%E6%B3%A8%E6%84%8F"><span class="toc-text">！注意</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Samba%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%A3%80%E9%AA%8C"><span class="toc-text">Samba配置文件检验</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/06/06/Squid%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8-0/" title="Squid代理服务器-2"><img src="https://w.wallhaven.cc/full/7p/wallhaven-7pw269.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Squid代理服务器-2"/></a><div class="content"><a class="title" href="/2023/06/06/Squid%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8-0/" title="Squid代理服务器-2">Squid代理服务器-2</a><time datetime="2023-06-06T08:23:50.000Z" title="发表于 2023-06-06 16:23:50">2023-06-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/06/%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1Samba/" title="文件共享服务Samba"><img src="https://th.wallhaven.cc/small/l3/l3xk6q.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="文件共享服务Samba"/></a><div class="content"><a class="title" href="/2023/06/06/%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1Samba/" title="文件共享服务Samba">文件共享服务Samba</a><time datetime="2023-06-06T08:23:26.000Z" title="发表于 2023-06-06 16:23:26">2023-06-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/06/httpd%E5%9F%BA%E7%A1%80/" title="httpd基础"><img src="https://w.wallhaven.cc/full/rr/wallhaven-rryk81.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="httpd基础"/></a><div class="content"><a class="title" href="/2023/06/06/httpd%E5%9F%BA%E7%A1%80/" title="httpd基础">httpd基础</a><time datetime="2023-06-06T08:22:55.000Z" title="发表于 2023-06-06 16:22:55">2023-06-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/06/Docker%E5%9F%BA%E7%A1%80/" title="Docker基础"><img src="https://w.wallhaven.cc/full/we/wallhaven-wel6or.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Docker基础"/></a><div class="content"><a class="title" href="/2023/06/06/Docker%E5%9F%BA%E7%A1%80/" title="Docker基础">Docker基础</a><time datetime="2023-06-06T08:22:42.000Z" title="发表于 2023-06-06 16:22:42">2023-06-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/06/Chrony%E6%97%B6%E9%97%B4%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="Chrony时间服务器"><img src="https://th.wallhaven.cc/small/9m/9mjoy1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Chrony时间服务器"/></a><div class="content"><a class="title" href="/2023/06/06/Chrony%E6%97%B6%E9%97%B4%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="Chrony时间服务器">Chrony时间服务器</a><time datetime="2023-06-06T08:22:13.000Z" title="发表于 2023-06-06 16:22:13">2023-06-06</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By XiaoBei</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><div class="fb-customerchat" id="fb-customer-chat" attribution="biz_inbox"></div><script>document.getElementById('fb-root') ? '' : document.body.insertAdjacentHTML('afterend', '<div id="fb-root"></div>')
+
+window.fbAsyncInit = function() {
+  FB.init({
+    xfbml: true,
+    version: 'v15.0'
+  });
+};
+
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/zh_CN/sdk/xfbml.customerchat.js';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+if (false) {
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      FB.CustomerChat.show();
+    });
+  }
+  chatBtnFn()
+} else {
+  if (false) {
+    function chatBtnHide () {
+      FB.CustomerChat.hide()
+    }
+    function chatBtnShow () {
+      FB.CustomerChat.show(false)
+    }
+  }
+}</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></body></html>

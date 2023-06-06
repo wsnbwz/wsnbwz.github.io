@@ -5,19 +5,19 @@
 <meta property="og:site_name" content="xiaobei">
 <meta property="og:description" content="Pod基本概念Pod是一个逻辑抽象的概念，kubernetes创建的最小单元， 一个Pod有一个容器或多个容器组成。 Pod特点： 一个Pod可以理解为一个应用实例，提供服务  Pod中容器始终部署在一个Node上  Pod中容器共享网络，储存资源   k8s-pod存在的意义Pod主要用法：  运行单个容器：最常见的用法，在这种情况下，可以将Pod看做是单个容器的抽象封装  ​     ​">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://th.wallhaven.cc/small/zy/zygeko.jpg">
+<meta property="og:image" content="https://w.wallhaven.cc/full/qz/wallhaven-qzge85.jpg">
 <meta property="article:published_time" content="2022-08-01T08:27:54.000Z">
 <meta property="article:modified_time" content="2022-08-01T08:36:33.389Z">
 <meta property="article:author" content="XiaoBei">
 <meta property="article:tag" content="cloud">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://th.wallhaven.cc/small/zy/zygeko.jpg"><link rel="shortcut icon" href="/img/homepage.jpg"><link rel="canonical" href="http://example.com/2022/08/01/Pod%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+<meta name="twitter:image" content="https://w.wallhaven.cc/full/qz/wallhaven-qzge85.jpg"><link rel="shortcut icon" href="/img/homepage.jpg"><link rel="canonical" href="http://example.com/2022/08/01/Pod%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
   root: '/',
   algolia: undefined,
   localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
   translate: undefined,
   noticeOutdate: undefined,
-  highlight: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -161,7 +161,7 @@
       }
     }
     detectApple()
-    })(window)</script><link rel="stylesheet" href="/css/background.css"><link rel="stylesheet" href="/css/test.css"><link rel="stylesheet" href="/css/ahzoo.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/wsnb.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.linuxcool.com"><i class="fa-fw Linux命令大全"></i><span> 学Linux</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://www.555kan.net"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="xiaobei"><span class="site-name">xiaobei</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.linuxcool.com"><i class="fa-fw Linux命令大全"></i><span> 学Linux</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://www.555kan.net"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Pod基本概念</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-08-01T08:27:54.000Z" title="发表于 2022-08-01 16:27:54">2022-08-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-08-01T08:36:33.389Z" title="更新于 2022-08-01 16:36:33">2022-08-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/k8s/">k8s</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>18分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Pod基本概念"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="Pod基本概念"><a href="#Pod基本概念" class="headerlink" title="Pod基本概念"></a><strong>Pod基本概念</strong></h1><p>Pod是一个逻辑抽象的概念，kubernetes创建的最小单元，</p>
+    })(window)</script><link rel="stylesheet" href="/css/background.css"><link rel="stylesheet" href="/css/test.css"><link rel="stylesheet" href="/css/ahzoo.css"><link rel="stylesheet" href="/css/transpancy.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/wsnb.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.linuxcool.com"><i class="fa-fw Linux命令大全"></i><span> 学Linux</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://www.555kan.net"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="xiaobei"><span class="site-name">xiaobei</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.linuxcool.com"><i class="fa-fw Linux命令大全"></i><span> 学Linux</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://www.555kan.net"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Pod基本概念</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-08-01T08:27:54.000Z" title="发表于 2022-08-01 16:27:54">2022-08-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-08-01T08:36:33.389Z" title="更新于 2022-08-01 16:36:33">2022-08-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/k8s/">k8s</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>18分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Pod基本概念"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="Pod基本概念"><a href="#Pod基本概念" class="headerlink" title="Pod基本概念"></a><strong>Pod基本概念</strong></h1><p>Pod是一个逻辑抽象的概念，kubernetes创建的最小单元，</p>
 <p>一个Pod有一个容器或多个容器组成。</p>
 <h2 id="Pod特点："><a href="#Pod特点：" class="headerlink" title="Pod特点："></a><strong>Pod特点：</strong></h2><ul>
 <li><p>一个Pod可以理解为一个应用实例，提供服务</p>
@@ -200,18 +200,8 @@
 </li>
 </ul>
 <p>为什么</p>
-<pre><code>Q：为什么k8s不直接使用容器作为最小计算单位，而是给出一个新的pod的概念？
-​
-A：原因在于容器的设计本身更适合一个容器内只运行一个进程。pod可以更好的适应当前的生产环境。
-​
-在Dockerfile创建镜像时，通过ENTRYPOINT命令指定启动容器时运行的第一个进程，这个进程的pid是1
-1.容器中孤儿进程的管理需要自行实现。
-在正常的操作系统中，pid为1的进程是init进程，是所有进程的父进程，它的其中一个使命是负责收养孤儿进程，但在容器中，除非我们自己去实现管理孤儿进程的逻辑，否则将无法处理。
-2.除pid为1 的进程外，额外进程的健康状态需自行管理。
-​
-Q：一个pod中运行多个服务可不可以？
-A：从实现上来说是可以的，但是并不推荐这样。一个pod尽量由一组紧密关联的容器组成，例如该服务进程需要一些额外的agent进程支持等。
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">Q：为什么k8s不直接使用容器作为最小计算单位，而是给出一个新的pod的概念？<br>​<br>A：原因在于容器的设计本身更适合一个容器内只运行一个进程。pod可以更好的适应当前的生产环境。<br>​<br>在Dockerfile创建镜像时，通过ENTRYPOINT命令指定启动容器时运行的第一个进程，这个进程的pid是1<br>1.容器中孤儿进程的管理需要自行实现。<br>在正常的操作系统中，pid为1的进程是init进程，是所有进程的父进程，它的其中一个使命是负责收养孤儿进程，但在容器中，除非我们自己去实现管理孤儿进程的逻辑，否则将无法处理。<br>2.除pid为1 的进程外，额外进程的健康状态需自行管理。<br>​<br>Q：一个pod中运行多个服务可不可以？<br>A：从实现上来说是可以的，但是并不推荐这样。一个pod尽量由一组紧密关联的容器组成，例如该服务进程需要一些额外的agent进程支持等。<br></code></pre></td></tr></table></figure>
+
 <p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20220801162310119.png" alt="image-20220801162310119"></p>
 <p>注：如果真的需要在一个容器中运行多个进程，会增加很多程序员的额外负担，pod作为一种更加高级的结构将容器绑定在一起，并且将他们作为一个单元进行管理。但这并不意味着所有的pod都由多个容器组成，一个pod中一个容器的情况也是非常常见的。</p>
 <h3 id="Pod内容器之间如何通行"><a href="#Pod内容器之间如何通行" class="headerlink" title="Pod内容器之间如何通行"></a><strong>Pod内容器之间如何通行</strong></h3><p>我们学多dokcer都知道容器之间是相互隔离的，那么日志&#x2F;监控服务如何拿到主容器的数据呢，这里就用到了k8s的共享存储和共享网络</p>
@@ -222,140 +212,14 @@ A：从实现上来说是可以的，但是并不推荐这样。一个pod尽量�
 </li>
 </ul>
 <p><strong>Demo</strong></p>
-<pre><code>[root@vm1 yaml]# cat Pod.yaml                                        
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: pod-test
-spec:
-  replicas: 3       # Pod副本数3个，意思就是3个Pod
-  selector:
-    matchLabels:
-      app: nginx
-  template:
-    metadata:
-      labels:
-        app: nginx
-    spec:
-      containers:       # 这个是定义容器的
-      - name: web       # 容器名称
-        image: nginx:1.18   # 镜像加版本
-        volumeMounts:       # 添加挂载
-        - name: log         # 卷的名称，对应下面
-          mountPath: /data   # 挂载到容器本地的路径
-      - name: bs        # 容器名称
-        image: busybox  # 这个镜像是一个集成了三百多个最常用Linux命令和工具的软件。
-        command:        # 执行命令
-        - sleep         # 睡眠
-        - 24h           # 睡眠时间，进程结束容器就自动退出，这里时间设置为24意思是24小时不会睡眠，所以就不会退出。
-        volumeMounts:       # 添加挂载
-        - name: log         # 卷的名称，对应下面
-          mountPath: /data2   # 挂载到容器本地的路径
-      volumes:          # 创建一个数据卷
-      - name: log       # 名称为log
-        emptyDir: &#123;&#125;     # 卷类型
-[root@vm1 yaml]# kubectl apply -f Pod.yaml 
-deployment.apps/pod-test created
-</code></pre>
-<pre><code> 实时查看创建过程   
-[root@vm1 ~]# kubectl get pod -w        #  这里可以看到我们 READY这里都显示2了，意思就是有两个容器，而且都在运行着
-NAME                        READY   STATUS              RESTARTS   AGE
-pod-test-66bb56448f-2hmhh   0/2     ContainerCreating   0          14s
-pod-test-66bb56448f-mscj4   0/2     ContainerCreating   0          14s
-pod-test-66bb56448f-z2d25   0/2     ContainerCreating   0          14s
-pod-test-66bb56448f-z2d25   2/2     Running             0          16s
-pod-test-66bb56448f-2hmhh   2/2     Running             0          16s
-pod-test-66bb56448f-mscj4   2/2     Running             0          17s
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">[root@vm1 yaml]# cat Pod.yaml                                        <br>apiVersion: apps/v1<br>kind: Deployment<br>metadata:<br>  name: pod-test<br>spec:<br>  replicas: 3       # Pod副本数3个，意思就是3个Pod<br>  selector:<br>    matchLabels:<br>      app: nginx<br>  template:<br>    metadata:<br>      labels:<br>        app: nginx<br>    spec:<br>      containers:       # 这个是定义容器的<br>      - name: web       # 容器名称<br>        image: nginx:1.18   # 镜像加版本<br>        volumeMounts:       # 添加挂载<br>        - name: log         # 卷的名称，对应下面<br>          mountPath: /data   # 挂载到容器本地的路径<br>      - name: bs        # 容器名称<br>        image: busybox  # 这个镜像是一个集成了三百多个最常用Linux命令和工具的软件。<br>        command:        # 执行命令<br>        - sleep         # 睡眠<br>        - 24h           # 睡眠时间，进程结束容器就自动退出，这里时间设置为24意思是24小时不会睡眠，所以就不会退出。<br>        volumeMounts:       # 添加挂载<br>        - name: log         # 卷的名称，对应下面<br>          mountPath: /data2   # 挂载到容器本地的路径<br>      volumes:          # 创建一个数据卷<br>      - name: log       # 名称为log<br>        emptyDir: &#123;&#125;     # 卷类型<br>[root@vm1 yaml]# kubectl apply -f Pod.yaml <br>deployment.apps/pod-test created<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext"> 实时查看创建过程   <br>[root@vm1 ~]# kubectl get pod -w        #  这里可以看到我们 READY这里都显示2了，意思就是有两个容器，而且都在运行着<br>NAME                        READY   STATUS              RESTARTS   AGE<br>pod-test-66bb56448f-2hmhh   0/2     ContainerCreating   0          14s<br>pod-test-66bb56448f-mscj4   0/2     ContainerCreating   0          14s<br>pod-test-66bb56448f-z2d25   0/2     ContainerCreating   0          14s<br>pod-test-66bb56448f-z2d25   2/2     Running             0          16s<br>pod-test-66bb56448f-2hmhh   2/2     Running             0          16s<br>pod-test-66bb56448f-mscj4   2/2     Running             0          17s<br></code></pre></td></tr></table></figure>
+
 <p><strong>验证Pod之间通信</strong></p>
 <p>进入Pod</p>
-<pre><code># 验证共享存储
-# 进入web容器
-[root@vm1 yaml]# kubectl exec  -it pod-test-66bb56448f-2hmhh -c web -- bash 
-root@pod-test-66bb56448f-2hmhh:/# ls
-bin   data  docker-entrypoint.d   etc   lib    media  opt   root  sbin  sys  usr
-boot  dev   docker-entrypoint.sh  home  lib64  mnt    proc  run   srv   tmp  var
-# 竟然data目录创建文件
-root@pod-test-66bb56448f-2hmhh:/# cd /data/
-root@pod-test-66bb56448f-2hmhh:/data# ls
-root@pod-test-66bb56448f-2hmhh:/data# touch test-web
-root@pod-test-66bb56448f-2hmhh:/data# ls
-test-web
-​
-# 进入bs容器，因为busybox镜像没有bash的一个知识，我们需要用sh
-[root@vm1 ~]#  kubectl exec  -it pod-test-66bb56448f-2hmhh -c bs -- sh   # 进入容器
-/ # cd /data2/                  # 进入data2目录
-/data2 # ls                     # 查看到我们刚刚在web镜像创建的文件
-test-web
-以上共享存储验证成功
-​
----------------------------------------------------------------------------------------
-# 验证共享网络
-进入bs容器
-[root@vm1 ~]#  kubectl exec  -it pod-test-66bb56448f-2hmhh -c bs -- sh 
-/ # netstat -natp               # 查看容器监听的端口，busybox镜像默认是没有任何服务的，所以为什么会监听一个80端口呢，其实这个是监听的nginx的端口
-Active Internet connections (servers and established)
-Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
-tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      -
-tcp        0      0 :::80                   :::*                    LISTEN      -
-/ # ifconfig                    # 查看容器ip
-eth0      Link encap:Ethernet  HWaddr BE:5D:64:A0:3C:9D  
-          inet addr:10.244.2.53  Bcast:10.244.2.255  Mask:255.255.255.0
-          UP BROADCAST RUNNING MULTICAST  MTU:1450  Metric:1
-          RX packets:6 errors:0 dropped:0 overruns:0 frame:0
-          TX packets:1 errors:0 dropped:0 overruns:0 carrier:0
-          collisions:0 txqueuelen:0 
-          RX bytes:480 (480.0 B)  TX bytes:42 (42.0 B)
-​
-lo        Link encap:Local Loopback  
-          inet addr:127.0.0.1  Mask:255.0.0.0
-          UP LOOPBACK RUNNING  MTU:65536  Metric:1
-          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
-          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
-          collisions:0 txqueuelen:1000 
-          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
-​
-/ # ps -ef                    # 查看bs的进程
-PID   USER     TIME  COMMAND
-    1 root      0:00 sleep 24h
-   13 root      0:00 sh
-   22 root      0:00 ps -ef
-/ # 
-访问web的nginx
-/ # wget 127.0.0.1          # 因为没有curl命令，所以我们使用wget把index文件下载下来，在使用cat查看文件内容
-Connecting to 127.0.0.1 (127.0.0.1:80)
-saving to &#39;index.html&#39;
-index.html           100% |*************************************************************************************************|   612  0:00:00 ETA
-&#39;index.html&#39; saved
-/ # cat index.html          # 查看文件内容，这个访问的就是web的nginx
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;title&gt;Welcome to nginx!&lt;/title&gt;        # 可以看到是nginx
-&lt;style&gt;
-    body &#123;
-        width: 35em;
-        margin: 0 auto;
-        font-family: Tahoma, Verdana, Arial, sans-serif;
-    &#125;
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;h1&gt;Welcome to nginx!&lt;/h1&gt;
-&lt;p&gt;If you see this page, the nginx web server is successfully installed and
-working. Further configuration is required.&lt;/p&gt;
-​
-&lt;p&gt;For online documentation and support please refer to
-&lt;a href=&quot;http://nginx.org/&quot;&gt;nginx.org&lt;/a&gt;.&lt;br/&gt;
-Commercial support is available at
-&lt;a href=&quot;http://nginx.com/&quot;&gt;nginx.com&lt;/a&gt;.&lt;/p&gt;
-​
-&lt;p&gt;&lt;em&gt;Thank you for using nginx.&lt;/em&gt;&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-/ #
-# 网络共享验证成功
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext"># 验证共享存储<br># 进入web容器<br>[root@vm1 yaml]# kubectl exec  -it pod-test-66bb56448f-2hmhh -c web -- bash <br>root@pod-test-66bb56448f-2hmhh:/# ls<br>bin   data  docker-entrypoint.d   etc   lib    media  opt   root  sbin  sys  usr<br>boot  dev   docker-entrypoint.sh  home  lib64  mnt    proc  run   srv   tmp  var<br># 竟然data目录创建文件<br>root@pod-test-66bb56448f-2hmhh:/# cd /data/<br>root@pod-test-66bb56448f-2hmhh:/data# ls<br>root@pod-test-66bb56448f-2hmhh:/data# touch test-web<br>root@pod-test-66bb56448f-2hmhh:/data# ls<br>test-web<br>​<br># 进入bs容器，因为busybox镜像没有bash的一个知识，我们需要用sh<br>[root@vm1 ~]#  kubectl exec  -it pod-test-66bb56448f-2hmhh -c bs -- sh   # 进入容器<br>/ # cd /data2/                  # 进入data2目录<br>/data2 # ls                     # 查看到我们刚刚在web镜像创建的文件<br>test-web<br>以上共享存储验证成功<br>​<br>---------------------------------------------------------------------------------------<br># 验证共享网络<br>进入bs容器<br>[root@vm1 ~]#  kubectl exec  -it pod-test-66bb56448f-2hmhh -c bs -- sh <br>/ # netstat -natp               # 查看容器监听的端口，busybox镜像默认是没有任何服务的，所以为什么会监听一个80端口呢，其实这个是监听的nginx的端口<br>Active Internet connections (servers and established)<br>Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    <br>tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      -<br>tcp        0      0 :::80                   :::*                    LISTEN      -<br>/ # ifconfig                    # 查看容器ip<br>eth0      Link encap:Ethernet  HWaddr BE:5D:64:A0:3C:9D  <br>          inet addr:10.244.2.53  Bcast:10.244.2.255  Mask:255.255.255.0<br>          UP BROADCAST RUNNING MULTICAST  MTU:1450  Metric:1<br>          RX packets:6 errors:0 dropped:0 overruns:0 frame:0<br>          TX packets:1 errors:0 dropped:0 overruns:0 carrier:0<br>          collisions:0 txqueuelen:0 <br>          RX bytes:480 (480.0 B)  TX bytes:42 (42.0 B)<br>​<br>lo        Link encap:Local Loopback  <br>          inet addr:127.0.0.1  Mask:255.0.0.0<br>          UP LOOPBACK RUNNING  MTU:65536  Metric:1<br>          RX packets:0 errors:0 dropped:0 overruns:0 frame:0<br>          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0<br>          collisions:0 txqueuelen:1000 <br>          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)<br>​<br>/ # ps -ef                    # 查看bs的进程<br>PID   USER     TIME  COMMAND<br>    1 root      0:00 sleep 24h<br>   13 root      0:00 sh<br>   22 root      0:00 ps -ef<br>/ # <br>访问web的nginx<br>/ # wget 127.0.0.1          # 因为没有curl命令，所以我们使用wget把index文件下载下来，在使用cat查看文件内容<br>Connecting to 127.0.0.1 (127.0.0.1:80)<br>saving to &#x27;index.html&#x27;<br>index.html           100% |*************************************************************************************************|   612  0:00:00 ETA<br>&#x27;index.html&#x27; saved<br>/ # cat index.html          # 查看文件内容，这个访问的就是web的nginx<br>&lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>&lt;head&gt;<br>&lt;title&gt;Welcome to nginx!&lt;/title&gt;        # 可以看到是nginx<br>&lt;style&gt;<br>    body &#123;<br>        width: 35em;<br>        margin: 0 auto;<br>        font-family: Tahoma, Verdana, Arial, sans-serif;<br>    &#125;<br>&lt;/style&gt;<br>&lt;/head&gt;<br>&lt;body&gt;<br>&lt;h1&gt;Welcome to nginx!&lt;/h1&gt;<br>&lt;p&gt;If you see this page, the nginx web server is successfully installed and<br>working. Further configuration is required.&lt;/p&gt;<br>​<br>&lt;p&gt;For online documentation and support please refer to<br>&lt;a href=&quot;http://nginx.org/&quot;&gt;nginx.org&lt;/a&gt;.&lt;br/&gt;<br>Commercial support is available at<br>&lt;a href=&quot;http://nginx.com/&quot;&gt;nginx.com&lt;/a&gt;.&lt;/p&gt;<br>​<br>&lt;p&gt;&lt;em&gt;Thank you for using nginx.&lt;/em&gt;&lt;/p&gt;<br>&lt;/body&gt;<br>&lt;/html&gt;<br>/ #<br># 网络共享验证成功<br></code></pre></td></tr></table></figure>
+
 <p>注意：</p>
 <p>不管我们创建多个或者单个容器的Pod，都会在创建Pod之前创建一个 infra container网络共享的容器，在将我们定以的容器加入到这个网络，此容器不对用户开放是在后台工作的。</p>
 <h2 id="Pod管理命令"><a href="#Pod管理命令" class="headerlink" title="Pod管理命令"></a><strong>Pod管理命令</strong></h2><p>创建Pod：</p>
@@ -387,213 +251,31 @@ Commercial support is available at
 <p>kubectl delete pod </p>
 <p>实验</p>
 <p>定义一个Pod，不用deployment控制器去创建不用副本</p>
-<pre><code># yaml创建一个Pod
-[root@vm1 yaml]# cat Pod.demo.yaml      # 单独创建一个Pod没有定义副本，Pod内定义了2个容器
-apiVersion: v1
-kind: Pod           # 类型Pod这里我们没有用Deployment
-metadata:
-  name: my-pod
-spec:
-  containers:   
-  - name: web-pod       # 第一个容器
-    image: nginx:1.18
-  - name: bs            # 第二个容器
-    image: busybox
-    command:
-    - sleep
-    - 24h
-[root@vm1 yaml]# kubectl apply -f Pod.demo.yaml     
-pod/my-pod created
-[root@vm1 yaml]# kubectl get pod          
-NAME                        READY   STATUS              RESTARTS   AGE
-my-pod                      0/2     ContainerCreating   0          3s
-pod-test-66bb56448f-2hmhh   2/2     Running             0          19h
-pod-test-66bb56448f-mscj4   2/2     Running             0          19h
-pod-test-66bb56448f-z2d25   2/2     Running             0          19h
-[root@vm1 yaml]# kubectl get pod
-NAME                        READY   STATUS    RESTARTS   AGE
-my-pod                      2/2     Running   0          36s            # 启动成功一个Pod两个容器
-pod-test-66bb56448f-2hmhh   2/2     Running   0          19h
-pod-test-66bb56448f-mscj4   2/2     Running   0          19h
-pod-test-66bb56448f-z2d25   2/2     Running   0          19h
-​
-​
-# 命令行创建一个Pod
-[root@vm1 yaml]# kubectl run my-pod2 --image=nginx          # 命令行方式创建一个Pod
-pod/my-pod2 created
-[root@vm1 yaml]# kubectl get pod
-NAME                        READY   STATUS              RESTARTS   AGE
-my-pod                      2/2     Running             0          13m
-my-pod2                     0/1     ContainerCreating   0          4s
-pod-test-66bb56448f-2hmhh   2/2     Running             0          19h
-pod-test-66bb56448f-mscj4   2/2     Running             0          19h
-pod-test-66bb56448f-z2d25   2/2     Running             0          19h
-[root@vm1 yaml]# kubectl get pod                # Pod启动成功
-NAME                        READY   STATUS    RESTARTS   AGE
-my-pod                      2/2     Running   0          15m
-my-pod2                     1/1     Running   0          2m14s
-pod-test-66bb56448f-2hmhh   2/2     Running   0          19h
-pod-test-66bb56448f-mscj4   2/2     Running   0          19h
-pod-test-66bb56448f-z2d25   2/2     Running   0          19h
-​
-# 查看现有的Pod，删除一个Pod，在删除一个有Deployment控制的Pod。
-[root@vm1 yaml]# kubectl get pod
-NAME                        READY   STATUS    RESTARTS   AGE
-my-pod                      2/2     Running   0          15m
-my-pod2                     1/1     Running   0          2m14s
-pod-test-66bb56448f-2hmhh   2/2     Running   0          19h
-pod-test-66bb56448f-mscj4   2/2     Running   0          19h
-pod-test-66bb56448f-z2d25   2/2     Running   0          19h
-​
-# 我们删除一个my-pod和Deployment控制的Pod看一下会是什么效果
-[root@vm1 yaml]# kubectl delete pod my-pod      # Pod
-pod &quot;my-pod&quot; deleted
-[root@vm1 yaml]# kubectl delete pod pod-test-66bb56448f-2hmhh       # deployment控制的Pod
-pod &quot;pod-test-66bb56448f-2hmhh&quot; deleted
-​
-# 这里可以看到my-pod被删除了，但是pod-test还是3个，但是我们删除的那个pod没有了？为什么呢
-原因就是Deployment内的replicas定义了Pod有3个如果，单个或者多个被删除或者下线，replicas检查到会重新拉起定义的个数
-[root@vm1 yaml]# kubectl get pod        
-NAME                        READY   STATUS    RESTARTS   AGE
-my-pod2                     1/1     Running   0          12m
-pod-test-66bb56448f-mscj4   2/2     Running   0          19h
-pod-test-66bb56448f-vglcw   2/2     Running   0          51s
-pod-test-66bb56448f-z2d25   2/2     Running   0          19h
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext"># yaml创建一个Pod<br>[root@vm1 yaml]# cat Pod.demo.yaml      # 单独创建一个Pod没有定义副本，Pod内定义了2个容器<br>apiVersion: v1<br>kind: Pod           # 类型Pod这里我们没有用Deployment<br>metadata:<br>  name: my-pod<br>spec:<br>  containers:   <br>  - name: web-pod       # 第一个容器<br>    image: nginx:1.18<br>  - name: bs            # 第二个容器<br>    image: busybox<br>    command:<br>    - sleep<br>    - 24h<br>[root@vm1 yaml]# kubectl apply -f Pod.demo.yaml     <br>pod/my-pod created<br>[root@vm1 yaml]# kubectl get pod          <br>NAME                        READY   STATUS              RESTARTS   AGE<br>my-pod                      0/2     ContainerCreating   0          3s<br>pod-test-66bb56448f-2hmhh   2/2     Running             0          19h<br>pod-test-66bb56448f-mscj4   2/2     Running             0          19h<br>pod-test-66bb56448f-z2d25   2/2     Running             0          19h<br>[root@vm1 yaml]# kubectl get pod<br>NAME                        READY   STATUS    RESTARTS   AGE<br>my-pod                      2/2     Running   0          36s            # 启动成功一个Pod两个容器<br>pod-test-66bb56448f-2hmhh   2/2     Running   0          19h<br>pod-test-66bb56448f-mscj4   2/2     Running   0          19h<br>pod-test-66bb56448f-z2d25   2/2     Running   0          19h<br>​<br>​<br># 命令行创建一个Pod<br>[root@vm1 yaml]# kubectl run my-pod2 --image=nginx          # 命令行方式创建一个Pod<br>pod/my-pod2 created<br>[root@vm1 yaml]# kubectl get pod<br>NAME                        READY   STATUS              RESTARTS   AGE<br>my-pod                      2/2     Running             0          13m<br>my-pod2                     0/1     ContainerCreating   0          4s<br>pod-test-66bb56448f-2hmhh   2/2     Running             0          19h<br>pod-test-66bb56448f-mscj4   2/2     Running             0          19h<br>pod-test-66bb56448f-z2d25   2/2     Running             0          19h<br>[root@vm1 yaml]# kubectl get pod                # Pod启动成功<br>NAME                        READY   STATUS    RESTARTS   AGE<br>my-pod                      2/2     Running   0          15m<br>my-pod2                     1/1     Running   0          2m14s<br>pod-test-66bb56448f-2hmhh   2/2     Running   0          19h<br>pod-test-66bb56448f-mscj4   2/2     Running   0          19h<br>pod-test-66bb56448f-z2d25   2/2     Running   0          19h<br>​<br># 查看现有的Pod，删除一个Pod，在删除一个有Deployment控制的Pod。<br>[root@vm1 yaml]# kubectl get pod<br>NAME                        READY   STATUS    RESTARTS   AGE<br>my-pod                      2/2     Running   0          15m<br>my-pod2                     1/1     Running   0          2m14s<br>pod-test-66bb56448f-2hmhh   2/2     Running   0          19h<br>pod-test-66bb56448f-mscj4   2/2     Running   0          19h<br>pod-test-66bb56448f-z2d25   2/2     Running   0          19h<br>​<br># 我们删除一个my-pod和Deployment控制的Pod看一下会是什么效果<br>[root@vm1 yaml]# kubectl delete pod my-pod      # Pod<br>pod &quot;my-pod&quot; deleted<br>[root@vm1 yaml]# kubectl delete pod pod-test-66bb56448f-2hmhh       # deployment控制的Pod<br>pod &quot;pod-test-66bb56448f-2hmhh&quot; deleted<br>​<br># 这里可以看到my-pod被删除了，但是pod-test还是3个，但是我们删除的那个pod没有了？为什么呢<br>原因就是Deployment内的replicas定义了Pod有3个如果，单个或者多个被删除或者下线，replicas检查到会重新拉起定义的个数<br>[root@vm1 yaml]# kubectl get pod        <br>NAME                        READY   STATUS    RESTARTS   AGE<br>my-pod2                     1/1     Running   0          12m<br>pod-test-66bb56448f-mscj4   2/2     Running   0          19h<br>pod-test-66bb56448f-vglcw   2/2     Running   0          51s<br>pod-test-66bb56448f-z2d25   2/2     Running   0          19h<br></code></pre></td></tr></table></figure>
+
 <p>查看Pod的详情信息</p>
 <p>如果我们需要查看这个Pod使用了什么镜像Pod有什么配置什么属性信息，都可以看到，我们可以使用describe</p>
 <ul>
 <li>kubectl describe pod  my-pod2</li>
 </ul>
-<pre><code>[root@vm1 yaml]# kubectl describe pod  my-pod2    
-Name:         my-pod2       # Pod名称
-Namespace:    default       # 命名空间
-Priority:     0
-Node:         vm2/192.168.10.20         # 运行在那个节点
-Start Time:   Fri, 15 Jul 2022 16:40:15 +0800           # 启动时间
-Labels:       run=my-pod2
-Annotations:  &lt;none&gt;
-Status:       Running
-IP:           10.244.1.57
-IPs:
-  IP:  10.244.1.57
-Containers:
-  my-pod2:
-    Container ID:   docker://5ec534e4d2697790d232dfd0edc25b8ba4da382ffb57c28bcfec4cd338c6b1c7
-    Image:          nginx
-    Image ID:       docker-pullable://nginx@sha256:0d17b565c37bcbd895e9d92315a05c1c3c9a29f762b011a10c54a66cd53c9b31
-    Port:           &lt;none&gt;
-    Host Port:      &lt;none&gt;
-    State:          Running
-      Started:      Fri, 15 Jul 2022 16:40:32 +0800
-    Ready:          True
-    Restart Count:  0
-    Environment:    &lt;none&gt;
-    Mounts:
-      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-lll4q (ro)
-Conditions:
-  Type              Status
-  Initialized       True 
-  Ready             True 
-  ContainersReady   True 
-  PodScheduled      True 
-Volumes:
-  kube-api-access-lll4q:
-    Type:                    Projected (a volume that contains injected data from multiple sources)
-    TokenExpirationSeconds:  3607
-    ConfigMapName:           kube-root-ca.crt
-    ConfigMapOptional:       &lt;nil&gt;
-    DownwardAPI:             true
-QoS Class:                   BestEffort
-Node-Selectors:              &lt;none&gt;
-Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
-                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
-Events:
-  Type    Reason     Age   From               Message
-  ----    ------     ----  ----               -------
-  Normal  Scheduled  20m   default-scheduler  Successfully assigned default/my-pod2 to vm2
-  Normal  Pulling    20m   kubelet            Pulling image &quot;nginx&quot;
-  Normal  Pulled     20m   kubelet            Successfully pulled image &quot;nginx&quot; in 15.540698325s
-  Normal  Created    20m   kubelet            Created container my-pod2
-  Normal  Started    20m   kubelet            Started container my-pod2
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">[root@vm1 yaml]# kubectl describe pod  my-pod2    <br>Name:         my-pod2       # Pod名称<br>Namespace:    default       # 命名空间<br>Priority:     0<br>Node:         vm2/192.168.10.20         # 运行在那个节点<br>Start Time:   Fri, 15 Jul 2022 16:40:15 +0800           # 启动时间<br>Labels:       run=my-pod2<br>Annotations:  &lt;none&gt;<br>Status:       Running<br>IP:           10.244.1.57<br>IPs:<br>  IP:  10.244.1.57<br>Containers:<br>  my-pod2:<br>    Container ID:   docker://5ec534e4d2697790d232dfd0edc25b8ba4da382ffb57c28bcfec4cd338c6b1c7<br>    Image:          nginx<br>    Image ID:       docker-pullable://nginx@sha256:0d17b565c37bcbd895e9d92315a05c1c3c9a29f762b011a10c54a66cd53c9b31<br>    Port:           &lt;none&gt;<br>    Host Port:      &lt;none&gt;<br>    State:          Running<br>      Started:      Fri, 15 Jul 2022 16:40:32 +0800<br>    Ready:          True<br>    Restart Count:  0<br>    Environment:    &lt;none&gt;<br>    Mounts:<br>      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-lll4q (ro)<br>Conditions:<br>  Type              Status<br>  Initialized       True <br>  Ready             True <br>  ContainersReady   True <br>  PodScheduled      True <br>Volumes:<br>  kube-api-access-lll4q:<br>    Type:                    Projected (a volume that contains injected data from multiple sources)<br>    TokenExpirationSeconds:  3607<br>    ConfigMapName:           kube-root-ca.crt<br>    ConfigMapOptional:       &lt;nil&gt;<br>    DownwardAPI:             true<br>QoS Class:                   BestEffort<br>Node-Selectors:              &lt;none&gt;<br>Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s<br>                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s<br>Events:<br>  Type    Reason     Age   From               Message<br>  ----    ------     ----  ----               -------<br>  Normal  Scheduled  20m   default-scheduler  Successfully assigned default/my-pod2 to vm2<br>  Normal  Pulling    20m   kubelet            Pulling image &quot;nginx&quot;<br>  Normal  Pulled     20m   kubelet            Successfully pulled image &quot;nginx&quot; in 15.540698325s<br>  Normal  Created    20m   kubelet            Created container my-pod2<br>  Normal  Started    20m   kubelet            Started container my-pod2<br></code></pre></td></tr></table></figure>
+
 <p>查看容器的日志信息</p>
 <p>在日常工作中日志是常用的，报错的时候不知道什么情况我们就需要去容器的日志信息</p>
 <ul>
 <li>kubectl logs my-pod2 -n default</li>
 </ul>
-<pre><code>[root@vm1 yaml]# kubectl logs my-pod2 -n default
-/docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
-/docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
-/docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
-10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
-10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
-/docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
-/docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
-/docker-entrypoint.sh: Configuration complete; ready for start up
-2022/07/15 08:40:32 [notice] 1#1: using the &quot;epoll&quot; event method
-2022/07/15 08:40:32 [notice] 1#1: nginx/1.21.5
-2022/07/15 08:40:32 [notice] 1#1: built by gcc 10.2.1 20210110 (Debian 10.2.1-6) 
-2022/07/15 08:40:32 [notice] 1#1: OS: Linux 3.10.0-862.el7.x86_64
-2022/07/15 08:40:32 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 65536:65536
-2022/07/15 08:40:32 [notice] 1#1: start worker processes
-2022/07/15 08:40:32 [notice] 1#1: start worker process 31
-2022/07/15 08:40:32 [notice] 1#1: start worker process 32
-​
-# 注意还有一种情况
-[root@vm1 yaml]# kubectl get pod
-NAME                        READY   STATUS    RESTARTS   AGE
-my-pod                      2/2     Running   0          18s
-my-pod2                     1/1     Running   0          29m
-pod-test-66bb56448f-mscj4   2/2     Running   0          19h
-pod-test-66bb56448f-vglcw   2/2     Running   0          18m
-pod-test-66bb56448f-z2d25   2/2     Running   0          19h
-[root@vm1 yaml]# kubectl logs my-pod        # 这里发现看不了容器日志
-error: a container name must be specified for pod my-pod, choose one of: [web-pod bs]  # 这里有提醒
-# 是什么原因呢，原因就是这个Pod内有两个容器，我们必须要指定查看那个容器的日志   我们需要在Pod后面加上《-c》指定容器名称查看日志
-[root@vm1 yaml]# kubectl logs my-pod -c web-pod
-/docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
-/docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
-/docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
-10-listen-on-ipv6-by-default.sh: Getting the checksum of /etc/nginx/conf.d/default.conf
-10-listen-on-ipv6-by-default.sh: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
-/docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
-/docker-entrypoint.sh: Configuration complete; ready for start up
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">[root@vm1 yaml]# kubectl logs my-pod2 -n default<br>/docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration<br>/docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/<br>/docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh<br>10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf<br>10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf<br>/docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh<br>/docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh<br>/docker-entrypoint.sh: Configuration complete; ready for start up<br>2022/07/15 08:40:32 [notice] 1#1: using the &quot;epoll&quot; event method<br>2022/07/15 08:40:32 [notice] 1#1: nginx/1.21.5<br>2022/07/15 08:40:32 [notice] 1#1: built by gcc 10.2.1 20210110 (Debian 10.2.1-6) <br>2022/07/15 08:40:32 [notice] 1#1: OS: Linux 3.10.0-862.el7.x86_64<br>2022/07/15 08:40:32 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 65536:65536<br>2022/07/15 08:40:32 [notice] 1#1: start worker processes<br>2022/07/15 08:40:32 [notice] 1#1: start worker process 31<br>2022/07/15 08:40:32 [notice] 1#1: start worker process 32<br>​<br># 注意还有一种情况<br>[root@vm1 yaml]# kubectl get pod<br>NAME                        READY   STATUS    RESTARTS   AGE<br>my-pod                      2/2     Running   0          18s<br>my-pod2                     1/1     Running   0          29m<br>pod-test-66bb56448f-mscj4   2/2     Running   0          19h<br>pod-test-66bb56448f-vglcw   2/2     Running   0          18m<br>pod-test-66bb56448f-z2d25   2/2     Running   0          19h<br>[root@vm1 yaml]# kubectl logs my-pod        # 这里发现看不了容器日志<br>error: a container name must be specified for pod my-pod, choose one of: [web-pod bs]  # 这里有提醒<br># 是什么原因呢，原因就是这个Pod内有两个容器，我们必须要指定查看那个容器的日志   我们需要在Pod后面加上《-c》指定容器名称查看日志<br>[root@vm1 yaml]# kubectl logs my-pod -c web-pod<br>/docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration<br>/docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/<br>/docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh<br>10-listen-on-ipv6-by-default.sh: Getting the checksum of /etc/nginx/conf.d/default.conf<br>10-listen-on-ipv6-by-default.sh: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf<br>/docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh<br>/docker-entrypoint.sh: Configuration complete; ready for start up<br></code></pre></td></tr></table></figure>
+
 <p>如果想实时查看容器日志我们只需要在最后面在加上一个参数《-f》</p>
-<pre><code>[root@vm1 yaml]# kubectl logs my-pod -c web-pod -f
-/docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
-/docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
-/docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
-10-listen-on-ipv6-by-default.sh: Getting the checksum of /etc/nginx/conf.d/default.conf
-10-listen-on-ipv6-by-default.sh: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
-/docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
-/docker-entrypoint.sh: Configuration complete; ready for start up
-​
-10.244.0.0 - - [15/Jul/2022:09:16:36 +0000] &quot;GET / HTTP/1.1&quot; 200 612 &quot;-&quot; &quot;curl/7.29.0&quot; &quot;-&quot;
-​
-​
-# 刚刚我在另一个界面访问了这个容器，日志实时的同步了下来
-curl  10.244.2.57  这个Ip可以在详情内看到
-[root@vm1 yaml]# kubectl get pod -o wide
-NAME                        READY   STATUS    RESTARTS   AGE   IP            NODE   NOMINATED NODE   READINESS GATES
-my-pod                      2/2     Running   0          23m   10.244.2.57   vm3    &lt;none&gt;           &lt;none&gt;
-my-pod2                     1/1     Running   0          52m   10.244.1.57   vm2    &lt;none&gt;           &lt;none&gt;
-pod-test-66bb56448f-mscj4   2/2     Running   0          20h   10.244.1.56   vm2    &lt;none&gt;           &lt;none&gt;
-pod-test-66bb56448f-vglcw   2/2     Running   0          41m   10.244.2.56   vm3    &lt;none&gt;           &lt;none&gt;
-pod-test-66bb56448f-z2d25   2/2     Running   0          20h   10.244.1.55   vm2    &lt;none&gt;           &lt;none&gt;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">[root@vm1 yaml]# kubectl logs my-pod -c web-pod -f<br>/docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration<br>/docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/<br>/docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh<br>10-listen-on-ipv6-by-default.sh: Getting the checksum of /etc/nginx/conf.d/default.conf<br>10-listen-on-ipv6-by-default.sh: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf<br>/docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh<br>/docker-entrypoint.sh: Configuration complete; ready for start up<br>​<br>10.244.0.0 - - [15/Jul/2022:09:16:36 +0000] &quot;GET / HTTP/1.1&quot; 200 612 &quot;-&quot; &quot;curl/7.29.0&quot; &quot;-&quot;<br>​<br>​<br># 刚刚我在另一个界面访问了这个容器，日志实时的同步了下来<br>curl  10.244.2.57  这个Ip可以在详情内看到<br>[root@vm1 yaml]# kubectl get pod -o wide<br>NAME                        READY   STATUS    RESTARTS   AGE   IP            NODE   NOMINATED NODE   READINESS GATES<br>my-pod                      2/2     Running   0          23m   10.244.2.57   vm3    &lt;none&gt;           &lt;none&gt;<br>my-pod2                     1/1     Running   0          52m   10.244.1.57   vm2    &lt;none&gt;           &lt;none&gt;<br>pod-test-66bb56448f-mscj4   2/2     Running   0          20h   10.244.1.56   vm2    &lt;none&gt;           &lt;none&gt;<br>pod-test-66bb56448f-vglcw   2/2     Running   0          41m   10.244.2.56   vm3    &lt;none&gt;           &lt;none&gt;<br>pod-test-66bb56448f-z2d25   2/2     Running   0          20h   10.244.1.55   vm2    &lt;none&gt;           &lt;none&gt;<br></code></pre></td></tr></table></figure>
+
 <p>进入终端</p>
 <p>比如我们想进入某个Pod内的容器</p>
 <p>如果Pod内也有多个容器我们也需要加《-c》参数指定容器，如果不指定会默认进入一个默认的容器</p>
-<pre><code>[root@vm1 yaml]# kubectl exec -it my-pod -c web-pod -- bash
-root@my-pod:/# ls
-bin  boot  dev  docker-entrypoint.d  docker-entrypoint.sh  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
-root@my-pod:/# exit
-exit
-[root@vm1 yaml]#
-</code></pre>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">XiaoBei</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/08/01/Pod%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">http://example.com/2022/08/01/Pod%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="null" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">xiaobei</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/cloud/">cloud</a></div><div class="post_share"><div class="social-share" data-image="https://th.wallhaven.cc/small/zy/zygeko.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/08/01/Repository/" title="Repository"><img class="cover" src="https://w.wallhaven.cc/full/x6/wallhaven-x6jy2d.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Repository</div></div></a></div><div class="next-post pull-right"><a href="/2022/07/21/Service%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Service学习笔记"><img class="cover" src="https://w.wallhaven.cc/full/jx/wallhaven-jxkjj5.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Service学习笔记</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/07/21/k8s%E4%BC%81%E4%B8%9A%E5%BA%94%E7%94%A8%E4%B8%8E%E5%AE%B9%E5%99%A8%E8%BF%81%E7%A7%BB/" title="k8s企业应用与容器迁移"><img class="cover" src="https://th.wallhaven.cc/small/9m/9mjoy1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-21</div><div class="title">k8s企业应用与容器迁移</div></div></a></div><div><a href="/2022/07/21/Service%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Service学习笔记"><img class="cover" src="https://w.wallhaven.cc/full/jx/wallhaven-jxkjj5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-21</div><div class="title">Service学习笔记</div></div></a></div><div><a href="/2022/07/20/%E4%BA%94%E7%A7%8D%E6%8E%A7%E5%88%B6%E5%99%A8%E8%AF%A6%E8%A7%A3/" title="五种控制器详解"><img class="cover" src="https://th.wallhaven.cc/small/zy/zygeko.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-20</div><div class="title">五种控制器详解</div></div></a></div><div><a href="/2022/07/20/%E8%B5%84%E6%BA%90%E5%AF%B9%E8%B1%A1%E5%AF%B9%E5%BA%94%E5%85%B3%E7%B3%BB/" title="资源对象对应关系*-*"><img class="cover" src="https://w.wallhaven.cc/full/x6/wallhaven-x6jy2d.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-20</div><div class="title">资源对象对应关系*-*</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/wsnb.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">XiaoBei</div><div class="author-info__description">归途也还可爱</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/wsnbwz" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:wsnblove@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Pod%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">Pod基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Pod%E7%89%B9%E7%82%B9%EF%BC%9A"><span class="toc-text">Pod特点：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#k8s-pod%E5%AD%98%E5%9C%A8%E7%9A%84%E6%84%8F%E4%B9%89"><span class="toc-text">k8s-pod存在的意义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pod%E5%86%85%E5%AE%B9%E5%99%A8%E4%B9%8B%E9%97%B4%E5%A6%82%E4%BD%95%E9%80%9A%E8%A1%8C"><span class="toc-text">Pod内容器之间如何通行</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pod%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4"><span class="toc-text">Pod管理命令</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/03/10/Docker%E7%BD%91%E7%BB%9C/" title="Docker网络"><img src="https://w.wallhaven.cc/full/we/wallhaven-wel6or.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Docker网络"/></a><div class="content"><a class="title" href="/2023/03/10/Docker%E7%BD%91%E7%BB%9C/" title="Docker网络">Docker网络</a><time datetime="2023-03-10T13:15:04.000Z" title="发表于 2023-03-10 21:15:04">2023-03-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/10/Docker%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/" title="Docker基础搭建"><img src="https://w.wallhaven.cc/full/qz/wallhaven-qzgzwl.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Docker基础搭建"/></a><div class="content"><a class="title" href="/2023/03/10/Docker%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/" title="Docker基础搭建">Docker基础搭建</a><time datetime="2023-03-10T08:00:34.000Z" title="发表于 2023-03-10 16:00:34">2023-03-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/02/%E7%AE%80%E5%8D%95%E6%90%AD%E5%BB%BAhttp%E6%9C%8D%E5%8A%A1/" title="简单搭建http服务"><img src="https://th.wallhaven.cc/small/y8/y8622k.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="简单搭建http服务"/></a><div class="content"><a class="title" href="/2022/08/02/%E7%AE%80%E5%8D%95%E6%90%AD%E5%BB%BAhttp%E6%9C%8D%E5%8A%A1/" title="简单搭建http服务">简单搭建http服务</a><time datetime="2022-08-02T06:07:47.000Z" title="发表于 2022-08-02 14:07:47">2022-08-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/02/DHCP%E5%85%AB%E7%A7%8D%E6%8A%A5%E6%96%87%E8%AF%A6%E8%A7%A3/" title="DHCP八种报文详解"><img src="https://th.wallhaven.cc/small/zy/zyxvqy.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="DHCP八种报文详解"/></a><div class="content"><a class="title" href="/2022/08/02/DHCP%E5%85%AB%E7%A7%8D%E6%8A%A5%E6%96%87%E8%AF%A6%E8%A7%A3/" title="DHCP八种报文详解">DHCP八种报文详解</a><time datetime="2022-08-02T06:00:35.000Z" title="发表于 2022-08-02 14:00:35">2022-08-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/02/NAT-NAPT%E4%BB%A5%E5%8F%8AeasyIP%E7%9A%84%E5%8C%BA%E5%88%AB/" title="NAT,NAPT以及easyIP的区别"><img src="https://w.wallhaven.cc/full/7p/wallhaven-7pw269.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="NAT,NAPT以及easyIP的区别"/></a><div class="content"><a class="title" href="/2022/08/02/NAT-NAPT%E4%BB%A5%E5%8F%8AeasyIP%E7%9A%84%E5%8C%BA%E5%88%AB/" title="NAT,NAPT以及easyIP的区别">NAT,NAPT以及easyIP的区别</a><time datetime="2022-08-02T05:55:50.000Z" title="发表于 2022-08-02 13:55:50">2022-08-02</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By XiaoBei</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">[root@vm1 yaml]# kubectl exec -it my-pod -c web-pod -- bash<br>root@my-pod:/# ls<br>bin  boot  dev  docker-entrypoint.d  docker-entrypoint.sh  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var<br>root@my-pod:/# exit<br>exit<br>[root@vm1 yaml]#<br></code></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">XiaoBei</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/08/01/Pod%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">http://example.com/2022/08/01/Pod%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="null" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">xiaobei</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/cloud/">cloud</a></div><div class="post_share"><div class="social-share" data-image="https://w.wallhaven.cc/full/qz/wallhaven-qzge85.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/08/01/Repository/" title="Repository"><img class="cover" src="https://w.wallhaven.cc/full/qz/wallhaven-qzgzwl.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Repository</div></div></a></div><div class="next-post pull-right"><a href="/2022/07/21/Service%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Service学习笔记"><img class="cover" src="https://w.wallhaven.cc/full/kx/wallhaven-kxkdp7.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Service学习笔记</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/07/21/Service%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Service学习笔记"><img class="cover" src="https://w.wallhaven.cc/full/kx/wallhaven-kxkdp7.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-21</div><div class="title">Service学习笔记</div></div></a></div><div><a href="/2022/07/21/k8s%E4%BC%81%E4%B8%9A%E5%BA%94%E7%94%A8%E4%B8%8E%E5%AE%B9%E5%99%A8%E8%BF%81%E7%A7%BB/" title="k8s企业应用与容器迁移"><img class="cover" src="https://w.wallhaven.cc/full/yx/wallhaven-yxe1rd.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-21</div><div class="title">k8s企业应用与容器迁移</div></div></a></div><div><a href="/2022/07/20/%E4%BA%94%E7%A7%8D%E6%8E%A7%E5%88%B6%E5%99%A8%E8%AF%A6%E8%A7%A3/" title="五种控制器详解"><img class="cover" src="https://w.wallhaven.cc/full/kx/wallhaven-kxkdp7.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-20</div><div class="title">五种控制器详解</div></div></a></div><div><a href="/2022/07/20/%E8%B5%84%E6%BA%90%E5%AF%B9%E8%B1%A1%E5%AF%B9%E5%BA%94%E5%85%B3%E7%B3%BB/" title="资源对象对应关系*-*"><img class="cover" src="https://th.wallhaven.cc/small/l3/l3xk6q.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-20</div><div class="title">资源对象对应关系*-*</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/wsnb.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">XiaoBei</div><div class="author-info__description">归途也还可爱</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/wsnbwz" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:wsnblove@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Pod%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">Pod基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Pod%E7%89%B9%E7%82%B9%EF%BC%9A"><span class="toc-text">Pod特点：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#k8s-pod%E5%AD%98%E5%9C%A8%E7%9A%84%E6%84%8F%E4%B9%89"><span class="toc-text">k8s-pod存在的意义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pod%E5%86%85%E5%AE%B9%E5%99%A8%E4%B9%8B%E9%97%B4%E5%A6%82%E4%BD%95%E9%80%9A%E8%A1%8C"><span class="toc-text">Pod内容器之间如何通行</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pod%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4"><span class="toc-text">Pod管理命令</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/06/06/Squid%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8-0/" title="Squid代理服务器-2"><img src="https://w.wallhaven.cc/full/7p/wallhaven-7pw269.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Squid代理服务器-2"/></a><div class="content"><a class="title" href="/2023/06/06/Squid%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8-0/" title="Squid代理服务器-2">Squid代理服务器-2</a><time datetime="2023-06-06T08:23:50.000Z" title="发表于 2023-06-06 16:23:50">2023-06-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/06/%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1Samba/" title="文件共享服务Samba"><img src="https://th.wallhaven.cc/small/l3/l3xk6q.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="文件共享服务Samba"/></a><div class="content"><a class="title" href="/2023/06/06/%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1Samba/" title="文件共享服务Samba">文件共享服务Samba</a><time datetime="2023-06-06T08:23:26.000Z" title="发表于 2023-06-06 16:23:26">2023-06-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/06/httpd%E5%9F%BA%E7%A1%80/" title="httpd基础"><img src="https://w.wallhaven.cc/full/rr/wallhaven-rryk81.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="httpd基础"/></a><div class="content"><a class="title" href="/2023/06/06/httpd%E5%9F%BA%E7%A1%80/" title="httpd基础">httpd基础</a><time datetime="2023-06-06T08:22:55.000Z" title="发表于 2023-06-06 16:22:55">2023-06-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/06/Docker%E5%9F%BA%E7%A1%80/" title="Docker基础"><img src="https://w.wallhaven.cc/full/we/wallhaven-wel6or.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Docker基础"/></a><div class="content"><a class="title" href="/2023/06/06/Docker%E5%9F%BA%E7%A1%80/" title="Docker基础">Docker基础</a><time datetime="2023-06-06T08:22:42.000Z" title="发表于 2023-06-06 16:22:42">2023-06-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/06/Chrony%E6%97%B6%E9%97%B4%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="Chrony时间服务器"><img src="https://th.wallhaven.cc/small/9m/9mjoy1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Chrony时间服务器"/></a><div class="content"><a class="title" href="/2023/06/06/Chrony%E6%97%B6%E9%97%B4%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="Chrony时间服务器">Chrony时间服务器</a><time datetime="2023-06-06T08:22:13.000Z" title="发表于 2023-06-06 16:22:13">2023-06-06</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By XiaoBei</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
 POWERMODE.shake = true;
 POWERMODE.mobile = true;
 document.body.addEventListener('input', POWERMODE);
