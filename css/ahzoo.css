@@ -1,0 +1,101 @@
+/* 页头 */
+i.fas.fa-chevron-down {
+    display: none;
+}
+
+#nav .menus_items .menus_item {
+    display: inline;
+    padding: 0 0 0 .7rem;
+    margin: 3px 15px;
+    padding: .2rem .6rem .5rem .6rem !important;
+    box-shadow: var(--card-box-shadow);
+    border-radius: 10px;
+    transition: color .3s ease-out, transform .3s ease-out
+}
+
+#nav .site-page:not(.child):hover:after {
+    width: unset
+}
+
+#nav .menus_items .menus_item .menus_item_child li:hover {
+    margin: 0 auto;
+    border-radius: 12px;
+    background: var(--btn-bg)
+}
+
+#nav .menus_items .menus_item .menus_item_child {
+    padding: 6px 8px 8px 8px;
+    border-radius: 12px;
+    width: 150px;
+    background: var(--card-bg)
+}
+
+#menus .site-page:not(.child) span {
+    display: none
+}
+
+
+/* 页脚 */
+#footer {
+    background: var(--card-bg);
+}
+
+#footer-wrap {
+    padding-top: 12px;
+    height: 90px;
+    box-shadow: var(--card-box-shadow);
+    border-radius: 18px 18px 0 0;
+    color: var(--font-color);
+    position: relative;
+    text-align: center
+}
+
+#footer-wrap a {
+    color: var(--font-color)
+}
+
+#footer-wrap .icp-icon {
+    padding: 0 4px;
+    vertical-align: text-bottom;
+    max-height: 1.4em;
+    width: auto
+}
+
+
+
+
+/* 首页文章 */
+#recent-posts>.recent-post-item:hover .recent-post-info .content {
+    opacity: 1;
+    line-height: 2;
+    transition: all .3s;
+}
+
+#recent-posts>.recent-post-item>.recent-post-info>.content {
+    opacity: 0;
+    line-height: .7;
+    transition: all .3s;
+}
+
+#recent-posts>.recent-post-item .post_cover img.post_bg {
+    border-radius: 30px;
+    padding: 15px
+}
+
+#recent-posts>.recent-post-item:hover img.post_bg {
+    -webkit-transform: scale(.9);
+    -moz-transform: scale(.9);
+    -o-transform: scale(.9);
+    -ms-transform: scale(.9);
+    transform: scale(.9);
+}
+
+
+/* 选中 */
+#aside-content .card-archives ul.card-archive-list>.card-archive-list-item a:hover,
+.site-data>a:hover,
+#aside-content .card-categories ul.card-category-list>.card-category-list-item a:hover {
+    border-radius: 9px;
+    color: var(--card-bg);
+    background-color: var(--text-bg-hover);
+}
